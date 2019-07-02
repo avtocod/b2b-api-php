@@ -4,15 +4,13 @@ FROM php:7.2.0-alpine
 
 ENV \
     COMPOSER_ALLOW_SUPERUSER="1" \
-    COMPOSER_HOME="/tmp/composer" \
-    RUNTIME_DEPS="autoconf pkgconf make g++ gcc" \
-    PERMANENT_DEPS="git curl"
+    COMPOSER_HOME="/tmp/composer"
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 RUN set -xe \
-    && apk add --no-cache ${PERMANENT_DEPS} \
-    && apk add --no-cache --virtual .build-deps ${RUNTIME_DEPS} \
+    && apk add --no-cache binutils git curl \
+    && apk add --no-cache --virtual .build-deps autoconf pkgconf make g++ gcc \
     # install xdebug (for testing with code coverage), but not enable it
     && pecl install xdebug-2.7.2 \
     && apk del .build-deps \
