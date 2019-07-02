@@ -11,8 +11,8 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Exception\RequestException;
 use Avtocod\B2BApi\Responses\DevPingResponse;
-use GuzzleHttp\ClientInterface as GuzzleInterface;
 use Avtocod\B2BApi\Exceptions\BadRequestException;
+use GuzzleHttp\ClientInterface as GuzzleInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -78,12 +78,28 @@ final class Client
     }
 
     /**
+     * @param bool $without_hash
+     *
+     * @return string
+     */
+    public function getVersion(bool $without_hash = true): string
+    {
+        $version = Versions::getVersion('avtocod/b2b-api-php');
+
+        if ($without_hash === true && \is_int($delimiter_position = \mb_strpos($version, '@'))) {
+            return \mb_substr($version, 0, (int) $delimiter_position);
+        }
+
+        return $version;
+    }
+
+    /**
      * @param RequestInterface $request
      * @param array            $options
      *
-     * @return ResponseInterface
      * @throws BadRequestException
      *
+     * @return ResponseInterface
      */
     protected function doRequest(RequestInterface $request, array $options = []): ResponseInterface
     {
@@ -137,21 +153,5 @@ final class Client
         }
 
         return $user_agent;
-    }
-
-    /**
-     * @param bool $without_hash
-     *
-     * @return string
-     */
-    public function getVersion(bool $without_hash = true): string
-    {
-        $version = Versions::getVersion('avtocod/b2b-api-php');
-
-        if ($without_hash === true && \is_int($delimiter_position = \strpos($version, '@'))) {
-            return \substr($version, 0, (int) $delimiter_position);
-        }
-
-        return $version;
     }
 }

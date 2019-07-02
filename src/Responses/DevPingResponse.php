@@ -48,7 +48,7 @@ final class DevPingResponse implements ResponseInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @throws BadResponseException
      */

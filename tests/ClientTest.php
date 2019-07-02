@@ -33,6 +33,21 @@ class ClientTest extends AbstractTestCase
     protected $settings;
 
     /**
+     * {@inheritdoc}
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->client = new Client(
+            $this->settings = new Settings('TEST_TOKEN'),
+            $this->guzzle = new Guzzle([
+                'handler' => HandlerStack::create($this->guzzle_handler),
+            ])
+        );
+    }
+
+    /**
      * @small
      *
      * @return void
@@ -41,7 +56,7 @@ class ClientTest extends AbstractTestCase
     {
         $this->assertSame($version = Versions::getVersion('avtocod/b2b-api-php'), $this->client->getVersion(false));
 
-        $this->assertSame(\substr($version, 0, (int) \strpos($version, '@')), $this->client->getVersion());
+        $this->assertSame(\mb_substr($version, 0, (int) \mb_strpos($version, '@')), $this->client->getVersion());
     }
 
     /**
@@ -111,20 +126,5 @@ class ClientTest extends AbstractTestCase
         );
 
         $this->client->devPing();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->client = new Client(
-            $this->settings = new Settings('TEST_TOKEN'),
-            $this->guzzle = new Guzzle([
-                'handler' => HandlerStack::create($this->guzzle_handler),
-            ])
-        );
     }
 }
