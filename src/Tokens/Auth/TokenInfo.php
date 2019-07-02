@@ -34,7 +34,7 @@ final class TokenInfo
     /**
      * Create a new TokenInfo instance.
      *
-     * @param string $user Like `user@domain`
+     * @param string $user        Like `user@domain`
      * @param int    $timestamp
      * @param int    $age
      * @param string $salted_hash

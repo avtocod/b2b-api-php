@@ -4,9 +4,9 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Tests\Exceptions;
 
-use Avtocod\B2BApi\Exceptions\B2BApiException;
-use Avtocod\B2BApi\Tests\AbstractTestCase;
 use RuntimeException;
+use Avtocod\B2BApi\Tests\AbstractTestCase;
+use Avtocod\B2BApi\Exceptions\B2BApiException;
 
 /**
  * @covers \Avtocod\B2BApi\Exceptions\B2BApiException

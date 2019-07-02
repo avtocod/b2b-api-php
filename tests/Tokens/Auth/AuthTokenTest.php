@@ -4,9 +4,9 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Tests\Tokens\Auth;
 
-use Avtocod\B2BApi\Exceptions\TokenParserException;
-use Avtocod\B2BApi\Tests\AbstractTestCase;
 use Avtocod\B2BApi\Tokens\Auth\AuthToken;
+use Avtocod\B2BApi\Tests\AbstractTestCase;
+use Avtocod\B2BApi\Exceptions\TokenParserException;
 
 class AuthTokenTest extends AbstractTestCase
 {

@@ -15,12 +15,12 @@ class AbstractTestCase extends TestCase
     protected $faker;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->faker = \Faker\Factory::create();;
+        $this->faker = \Faker\Factory::create();
     }
 }
