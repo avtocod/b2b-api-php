@@ -14,8 +14,8 @@ use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Exception\RequestException;
 use Avtocod\B2BApi\Responses\DevPingResponse;
 use Avtocod\B2BApi\Responses\DevTokenResponse;
-use GuzzleHttp\ClientInterface as GuzzleInterface;
 use Avtocod\B2BApi\Exceptions\BadRequestException;
+use GuzzleHttp\ClientInterface as GuzzleInterface;
 
 final class Client implements ClientInterface
 {
@@ -62,18 +62,6 @@ final class Client implements ClientInterface
         $this->events_handler = $events_handler;
 
         return $this;
-    }
-
-    /**
-     * @param object $event
-     *
-     * @return void
-     */
-    protected function dispatchEvent(object $event): void
-    {
-        if ($this->events_handler instanceof Closure) {
-            $this->events_handler->__invoke($event);
-        }
     }
 
     /**
@@ -133,6 +121,18 @@ final class Client implements ClientInterface
         }
 
         return $version;
+    }
+
+    /**
+     * @param object $event
+     *
+     * @return void
+     */
+    protected function dispatchEvent(object $event): void
+    {
+        if ($this->events_handler instanceof Closure) {
+            $this->events_handler->__invoke($event);
+        }
     }
 
     /**
