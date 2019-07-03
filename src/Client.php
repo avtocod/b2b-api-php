@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi;
 
+use Closure;
 use DateTime;
 use GuzzleHttp\Psr7\Request;
 use PackageVersions\Versions;
@@ -13,10 +14,8 @@ use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Exception\RequestException;
 use Avtocod\B2BApi\Responses\DevPingResponse;
 use Avtocod\B2BApi\Responses\DevTokenResponse;
-use Avtocod\B2BApi\Exceptions\BadRequestException;
 use GuzzleHttp\ClientInterface as GuzzleInterface;
-use Symfony\Component\EventDispatcher\EventDispatcher;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Avtocod\B2BApi\Exceptions\BadRequestException;
 
 final class Client implements ClientInterface
 {
@@ -31,32 +30,50 @@ final class Client implements ClientInterface
     protected $settings;
 
     /**
-     * @var EventDispatcherInterface
+     * @var Closure|null
      */
-    protected $dispatcher;
+    protected $events_handler;
 
     /**
      * Create a new client instance.
      *
-     * @param Settings                      $settings
-     * @param GuzzleInterface|null          $guzzle
-     * @param EventDispatcherInterface|null $dispatcher
+     * @param Settings             $settings
+     * @param GuzzleInterface|null $guzzle
+     * @param Closure|null         $events_handler
      */
     public function __construct(Settings $settings,
                                 ?GuzzleInterface $guzzle = null,
-                                ?EventDispatcherInterface $dispatcher = null)
+                                ?Closure $events_handler = null)
     {
-        $this->settings   = $settings;
-        $this->guzzle     = $guzzle ?? new Guzzle;
-        $this->dispatcher = $dispatcher ?? new EventDispatcher;
+        $this->settings       = $settings;
+        $this->guzzle         = $guzzle ?? new Guzzle;
+        $this->events_handler = $events_handler;
     }
 
     /**
-     * @return EventDispatcherInterface
+     * Set events handler.
+     *
+     * @param Closure $events_handler
+     *
+     * @return $this
      */
-    public function getDispatcher(): EventDispatcherInterface
+    public function setEventsHandler(Closure $events_handler): self
     {
-        return $this->dispatcher;
+        $this->events_handler = $events_handler;
+
+        return $this;
+    }
+
+    /**
+     * @param object $event
+     *
+     * @return void
+     */
+    protected function dispatchEvent(object $event): void
+    {
+        if ($this->events_handler instanceof Closure) {
+            $this->events_handler->__invoke($event);
+        }
     }
 
     /**
@@ -137,13 +154,13 @@ final class Client implements ClientInterface
             'User-Agent'    => $this->getDefaultUserAgent(),
         ], $options['headers'] ?? []);
 
-        $this->dispatcher->dispatch(new Events\BeforeRequestSendingEvent($request, $options));
+        $this->dispatchEvent(new Events\BeforeRequestSendingEvent($request, $options));
 
         try {
             $started_at = \microtime(true);
             $response   = $this->guzzle->send($request, $options);
         } catch (RequestException $exception) {
-            $this->dispatcher->dispatch(new Events\RequestFailedEvent(
+            $this->dispatchEvent(new Events\RequestFailedEvent(
                 $exception_request = $exception->getRequest(),
                 $exception_response = $exception->getResponse()
             ));
@@ -151,7 +168,7 @@ final class Client implements ClientInterface
             throw new BadRequestException($exception_request, $exception_response);
         }
 
-        $this->dispatcher->dispatch(new Events\AfterRequestSendingEvent(
+        $this->dispatchEvent(new Events\AfterRequestSendingEvent(
             $request,
             $response,
             (int) \round((\microtime(true) - $started_at) * 1000) // in microseconds

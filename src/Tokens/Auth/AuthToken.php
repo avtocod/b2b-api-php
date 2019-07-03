@@ -26,7 +26,7 @@ final class AuthToken
             $auth_token = \trim(\str_replace(static::TOKEN_PREFIX, '', $auth_token));
         }
 
-        $parts = \explode(':', \base64_decode($auth_token, true));
+        $parts = \explode(':', (string) \base64_decode($auth_token, true));
 
         $username    = $parts[0] ?? null;
         $timestamp   = $parts[1] ?? null;

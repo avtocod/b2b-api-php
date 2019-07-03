@@ -6,9 +6,8 @@ namespace Avtocod\B2BApi\Events;
 
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Symfony\Component\EventDispatcher\Event as SymfonyEvent;
 
-final class RequestFailedEvent extends SymfonyEvent
+final class RequestFailedEvent
 {
     /**
      * @var RequestInterface
