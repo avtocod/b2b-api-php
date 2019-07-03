@@ -13,8 +13,8 @@ use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Exception\RequestException;
 use Avtocod\B2BApi\Responses\DevPingResponse;
 use Avtocod\B2BApi\Responses\DevTokenResponse;
-use GuzzleHttp\ClientInterface as GuzzleInterface;
 use Avtocod\B2BApi\Exceptions\BadRequestException;
+use GuzzleHttp\ClientInterface as GuzzleInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -68,7 +68,7 @@ final class Client implements ClientInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function devPing(): DevPingResponse
     {
@@ -122,9 +122,9 @@ final class Client implements ClientInterface
      * @param RequestInterface $request
      * @param array            $options
      *
-     * @return ResponseInterface
      * @throws BadRequestException
      *
+     * @return ResponseInterface
      */
     protected function doRequest(RequestInterface $request, array $options = []): ResponseInterface
     {
