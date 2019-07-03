@@ -4,9 +4,9 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Responses;
 
-use Avtocod\B2BApi\DateTimeFactory;
 use DateTime;
 use Tarampampam\Wrappers\Json;
+use Avtocod\B2BApi\DateTimeFactory;
 use Avtocod\B2BApi\Exceptions\BadResponseException;
 use Tarampampam\Wrappers\Exceptions\JsonEncodeDecodeException;
 use Psr\Http\Message\ResponseInterface as HttpResponseInterface;
@@ -95,7 +95,6 @@ final class DevTokenResponse implements ResponseInterface
                                  string $token,
                                  string $header)
     {
-
         $this->user             = $user;
         $this->password         = $password;
         $this->password_hash    = $password_hash;

@@ -4,8 +4,8 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Tests;
 
-use Avtocod\B2BApi\DateTimeFactory;
 use DateTime;
+use Avtocod\B2BApi\DateTimeFactory;
 
 /**
  * @group datetime
