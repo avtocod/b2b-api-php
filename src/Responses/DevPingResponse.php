@@ -61,10 +61,10 @@ final class DevPingResponse implements ResponseInterface
         }
 
         return new static(
-            $as_array['value'] ?? '',
-            $as_array['in'] ?? 0,
-            $as_array['out'] ?? 0,
-            $as_array['delay'] ?? 0
+            $as_array['value'],
+            $as_array['in'],
+            $as_array['out'],
+            $as_array['delay']
         );
     }
 

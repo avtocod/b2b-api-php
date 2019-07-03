@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace Avtocod\B2BApi\Events;
 
 use Psr\Http\Message\RequestInterface;
-use Symfony\Contracts\EventDispatcher\Event as SymfonyEvent;
+use Symfony\Component\EventDispatcher\Event as SymfonyEvent;
 
 final class BeforeRequestSendingEvent extends SymfonyEvent
 {

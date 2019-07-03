@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi;
 
+use DateTime;
 use GuzzleHttp\Psr7\Request;
 use PackageVersions\Versions;
 use GuzzleHttp\Client as Guzzle;
@@ -11,12 +12,13 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Exception\RequestException;
 use Avtocod\B2BApi\Responses\DevPingResponse;
-use Avtocod\B2BApi\Exceptions\BadRequestException;
+use Avtocod\B2BApi\Responses\DevTokenResponse;
 use GuzzleHttp\ClientInterface as GuzzleInterface;
+use Avtocod\B2BApi\Exceptions\BadRequestException;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-final class Client
+final class Client implements ClientInterface
 {
     /**
      * @var GuzzleInterface
@@ -66,14 +68,37 @@ final class Client
     }
 
     /**
-     * Test connection.
-     *
-     * @return DevPingResponse
+     * {@inheritDoc}
      */
     public function devPing(): DevPingResponse
     {
         return DevPingResponse::fromHttpResponse(
-            $this->doRequest(new Request('get', \sprintf('dev/ping?value=%d', \time())))
+            $this->doRequest(new Request('get', 'dev/ping'), [
+                'query' => [
+                    'value' => \time(),
+                ],
+            ])
+        );
+    }
+
+    public function devToken(string $username,
+                             string $password,
+                             bool $is_hash = false,
+                             ?DateTime $date_from = null,
+                             int $age = 60): DevTokenResponse
+    {
+        return DevTokenResponse::fromHttpResponse(
+            $this->doRequest(new Request('get', 'dev/token'), [
+                'query' => [
+                    'user'    => $username,
+                    'pass'    => $password,
+                    'is_hash' => $is_hash
+                        ? 'true'
+                        : 'false',
+                    'date'    => DateTimeFactory::toIso8601Zulu($date_from ?? new DateTime),
+                    'age'     => \max(1, $age),
+                ],
+            ])
         );
     }
 
@@ -97,9 +122,9 @@ final class Client
      * @param RequestInterface $request
      * @param array            $options
      *
+     * @return ResponseInterface
      * @throws BadRequestException
      *
-     * @return ResponseInterface
      */
     protected function doRequest(RequestInterface $request, array $options = []): ResponseInterface
     {

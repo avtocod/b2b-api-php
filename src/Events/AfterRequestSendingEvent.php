@@ -6,7 +6,7 @@ namespace Avtocod\B2BApi\Events;
 
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Symfony\Contracts\EventDispatcher\Event as SymfonyEvent;
+use Symfony\Component\EventDispatcher\Event as SymfonyEvent;
 
 final class AfterRequestSendingEvent extends SymfonyEvent
 {
