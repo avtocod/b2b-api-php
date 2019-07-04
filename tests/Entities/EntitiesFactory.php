@@ -18,6 +18,30 @@ class EntitiesFactory
     private static $factories = [];
 
     /**
+     * @param string $entity_class
+     * @param array  $attributes
+     *
+     * @throws InvalidArgumentException
+     *
+     * @return object
+     */
+    public static function make(string $entity_class, array $attributes = [])
+    {
+        if (\count(static::$factories) === 0) {
+            static::bootUpFactories();
+        }
+
+        if (! isset(static::$factories[$entity_class])) {
+            throw new InvalidArgumentException("Unknown factory [{$entity_class}]");
+        }
+
+        /** @var callable $factory */
+        $factory = static::$factories[$entity_class];
+
+        return $factory(static::getFaker(), $attributes);
+    }
+
+    /**
      * @return Faker
      */
     protected static function getFaker(): Faker
@@ -52,7 +76,7 @@ class EntitiesFactory
                 'deleted'     => $faker->randomElement([null, $faker->boolean]),
             ], $attributes);
 
-            /**
+            /*
              * @var $uid
              * @var $comment
              * @var $name
@@ -120,7 +144,7 @@ class EntitiesFactory
                 'pass_hash'   => $faker->randomElement([null, $faker->md5]),
             ], $attributes);
 
-            /**
+            /*
              * @var $uid
              * @var $comment
              * @var $contacts
@@ -189,7 +213,7 @@ class EntitiesFactory
                 'deleted'     => $faker->randomElement([null, $faker->boolean]),
             ], $attributes);
 
-            /**
+            /*
              * @var $uid
              * @var $comment
              * @var $name
@@ -224,29 +248,5 @@ class EntitiesFactory
                 $deleted
             );
         };
-    }
-
-    /**
-     * @param string $entity_class
-     * @param array  $attributes
-     *
-     * @throws InvalidArgumentException
-     *
-     * @return object
-     */
-    public static function make(string $entity_class, array $attributes = [])
-    {
-        if (\count(static::$factories) === 0) {
-            static::bootUpFactories();
-        }
-
-        if (! isset(static::$factories[$entity_class])) {
-            throw new InvalidArgumentException("Unknown factory [{$entity_class}]");
-        }
-
-        /** @var callable $factory */
-        $factory = static::$factories[$entity_class];
-
-        return $factory(static::getFaker(), $attributes);
     }
 }

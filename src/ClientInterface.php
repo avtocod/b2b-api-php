@@ -2,12 +2,12 @@
 
 namespace Avtocod\B2BApi;
 
+use DateTime;
+use Avtocod\B2BApi\Responses\UserResponse;
 use Avtocod\B2BApi\Responses\DevPingResponse;
+use Avtocod\B2BApi\Responses\DevTokenResponse;
 use Avtocod\B2BApi\Exceptions\BadRequestException;
 use Avtocod\B2BApi\Exceptions\BadResponseException;
-use Avtocod\B2BApi\Responses\DevTokenResponse;
-use Avtocod\B2BApi\Responses\UserResponse;
-use DateTime;
 
 interface ClientInterface
 {

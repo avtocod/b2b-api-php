@@ -15,8 +15,8 @@ use Avtocod\B2BApi\Responses\UserResponse;
 use GuzzleHttp\Exception\RequestException;
 use Avtocod\B2BApi\Responses\DevPingResponse;
 use Avtocod\B2BApi\Responses\DevTokenResponse;
-use GuzzleHttp\ClientInterface as GuzzleInterface;
 use Avtocod\B2BApi\Exceptions\BadRequestException;
+use GuzzleHttp\ClientInterface as GuzzleInterface;
 
 final class Client implements ClientInterface
 {

@@ -4,8 +4,8 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Responses\Entities;
 
-use Avtocod\B2BApi\DateTimeFactory;
 use DateTime;
+use Avtocod\B2BApi\DateTimeFactory;
 
 class User
 {
@@ -112,26 +112,26 @@ class User
     /**
      * Create a new user instance.
      *
-     * @param string       $uid         Unique user ID
-     * @param string       $comment     User comment
-     * @param string       $contacts    User contact info
-     * @param string       $email       User email
-     * @param string       $login       Login (e.g. `user@domain`)
-     * @param string       $name        Human-readable user name
-     * @param string       $state       User status (e.g.: `ACTIVATION_REQUIRED`, `ACTIVE`, `BANNED`)
-     * @param string       $domain_uid  User domain unique ID
-     * @param Domain|null  $domain      User domain object (optional)
-     * @param string[]     $roles       User roles
-     * @param string[]     $tags        Additional user tags
-     * @param DateTime     $created_at  User created at
-     * @param string       $created_by  User creator
-     * @param DateTime     $updated_at  Last changes was made at
-     * @param string       $updated_by  Last changes was made by
-     * @param DateTime     $active_from Active from
-     * @param DateTime     $active_to   Active to
-     * @param int|null     $id          Internal database identifier (optional, only for administrators)
-     * @param bool|null    $deleted     Is deleted flag (optional, only for administrators)
-     * @param string|null  $pass_hash   Password hash (optional, only for administrators)
+     * @param string      $uid         Unique user ID
+     * @param string      $comment     User comment
+     * @param string      $contacts    User contact info
+     * @param string      $email       User email
+     * @param string      $login       Login (e.g. `user@domain`)
+     * @param string      $name        Human-readable user name
+     * @param string      $state       User status (e.g.: `ACTIVATION_REQUIRED`, `ACTIVE`, `BANNED`)
+     * @param string      $domain_uid  User domain unique ID
+     * @param Domain|null $domain      User domain object (optional)
+     * @param string[]    $roles       User roles
+     * @param string[]    $tags        Additional user tags
+     * @param DateTime    $created_at  User created at
+     * @param string      $created_by  User creator
+     * @param DateTime    $updated_at  Last changes was made at
+     * @param string      $updated_by  Last changes was made by
+     * @param DateTime    $active_from Active from
+     * @param DateTime    $active_to   Active to
+     * @param int|null    $id          Internal database identifier (optional, only for administrators)
+     * @param bool|null   $deleted     Is deleted flag (optional, only for administrators)
+     * @param string|null $pass_hash   Password hash (optional, only for administrators)
      */
     public function __construct(string $uid,
                                 string $comment,
@@ -194,7 +194,7 @@ class User
             $data['name'],
             $data['state'],
             $data['domain_uid'],
-            isset ($data['domain'])
+            isset($data['domain'])
                 ? Domain::fromArray($data['domain'])
                 : null,
             \array_filter(\explode(',', $data['roles'])),

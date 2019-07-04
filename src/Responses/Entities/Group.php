@@ -111,7 +111,6 @@ class Group
                                 ?int $id,
                                 ?bool $deleted)
     {
-
         $this->uid         = $uid;
         $this->comment     = $comment;
         $this->name        = $name;
