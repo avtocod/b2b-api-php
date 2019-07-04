@@ -55,7 +55,7 @@ final class DevPingResponse implements ResponseInterface
     public static function fromHttpResponse(HttpResponseInterface $response): self
     {
         try {
-            $as_array = (array) Json::decode($response->getBody()->__toString());
+            $as_array = (array) Json::decode((string) $response->getBody());
         } catch (JsonEncodeDecodeException $e) {
             throw BadResponseException::wrongJson($response, $e->getMessage(), $e);
         }

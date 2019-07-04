@@ -8,8 +8,6 @@ use Avtocod\B2BApi\Exceptions\TokenParserException;
 
 final class AuthToken
 {
-    protected const TOKEN_PREFIX = 'AR-REST';
-
     /**
      * Parse authorization token string.
      *
@@ -21,11 +19,6 @@ final class AuthToken
      */
     public static function parse(string $auth_token): TokenInfo
     {
-        // Remove prefix, if it presents
-        if (\mb_strpos($auth_token, static::TOKEN_PREFIX) !== false) {
-            $auth_token = \trim(\str_replace(static::TOKEN_PREFIX, '', $auth_token));
-        }
-
         $parts = \explode(':', (string) \base64_decode($auth_token, true));
 
         $username    = $parts[0] ?? null;
@@ -66,8 +59,6 @@ final class AuthToken
         $pass_hash   = \base64_encode(\md5($password, true));
         $salted_hash = \base64_encode(\md5(\implode(':', [$timestamp, $age, $pass_hash]), true));
 
-        return static::TOKEN_PREFIX . ' ' . \base64_encode(
-                \implode(':', [$username, $timestamp, $age, $salted_hash])
-            );
+        return \base64_encode(\implode(':', [$username, $timestamp, $age, $salted_hash]));
     }
 }

@@ -39,11 +39,11 @@ class Settings
     {
         $this->auth_token = $auth_token;
 
-        if ($base_uri !== null) {
+        if (\is_string($base_uri)) {
             $this->base_uri = \rtrim($base_uri, '/ ') . '/';
         }
 
-        if ($guzzle_options !== null) {
+        if (\is_array($guzzle_options)) {
             $this->guzzle_options = \array_replace($this->guzzle_options, $guzzle_options);
         }
     }

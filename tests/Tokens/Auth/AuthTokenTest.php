@@ -18,7 +18,6 @@ class AuthTokenTest extends AbstractTestCase
     public function testParsing(): void
     {
         $tokens = [
-            'AR-REST dGVzdEB0ZXN0OjE0ODM2MzQ3MjM6NTpaVGZBTzQramFDdmhWMCs2elk1dWFnPT0=',
             'dGVzdEB0ZXN0OjE0ODM2MzQ3MjM6NTpaVGZBTzQramFDdmhWMCs2elk1dWFnPT0=',
         ];
 
@@ -62,7 +61,7 @@ class AuthTokenTest extends AbstractTestCase
     public function testGeneration(): void
     {
         $this->assertSame(
-            'AR-REST dGVzdEB0ZXN0OjE0ODM2MzQ3MjM6NTpaVGZBTzQramFDdmhWMCs2elk1dWFnPT0=',
+            'dGVzdEB0ZXN0OjE0ODM2MzQ3MjM6NTpaVGZBTzQramFDdmhWMCs2elk1dWFnPT0=',
             AuthToken::generate(
                 $username = 'test',
                 $password = '123',

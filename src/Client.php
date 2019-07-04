@@ -11,14 +11,17 @@ use PackageVersions\Versions;
 use GuzzleHttp\Client as Guzzle;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Avtocod\B2BApi\Responses\UserResponse;
 use GuzzleHttp\Exception\RequestException;
 use Avtocod\B2BApi\Responses\DevPingResponse;
 use Avtocod\B2BApi\Responses\DevTokenResponse;
-use Avtocod\B2BApi\Exceptions\BadRequestException;
 use GuzzleHttp\ClientInterface as GuzzleInterface;
+use Avtocod\B2BApi\Exceptions\BadRequestException;
 
 final class Client implements ClientInterface
 {
+    protected const TOKEN_PREFIX = 'AR-REST';
+
     /**
      * @var GuzzleInterface
      */
@@ -86,6 +89,9 @@ final class Client implements ClientInterface
         );
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function devToken(string $username,
                              string $password,
                              bool $is_hash = false,
@@ -102,6 +108,26 @@ final class Client implements ClientInterface
                         : 'false',
                     'date'    => DateTimeFactory::toIso8601Zulu($date_from ?? new DateTime),
                     'age'     => \max(1, $age),
+                ],
+            ])
+        );
+    }
+
+    /**
+     * Retrieve information about current user.
+     *
+     * @param bool $detailed
+     *
+     * @return UserResponse
+     */
+    public function user(bool $detailed = false): UserResponse
+    {
+        return UserResponse::fromHttpResponse(
+            $this->doRequest(new Request('get', 'user'), [
+                'query' => [
+                    '_detailed' => $detailed
+                        ? 'true'
+                        : 'false',
                 ],
             ])
         );
@@ -128,7 +154,7 @@ final class Client implements ClientInterface
      *
      * @return void
      */
-    protected function dispatchEvent(object $event): void
+    protected function dispatchEvent($event): void
     {
         if ($this->events_handler instanceof Closure) {
             $this->events_handler->__invoke($event);
@@ -150,7 +176,7 @@ final class Client implements ClientInterface
         $options['base_uri'] = $this->settings->getBaseUri();
 
         $options['headers'] = \array_replace([
-            'Authorization' => $this->settings->getAuthToken(),
+            'Authorization' => static::TOKEN_PREFIX . ' ' . $this->settings->getAuthToken(),
             'User-Agent'    => $this->getDefaultUserAgent(),
         ], $options['headers'] ?? []);
 
@@ -159,13 +185,13 @@ final class Client implements ClientInterface
         try {
             $started_at = \microtime(true);
             $response   = $this->guzzle->send($request, $options);
-        } catch (RequestException $exception) {
+        } catch (RequestException $e) {
             $this->dispatchEvent(new Events\RequestFailedEvent(
-                $exception_request = $exception->getRequest(),
-                $exception_response = $exception->getResponse()
+                $exception_request = $e->getRequest(),
+                $exception_response = $e->getResponse()
             ));
 
-            throw new BadRequestException($exception_request, $exception_response);
+            throw new BadRequestException($exception_request, $exception_response, $e->getMessage(), 0, $e);
         }
 
         $this->dispatchEvent(new Events\AfterRequestSendingEvent(
