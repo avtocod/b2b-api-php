@@ -44,7 +44,7 @@ class Settings
         }
 
         if (\is_array($guzzle_options)) {
-            $this->guzzle_options = \array_replace($this->guzzle_options, $guzzle_options);
+            $this->guzzle_options = (array) \array_replace($this->guzzle_options, $guzzle_options);
         }
     }
 
