@@ -182,6 +182,8 @@ final class Client implements ClientInterface
     }
 
     /**
+     * Get client (package) version.
+     *
      * @param bool $without_hash
      *
      * @return string

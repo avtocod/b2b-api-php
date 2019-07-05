@@ -41,9 +41,9 @@ class CleanOptions implements CanCreateSelfFromArrayInterface
     public static function fromArray(array $data): self
     {
         return new static(
-            $data['Process_Response'],
-            $data['Process_Request'],
-            $data['ReportLog']
+            $data['Process_Response'] ?? null,
+            $data['Process_Request'] ?? null,
+            $data['ReportLog'] ?? null
         );
     }
 
