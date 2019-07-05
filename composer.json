@@ -28,7 +28,7 @@
         "phpstan/phpstan": "^0.11",
         "phpunit/phpunit": "^7.5",
         "symfony/var-dumper": "^4.2",
-        "tarampampam/guzzle-url-mock": "^1.0"
+        "tarampampam/guzzle-url-mock": "^1.1"
     },
     "autoload": {
         "psr-4": {

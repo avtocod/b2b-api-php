@@ -5,9 +5,40 @@ declare(strict_types = 1);
 namespace Avtocod\B2BApi\Responses\Entities;
 
 use DateTime;
+use Avtocod\B2BApi\DateTimeFactory;
 
-class ReportType
+class ReportType implements CanCreateSelfFromArrayInterface
 {
+    /**
+     * Report state - draft.
+     */
+    public const STATE_DRAFT = 'DRAFT';
+
+    /**
+     * Report state - published.
+     */
+    public const STATE_PUBLISHED = 'PUBLISHED';
+
+    /**
+     * Report state - obsolete.
+     */
+    public const STATE_OBSOLETE = 'OBSOLETE';
+
+    /**
+     * Report make mode - transactional
+     */
+    public const REPORT_MAKE_MODE_TRANSACTIONAL = 'TRANSACTIONAL';
+
+    /**
+     * Report make mode - "fast, without transaction".
+     */
+    public const REPORT_MAKE_MODE_FAST_NON_TRANSACTIONAL = 'FAST_NON_TRANSACTIONAL';
+
+    /**
+     * Report make mode - "fast, without balance".
+     */
+    public const REPORT_MAKE_MODE_FAST_NON_BALANCE = 'FAST_NON_BALANCE';
+
     /**
      * @var string
      */
@@ -44,7 +75,7 @@ class ReportType
     protected $domain_uid;
 
     /**
-     * @var ReportTypeContent
+     * @var ReportTypeContent|null
      */
     protected $content;
 
@@ -119,6 +150,11 @@ class ReportType
     protected $clean_options;
 
     /**
+     * @var string|null
+     */
+    protected $report_make_mode;
+
+    /**
      * @var int|null
      */
     protected $id;
@@ -131,31 +167,33 @@ class ReportType
     /**
      * Create a new report type instance.
      *
-     * @param string            $uid             Unique report type ID
-     * @param string            $comment         Report type comment
-     * @param string            $name            Human-readable report type name
-     * @param string            $state           Report type state (e.g.: `DRAFT`, `PUBLISHED`, `OBSOLETE`)
-     * @param string[]          $tags            Additional report type tags
-     * @param int               $max_age         Period of relevance
-     * @param string            $domain_uid      Domain unique ID
-     * @param ReportTypeContent $content         Report type content
-     * @param int               $day_quote       Daily quota
-     * @param int               $month_quote     Monthly quota
-     * @param int               $total_quote     Total quote
-     * @param int               $min_priority    Lowest possible priority for this report type
-     * @param int               $max_priority    Highest possible priority for this report type
-     * @param int               $period_priority Time unit (in milliseconds) for priority calculation
-     * @param int               $max_request     Number of requests in a given time unit, which will lower the
-     *                                           priority to a minimum
-     * @param DateTime          $created_at      Report type created at
-     * @param string            $created_by      Report type creator
-     * @param DateTime          $updated_at      Last changes was made at
-     * @param string            $updated_by      Last changes was made by
-     * @param DateTime          $active_from     Active from
-     * @param DateTime          $active_to       Active to
-     * @param CleanOptions|null $clean_options   Objects obsolescence
-     * @param int|null          $id              Internal database identifier (optional, only for administrators)
-     * @param bool|null         $deleted         Is deleted flag (optional, only for administrators)
+     * @param string                 $uid              Unique report type ID (e.g.: `report_type@domain`)
+     * @param string                 $comment          Report type comment
+     * @param string                 $name             Human-readable report type name
+     * @param string                 $state            Report type state (e.g.: `DRAFT`, `PUBLISHED`, `OBSOLETE`)
+     * @param string[]               $tags             Additional report type tags
+     * @param int                    $max_age          Period of relevance
+     * @param string                 $domain_uid       Domain unique ID
+     * @param ReportTypeContent|null $content          Report type content
+     * @param int                    $day_quote        Daily quota
+     * @param int                    $month_quote      Monthly quota
+     * @param int                    $total_quote      Total quote
+     * @param int                    $min_priority     Lowest possible priority for this report type
+     * @param int                    $max_priority     Highest possible priority for this report type
+     * @param int                    $period_priority  Time unit (in milliseconds) for priority calculation
+     * @param int                    $max_request      Number of requests in a given time unit, which will lower the
+     *                                                 priority to a minimum
+     * @param DateTime               $created_at       Report type created at
+     * @param string                 $created_by       Report type creator
+     * @param DateTime               $updated_at       Last changes was made at
+     * @param string                 $updated_by       Last changes was made by
+     * @param DateTime               $active_from      Active from
+     * @param DateTime               $active_to        Active to
+     * @param CleanOptions|null      $clean_options    Objects obsolescence
+     * @param string|null            $report_make_mode Report generation mode (e.g.: `TRANSACTIONAL`,
+     *                                                 `FAST_NON_TRANSACTIONAL`, `FAST_NON_BALANCE`)
+     * @param int|null               $id               Internal database identifier (optional, only for administrators)
+     * @param bool|null              $deleted          Is deleted flag (optional, only for administrators)
      */
     public function __construct(string $uid,
                                 string $comment,
@@ -164,7 +202,7 @@ class ReportType
                                 array $tags,
                                 int $max_age,
                                 string $domain_uid,
-                                ReportTypeContent $content,
+                                ?ReportTypeContent $content,
                                 int $day_quote,
                                 int $month_quote,
                                 int $total_quote,
@@ -179,33 +217,73 @@ class ReportType
                                 DateTime $active_from,
                                 DateTime $active_to,
                                 ?CleanOptions $clean_options,
+                                ?string $report_make_mode,
                                 ?int $id,
                                 ?bool $deleted)
     {
-        $this->uid             = $uid;
-        $this->comment         = $comment;
-        $this->name            = $name;
-        $this->state           = $state;
-        $this->tags            = $tags;
-        $this->max_age         = $max_age;
-        $this->domain_uid      = $domain_uid;
-        $this->content         = $content;
-        $this->day_quote       = $day_quote;
-        $this->month_quote     = $month_quote;
-        $this->total_quote     = $total_quote;
-        $this->min_priority    = $min_priority;
-        $this->max_priority    = $max_priority;
-        $this->period_priority = $period_priority;
-        $this->max_request     = $max_request;
-        $this->created_at      = $created_at;
-        $this->created_by      = $created_by;
-        $this->updated_at      = $updated_at;
-        $this->updated_by      = $updated_by;
-        $this->active_from     = $active_from;
-        $this->active_to       = $active_to;
-        $this->clean_options   = $clean_options;
-        $this->id              = $id;
-        $this->deleted         = $deleted;
+        $this->uid              = $uid;
+        $this->comment          = $comment;
+        $this->name             = $name;
+        $this->state            = $state;
+        $this->tags             = $tags;
+        $this->max_age          = $max_age;
+        $this->domain_uid       = $domain_uid;
+        $this->content          = $content;
+        $this->day_quote        = $day_quote;
+        $this->month_quote      = $month_quote;
+        $this->total_quote      = $total_quote;
+        $this->min_priority     = $min_priority;
+        $this->max_priority     = $max_priority;
+        $this->period_priority  = $period_priority;
+        $this->max_request      = $max_request;
+        $this->created_at       = $created_at;
+        $this->created_by       = $created_by;
+        $this->updated_at       = $updated_at;
+        $this->updated_by       = $updated_by;
+        $this->active_from      = $active_from;
+        $this->active_to        = $active_to;
+        $this->clean_options    = $clean_options;
+        $this->report_make_mode = $report_make_mode;
+        $this->id               = $id;
+        $this->deleted          = $deleted;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public static function fromArray(array $data): self
+    {
+        return new static(
+            $data['uid'],
+            $data['comment'],
+            $data['name'],
+            $data['state'],
+            \array_filter(\explode(',', $data['tags'])),
+            $data['max_age'],
+            $data['domain_uid'],
+            isset($data['content'])
+                ? ReportTypeContent::fromArray($data['content'])
+                : null,
+            $data['day_quote'],
+            $data['month_quote'],
+            $data['total_quote'],
+            $data['min_priority'],
+            $data['max_priority'],
+            $data['period_priority'],
+            $data['max_request'],
+            DateTimeFactory::createFromIso8601Zulu($data['created_at']),
+            $data['created_by'],
+            DateTimeFactory::createFromIso8601Zulu($data['updated_at']),
+            $data['updated_by'],
+            DateTimeFactory::createFromIso8601Zulu($data['active_from']),
+            DateTimeFactory::createFromIso8601Zulu($data['active_to']),
+            isset($data['clean_options'])
+                ? CleanOptions::fromArray($data['clean_options'])
+                : null,
+            $data['report_make_mode'] ?? null,
+            $data['id'] ?? null,
+            $data['deleted'] ?? null
+        );
     }
 
     /**
@@ -283,9 +361,9 @@ class ReportType
     /**
      * Get report type content.
      *
-     * @return ReportTypeContent
+     * @return ReportTypeContent|null
      */
-    public function getContent(): ReportTypeContent
+    public function getContent(): ?ReportTypeContent
     {
         return $this->content;
     }
@@ -428,6 +506,18 @@ class ReportType
     public function getCleanOptions(): ?CleanOptions
     {
         return $this->clean_options;
+    }
+
+    /**
+     * Get report generation mode.
+     *
+     * E.g.: `TRANSACTIONAL`, `FAST_NON_TRANSACTIONAL`, `FAST_NON_BALANCE`.
+     *
+     * @return string|null
+     */
+    public function getReportMakeMode(): ?string
+    {
+        return $this->report_make_mode;
     }
 
     /**

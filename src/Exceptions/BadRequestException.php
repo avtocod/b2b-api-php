@@ -6,8 +6,10 @@ namespace Avtocod\B2BApi\Exceptions;
 
 use Throwable;
 use RuntimeException;
+use Tarampampam\Wrappers\Json;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Tarampampam\Wrappers\Exceptions\JsonEncodeDecodeException;
 
 class BadRequestException extends RuntimeException
 {
@@ -27,19 +29,61 @@ class BadRequestException extends RuntimeException
      * @param RequestInterface       $http_request
      * @param ResponseInterface|null $http_response
      * @param string                 $message
-     * @param int                    $code
+     * @param int|null               $code
      * @param Throwable|null         $previous
      */
     public function __construct(RequestInterface $http_request,
                                 ?ResponseInterface $http_response = null,
-                                string $message = 'Unsuccessful request',
-                                int $code = 0,
+                                ?string $message = null,
+                                ?int $code = null,
                                 ?Throwable $previous = null)
     {
         $this->http_request  = $http_request;
         $this->http_response = $http_response;
 
-        parent::__construct($message, $code, $previous);
+        $service_error_message = $http_response instanceof ResponseInterface
+            ? $this->extractErrorMessageFromResponse($http_response)
+            : null;
+
+        $http_code = $http_response instanceof ResponseInterface
+            ? $http_response->getStatusCode()
+            : null;
+
+        parent::__construct(
+            $message ?? $service_error_message ?? 'Unsuccessful request',
+            $code ?? $http_code ?? 0,
+            $previous
+        );
+    }
+
+    /**
+     * Extract service error information from response.
+     *
+     * @param ResponseInterface $response
+     *
+     * @return string|null
+     */
+    protected function extractErrorMessageFromResponse(ResponseInterface $response): ?string
+    {
+        try {
+            $as_array = (array) Json::decode((string) $response->getBody());
+
+            if (isset($as_array['type'], $as_array['name'], $as_array['message'])) {
+                return "{$as_array['type']}: {$as_array['name']} ({$as_array['message']})";
+            }
+
+            if (isset($as_array['event']) && \is_array($event = $as_array['event'])) {
+                $type    = $event['type'] ?? null;
+                $name    = $event['name'] ?? null;
+                $message = $event['message'] ?? null;
+
+                return "{$type}: {$name} ({$message})";
+            }
+        } catch (JsonEncodeDecodeException $e) {
+            //
+        }
+
+        return null;
     }
 
     /**

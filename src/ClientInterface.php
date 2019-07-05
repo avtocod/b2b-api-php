@@ -2,6 +2,8 @@
 
 namespace Avtocod\B2BApi;
 
+use Avtocod\B2BApi\Responses\UserBalanceResponse;
+use Avtocod\B2BApi\Responses\UserReportTypesResponse;
 use DateTime;
 use Avtocod\B2BApi\Responses\UserResponse;
 use Avtocod\B2BApi\Responses\DevPingResponse;
@@ -52,4 +54,43 @@ interface ClientInterface
      * @return UserResponse
      */
     public function user(bool $detailed = false): UserResponse;
+
+    /**
+     * Retrieve balance information for report type.
+     *
+     * @param string $report_type_uid E.g.: `report_type@domain`
+     * @param bool   $detailed
+     *
+     * @throws BadRequestException
+     * @throws BadResponseException
+     *
+     * @return UserBalanceResponse
+     */
+    public function userBalance(string $report_type_uid, bool $detailed = false): UserBalanceResponse;
+
+    /**
+     * Retrieve report types data.
+     *
+     * @param bool   $can_generate User nac generate reports for report type?
+     * @param bool   $content      Include report content rules
+     * @param string $query
+     * @param int    $size         Maximum entries per page
+     * @param int    $offset       Pagination offset
+     * @param int    $page         Page number
+     * @param string $sort         Sorting rules
+     * @param bool   $calc_total   Calculate total report types count
+     *
+     * @throws BadRequestException
+     * @throws BadResponseException
+     *
+     * @return UserReportTypesResponse
+     */
+    public function userReportTypes(bool $can_generate = false,
+                                    bool $content = false,
+                                    string $query = '_all',
+                                    int $size = 20,
+                                    int $offset = 0,
+                                    int $page = 1,
+                                    string $sort = '-created_at',
+                                    bool $calc_total = false): UserReportTypesResponse;
 }

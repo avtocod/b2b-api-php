@@ -162,7 +162,7 @@ class ClientTest extends AbstractTestCase
                     ? 'true'
                     : 'false',
                 'date'    => DateTimeFactory::toIso8601Zulu($date = new DateTime),
-                'age'     => $age = 60,
+                'age'     => $age = \random_int(1, 100),
             ]),
             'get',
             new Response(
@@ -254,7 +254,7 @@ class ClientTest extends AbstractTestCase
                             'updated_by'  => $updated_by = 'system',
                             'active_from' => $active_from = '1900-01-01T00:00:00.000Z',
                             'active_to'   => $active_to = '3000-01-01T00:00:00.000Z',
-                            'id'          => $id = 123,
+                            'id'          => $id = \random_int(1, 100),
                             'deleted'     => $deleted = false,
                             'pass_hash'   => $pass_hash = '7815696ecbf1c96e6894b779456d330e',
                         ],
@@ -393,5 +393,462 @@ class ClientTest extends AbstractTestCase
         $this->assertSame($domain_updated_by, $user_domain->getUpdatedBy());
         $this->assertSame($domain_active_from, DateTimeFactory::toIso8601Zulu($user_domain->getActiveFrom()));
         $this->assertSame($domain_active_to, DateTimeFactory::toIso8601Zulu($user_domain->getActiveTo()));
+    }
+
+    /**
+     * @small
+     *
+     * @covers ::user
+     * @covers ::doRequest
+     *
+     * @return void
+     */
+    public function testUserWithWrongJson(): void
+    {
+        self::markTestIncomplete();
+    }
+
+    /**
+     * @small
+     *
+     * @covers ::user
+     * @covers ::doRequest
+     *
+     * @return void
+     */
+    public function testUserWithServerError(): void
+    {
+        self::markTestIncomplete();
+    }
+
+    /**
+     * @small
+     *
+     * @covers ::userBalance
+     * @covers ::doRequest
+     *
+     * @return void
+     */
+    public function testUserBalance(): void
+    {
+        $this->guzzle_handler->onUriRequested(
+            $this->settings->getBaseUri() . \sprintf(
+                'user/balance/%s?_detailed=false', \urlencode($report_type_uid = 'foo@bar')
+            ),
+            'get',
+            new Response(
+                200, ['content-type' => 'application/json;charset=utf-8'], \json_encode((object) [
+                    'state' => $state = 'ok',
+                    'size'  => $size = 3,
+                    'stamp' => $stamp = DateTimeFactory::toIso8601Zulu(new DateTime),
+                    'data'  => $data = [
+                        (object) [
+                            'report_type_uid' => $report_type_uid,
+                            'balance_type'    => $day_type = 'DAY',
+                            'quote_init'      => $day_init = \random_int(1, 100),
+                            'quote_up'        => $day_up = \random_int(1, 100),
+                            'quote_use'       => $day_use = \random_int(1, 100),
+                        ],
+                        (object) [
+                            'report_type_uid' => $report_type_uid,
+                            'balance_type'    => $month_type = 'MONTH',
+                            'quote_init'      => $month_init = \random_int(1, 100),
+                            'quote_up'        => $month_up = \random_int(1, 100),
+                            'quote_use'       => $month_use = \random_int(1, 100),
+                        ],
+                        (object) [
+                            'report_type_uid' => $report_type_uid,
+                            'balance_type'    => $total_type = 'TOTAL',
+                            'quote_init'      => $total_init = \random_int(1, 100),
+                            'quote_up'        => $total_up = \random_int(1, 100),
+                            'quote_use'       => $total_use = \random_int(1, 100),
+                            'created_at'      => $total_created_at = '2017-10-23T08:20:57.264Z',
+                            'updated_at'      => $total_updated_at = '2017-10-23T08:43:48.632Z',
+                        ],
+                    ],
+                ])
+            )
+        );
+
+        $response = $this->client->userBalance($report_type_uid);
+
+        $this->assertSame($state, $response->getState());
+        $this->assertSame($size, $response->getSize());
+        $this->assertCount($size, $data);
+        $this->assertCount($size, $response->getData());
+        $this->assertSame($stamp, DateTimeFactory::toIso8601Zulu($response->getStamp()));
+
+        $daily = $response->getByType($day_type);
+
+        $this->assertSame($report_type_uid, $daily->getReportTypeUid());
+        $this->assertSame($day_type, $daily->getBalanceType());
+        $this->assertSame($day_init, $daily->getQuoteInit());
+        $this->assertSame($day_up, $daily->getQuoteUp());
+        $this->assertSame($day_use, $daily->getQuoteUse());
+        $this->assertNull($daily->getCreatedAt());
+        $this->assertNull($daily->getUpdatedAt());
+
+        $monthly = $response->getByType($month_type);
+
+        $this->assertSame($report_type_uid, $monthly->getReportTypeUid());
+        $this->assertSame($month_type, $monthly->getBalanceType());
+        $this->assertSame($month_init, $monthly->getQuoteInit());
+        $this->assertSame($month_up, $monthly->getQuoteUp());
+        $this->assertSame($month_use, $monthly->getQuoteUse());
+        $this->assertNull($daily->getCreatedAt());
+        $this->assertNull($daily->getUpdatedAt());
+
+        $totally = $response->getByType($total_type);
+
+        $this->assertSame($report_type_uid, $totally->getReportTypeUid());
+        $this->assertSame($total_type, $totally->getBalanceType());
+        $this->assertSame($total_init, $totally->getQuoteInit());
+        $this->assertSame($total_up, $totally->getQuoteUp());
+        $this->assertSame($total_use, $totally->getQuoteUse());
+        $this->assertSame($total_created_at, DateTimeFactory::toIso8601Zulu($totally->getCreatedAt()));
+        $this->assertSame($total_updated_at, DateTimeFactory::toIso8601Zulu($totally->getUpdatedAt()));
+    }
+
+    /**
+     * @small
+     *
+     * @covers ::userBalance
+     * @covers ::doRequest
+     *
+     * @return void
+     */
+    public function testUserBalanceDetailed(): void
+    {
+        $this->guzzle_handler->onUriRequested(
+            $this->settings->getBaseUri() . \sprintf(
+                'user/balance/%s?_detailed=true', \urlencode($report_type_uid = 'foo@bar')
+            ),
+            'get',
+            new Response(
+                200, ['content-type' => 'application/json;charset=utf-8'], \json_encode((object) [
+                    'state' => $state = 'ok',
+                    'size'  => $size = 3,
+                    'stamp' => $stamp = DateTimeFactory::toIso8601Zulu(new DateTime),
+                    'data'  => $data = [
+                        (object) [
+                            'report_type_uid' => $report_type_uid,
+                            'balance_type'    => $day_type = 'DAY',
+                            'quote_init'      => $day_init = \random_int(1, 100),
+                            'quote_up'        => $day_up = \random_int(1, 100),
+                            'quote_use'       => $day_use = \random_int(1, 100),
+                        ],
+                        (object) [
+                            'report_type_uid' => $report_type_uid,
+                            'balance_type'    => $month_type = 'MONTH',
+                            'quote_init'      => $month_init = \random_int(1, 100),
+                            'quote_up'        => $month_up = \random_int(1, 100),
+                            'quote_use'       => $month_use = \random_int(1, 100),
+                        ],
+                        (object) [
+                            'report_type_uid' => $report_type_uid,
+                            'balance_type'    => $total_type = 'TOTAL',
+                            'quote_init'      => $total_init = \random_int(1, 100),
+                            'quote_up'        => $total_up = \random_int(1, 100),
+                            'quote_use'       => $total_use = \random_int(1, 100),
+                            'created_at'      => $total_created_at = '2017-10-23T08:20:57.264Z',
+                            'updated_at'      => $total_updated_at = '2017-10-23T08:43:48.632Z',
+                        ],
+                    ],
+                ])
+            )
+        );
+
+        $response = $this->client->userBalance($report_type_uid, true);
+
+        $this->assertSame($state, $response->getState());
+        $this->assertSame($size, $response->getSize());
+        $this->assertCount($size, $data);
+        $this->assertCount($size, $response->getData());
+        $this->assertSame($stamp, DateTimeFactory::toIso8601Zulu($response->getStamp()));
+
+        $daily = $response->getByType($day_type);
+
+        $this->assertSame($report_type_uid, $daily->getReportTypeUid());
+        $this->assertSame($day_type, $daily->getBalanceType());
+        $this->assertSame($day_init, $daily->getQuoteInit());
+        $this->assertSame($day_up, $daily->getQuoteUp());
+        $this->assertSame($day_use, $daily->getQuoteUse());
+        $this->assertNull($daily->getCreatedAt());
+        $this->assertNull($daily->getUpdatedAt());
+
+        $monthly = $response->getByType($month_type);
+
+        $this->assertSame($report_type_uid, $monthly->getReportTypeUid());
+        $this->assertSame($month_type, $monthly->getBalanceType());
+        $this->assertSame($month_init, $monthly->getQuoteInit());
+        $this->assertSame($month_up, $monthly->getQuoteUp());
+        $this->assertSame($month_use, $monthly->getQuoteUse());
+        $this->assertNull($daily->getCreatedAt());
+        $this->assertNull($daily->getUpdatedAt());
+
+        $totally = $response->getByType($total_type);
+
+        $this->assertSame($report_type_uid, $totally->getReportTypeUid());
+        $this->assertSame($total_type, $totally->getBalanceType());
+        $this->assertSame($total_init, $totally->getQuoteInit());
+        $this->assertSame($total_up, $totally->getQuoteUp());
+        $this->assertSame($total_use, $totally->getQuoteUse());
+        $this->assertSame($total_created_at, DateTimeFactory::toIso8601Zulu($totally->getCreatedAt()));
+        $this->assertSame($total_updated_at, DateTimeFactory::toIso8601Zulu($totally->getUpdatedAt()));
+    }
+
+    /**
+     * @small
+     *
+     * @covers ::userBalance
+     * @covers ::doRequest
+     *
+     * @return void
+     */
+    public function testUserBalanceWithUnknownReportTypeUid(): void
+    {
+        $report_type_uid = 'foo@bar';
+
+        $this->expectException(BadRequestException::class);
+        $this->expectExceptionMessageRegExp("~DataSeekObjectError\:.*Отсутствие объекта.*{$report_type_uid}~i");
+
+        $this->guzzle_handler->onUriRequested(
+            $this->settings->getBaseUri() . \sprintf(
+                'user/balance/%s?_detailed=true', \urlencode($report_type_uid)
+            ),
+            'get',
+            new Response(
+                500, ['content-type' => 'application/json;charset=utf-8'], \json_encode((object) [
+                'state' => $state = 'fail',
+                'stamp' => $stamp = DateTimeFactory::toIso8601Zulu(new DateTime),
+                'event' => (object) [
+                    'uid'     => '',
+                    'stamp'   => $stamp,
+                    'cls'     => 'Data',
+                    'type'    => 'DataSeekObjectError',
+                    'name'    => 'Отсутствие объекта с заданным идентификатором',
+                    'message' => "Отсутствует объект типа api.model.Report_Type с UID {$report_type_uid}",
+                    'data'    => (object) [
+                        'entity_type' => 'api.model.Report_Type',
+                        'entity_uid'  => 'short_report_V1@avtocod1',
+                    ],
+                    'events'  => [],
+                ],
+            ]))
+        );
+
+        $this->client->userBalance($report_type_uid, true);
+    }
+
+    /**
+     * @small
+     *
+     * @covers ::userBalance
+     * @covers ::doRequest
+     *
+     * @return void
+     */
+    public function testUserBalanceWithWrongJson(): void
+    {
+        $this->expectException(BadResponseException::class);
+        $this->expectExceptionMessageRegExp('~syntax~i');
+
+        $this->guzzle_handler->onUriRequested(
+            $this->settings->getBaseUri() . \sprintf(
+                'user/balance/%s?_detailed=false', \urlencode($report_type_uid = 'foo@bar')
+            ),
+            'get',
+            new Response(
+                200, ['content-type' => 'application/json;charset=utf-8'], '{"foo":]'
+            )
+        );
+
+        $this->client->userBalance($report_type_uid);
+    }
+
+    /**
+     * @small
+     *
+     * @covers ::userBalance
+     * @covers ::doRequest
+     *
+     * @return void
+     */
+    public function testUserBalanceWithServerError(): void
+    {
+        $this->expectException(BadRequestException::class);
+
+        $this->guzzle_handler->onUriRequested(
+            $uri = $this->settings->getBaseUri() . \sprintf(
+                    'user/balance/%s?_detailed=false', \urlencode($report_type_uid = 'foo@bar')
+                ),
+            $method = 'get',
+            new ConnectException(
+                'cURL error 7: Failed to connect to host: Connection refused ...', new Request($method, $uri)
+            )
+        );
+
+        $this->client->userBalance($report_type_uid);
+    }
+
+    /**
+     * @small
+     *
+     * @covers ::userReportTypes
+     * @covers ::doRequest
+     *
+     * @return void
+     */
+    public function testUserReportTypes(): void
+    {
+        $this->guzzle_handler->onUriRegexpRequested(
+            '~' . preg_quote($this->settings->getBaseUri() . 'user/report_types', '/') . '.*~i',
+            'get',
+            new Response(
+                200,
+                ['content-type' => 'application/json;charset=utf-8'],
+                \file_get_contents(__DIR__ . '/stubs/user__report_types__with_content_and_total.json')
+            ),
+            true
+        );
+
+        $response = $this->client->userReportTypes();
+
+        $this->assertCount(11, $response->getData());
+        $this->assertSame(11, $response->getTotal());
+
+        $this->assertNull($response->getByUid('foo@bar'));
+
+        $report_type = $response->getByUid('some_report_uid_4_test@some_domain_uid');
+
+        $this->assertSame('some_report_uid_4_test@some_domain_uid', $report_type->getUid());
+        $this->assertSame('', $report_type->getComment());
+        $this->assertSame('Краткий отчет 7', $report_type->getName());
+        $this->assertSame([], $report_type->getTags());
+        $this->assertSame('PUBLISHED', $report_type->getState());
+        $this->assertSame(90000000, $report_type->getMaxAge());
+        $this->assertSame('some_domain_uid', $report_type->getDomainUid());
+        $this->assertSame(['base', 'images.avtonomer', 'references.base'], $report_type->getContent()->getSources());
+        $this->assertCount(19, $report_type->getContent()->getFields());
+        $this->assertSame(0, $report_type->getDayQuote());
+        $this->assertSame(0, $report_type->getMonthQuote());
+        $this->assertSame(0, $report_type->getTotalQuote());
+        $this->assertSame(201, $report_type->getMinPriority());
+        $this->assertSame(204, $report_type->getMaxPriority());
+        $this->assertSame(1000, $report_type->getPeriodPriority());
+        $this->assertSame(2, $report_type->getMaxRequest());
+        $this->assertEquals(
+            DateTimeFactory::createFromIso8601Zulu('2017-06-08T13:05:27.377Z'), $report_type->getCreatedAt()
+        );
+        $this->assertSame('system', $report_type->getCreatedBy());
+        $this->assertEquals(
+            DateTimeFactory::createFromIso8601Zulu('2019-03-06T08:28:23.025Z'), $report_type->getUpdatedAt()
+        );
+        $this->assertSame('system', $report_type->getUpdatedBy());
+        $this->assertEquals(
+            DateTimeFactory::createFromIso8601Zulu('1900-01-01T00:00:00.000Z'), $report_type->getActiveFrom()
+        );
+        $this->assertEquals(
+            DateTimeFactory::createFromIso8601Zulu('3000-01-01T00:00:00.000Z'), $report_type->getActiveTo()
+        );
+    }
+
+    /**
+     * @small
+     *
+     * @covers ::userReportTypes
+     * @covers ::doRequest
+     *
+     * @return void
+     */
+    public function testUserReportTypesWithMinimalData(): void
+    {
+        $this->guzzle_handler->onUriRegexpRequested(
+            '~' . preg_quote($this->settings->getBaseUri() . 'user/report_types', '/') . '.*~i',
+            'get',
+            new Response(
+                200,
+                ['content-type' => 'application/json;charset=utf-8'],
+                \file_get_contents(__DIR__ . '/stubs/user__report_types__minimal.json')
+            ),
+            true
+        );
+
+        $response = $this->client->userReportTypes();
+
+        $this->assertCount(11, $response->getData());
+        $this->assertNull($response->getTotal());
+
+        $this->assertNull($response->getByUid('foo@bar'));
+
+        $report_type = $response->getByUid('some_report_uid_11@some_domain_uid');
+
+        $this->assertSame('some_report_uid_11@some_domain_uid', $report_type->getUid());
+        $this->assertSame('', $report_type->getComment());
+        $this->assertSame('Краткий отчет 7', $report_type->getName());
+        $this->assertSame(['SOME_TAG', 'AND_ONE_MORE'], $report_type->getTags());
+        $this->assertSame('PUBLISHED', $report_type->getState());
+        $this->assertSame(90000000, $report_type->getMaxAge());
+        $this->assertSame('some_domain_uid', $report_type->getDomainUid());
+        $this->assertNull($report_type->getContent());
+        $this->assertSame(0, $report_type->getDayQuote());
+        $this->assertSame(0, $report_type->getMonthQuote());
+        $this->assertSame(1110, $report_type->getTotalQuote());
+        $this->assertSame(201, $report_type->getMinPriority());
+        $this->assertSame(204, $report_type->getMaxPriority());
+        $this->assertSame(1000, $report_type->getPeriodPriority());
+        $this->assertSame(2, $report_type->getMaxRequest());
+        $this->assertEquals(
+            DateTimeFactory::createFromIso8601Zulu('2017-06-08T13:05:27.377Z'), $report_type->getCreatedAt()
+        );
+        $this->assertSame('system', $report_type->getCreatedBy());
+        $this->assertEquals(
+            DateTimeFactory::createFromIso8601Zulu('2019-03-06T08:28:23.025Z'), $report_type->getUpdatedAt()
+        );
+        $this->assertSame('manager', $report_type->getUpdatedBy());
+        $this->assertEquals(
+            DateTimeFactory::createFromIso8601Zulu('1900-01-01T00:00:00.000Z'), $report_type->getActiveFrom()
+        );
+        $this->assertEquals(
+            DateTimeFactory::createFromIso8601Zulu('3000-01-01T00:00:00.000Z'), $report_type->getActiveTo()
+        );
+    }
+
+    /**
+     * @small
+     *
+     * @covers ::userBalance
+     * @covers ::doRequest
+     *
+     * @return void
+     */
+    public function testUserReportTypesWithOutdatedToken(): void
+    {
+        $this->expectException(BadRequestException::class);
+        $this->expectExceptionMessageRegExp('~SecurityAuthTimeoutedStamp\:.*просрочен~i');
+
+        $this->guzzle_handler->onUriRegexpRequested(
+            '~' . preg_quote($this->settings->getBaseUri() . 'user/report_types', '/') . '.*~i',
+            'get',
+            new Response(
+                403, ['content-type' => 'application/json;charset=utf-8'], \json_encode((object) [
+                'uid'     => '',
+                'stamp'   => $stamp = DateTimeFactory::toIso8601Zulu(new DateTime),
+                'cls'     => 'Security',
+                'type'    => 'SecurityAuthTimeoutedStamp',
+                'name'    => 'Метка времени просрочена',
+                'message' => 'Метка времени Thu Jan 05 16:45:23 UTC 2017 просрочена - income_age:5, ' .
+                             'server_time:Fri Jul 05 14:55:44 UTC 2019',
+                'data'    => (object) [
+                    'income_stamp' => '2017-01-05T16:45:23.000Z',
+                    'income_age'   => 5,
+                    'server_time'  => '2019-07-05T14:55:44.604Z',
+                ],
+                'events'  => [],
+            ])),
+            true
+        );
+
+        $this->client->userReportTypes();
     }
 }

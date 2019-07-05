@@ -15,8 +15,10 @@ use Avtocod\B2BApi\Responses\UserResponse;
 use GuzzleHttp\Exception\RequestException;
 use Avtocod\B2BApi\Responses\DevPingResponse;
 use Avtocod\B2BApi\Responses\DevTokenResponse;
-use Avtocod\B2BApi\Exceptions\BadRequestException;
+use Avtocod\B2BApi\Responses\UserBalanceResponse;
 use GuzzleHttp\ClientInterface as GuzzleInterface;
+use Avtocod\B2BApi\Exceptions\BadRequestException;
+use Avtocod\B2BApi\Responses\UserReportTypesResponse;
 
 final class Client implements ClientInterface
 {
@@ -103,7 +105,7 @@ final class Client implements ClientInterface
                 'query' => [
                     'user'    => $username,
                     'pass'    => $password,
-                    'is_hash' => $is_hash
+                    'is_hash' => $is_hash === true
                         ? 'true'
                         : 'false',
                     'date'    => DateTimeFactory::toIso8601Zulu($date_from ?? new DateTime),
@@ -114,18 +116,64 @@ final class Client implements ClientInterface
     }
 
     /**
-     * Retrieve information about current user.
-     *
-     * @param bool $detailed
-     *
-     * @return UserResponse
+     * {@inheritdoc}
      */
     public function user(bool $detailed = false): UserResponse
     {
         return UserResponse::fromHttpResponse(
             $this->doRequest(new Request('get', 'user'), [
                 'query' => [
-                    '_detailed' => $detailed
+                    '_detailed' => $detailed === true
+                        ? 'true'
+                        : 'false',
+                ],
+            ])
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function userBalance(string $report_type_uid, bool $detailed = false): UserBalanceResponse
+    {
+        return UserBalanceResponse::fromHttpResponse(
+            $this->doRequest(new Request('get', \sprintf('user/balance/%s', \urlencode($report_type_uid))), [
+                'query' => [
+                    '_detailed' => $detailed === true
+                        ? 'true'
+                        : 'false',
+                ],
+            ])
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function userReportTypes(bool $can_generate = false,
+                                    bool $content = false,
+                                    string $query = '_all',
+                                    int $size = 20,
+                                    int $offset = 0,
+                                    int $page = 1,
+                                    string $sort = '-created_at',
+                                    bool $calc_total = false): UserReportTypesResponse
+    {
+        return UserReportTypesResponse::fromHttpResponse(
+            $this->doRequest(new Request('get', 'user/report_types'), [
+                'query' => [
+                    '_can_generate' => $can_generate === true
+                        ? 'true'
+                        : 'false',
+                    '_content'      => $content === true
+                        ? 'true'
+                        : 'false',
+                    '_query'        => $query,
+                    '_size'         => $size,
+                    '_offset'       => $offset,
+                    '_page'         => $page,
+                    '_sort'         => $sort,
+                    '_calc_total'   => $calc_total === true
                         ? 'true'
                         : 'false',
                 ],
@@ -191,7 +239,7 @@ final class Client implements ClientInterface
                 $exception_response = $e->getResponse()
             ));
 
-            throw new BadRequestException($exception_request, $exception_response, $e->getMessage(), 0, $e);
+            throw new BadRequestException($exception_request, $exception_response, null, null, $e);
         }
 
         $this->dispatchEvent(new Events\AfterRequestSendingEvent(

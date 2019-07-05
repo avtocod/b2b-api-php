@@ -7,7 +7,7 @@ namespace Avtocod\B2BApi\Responses\Entities;
 use DateTime;
 use Avtocod\B2BApi\DateTimeFactory;
 
-class Domain
+class Domain implements CanCreateSelfFromArrayInterface
 {
     /**
      * @var string
@@ -129,11 +129,7 @@ class Domain
     }
 
     /**
-     * Create self using array of data.
-     *
-     * @param array $data
-     *
-     * @return self
+     * {@inheritDoc}
      */
     public static function fromArray(array $data): self
     {
