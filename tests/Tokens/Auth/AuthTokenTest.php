@@ -11,8 +11,6 @@ use Avtocod\B2BApi\Exceptions\TokenParserException;
 class AuthTokenTest extends AbstractTestCase
 {
     /**
-     * @small
-     *
      * @return void
      */
     public function testParsing(): void
@@ -32,8 +30,6 @@ class AuthTokenTest extends AbstractTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testParsingThrowsAnExceptionWhenPassedWrongToken(): void
@@ -54,8 +50,6 @@ class AuthTokenTest extends AbstractTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testGeneration(): void

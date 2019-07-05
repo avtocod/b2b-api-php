@@ -1,0 +1,714 @@
+{
+    "state": "fail",
+    "stamp": "2019-07-05T15:53:26.599Z",
+    "event": {
+        "uid": "",
+        "stamp": "2019-07-05T15:53:26.597Z",
+        "cls": "Global",
+        "type": "GenericSystemError",
+        "name": "Общая ошибка системы",
+        "message": "В системе произошла непредвиденная ошибка org.springframework.dao.DataAccessResourceFailureException : PreparedStatementCallback; SQL [SELECT count(id) FROM avto.report WHERE domain_uid=?  and report_type_uid in ('some_report_uid_1@some_domain_uid','some_report_uid_2@some_domain_uid','some_report_uid_3@some_domain_uid')]; An I/O error occured while sending to the backend.; nested exception is org.postgresql.util.PSQLException: An I/O error occured while sending to the backend.",
+        "data": {
+            "error_type": "org.springframework.dao.DataAccessResourceFailureException",
+            "error_message": "PreparedStatementCallback; SQL [SELECT count(id) FROM avto.report WHERE domain_uid=?  and report_type_uid in ('some_report_uid_1@some_domain_uid','some_report_uid_2@some_domain_uid','some_report_uid_3@some_domain_uid')]; An I/O error occured while sending to the backend.; nested exception is org.postgresql.util.PSQLException: An I/O error occured while sending to the backend.",
+            "error_stack_trace": [
+                {
+                    "declaringClass": "org.springframework.jdbc.support.SQLStateSQLExceptionTranslator",
+                    "methodName": "doTranslate",
+                    "fileName": "SQLStateSQLExceptionTranslator.java",
+                    "lineNumber": 105
+                },
+                {
+                    "declaringClass": "org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator",
+                    "methodName": "translate",
+                    "fileName": "AbstractFallbackSQLExceptionTranslator.java",
+                    "lineNumber": 73
+                },
+                {
+                    "declaringClass": "org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator",
+                    "methodName": "translate",
+                    "fileName": "AbstractFallbackSQLExceptionTranslator.java",
+                    "lineNumber": 81
+                },
+                {
+                    "declaringClass": "org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator",
+                    "methodName": "translate",
+                    "fileName": "AbstractFallbackSQLExceptionTranslator.java",
+                    "lineNumber": 81
+                },
+                {
+                    "declaringClass": "org.springframework.jdbc.core.JdbcTemplate",
+                    "methodName": "execute",
+                    "fileName": "JdbcTemplate.java",
+                    "lineNumber": 649
+                },
+                {
+                    "declaringClass": "org.springframework.jdbc.core.JdbcTemplate",
+                    "methodName": "query",
+                    "fileName": "JdbcTemplate.java",
+                    "lineNumber": 684
+                },
+                {
+                    "declaringClass": "org.springframework.jdbc.core.JdbcTemplate",
+                    "methodName": "query",
+                    "fileName": "JdbcTemplate.java",
+                    "lineNumber": 716
+                },
+                {
+                    "declaringClass": "org.springframework.jdbc.core.JdbcTemplate",
+                    "methodName": "query",
+                    "fileName": "JdbcTemplate.java",
+                    "lineNumber": 726
+                },
+                {
+                    "declaringClass": "org.springframework.jdbc.core.JdbcTemplate",
+                    "methodName": "queryForObject",
+                    "fileName": "JdbcTemplate.java",
+                    "lineNumber": 794
+                },
+                {
+                    "declaringClass": "org.springframework.jdbc.core.JdbcTemplate",
+                    "methodName": "queryForObject",
+                    "fileName": "JdbcTemplate.java",
+                    "lineNumber": 813
+                },
+                {
+                    "declaringClass": "sitesoft.avtoraport.api.db.DefaultEntityStorage",
+                    "methodName": "count",
+                    "fileName": "DefaultEntityStorage.java",
+                    "lineNumber": 244
+                },
+                {
+                    "declaringClass": "sitesoft.avtoraport.api.model.DomainRepository",
+                    "methodName": "getReports",
+                    "fileName": "DomainRepository.java",
+                    "lineNumber": 603
+                },
+                {
+                    "declaringClass": "sitesoft.avtoraport.api.security.SecurityRepository",
+                    "methodName": "getReportsByQuery",
+                    "fileName": "SecurityRepository.java",
+                    "lineNumber": 126
+                },
+                {
+                    "declaringClass": "sitesoft.avtoraport.api.bizlogic.UserService",
+                    "methodName": "getReportListByQuery",
+                    "fileName": "UserService.java",
+                    "lineNumber": 110
+                },
+                {
+                    "declaringClass": "sitesoft.avtoraport.api.restapi.UserController",
+                    "methodName": "lambda$reportsQuery$2",
+                    "fileName": "UserController.java",
+                    "lineNumber": 63
+                },
+                {
+                    "declaringClass": "sitesoft.avtoraport.api.restapi.ResponseEntityService",
+                    "methodName": "create",
+                    "fileName": "ResponseEntityService.java",
+                    "lineNumber": 47
+                },
+                {
+                    "declaringClass": "sitesoft.avtoraport.api.restapi.UserController",
+                    "methodName": "reportsQuery",
+                    "fileName": "UserController.java",
+                    "lineNumber": 63
+                },
+                {
+                    "declaringClass": "sun.reflect.GeneratedMethodAccessor233",
+                    "methodName": "invoke",
+                    "lineNumber": -1
+                },
+                {
+                    "declaringClass": "sun.reflect.DelegatingMethodAccessorImpl",
+                    "methodName": "invoke",
+                    "fileName": "DelegatingMethodAccessorImpl.java",
+                    "lineNumber": 43
+                },
+                {
+                    "declaringClass": "java.lang.reflect.Method",
+                    "methodName": "invoke",
+                    "fileName": "Method.java",
+                    "lineNumber": 498
+                },
+                {
+                    "declaringClass": "org.springframework.web.method.support.InvocableHandlerMethod",
+                    "methodName": "doInvoke",
+                    "fileName": "InvocableHandlerMethod.java",
+                    "lineNumber": 205
+                },
+                {
+                    "declaringClass": "org.springframework.web.method.support.InvocableHandlerMethod",
+                    "methodName": "invokeForRequest",
+                    "fileName": "InvocableHandlerMethod.java",
+                    "lineNumber": 133
+                },
+                {
+                    "declaringClass": "org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod",
+                    "methodName": "invokeAndHandle",
+                    "fileName": "ServletInvocableHandlerMethod.java",
+                    "lineNumber": 116
+                },
+                {
+                    "declaringClass": "org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter",
+                    "methodName": "invokeHandlerMethod",
+                    "fileName": "RequestMappingHandlerAdapter.java",
+                    "lineNumber": 827
+                },
+                {
+                    "declaringClass": "org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter",
+                    "methodName": "handleInternal",
+                    "fileName": "RequestMappingHandlerAdapter.java",
+                    "lineNumber": 738
+                },
+                {
+                    "declaringClass": "org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter",
+                    "methodName": "handle",
+                    "fileName": "AbstractHandlerMethodAdapter.java",
+                    "lineNumber": 85
+                },
+                {
+                    "declaringClass": "org.springframework.web.servlet.DispatcherServlet",
+                    "methodName": "doDispatch",
+                    "fileName": "DispatcherServlet.java",
+                    "lineNumber": 963
+                },
+                {
+                    "declaringClass": "org.springframework.web.servlet.DispatcherServlet",
+                    "methodName": "doService",
+                    "fileName": "DispatcherServlet.java",
+                    "lineNumber": 897
+                },
+                {
+                    "declaringClass": "org.springframework.web.servlet.FrameworkServlet",
+                    "methodName": "processRequest",
+                    "fileName": "FrameworkServlet.java",
+                    "lineNumber": 970
+                },
+                {
+                    "declaringClass": "org.springframework.web.servlet.FrameworkServlet",
+                    "methodName": "doGet",
+                    "fileName": "FrameworkServlet.java",
+                    "lineNumber": 861
+                },
+                {
+                    "declaringClass": "javax.servlet.http.HttpServlet",
+                    "methodName": "service",
+                    "fileName": "HttpServlet.java",
+                    "lineNumber": 687
+                },
+                {
+                    "declaringClass": "org.springframework.web.servlet.FrameworkServlet",
+                    "methodName": "service",
+                    "fileName": "FrameworkServlet.java",
+                    "lineNumber": 846
+                },
+                {
+                    "declaringClass": "javax.servlet.http.HttpServlet",
+                    "methodName": "service",
+                    "fileName": "HttpServlet.java",
+                    "lineNumber": 790
+                },
+                {
+                    "declaringClass": "org.eclipse.jetty.servlet.ServletHolder",
+                    "methodName": "handle",
+                    "fileName": "ServletHolder.java",
+                    "lineNumber": 841
+                },
+                {
+                    "declaringClass": "org.eclipse.jetty.servlet.ServletHandler$CachedChain",
+                    "methodName": "doFilter",
+                    "fileName": "ServletHandler.java",
+                    "lineNumber": 1634
+                },
+                {
+                    "declaringClass": "org.eclipse.jetty.websocket.server.WebSocketUpgradeFilter",
+                    "methodName": "doFilter",
+                    "fileName": "WebSocketUpgradeFilter.java",
+                    "lineNumber": 206
+                },
+                {
+                    "declaringClass": "org.eclipse.jetty.servlet.ServletHandler$CachedChain",
+                    "methodName": "doFilter",
+                    "fileName": "ServletHandler.java",
+                    "lineNumber": 1621
+                },
+                {
+                    "declaringClass": "org.springframework.boot.web.filter.ApplicationContextHeaderFilter",
+                    "methodName": "doFilterInternal",
+                    "fileName": "ApplicationContextHeaderFilter.java",
+                    "lineNumber": 55
+                },
+                {
+                    "declaringClass": "org.springframework.web.filter.OncePerRequestFilter",
+                    "methodName": "doFilter",
+                    "fileName": "OncePerRequestFilter.java",
+                    "lineNumber": 107
+                },
+                {
+                    "declaringClass": "org.eclipse.jetty.servlet.ServletHandler$CachedChain",
+                    "methodName": "doFilter",
+                    "fileName": "ServletHandler.java",
+                    "lineNumber": 1621
+                },
+                {
+                    "declaringClass": "org.springframework.boot.actuate.trace.WebRequestTraceFilter",
+                    "methodName": "doFilterInternal",
+                    "fileName": "WebRequestTraceFilter.java",
+                    "lineNumber": 108
+                },
+                {
+                    "declaringClass": "org.springframework.web.filter.OncePerRequestFilter",
+                    "methodName": "doFilter",
+                    "fileName": "OncePerRequestFilter.java",
+                    "lineNumber": 107
+                },
+                {
+                    "declaringClass": "org.eclipse.jetty.servlet.ServletHandler$CachedChain",
+                    "methodName": "doFilter",
+                    "fileName": "ServletHandler.java",
+                    "lineNumber": 1621
+                },
+                {
+                    "declaringClass": "org.springframework.security.web.FilterChainProxy$VirtualFilterChain",
+                    "methodName": "doFilter",
+                    "fileName": "FilterChainProxy.java",
+                    "lineNumber": 317
+                },
+                {
+                    "declaringClass": "org.springframework.security.web.access.intercept.FilterSecurityInterceptor",
+                    "methodName": "invoke",
+                    "fileName": "FilterSecurityInterceptor.java",
+                    "lineNumber": 127
+                },
+                {
+                    "declaringClass": "org.springframework.security.web.access.intercept.FilterSecurityInterceptor",
+                    "methodName": "doFilter",
+                    "fileName": "FilterSecurityInterceptor.java",
+                    "lineNumber": 91
+                },
+                {
+                    "declaringClass": "org.springframework.security.web.FilterChainProxy$VirtualFilterChain",
+                    "methodName": "doFilter",
+                    "fileName": "FilterChainProxy.java",
+                    "lineNumber": 331
+                },
+                {
+                    "declaringClass": "org.springframework.security.web.access.ExceptionTranslationFilter",
+                    "methodName": "doFilter",
+                    "fileName": "ExceptionTranslationFilter.java",
+                    "lineNumber": 114
+                },
+                {
+                    "declaringClass": "org.springframework.security.web.FilterChainProxy$VirtualFilterChain",
+                    "methodName": "doFilter",
+                    "fileName": "FilterChainProxy.java",
+                    "lineNumber": 331
+                },
+                {
+                    "declaringClass": "org.springframework.security.web.session.SessionManagementFilter",
+                    "methodName": "doFilter",
+                    "fileName": "SessionManagementFilter.java",
+                    "lineNumber": 137
+                },
+                {
+                    "declaringClass": "org.springframework.security.web.FilterChainProxy$VirtualFilterChain",
+                    "methodName": "doFilter",
+                    "fileName": "FilterChainProxy.java",
+                    "lineNumber": 331
+                },
+                {
+                    "declaringClass": "org.springframework.security.web.authentication.AnonymousAuthenticationFilter",
+                    "methodName": "doFilter",
+                    "fileName": "AnonymousAuthenticationFilter.java",
+                    "lineNumber": 111
+                },
+                {
+                    "declaringClass": "org.springframework.security.web.FilterChainProxy$VirtualFilterChain",
+                    "methodName": "doFilter",
+                    "fileName": "FilterChainProxy.java",
+                    "lineNumber": 331
+                },
+                {
+                    "declaringClass": "org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter",
+                    "methodName": "doFilter",
+                    "fileName": "SecurityContextHolderAwareRequestFilter.java",
+                    "lineNumber": 170
+                },
+                {
+                    "declaringClass": "org.springframework.security.web.FilterChainProxy$VirtualFilterChain",
+                    "methodName": "doFilter",
+                    "fileName": "FilterChainProxy.java",
+                    "lineNumber": 331
+                },
+                {
+                    "declaringClass": "org.springframework.security.web.savedrequest.RequestCacheAwareFilter",
+                    "methodName": "doFilter",
+                    "fileName": "RequestCacheAwareFilter.java",
+                    "lineNumber": 63
+                },
+                {
+                    "declaringClass": "org.springframework.security.web.FilterChainProxy$VirtualFilterChain",
+                    "methodName": "doFilter",
+                    "fileName": "FilterChainProxy.java",
+                    "lineNumber": 331
+                },
+                {
+                    "declaringClass": "sitesoft.avtoraport.api.restapi.security.AuthenticationFilter",
+                    "methodName": "doFilterInternal",
+                    "fileName": "AuthenticationFilter.java",
+                    "lineNumber": 41
+                },
+                {
+                    "declaringClass": "org.springframework.web.filter.OncePerRequestFilter",
+                    "methodName": "doFilter",
+                    "fileName": "OncePerRequestFilter.java",
+                    "lineNumber": 107
+                },
+                {
+                    "declaringClass": "org.springframework.security.web.FilterChainProxy$VirtualFilterChain",
+                    "methodName": "doFilter",
+                    "fileName": "FilterChainProxy.java",
+                    "lineNumber": 331
+                },
+                {
+                    "declaringClass": "org.springframework.security.web.authentication.logout.LogoutFilter",
+                    "methodName": "doFilter",
+                    "fileName": "LogoutFilter.java",
+                    "lineNumber": 116
+                },
+                {
+                    "declaringClass": "org.springframework.security.web.FilterChainProxy$VirtualFilterChain",
+                    "methodName": "doFilter",
+                    "fileName": "FilterChainProxy.java",
+                    "lineNumber": 331
+                },
+                {
+                    "declaringClass": "org.springframework.security.web.header.HeaderWriterFilter",
+                    "methodName": "doFilterInternal",
+                    "fileName": "HeaderWriterFilter.java",
+                    "lineNumber": 64
+                },
+                {
+                    "declaringClass": "org.springframework.web.filter.OncePerRequestFilter",
+                    "methodName": "doFilter",
+                    "fileName": "OncePerRequestFilter.java",
+                    "lineNumber": 107
+                },
+                {
+                    "declaringClass": "org.springframework.security.web.FilterChainProxy$VirtualFilterChain",
+                    "methodName": "doFilter",
+                    "fileName": "FilterChainProxy.java",
+                    "lineNumber": 331
+                },
+                {
+                    "declaringClass": "org.springframework.security.web.context.SecurityContextPersistenceFilter",
+                    "methodName": "doFilter",
+                    "fileName": "SecurityContextPersistenceFilter.java",
+                    "lineNumber": 105
+                },
+                {
+                    "declaringClass": "org.springframework.security.web.FilterChainProxy$VirtualFilterChain",
+                    "methodName": "doFilter",
+                    "fileName": "FilterChainProxy.java",
+                    "lineNumber": 331
+                },
+                {
+                    "declaringClass": "org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter",
+                    "methodName": "doFilterInternal",
+                    "fileName": "WebAsyncManagerIntegrationFilter.java",
+                    "lineNumber": 56
+                },
+                {
+                    "declaringClass": "org.springframework.web.filter.OncePerRequestFilter",
+                    "methodName": "doFilter",
+                    "fileName": "OncePerRequestFilter.java",
+                    "lineNumber": 107
+                },
+                {
+                    "declaringClass": "org.springframework.security.web.FilterChainProxy$VirtualFilterChain",
+                    "methodName": "doFilter",
+                    "fileName": "FilterChainProxy.java",
+                    "lineNumber": 331
+                },
+                {
+                    "declaringClass": "org.springframework.security.web.FilterChainProxy",
+                    "methodName": "doFilterInternal",
+                    "fileName": "FilterChainProxy.java",
+                    "lineNumber": 214
+                },
+                {
+                    "declaringClass": "org.springframework.security.web.FilterChainProxy",
+                    "methodName": "doFilter",
+                    "fileName": "FilterChainProxy.java",
+                    "lineNumber": 177
+                },
+                {
+                    "declaringClass": "org.springframework.web.filter.DelegatingFilterProxy",
+                    "methodName": "invokeDelegate",
+                    "fileName": "DelegatingFilterProxy.java",
+                    "lineNumber": 346
+                },
+                {
+                    "declaringClass": "org.springframework.web.filter.DelegatingFilterProxy",
+                    "methodName": "doFilter",
+                    "fileName": "DelegatingFilterProxy.java",
+                    "lineNumber": 262
+                },
+                {
+                    "declaringClass": "org.eclipse.jetty.servlet.ServletHandler$CachedChain",
+                    "methodName": "doFilter",
+                    "fileName": "ServletHandler.java",
+                    "lineNumber": 1621
+                },
+                {
+                    "declaringClass": "org.springframework.web.filter.RequestContextFilter",
+                    "methodName": "doFilterInternal",
+                    "fileName": "RequestContextFilter.java",
+                    "lineNumber": 99
+                },
+                {
+                    "declaringClass": "org.springframework.web.filter.OncePerRequestFilter",
+                    "methodName": "doFilter",
+                    "fileName": "OncePerRequestFilter.java",
+                    "lineNumber": 107
+                },
+                {
+                    "declaringClass": "org.eclipse.jetty.servlet.ServletHandler$CachedChain",
+                    "methodName": "doFilter",
+                    "fileName": "ServletHandler.java",
+                    "lineNumber": 1621
+                },
+                {
+                    "declaringClass": "org.springframework.web.filter.HttpPutFormContentFilter",
+                    "methodName": "doFilterInternal",
+                    "fileName": "HttpPutFormContentFilter.java",
+                    "lineNumber": 105
+                },
+                {
+                    "declaringClass": "org.springframework.web.filter.OncePerRequestFilter",
+                    "methodName": "doFilter",
+                    "fileName": "OncePerRequestFilter.java",
+                    "lineNumber": 107
+                },
+                {
+                    "declaringClass": "org.eclipse.jetty.servlet.ServletHandler$CachedChain",
+                    "methodName": "doFilter",
+                    "fileName": "ServletHandler.java",
+                    "lineNumber": 1621
+                },
+                {
+                    "declaringClass": "org.springframework.web.filter.HiddenHttpMethodFilter",
+                    "methodName": "doFilterInternal",
+                    "fileName": "HiddenHttpMethodFilter.java",
+                    "lineNumber": 81
+                },
+                {
+                    "declaringClass": "org.springframework.web.filter.OncePerRequestFilter",
+                    "methodName": "doFilter",
+                    "fileName": "OncePerRequestFilter.java",
+                    "lineNumber": 107
+                },
+                {
+                    "declaringClass": "org.eclipse.jetty.servlet.ServletHandler$CachedChain",
+                    "methodName": "doFilter",
+                    "fileName": "ServletHandler.java",
+                    "lineNumber": 1621
+                },
+                {
+                    "declaringClass": "org.springframework.web.filter.CharacterEncodingFilter",
+                    "methodName": "doFilterInternal",
+                    "fileName": "CharacterEncodingFilter.java",
+                    "lineNumber": 197
+                },
+                {
+                    "declaringClass": "org.springframework.web.filter.OncePerRequestFilter",
+                    "methodName": "doFilter",
+                    "fileName": "OncePerRequestFilter.java",
+                    "lineNumber": 107
+                },
+                {
+                    "declaringClass": "org.eclipse.jetty.servlet.ServletHandler$CachedChain",
+                    "methodName": "doFilter",
+                    "fileName": "ServletHandler.java",
+                    "lineNumber": 1621
+                },
+                {
+                    "declaringClass": "org.springframework.boot.actuate.autoconfigure.MetricsFilter",
+                    "methodName": "doFilterInternal",
+                    "fileName": "MetricsFilter.java",
+                    "lineNumber": 106
+                },
+                {
+                    "declaringClass": "org.springframework.web.filter.OncePerRequestFilter",
+                    "methodName": "doFilter",
+                    "fileName": "OncePerRequestFilter.java",
+                    "lineNumber": 107
+                },
+                {
+                    "declaringClass": "org.eclipse.jetty.servlet.ServletHandler$CachedChain",
+                    "methodName": "doFilter",
+                    "fileName": "ServletHandler.java",
+                    "lineNumber": 1621
+                },
+                {
+                    "declaringClass": "org.eclipse.jetty.servlet.ServletHandler",
+                    "methodName": "doHandle",
+                    "fileName": "ServletHandler.java",
+                    "lineNumber": 541
+                },
+                {
+                    "declaringClass": "org.eclipse.jetty.server.handler.ScopedHandler",
+                    "methodName": "handle",
+                    "fileName": "ScopedHandler.java",
+                    "lineNumber": 143
+                },
+                {
+                    "declaringClass": "org.eclipse.jetty.security.SecurityHandler",
+                    "methodName": "handle",
+                    "fileName": "SecurityHandler.java",
+                    "lineNumber": 548
+                },
+                {
+                    "declaringClass": "org.eclipse.jetty.server.handler.HandlerWrapper",
+                    "methodName": "handle",
+                    "fileName": "HandlerWrapper.java",
+                    "lineNumber": 132
+                },
+                {
+                    "declaringClass": "org.eclipse.jetty.server.handler.ScopedHandler",
+                    "methodName": "nextHandle",
+                    "fileName": "ScopedHandler.java",
+                    "lineNumber": 190
+                },
+                {
+                    "declaringClass": "org.eclipse.jetty.server.session.SessionHandler",
+                    "methodName": "doHandle",
+                    "fileName": "SessionHandler.java",
+                    "lineNumber": 1592
+                },
+                {
+                    "declaringClass": "org.eclipse.jetty.server.handler.ScopedHandler",
+                    "methodName": "nextHandle",
+                    "fileName": "ScopedHandler.java",
+                    "lineNumber": 188
+                },
+                {
+                    "declaringClass": "org.eclipse.jetty.server.handler.ContextHandler",
+                    "methodName": "doHandle",
+                    "fileName": "ContextHandler.java",
+                    "lineNumber": 1239
+                },
+                {
+                    "declaringClass": "org.eclipse.jetty.server.handler.ScopedHandler",
+                    "methodName": "nextScope",
+                    "fileName": "ScopedHandler.java",
+                    "lineNumber": 168
+                },
+                {
+                    "declaringClass": "org.eclipse.jetty.servlet.ServletHandler",
+                    "methodName": "doScope",
+                    "fileName": "ServletHandler.java",
+                    "lineNumber": 481
+                },
+                {
+                    "declaringClass": "org.eclipse.jetty.server.session.SessionHandler",
+                    "methodName": "doScope",
+                    "fileName": "SessionHandler.java",
+                    "lineNumber": 1561
+                },
+                {
+                    "declaringClass": "org.eclipse.jetty.server.handler.ScopedHandler",
+                    "methodName": "nextScope",
+                    "fileName": "ScopedHandler.java",
+                    "lineNumber": 166
+                },
+                {
+                    "declaringClass": "org.eclipse.jetty.server.handler.ContextHandler",
+                    "methodName": "doScope",
+                    "fileName": "ContextHandler.java",
+                    "lineNumber": 1141
+                },
+                {
+                    "declaringClass": "org.eclipse.jetty.server.handler.ScopedHandler",
+                    "methodName": "handle",
+                    "fileName": "ScopedHandler.java",
+                    "lineNumber": 141
+                },
+                {
+                    "declaringClass": "org.eclipse.jetty.server.handler.HandlerWrapper",
+                    "methodName": "handle",
+                    "fileName": "HandlerWrapper.java",
+                    "lineNumber": 132
+                },
+                {
+                    "declaringClass": "org.eclipse.jetty.server.Server",
+                    "methodName": "handle",
+                    "fileName": "Server.java",
+                    "lineNumber": 564
+                },
+                {
+                    "declaringClass": "org.eclipse.jetty.server.HttpChannel",
+                    "methodName": "handle",
+                    "fileName": "HttpChannel.java",
+                    "lineNumber": 320
+                },
+                {
+                    "declaringClass": "org.eclipse.jetty.server.HttpConnection",
+                    "methodName": "onFillable",
+                    "fileName": "HttpConnection.java",
+                    "lineNumber": 251
+                },
+                {
+                    "declaringClass": "org.eclipse.jetty.io.AbstractConnection$ReadCallback",
+                    "methodName": "succeeded",
+                    "fileName": "AbstractConnection.java",
+                    "lineNumber": 279
+                },
+                {
+                    "declaringClass": "org.eclipse.jetty.io.FillInterest",
+                    "methodName": "fillable",
+                    "fileName": "FillInterest.java",
+                    "lineNumber": 110
+                },
+                {
+                    "declaringClass": "org.eclipse.jetty.io.ChannelEndPoint$2",
+                    "methodName": "run",
+                    "fileName": "ChannelEndPoint.java",
+                    "lineNumber": 124
+                },
+                {
+                    "declaringClass": "org.eclipse.jetty.util.thread.QueuedThreadPool",
+                    "methodName": "runJob",
+                    "fileName": "QueuedThreadPool.java",
+                    "lineNumber": 672
+                },
+                {
+                    "declaringClass": "org.eclipse.jetty.util.thread.QueuedThreadPool$2",
+                    "methodName": "run",
+                    "fileName": "QueuedThreadPool.java",
+                    "lineNumber": 590
+                },
+                {
+                    "declaringClass": "java.lang.Thread",
+                    "methodName": "run",
+                    "fileName": "Thread.java",
+                    "lineNumber": 748
+                }
+            ],
+            "error_cause": {
+                "SQLState": "08006",
+                "vendorCode": 0,
+                "detailMessage": "An I/O error occured while sending to the backend.",
+                "cause": {
+                    "detailMessage": "Socket closed",
+                    "stackTrace": [],
+                    "suppressedExceptions": []
+                },
+                "stackTrace": [],
+                "suppressedExceptions": []
+            }
+        },
+        "events": []
+    }
+}

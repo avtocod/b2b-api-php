@@ -13,8 +13,6 @@ use Avtocod\B2BApi\Tests\AbstractTestCase;
 class TokenInfoTest extends AbstractTestCase
 {
     /**
-     * @small
-     *
      * @return void
      */
     public function testBasicGetters(): void
@@ -33,8 +31,6 @@ class TokenInfoTest extends AbstractTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testDomainAndUsernameGetters(): void

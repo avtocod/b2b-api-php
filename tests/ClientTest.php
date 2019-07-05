@@ -14,11 +14,14 @@ use PackageVersions\Versions;
 use GuzzleHttp\Client as Guzzle;
 use Avtocod\B2BApi\DateTimeFactory;
 use GuzzleHttp\Exception\ConnectException;
+use Avtocod\B2BApi\Events\RequestFailedEvent;
 use Avtocod\B2BApi\Exceptions\BadRequestException;
+use Avtocod\B2BApi\Events\AfterRequestSendingEvent;
 use Avtocod\B2BApi\Exceptions\BadResponseException;
+use Avtocod\B2BApi\Events\BeforeRequestSendingEvent;
 
 /**
- * @coversDefaultClass \Avtocod\B2BApi\Client
+ * @covers \Avtocod\B2BApi\Client
  */
 class ClientTest extends AbstractTestCase
 {
@@ -53,10 +56,6 @@ class ClientTest extends AbstractTestCase
     }
 
     /**
-     * @small
-     *
-     * @covers ::getVersion
-     *
      * @return void
      */
     public function testGetVersion(): void
@@ -67,11 +66,262 @@ class ClientTest extends AbstractTestCase
     }
 
     /**
-     * @small
-     *
-     * @covers ::devPing
-     * @covers ::doRequest
-     *
+     * @return void
+     */
+    public function testDoRequestWithServerSideError(): void
+    {
+        $this->expectException(BadRequestException::class);
+        $this->expectExceptionMessageRegExp('~GenericSystemError~');
+
+        $this->guzzle_handler->onUriRegexpRequested(
+            '~' . \preg_quote($this->settings->getBaseUri(), '/') . '.*~i',
+            'get',
+            new Response(
+                500,
+                ['content-type' => 'application/json;charset=utf-8'],
+                \file_get_contents(__DIR__ . '/stubs/generic_system_error_500.json')
+            ),
+            true
+        );
+
+        $this->client->devPing();
+    }
+
+    /**
+     * @return void
+     */
+    public function testDoRequestWithSecurityError(): void
+    {
+        $this->expectException(BadRequestException::class);
+        $this->expectExceptionMessageRegExp('~SecurityAuthTimeoutedStamp~');
+
+        $this->guzzle_handler->onUriRegexpRequested(
+            '~' . \preg_quote($this->settings->getBaseUri(), '/') . '.*~i',
+            'get',
+            new Response(
+                403, ['content-type' => 'application/json;charset=utf-8'], \json_encode((object) [
+                'uid'     => '',
+                'stamp'   => $stamp = DateTimeFactory::toIso8601Zulu(new DateTime),
+                'cls'     => 'Security',
+                'type'    => 'SecurityAuthTimeoutedStamp',
+                'name'    => 'Метка времени просрочена',
+                'message' => 'Метка времени Thu Jan 05 16:45:23 UTC 2017 просрочена - income_age:5, ' .
+                             'server_time:Fri Jul 05 14:55:44 UTC 2019',
+                'data'    => (object) [
+                    'income_stamp' => '2017-01-05T16:45:23.000Z',
+                    'income_age'   => 5,
+                    'server_time'  => '2019-07-05T14:55:44.604Z',
+                ],
+                'events'  => [],
+            ])),
+            true
+        );
+
+        $this->client->devPing();
+    }
+
+    /**
+     * @return void
+     */
+    public function testDoRequestWithUnknownReportTypeUid(): void
+    {
+        $report_type_uid = 'foo@bar';
+
+        $this->expectException(BadRequestException::class);
+        $this->expectExceptionMessageRegExp("~DataSeekObjectError\:.*Отсутствие объекта.*{$report_type_uid}~i");
+
+        $this->guzzle_handler->onUriRegexpRequested(
+            '~' . \preg_quote($this->settings->getBaseUri(), '/') . '.*~i',
+            'get',
+            new Response(
+                500, ['content-type' => 'application/json;charset=utf-8'], \json_encode((object) [
+                'state' => $state = 'fail',
+                'stamp' => $stamp = DateTimeFactory::toIso8601Zulu(new DateTime),
+                'event' => (object) [
+                    'uid'     => '',
+                    'stamp'   => $stamp,
+                    'cls'     => 'Data',
+                    'type'    => 'DataSeekObjectError',
+                    'name'    => 'Отсутствие объекта с заданным идентификатором',
+                    'message' => "Отсутствует объект типа api.model.Report_Type с UID {$report_type_uid}",
+                    'data'    => (object) [
+                        'entity_type' => 'api.model.Report_Type',
+                        'entity_uid'  => 'some_report_uid_1@some_domain_uid',
+                    ],
+                    'events'  => [],
+                ],
+            ])),
+            true
+        );
+
+        $this->client->devPing();
+    }
+
+    /**
+     * @return void
+     */
+    public function testDoRequestWithWrongJson(): void
+    {
+        $this->expectException(BadResponseException::class);
+        $this->expectExceptionMessageRegExp('~syntax~i');
+
+        $this->guzzle_handler->onUriRegexpRequested(
+            '~' . \preg_quote($this->settings->getBaseUri(), '/') . '.*~i',
+            'get',
+            new Response(
+                200, ['content-type' => 'application/json;charset=utf-8'], '{"foo":]'
+            ),
+            true
+        );
+
+        $this->client->devPing();
+    }
+
+    /**
+     * @return void
+     */
+    public function testDoRequestWithServerError(): void
+    {
+        $this->expectException(BadRequestException::class);
+        $this->expectExceptionMessageRegExp('~Failed to connect~i');
+
+        $this->guzzle_handler->onUriRegexpRequested(
+            '~' . \preg_quote($this->settings->getBaseUri(), '/') . '.*~i',
+            $method = 'get',
+            new ConnectException(
+                'cURL error 7: Failed to connect to host: Connection refused ...',
+                new Request($method, $this->settings->getBaseUri() . 'dev/ping')
+            ),
+            true
+        );
+
+        $this->client->devPing();
+    }
+
+    /**
+     * @return void
+     */
+    public function testRequiredHeadersSending(): void
+    {
+        $this->guzzle_handler->onUriRegexpRequested(
+            '~' . \preg_quote($this->settings->getBaseUri() . 'dev/ping', '/') . '.*~i',
+            'get',
+            $response = new Response(
+                200, ['content-type' => 'application/json;charset=utf-8'], \json_encode((object) [
+                    'value' => (string) \time(),
+                    'in'    => $this->faker->numberBetween(0, 100),
+                    'out'   => $out = (\time() * 1000),
+                    'delay' => $out + 1,
+                ])
+            ),
+            true
+        );
+
+        $this->client->devPing();
+
+        $this->assertSame(
+            'AR-REST ' . $this->client->getSettings()->getAuthToken(),
+            $this->guzzle_handler->getLastRequest()->getHeaderLine('Authorization')
+        );
+
+        $this->assertRegExp(
+            '~b2b\-api\-php\/.+curl\/\d.+PHP\/\d.+~',
+            $this->guzzle_handler->getLastRequest()->getHeaderLine('User-Agent')
+        );
+    }
+
+    /**
+     * @return void
+     */
+    public function testDoRequestFireEventsOnError(): void
+    {
+        $this->guzzle_handler->onUriRegexpRequested(
+            '~' . \preg_quote($this->settings->getBaseUri(), '/') . '.*~i',
+            $method = 'get',
+            new ConnectException(
+                'cURL error 7: Failed to connect to host: Connection refused ...',
+                new Request($method, $this->settings->getBaseUri() . '...')
+            ),
+            true
+        );
+
+        $before_send_event = $error_event = $sent_event = $catch = false;
+
+        $this->client->setEventsHandler(function ($event) use (&$error_event, &$before_send_event, &$sent_event): void {
+            if ($event instanceof RequestFailedEvent) {
+                $error_event = true;
+            } elseif ($event instanceof BeforeRequestSendingEvent) {
+                $before_send_event = true;
+            } elseif ($event instanceof AfterRequestSendingEvent) {
+                $sent_event = true;
+            }
+        });
+
+        try {
+            $this->client->devPing();
+        } catch (BadRequestException $e) {
+            $catch = true;
+        }
+
+        $this->assertTrue($before_send_event);
+        $this->assertTrue($error_event);
+        $this->assertFalse($sent_event);
+
+        $this->assertTrue($catch);
+    }
+
+    /**
+     * @return void
+     */
+    public function testDoRequestFireEventsOnSuccess(): void
+    {
+        $this->guzzle_handler->onUriRegexpRequested(
+            '~' . \preg_quote($this->settings->getBaseUri() . 'dev/ping', '/') . '.*~i',
+            'get',
+            $response = new Response(
+                200, ['content-type' => 'application/json;charset=utf-8'], \json_encode((object) [
+                    'value' => (string) \time(),
+                    'in'    => $this->faker->numberBetween(0, 100),
+                    'out'   => $out = (\time() * 1000),
+                    'delay' => $out + 1,
+                ])
+            ),
+            true
+        );
+
+        $before_send_event = $error_event = $sent_event = $catch = false;
+
+        $this->client->setEventsHandler(function ($event) use (
+            &$error_event,
+            &$before_send_event,
+            &$sent_event,
+            $response
+        ): void {
+            if ($event instanceof RequestFailedEvent) {
+                $error_event = true;
+            } elseif ($event instanceof BeforeRequestSendingEvent) {
+                $before_send_event = true;
+            } elseif ($event instanceof AfterRequestSendingEvent && $event->getResponse() === $response) {
+                $this->assertEquals(0, $event->getDuration(), '', 5);
+
+                $sent_event = true;
+            }
+        });
+
+        try {
+            $this->client->devPing();
+        } catch (BadRequestException $e) {
+            $catch = true;
+        }
+
+        $this->assertTrue($before_send_event);
+        $this->assertFalse($error_event);
+        $this->assertTrue($sent_event);
+
+        $this->assertFalse($catch);
+    }
+
+    /**
      * @return void
      */
     public function testDevPing(): void
@@ -98,58 +348,6 @@ class ClientTest extends AbstractTestCase
     }
 
     /**
-     * @small
-     *
-     * @covers ::devPing
-     * @covers ::doRequest
-     *
-     * @return void
-     */
-    public function testDevPingWithWrongJson(): void
-    {
-        $this->expectException(BadResponseException::class);
-        $this->expectExceptionMessageRegExp('~syntax~i');
-
-        $this->guzzle_handler->onUriRequested(
-            $this->settings->getBaseUri() . \sprintf('dev/ping?value=%d', \time()),
-            'get',
-            new Response(
-                200, ['content-type' => 'application/json;charset=utf-8'], '{"foo":]'
-            )
-        );
-
-        $this->client->devPing();
-    }
-
-    /**
-     * @small
-     *
-     * @covers ::devPing
-     * @covers ::doRequest
-     *
-     * @return void
-     */
-    public function testDevPingWithServerError(): void
-    {
-        $this->expectException(BadRequestException::class);
-
-        $this->guzzle_handler->onUriRequested(
-            $uri = $this->settings->getBaseUri() . \sprintf('dev/ping?value=%d', \time()),
-            $method = 'get',
-            new ConnectException(
-                'cURL error 7: Failed to connect to host: Connection refused ...', new Request($method, $uri)
-            )
-        );
-
-        $this->client->devPing();
-    }
-
-    /**
-     * @small
-     *
-     * @covers ::devToken
-     * @covers ::doRequest
-     *
      * @return void
      */
     public function testDevToken(): void
@@ -193,37 +391,6 @@ class ClientTest extends AbstractTestCase
     }
 
     /**
-     * @small
-     *
-     * @covers ::devToken
-     * @covers ::doRequest
-     *
-     * @return void
-     */
-    public function testDevTokenWithWrongJson(): void
-    {
-        self::markTestIncomplete();
-    }
-
-    /**
-     * @small
-     *
-     * @covers ::devToken
-     * @covers ::doRequest
-     *
-     * @return void
-     */
-    public function testDevTokenWithServerError(): void
-    {
-        self::markTestIncomplete();
-    }
-
-    /**
-     * @small
-     *
-     * @covers ::user
-     * @covers ::doRequest
-     *
      * @return void
      */
     public function testUser(): void
@@ -295,11 +462,6 @@ class ClientTest extends AbstractTestCase
     }
 
     /**
-     * @small
-     *
-     * @covers ::user
-     * @covers ::doRequest
-     *
      * @return void
      */
     public function testUserDetailed(): void
@@ -396,37 +558,6 @@ class ClientTest extends AbstractTestCase
     }
 
     /**
-     * @small
-     *
-     * @covers ::user
-     * @covers ::doRequest
-     *
-     * @return void
-     */
-    public function testUserWithWrongJson(): void
-    {
-        self::markTestIncomplete();
-    }
-
-    /**
-     * @small
-     *
-     * @covers ::user
-     * @covers ::doRequest
-     *
-     * @return void
-     */
-    public function testUserWithServerError(): void
-    {
-        self::markTestIncomplete();
-    }
-
-    /**
-     * @small
-     *
-     * @covers ::userBalance
-     * @covers ::doRequest
-     *
      * @return void
      */
     public function testUserBalance(): void
@@ -510,11 +641,6 @@ class ClientTest extends AbstractTestCase
     }
 
     /**
-     * @small
-     *
-     * @covers ::userBalance
-     * @covers ::doRequest
-     *
      * @return void
      */
     public function testUserBalanceDetailed(): void
@@ -598,111 +724,12 @@ class ClientTest extends AbstractTestCase
     }
 
     /**
-     * @small
-     *
-     * @covers ::userBalance
-     * @covers ::doRequest
-     *
-     * @return void
-     */
-    public function testUserBalanceWithUnknownReportTypeUid(): void
-    {
-        $report_type_uid = 'foo@bar';
-
-        $this->expectException(BadRequestException::class);
-        $this->expectExceptionMessageRegExp("~DataSeekObjectError\:.*Отсутствие объекта.*{$report_type_uid}~i");
-
-        $this->guzzle_handler->onUriRequested(
-            $this->settings->getBaseUri() . \sprintf(
-                'user/balance/%s?_detailed=true', \urlencode($report_type_uid)
-            ),
-            'get',
-            new Response(
-                500, ['content-type' => 'application/json;charset=utf-8'], \json_encode((object) [
-                'state' => $state = 'fail',
-                'stamp' => $stamp = DateTimeFactory::toIso8601Zulu(new DateTime),
-                'event' => (object) [
-                    'uid'     => '',
-                    'stamp'   => $stamp,
-                    'cls'     => 'Data',
-                    'type'    => 'DataSeekObjectError',
-                    'name'    => 'Отсутствие объекта с заданным идентификатором',
-                    'message' => "Отсутствует объект типа api.model.Report_Type с UID {$report_type_uid}",
-                    'data'    => (object) [
-                        'entity_type' => 'api.model.Report_Type',
-                        'entity_uid'  => 'short_report_V1@avtocod1',
-                    ],
-                    'events'  => [],
-                ],
-            ]))
-        );
-
-        $this->client->userBalance($report_type_uid, true);
-    }
-
-    /**
-     * @small
-     *
-     * @covers ::userBalance
-     * @covers ::doRequest
-     *
-     * @return void
-     */
-    public function testUserBalanceWithWrongJson(): void
-    {
-        $this->expectException(BadResponseException::class);
-        $this->expectExceptionMessageRegExp('~syntax~i');
-
-        $this->guzzle_handler->onUriRequested(
-            $this->settings->getBaseUri() . \sprintf(
-                'user/balance/%s?_detailed=false', \urlencode($report_type_uid = 'foo@bar')
-            ),
-            'get',
-            new Response(
-                200, ['content-type' => 'application/json;charset=utf-8'], '{"foo":]'
-            )
-        );
-
-        $this->client->userBalance($report_type_uid);
-    }
-
-    /**
-     * @small
-     *
-     * @covers ::userBalance
-     * @covers ::doRequest
-     *
-     * @return void
-     */
-    public function testUserBalanceWithServerError(): void
-    {
-        $this->expectException(BadRequestException::class);
-
-        $this->guzzle_handler->onUriRequested(
-            $uri = $this->settings->getBaseUri() . \sprintf(
-                    'user/balance/%s?_detailed=false', \urlencode($report_type_uid = 'foo@bar')
-                ),
-            $method = 'get',
-            new ConnectException(
-                'cURL error 7: Failed to connect to host: Connection refused ...', new Request($method, $uri)
-            )
-        );
-
-        $this->client->userBalance($report_type_uid);
-    }
-
-    /**
-     * @small
-     *
-     * @covers ::userReportTypes
-     * @covers ::doRequest
-     *
      * @return void
      */
     public function testUserReportTypes(): void
     {
         $this->guzzle_handler->onUriRegexpRequested(
-            '~' . preg_quote($this->settings->getBaseUri() . 'user/report_types', '/') . '.*~i',
+            '~' . \preg_quote($this->settings->getBaseUri() . 'user/report_types', '/') . '.*~i',
             'get',
             new Response(
                 200,
@@ -712,7 +739,7 @@ class ClientTest extends AbstractTestCase
             true
         );
 
-        $response = $this->client->userReportTypes();
+        $response = $this->client->userReportTypes(true, true, '_all', 20, 0, 1, '-created_at', true);
 
         $this->assertCount(11, $response->getData());
         $this->assertSame(11, $response->getTotal());
@@ -754,17 +781,12 @@ class ClientTest extends AbstractTestCase
     }
 
     /**
-     * @small
-     *
-     * @covers ::userReportTypes
-     * @covers ::doRequest
-     *
      * @return void
      */
     public function testUserReportTypesWithMinimalData(): void
     {
         $this->guzzle_handler->onUriRegexpRequested(
-            '~' . preg_quote($this->settings->getBaseUri() . 'user/report_types', '/') . '.*~i',
+            '~' . \preg_quote($this->settings->getBaseUri() . 'user/report_types', '/') . '.*~i',
             'get',
             new Response(
                 200,
@@ -815,40 +837,21 @@ class ClientTest extends AbstractTestCase
     }
 
     /**
-     * @small
-     *
-     * @covers ::userBalance
-     * @covers ::doRequest
-     *
      * @return void
      */
-    public function testUserReportTypesWithOutdatedToken(): void
+    public function testUserReportsWithMinimalData(): void
     {
-        $this->expectException(BadRequestException::class);
-        $this->expectExceptionMessageRegExp('~SecurityAuthTimeoutedStamp\:.*просрочен~i');
-
         $this->guzzle_handler->onUriRegexpRequested(
-            '~' . preg_quote($this->settings->getBaseUri() . 'user/report_types', '/') . '.*~i',
+            '~' . \preg_quote($this->settings->getBaseUri() . 'user/reports', '/') . '.*~i',
             'get',
             new Response(
-                403, ['content-type' => 'application/json;charset=utf-8'], \json_encode((object) [
-                'uid'     => '',
-                'stamp'   => $stamp = DateTimeFactory::toIso8601Zulu(new DateTime),
-                'cls'     => 'Security',
-                'type'    => 'SecurityAuthTimeoutedStamp',
-                'name'    => 'Метка времени просрочена',
-                'message' => 'Метка времени Thu Jan 05 16:45:23 UTC 2017 просрочена - income_age:5, ' .
-                             'server_time:Fri Jul 05 14:55:44 UTC 2019',
-                'data'    => (object) [
-                    'income_stamp' => '2017-01-05T16:45:23.000Z',
-                    'income_age'   => 5,
-                    'server_time'  => '2019-07-05T14:55:44.604Z',
-                ],
-                'events'  => [],
-            ])),
+                200,
+                ['content-type' => 'application/json;charset=utf-8'],
+                \file_get_contents(__DIR__ . '/stubs/user__reports__minimal.json')
+            ),
             true
         );
 
-        $this->client->userReportTypes();
+        //dd($this->client->userReports()->getBody()->getContents());
     }
 }

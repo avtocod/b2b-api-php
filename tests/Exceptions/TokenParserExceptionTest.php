@@ -14,8 +14,6 @@ use Avtocod\B2BApi\Exceptions\TokenParserException;
 class TokenParserExceptionTest extends AbstractTestCase
 {
     /**
-     * @small
-     *
      * @return void
      */
     public function testInstance(): void
@@ -24,8 +22,6 @@ class TokenParserExceptionTest extends AbstractTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testFabrics(): void

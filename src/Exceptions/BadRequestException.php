@@ -45,12 +45,16 @@ class BadRequestException extends RuntimeException
             ? $this->extractErrorMessageFromResponse($http_response)
             : null;
 
+        $previous_exception_message = $previous instanceof Throwable && $previous->getMessage() !== ''
+            ? $previous->getMessage()
+            : null;
+
         $http_code = $http_response instanceof ResponseInterface
             ? $http_response->getStatusCode()
             : null;
 
         parent::__construct(
-            $message ?? $service_error_message ?? 'Unsuccessful request',
+            $message ?? $service_error_message ?? $previous_exception_message ?? 'Unsuccessful request',
             $code ?? $http_code ?? 0,
             $previous
         );

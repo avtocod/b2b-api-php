@@ -15,8 +15,6 @@ use Avtocod\B2BApi\DateTimeFactory;
 class DateTimeFactoryTest extends AbstractTestCase
 {
     /**
-     * @small
-     *
      * @return void
      */
     public function testCreateFromIso8601ZuluWithZeroMicroseconds(): void
@@ -33,8 +31,6 @@ class DateTimeFactoryTest extends AbstractTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testCreateFromIso8601ZuluWithSixZeroMicroseconds(): void
@@ -51,8 +47,6 @@ class DateTimeFactoryTest extends AbstractTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testCreateFromIso8601ZuluWithMicroseconds(): void
@@ -69,8 +63,6 @@ class DateTimeFactoryTest extends AbstractTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testCreateFromIso8601ZuluWithSixMicroseconds(): void
@@ -87,8 +79,6 @@ class DateTimeFactoryTest extends AbstractTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testToIso8601ZuluWitMicroseconds(): void
@@ -99,8 +89,6 @@ class DateTimeFactoryTest extends AbstractTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testToIso8601ZuluWithoutMicroseconds(): void

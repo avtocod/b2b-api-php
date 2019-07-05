@@ -16,8 +16,8 @@ use GuzzleHttp\Exception\RequestException;
 use Avtocod\B2BApi\Responses\DevPingResponse;
 use Avtocod\B2BApi\Responses\DevTokenResponse;
 use Avtocod\B2BApi\Responses\UserBalanceResponse;
-use Avtocod\B2BApi\Exceptions\BadRequestException;
 use GuzzleHttp\ClientInterface as GuzzleInterface;
+use Avtocod\B2BApi\Exceptions\BadRequestException;
 use Avtocod\B2BApi\Responses\UserReportTypesResponse;
 
 final class Client implements ClientInterface
@@ -169,9 +169,9 @@ final class Client implements ClientInterface
                         ? 'true'
                         : 'false',
                     '_query'        => $query,
-                    '_size'         => $size,
-                    '_offset'       => $offset,
-                    '_page'         => $page,
+                    '_size'         => \max(1, $size),
+                    '_offset'       => \max(0, $offset),
+                    '_page'         => \max(1, $page),
                     '_sort'         => $sort,
                     '_calc_total'   => $calc_total === true
                         ? 'true'
@@ -179,6 +179,35 @@ final class Client implements ClientInterface
                 ],
             ])
         );
+    }
+
+    public function userReports(bool $content = false,
+                                string $query = '_all',
+                                int $size = 20,
+                                int $offset = 0,
+                                int $page = 1,
+                                string $sort = '-created_at',
+                                bool $calc_total = false,
+                                bool $detailed = false)
+    {
+        return $this->doRequest(new Request('get', 'user/reports'), [
+            'query' => [
+                '_content'    => $content === true
+                    ? 'true'
+                    : 'false',
+                '_query'      => $query,
+                '_size'       => \max(1, $size),
+                '_offset'     => \max(0, $offset),
+                '_page'       => \max(1, $page),
+                '_sort'       => $sort,
+                '_calc_total' => $calc_total === true
+                    ? 'true'
+                    : 'false',
+                '_detailed'   => $detailed === true
+                    ? 'true'
+                    : 'false',
+            ],
+        ]);
     }
 
     /**
@@ -258,18 +287,12 @@ final class Client implements ClientInterface
      */
     protected function getDefaultUserAgent(): string
     {
-        static $user_agent = null;
+        $user_agent = 'b2b-api-php/' . $this->getVersion();
 
-        if ($user_agent === null) {
-            $user_agent = 'b2b-api-php/' . $this->getVersion();
-
-            if (\function_exists('curl_version') && \extension_loaded('curl')) {
-                $user_agent .= ' curl/' . (\curl_version()['version'] ?? '0.0.0');
-            }
-
-            $user_agent .= ' PHP/' . PHP_VERSION;
+        if (\function_exists('curl_version') && \extension_loaded('curl')) {
+            $user_agent .= ' curl/' . (\curl_version()['version'] ?? 'UNKNOWN');
         }
 
-        return $user_agent;
+        return $user_agent . ' PHP/' . PHP_VERSION;
     }
 }

@@ -16,8 +16,6 @@ use Avtocod\B2BApi\Responses\Entities\Group;
 class GroupTest extends AbstractTestCase
 {
     /**
-     * @small
-     *
      * @return void
      */
     public function testGetters(): void

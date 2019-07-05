@@ -16,8 +16,6 @@ use Avtocod\B2BApi\Responses\Entities\Domain;
 class UserTest extends AbstractTestCase
 {
     /**
-     * @small
-     *
      * @return void
      */
     public function testGetters(): void
