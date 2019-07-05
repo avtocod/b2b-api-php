@@ -25,7 +25,7 @@ class ReportType implements CanCreateSelfFromArrayInterface
     public const STATE_OBSOLETE = 'OBSOLETE';
 
     /**
-     * Report make mode - transactional
+     * Report make mode - transactional.
      */
     public const REPORT_MAKE_MODE_TRANSACTIONAL = 'TRANSACTIONAL';
 
@@ -249,7 +249,7 @@ class ReportType implements CanCreateSelfFromArrayInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public static function fromArray(array $data): self
     {

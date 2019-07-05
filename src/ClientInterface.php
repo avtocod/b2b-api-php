@@ -2,14 +2,14 @@
 
 namespace Avtocod\B2BApi;
 
-use Avtocod\B2BApi\Responses\UserBalanceResponse;
-use Avtocod\B2BApi\Responses\UserReportTypesResponse;
 use DateTime;
 use Avtocod\B2BApi\Responses\UserResponse;
 use Avtocod\B2BApi\Responses\DevPingResponse;
 use Avtocod\B2BApi\Responses\DevTokenResponse;
+use Avtocod\B2BApi\Responses\UserBalanceResponse;
 use Avtocod\B2BApi\Exceptions\BadRequestException;
 use Avtocod\B2BApi\Exceptions\BadResponseException;
+use Avtocod\B2BApi\Responses\UserReportTypesResponse;
 
 interface ClientInterface
 {

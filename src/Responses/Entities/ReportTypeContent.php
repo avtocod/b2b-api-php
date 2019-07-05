@@ -29,7 +29,7 @@ class ReportTypeContent implements CanCreateSelfFromArrayInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public static function fromArray(array $data): self
     {
