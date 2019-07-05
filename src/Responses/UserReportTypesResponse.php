@@ -79,7 +79,7 @@ final class UserReportTypesResponse implements ResponseInterface
             $as_array['size'],
             DateTimeFactory::createFromIso8601Zulu($as_array['stamp']),
             $as_array['data'],
-            $as_array['total']
+            $as_array['total'] ?? null
         );
     }
 
