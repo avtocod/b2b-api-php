@@ -76,39 +76,21 @@ class EntitiesFactory
                 'deleted'     => $faker->randomElement([null, $faker->boolean]),
             ], $attributes);
 
-            /*
-             * @var $uid
-             * @var $comment
-             * @var $name
-             * @var $state
-             * @var $roles
-             * @var $tags
-             * @var $created_at
-             * @var $created_by
-             * @var $updated_at
-             * @var $updated_by
-             * @var $active_from
-             * @var $active_to
-             * @var $id
-             * @var $deleted
-             */
-            \extract($attributes);
-
             return new Domain(
-                $uid,
-                $comment,
-                $name,
-                $state,
-                $roles,
-                $tags,
-                $created_at,
-                $created_by,
-                $updated_at,
-                $updated_by,
-                $active_from,
-                $active_to,
-                $id,
-                $deleted
+                $attributes['uid'],
+                $attributes['comment'],
+                $attributes['name'],
+                $attributes['state'],
+                $attributes['roles'],
+                $attributes['tags'],
+                $attributes['created_at'],
+                $attributes['created_by'],
+                $attributes['updated_at'],
+                $attributes['updated_by'],
+                $attributes['active_from'],
+                $attributes['active_to'],
+                $attributes['id'],
+                $attributes['deleted']
             );
         };
 
@@ -144,51 +126,27 @@ class EntitiesFactory
                 'pass_hash'   => $faker->randomElement([null, $faker->md5]),
             ], $attributes);
 
-            /*
-             * @var $uid
-             * @var $comment
-             * @var $contacts
-             * @var $email
-             * @var $login
-             * @var $name
-             * @var $state
-             * @var $domain_uid
-             * @var $domain
-             * @var $roles
-             * @var $tags
-             * @var $created_at
-             * @var $created_by
-             * @var $updated_at
-             * @var $updated_by
-             * @var $active_from
-             * @var $active_to
-             * @var $id
-             * @var $deleted
-             * @var $pass_hash
-             */
-            \extract($attributes);
-
             return new User(
-                $uid,
-                $comment,
-                $contacts,
-                $email,
-                $login,
-                $name,
-                $state,
-                $domain_uid,
-                $domain,
-                $roles,
-                $tags,
-                $created_at,
-                $created_by,
-                $updated_at,
-                $updated_by,
-                $active_from,
-                $active_to,
-                $id,
-                $deleted,
-                $pass_hash
+                $attributes['uid'],
+                $attributes['comment'],
+                $attributes['contacts'],
+                $attributes['email'],
+                $attributes['login'],
+                $attributes['name'],
+                $attributes['state'],
+                $attributes['domain_uid'],
+                $attributes['domain'],
+                $attributes['roles'],
+                $attributes['tags'],
+                $attributes['created_at'],
+                $attributes['created_by'],
+                $attributes['updated_at'],
+                $attributes['updated_by'],
+                $attributes['active_from'],
+                $attributes['active_to'],
+                $attributes['id'],
+                $attributes['deleted'],
+                $attributes['pass_hash']
             );
         };
 
@@ -213,39 +171,21 @@ class EntitiesFactory
                 'deleted'     => $faker->randomElement([null, $faker->boolean]),
             ], $attributes);
 
-            /*
-             * @var $uid
-             * @var $comment
-             * @var $name
-             * @var $users
-             * @var $roles
-             * @var $tags
-             * @var $created_at
-             * @var $created_by
-             * @var $updated_at
-             * @var $updated_by
-             * @var $active_from
-             * @var $active_to
-             * @var $id
-             * @var $deleted
-             */
-            \extract($attributes);
-
             return new Group(
-                $uid,
-                $comment,
-                $name,
-                $users,
-                $roles,
-                $tags,
-                $created_at,
-                $created_by,
-                $updated_at,
-                $updated_by,
-                $active_from,
-                $active_to,
-                $id,
-                $deleted
+                $attributes['uid'],
+                $attributes['comment'],
+                $attributes['name'],
+                $attributes['users'],
+                $attributes['roles'],
+                $attributes['tags'],
+                $attributes['created_at'],
+                $attributes['created_by'],
+                $attributes['updated_at'],
+                $attributes['updated_by'],
+                $attributes['active_from'],
+                $attributes['active_to'],
+                $attributes['id'],
+                $attributes['deleted']
             );
         };
     }

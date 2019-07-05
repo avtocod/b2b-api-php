@@ -17,6 +17,9 @@ use GuzzleHttp\Exception\ConnectException;
 use Avtocod\B2BApi\Exceptions\BadRequestException;
 use Avtocod\B2BApi\Exceptions\BadResponseException;
 
+/**
+ * @coversDefaultClass \Avtocod\B2BApi\Client
+ */
 class ClientTest extends AbstractTestCase
 {
     /**
@@ -52,6 +55,8 @@ class ClientTest extends AbstractTestCase
     /**
      * @small
      *
+     * @covers ::getVersion
+     *
      * @return void
      */
     public function testGetVersion(): void
@@ -63,6 +68,9 @@ class ClientTest extends AbstractTestCase
 
     /**
      * @small
+     *
+     * @covers ::devPing
+     * @covers ::doRequest
      *
      * @return void
      */
@@ -92,6 +100,9 @@ class ClientTest extends AbstractTestCase
     /**
      * @small
      *
+     * @covers ::devPing
+     * @covers ::doRequest
+     *
      * @return void
      */
     public function testDevPingWithWrongJson(): void
@@ -113,6 +124,9 @@ class ClientTest extends AbstractTestCase
     /**
      * @small
      *
+     * @covers ::devPing
+     * @covers ::doRequest
+     *
      * @return void
      */
     public function testDevPingWithServerError(): void
@@ -132,6 +146,9 @@ class ClientTest extends AbstractTestCase
 
     /**
      * @small
+     *
+     * @covers ::devToken
+     * @covers ::doRequest
      *
      * @return void
      */
@@ -178,6 +195,9 @@ class ClientTest extends AbstractTestCase
     /**
      * @small
      *
+     * @covers ::devToken
+     * @covers ::doRequest
+     *
      * @return void
      */
     public function testDevTokenWithWrongJson(): void
@@ -187,6 +207,9 @@ class ClientTest extends AbstractTestCase
 
     /**
      * @small
+     *
+     * @covers ::devToken
+     * @covers ::doRequest
      *
      * @return void
      */
@@ -198,9 +221,12 @@ class ClientTest extends AbstractTestCase
     /**
      * @small
      *
+     * @covers ::user
+     * @covers ::doRequest
+     *
      * @return void
      */
-    public function testUserInfo(): void
+    public function testUser(): void
     {
         $this->guzzle_handler->onUriRequested(
             $this->settings->getBaseUri() . 'user?_detailed=false',
@@ -271,9 +297,12 @@ class ClientTest extends AbstractTestCase
     /**
      * @small
      *
+     * @covers ::user
+     * @covers ::doRequest
+     *
      * @return void
      */
-    public function testUserInfoDetailed(): void
+    public function testUserDetailed(): void
     {
         $this->guzzle_handler->onUriRequested(
             $this->settings->getBaseUri() . 'user?_detailed=true',
