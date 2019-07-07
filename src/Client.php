@@ -15,9 +15,10 @@ use Avtocod\B2BApi\Responses\UserResponse;
 use GuzzleHttp\Exception\RequestException;
 use Avtocod\B2BApi\Responses\DevPingResponse;
 use Avtocod\B2BApi\Responses\DevTokenResponse;
+use Avtocod\B2BApi\Responses\UserReportsResponse;
 use Avtocod\B2BApi\Responses\UserBalanceResponse;
-use Avtocod\B2BApi\Exceptions\BadRequestException;
 use GuzzleHttp\ClientInterface as GuzzleInterface;
+use Avtocod\B2BApi\Exceptions\BadRequestException;
 use Avtocod\B2BApi\Responses\UserReportTypesResponse;
 
 final class Client implements ClientInterface
@@ -188,26 +189,28 @@ final class Client implements ClientInterface
                                 int $page = 1,
                                 string $sort = '-created_at',
                                 bool $calc_total = false,
-                                bool $detailed = false)
+                                bool $detailed = false): UserReportsResponse
     {
-        return $this->doRequest(new Request('get', 'user/reports'), [
-            'query' => [
-                '_content'    => $content === true
-                    ? 'true'
-                    : 'false',
-                '_query'      => $query,
-                '_size'       => \max(1, $size),
-                '_offset'     => \max(0, $offset),
-                '_page'       => \max(1, $page),
-                '_sort'       => $sort,
-                '_calc_total' => $calc_total === true
-                    ? 'true'
-                    : 'false',
-                '_detailed'   => $detailed === true
-                    ? 'true'
-                    : 'false',
-            ],
-        ]);
+        return UserReportsResponse::fromHttpResponse(
+            $this->doRequest(new Request('get', 'user/reports'), [
+                'query' => [
+                    '_content'    => $content === true
+                        ? 'true'
+                        : 'false',
+                    '_query'      => $query,
+                    '_size'       => \max(1, $size),
+                    '_offset'     => \max(0, $offset),
+                    '_page'       => \max(1, $page),
+                    '_sort'       => $sort,
+                    '_calc_total' => $calc_total === true
+                        ? 'true'
+                        : 'false',
+                    '_detailed'   => $detailed === true
+                        ? 'true'
+                        : 'false',
+                ],
+            ])
+        );
     }
 
     /**

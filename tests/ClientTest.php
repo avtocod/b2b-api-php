@@ -839,6 +839,69 @@ class ClientTest extends AbstractTestCase
     /**
      * @return void
      */
+    public function testUserReports(): void
+    {
+        $this->guzzle_handler->onUriRegexpRequested(
+            '~' . \preg_quote($this->settings->getBaseUri() . 'user/reports', '/') . '.*~i',
+            'get',
+            new Response(
+                200,
+                ['content-type' => 'application/json;charset=utf-8'],
+                \file_get_contents(__DIR__ . '/stubs/user__reports__maximal.json')
+            ),
+            true
+        );
+
+        $response = $this->client->userReports();
+
+        $this->assertSame(8007997, $response->getTotal());
+        $this->assertSame(2, $response->getSize());
+        $this->assertEquals(
+            DateTimeFactory::createFromIso8601Zulu('2019-07-07T10:53:37.032Z'), $response->getStamp()
+        );
+        $this->assertSame('ok', $response->getState());
+        $this->assertCount(2, $response->getData());
+
+        $report = $response->getData()[0];
+
+        $this->assertSame('some_domain_uid', $report->getDomainUid());
+        $this->assertSame('some_report_uid_1@some_domain_uid', $report->getReportTypeUid());
+        $this->assertSame('5TDDKRFH80S073711', $report->getVehicleId());
+        $this->assertSame('VIN', $report->getQuery()->getType());
+        $this->assertSame('5TDDKRFH80S073711', $report->getQuery()->getBody());
+        $this->assertSame(4, $report->getProgressOk());
+        $this->assertSame(0, $report->getProgressWait());
+        $this->assertSame(0, $report->getProgressError());
+        $this->assertTrue($report->getState()->getSourceStateByName('base')->isSuccess());
+
+        $this->assertSame('5TDDKRFH80S073711', $report->getContent()->getByPath('identifiers.vehicle.vin'));
+        $this->assertSame(0, $report->getContent()->getByPath('images.photos.count'));
+        $this->assertSame(['type' => 'Бензиновый'], $report->getContent()->getByPath('tech_data.engine.fuel'));
+
+        $this->assertSame('some_report_uid_1_5TDDKRFH80S073711@some_domain_uid', $report->getUid());
+        $this->assertSame('NONAME', $report->getName());
+        $this->assertSame('', $report->getComment());
+        $this->assertSame([], $report->getTags());
+        $this->assertEquals(
+            DateTimeFactory::createFromIso8601Zulu('2019-07-07T10:51:46.067Z'), $report->getCreatedAt()
+        );
+        $this->assertSame('system', $report->getCreatedBy());
+        $this->assertEquals(
+            DateTimeFactory::createFromIso8601Zulu('2019-07-07T10:51:55.167Z'), $report->getUpdatedAt()
+        );
+        $this->assertSame('manager', $report->getUpdatedBy());
+        $this->assertEquals(
+            DateTimeFactory::createFromIso8601Zulu('1900-01-01T00:00:00.000Z'), $report->getActiveFrom()
+        );
+        $this->assertEquals(
+            DateTimeFactory::createFromIso8601Zulu('3000-01-01T00:00:00.000Z'), $report->getActiveTo()
+        );
+        $this->assertTrue($report->isCompleted());
+    }
+
+    /**
+     * @return void
+     */
     public function testUserReportsWithMinimalData(): void
     {
         $this->guzzle_handler->onUriRegexpRequested(
@@ -852,6 +915,48 @@ class ClientTest extends AbstractTestCase
             true
         );
 
-        //dd($this->client->userReports()->getBody()->getContents());
+        $response = $this->client->userReports();
+
+        $this->assertNull($response->getTotal());
+        $this->assertSame(3, $response->getSize());
+        $this->assertEquals(
+            DateTimeFactory::createFromIso8601Zulu('2019-07-05T15:36:28.261Z'), $response->getStamp()
+        );
+        $this->assertSame('ok', $response->getState());
+        $this->assertCount(3, $response->getData());
+
+        $report = $response->getData()[0];
+
+        $this->assertSame('some_domain_uid', $report->getDomainUid());
+        $this->assertSame('some_report_uid_1@some_domain_uid', $report->getReportTypeUid());
+        $this->assertSame('YV1KS9614S107357Y', $report->getVehicleId());
+        $this->assertSame('VIN', $report->getQuery()->getType());
+        $this->assertSame('YV1KS9614S107357Y', $report->getQuery()->getBody());
+        $this->assertSame(0, $report->getProgressOk());
+        $this->assertSame(0, $report->getProgressWait());
+        $this->assertSame(5, $report->getProgressError());
+        $this->assertTrue($report->getState()->getSourceStateByName('gibdd.history')->isErrored());
+        $this->assertSame('some_report_uid_1_YV1KS9614S107357Y@some_domain_uid', $report->getUid());
+        $this->assertSame('NONAME', $report->getName());
+        $this->assertSame('', $report->getComment());
+        $this->assertSame([], $report->getTags());
+        $this->assertEquals(
+            DateTimeFactory::createFromIso8601Zulu('2018-11-26T11:30:50.225Z'), $report->getCreatedAt()
+        );
+        $this->assertSame('system', $report->getCreatedBy());
+        $this->assertEquals(
+            DateTimeFactory::createFromIso8601Zulu('2019-07-05T15:34:13.495Z'), $report->getUpdatedAt()
+        );
+        $this->assertSame('manager', $report->getUpdatedBy());
+        $this->assertEquals(
+            DateTimeFactory::createFromIso8601Zulu('1900-01-01T00:00:00.000Z'), $report->getActiveFrom()
+        );
+        $this->assertEquals(
+            DateTimeFactory::createFromIso8601Zulu('3000-01-01T00:00:00.000Z'), $report->getActiveTo()
+        );
+
+        $this->assertTrue($response->getData()[0]->isCompleted());
+        $this->assertTrue($response->getData()[1]->isCompleted());
+        $this->assertFalse($response->getData()[2]->isCompleted());
     }
 }
