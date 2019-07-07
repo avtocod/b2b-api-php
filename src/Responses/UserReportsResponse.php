@@ -45,7 +45,7 @@ final class UserReportsResponse implements ResponseInterface
      * @param string   $state
      * @param int      $size
      * @param DateTime $stamp
-     * @param Report[]   $data
+     * @param Report[] $data
      * @param int      $total
      */
     private function __construct(string $state, int $size, DateTime $stamp, array $data, ?int $total)

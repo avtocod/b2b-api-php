@@ -4,8 +4,8 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Responses\Entities;
 
-use Avtocod\B2BApi\DateTimeFactory;
 use DateTime;
+use Avtocod\B2BApi\DateTimeFactory;
 
 class Report implements CanCreateSelfFromArrayInterface
 {
@@ -161,27 +161,27 @@ class Report implements CanCreateSelfFromArrayInterface
                                 ?int $id,
                                 ?bool $deleted)
     {
-        $this->uid = $uid;
-        $this->comment = $comment;
-        $this->name = $name;
-        $this->content = $content;
-        $this->query = $query;
-        $this->vehicle_id = $vehicle_id;
+        $this->uid             = $uid;
+        $this->comment         = $comment;
+        $this->name            = $name;
+        $this->content         = $content;
+        $this->query           = $query;
+        $this->vehicle_id      = $vehicle_id;
         $this->report_type_uid = $report_type_uid;
-        $this->domain_uid = $domain_uid;
-        $this->tags = $tags;
-        $this->created_at = $created_at;
-        $this->created_by = $created_by;
-        $this->updated_at = $updated_at;
-        $this->updated_by = $updated_by;
-        $this->active_from = $active_from;
-        $this->active_to = $active_to;
-        $this->progress_ok = $progress_ok;
-        $this->progress_wait = $progress_wait;
-        $this->progress_error = $progress_error;
-        $this->state = $state;
-        $this->id = $id;
-        $this->deleted = $deleted;
+        $this->domain_uid      = $domain_uid;
+        $this->tags            = $tags;
+        $this->created_at      = $created_at;
+        $this->created_by      = $created_by;
+        $this->updated_at      = $updated_at;
+        $this->updated_by      = $updated_by;
+        $this->active_from     = $active_from;
+        $this->active_to       = $active_to;
+        $this->progress_ok     = $progress_ok;
+        $this->progress_wait   = $progress_wait;
+        $this->progress_error  = $progress_error;
+        $this->state           = $state;
+        $this->id              = $id;
+        $this->deleted         = $deleted;
     }
 
     /**

@@ -15,10 +15,10 @@ use Avtocod\B2BApi\Responses\UserResponse;
 use GuzzleHttp\Exception\RequestException;
 use Avtocod\B2BApi\Responses\DevPingResponse;
 use Avtocod\B2BApi\Responses\DevTokenResponse;
-use Avtocod\B2BApi\Responses\UserReportsResponse;
 use Avtocod\B2BApi\Responses\UserBalanceResponse;
-use GuzzleHttp\ClientInterface as GuzzleInterface;
+use Avtocod\B2BApi\Responses\UserReportsResponse;
 use Avtocod\B2BApi\Exceptions\BadRequestException;
+use GuzzleHttp\ClientInterface as GuzzleInterface;
 use Avtocod\B2BApi\Responses\UserReportTypesResponse;
 
 final class Client implements ClientInterface
