@@ -4,13 +4,13 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Tests\Exceptions;
 
-use Avtocod\B2BApi\Exceptions\B2BApiExceptionInterface;
-use Avtocod\B2BApi\Exceptions\BadRequestException;
-use Avtocod\B2BApi\Tests\AbstractTestCase;
 use Exception;
+use RuntimeException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
-use RuntimeException;
+use Avtocod\B2BApi\Tests\AbstractTestCase;
+use Avtocod\B2BApi\Exceptions\BadRequestException;
+use Avtocod\B2BApi\Exceptions\B2BApiExceptionInterface;
 
 /**
  * @covers \Avtocod\B2BApi\Exceptions\BadRequestException

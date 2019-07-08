@@ -19,8 +19,8 @@ use Avtocod\B2BApi\Responses\DevTokenResponse;
 use Avtocod\B2BApi\Responses\UserReportResponse;
 use Avtocod\B2BApi\Responses\UserBalanceResponse;
 use Avtocod\B2BApi\Responses\UserReportsResponse;
-use GuzzleHttp\ClientInterface as GuzzleInterface;
 use Avtocod\B2BApi\Exceptions\BadRequestException;
+use GuzzleHttp\ClientInterface as GuzzleInterface;
 use Avtocod\B2BApi\Responses\UserReportMakeResponse;
 use Avtocod\B2BApi\Responses\UserReportTypesResponse;
 use Avtocod\B2BApi\Responses\UserReportRefreshResponse;
@@ -296,7 +296,7 @@ final class Client implements ClientInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function userReportRefresh(string $report_uid, ?array $options = []): UserReportRefreshResponse
     {

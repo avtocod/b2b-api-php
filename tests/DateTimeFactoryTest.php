@@ -5,8 +5,8 @@ declare(strict_types = 1);
 namespace Avtocod\B2BApi\Tests;
 
 use DateTime;
-use Avtocod\B2BApi\DateTimeFactory;
 use InvalidArgumentException;
+use Avtocod\B2BApi\DateTimeFactory;
 
 /**
  * @group  datetime

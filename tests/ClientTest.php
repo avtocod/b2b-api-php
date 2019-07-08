@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Tests;
 
-use Avtocod\B2BApi\ClientInterface;
 use DateTime;
 use Avtocod\B2BApi\Client;
 use Avtocod\B2BApi\Settings;
@@ -14,6 +13,7 @@ use GuzzleHttp\Psr7\Response;
 use PackageVersions\Versions;
 use Tarampampam\Wrappers\Json;
 use GuzzleHttp\Client as Guzzle;
+use Avtocod\B2BApi\ClientInterface;
 use Avtocod\B2BApi\DateTimeFactory;
 use GuzzleHttp\Exception\ConnectException;
 use Avtocod\B2BApi\Events\RequestFailedEvent;

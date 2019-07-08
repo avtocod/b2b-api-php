@@ -4,10 +4,10 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Tests\Exceptions;
 
-use Avtocod\B2BApi\Exceptions\B2BApiExceptionInterface;
 use RuntimeException;
 use Avtocod\B2BApi\Tests\AbstractTestCase;
 use Avtocod\B2BApi\Exceptions\TokenParserException;
+use Avtocod\B2BApi\Exceptions\B2BApiExceptionInterface;
 
 /**
  * @covers \Avtocod\B2BApi\Exceptions\TokenParserException

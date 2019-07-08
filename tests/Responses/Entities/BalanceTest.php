@@ -52,12 +52,12 @@ class BalanceTest extends AbstractTestCase
 
         $balance = Balance::fromArray([
             'report_type_uid' => $report_type_uid = $attributes['report_type_uid'],
-            'balance_type' => $balance_type = $attributes['balance_type'],
-            'quote_init' => $quote_init = $attributes['quote_init'],
-            'quote_up' => $quote_up = $attributes['quote_up'],
-            'quote_use' => $quote_use = $attributes['quote_use'],
-            'created_at' => $created_at = $attributes['created_at'],
-            'updated_at' => $updated_at = $attributes['updated_at']
+            'balance_type'    => $balance_type = $attributes['balance_type'],
+            'quote_init'      => $quote_init = $attributes['quote_init'],
+            'quote_up'        => $quote_up = $attributes['quote_up'],
+            'quote_use'       => $quote_use = $attributes['quote_use'],
+            'created_at'      => $created_at = $attributes['created_at'],
+            'updated_at'      => $updated_at = $attributes['updated_at'],
         ]);
 
         $this->assertSame($report_type_uid, $balance->getReportTypeUid());
@@ -79,10 +79,10 @@ class BalanceTest extends AbstractTestCase
 
         $balance = Balance::fromArray([
             'report_type_uid' => $report_type_uid = $attributes['report_type_uid'],
-            'balance_type' => $balance_type = $attributes['balance_type'],
-            'quote_init' => $quote_init = $attributes['quote_init'],
-            'quote_up' => $quote_up = $attributes['quote_up'],
-            'quote_use' => $quote_use = $attributes['quote_use'],
+            'balance_type'    => $balance_type = $attributes['balance_type'],
+            'quote_init'      => $quote_init = $attributes['quote_init'],
+            'quote_up'        => $quote_up = $attributes['quote_up'],
+            'quote_use'       => $quote_use = $attributes['quote_use'],
         ]);
 
         $this->assertSame($report_type_uid, $balance->getReportTypeUid());
