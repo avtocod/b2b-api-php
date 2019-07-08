@@ -5,6 +5,9 @@ declare(strict_types = 1);
 namespace Avtocod\B2BApi\Responses;
 
 use DateTime;
+use Countable;
+use ArrayIterator;
+use IteratorAggregate;
 use Tarampampam\Wrappers\Json;
 use Avtocod\B2BApi\DateTimeFactory;
 use Avtocod\B2BApi\Responses\Entities\Report;
@@ -12,7 +15,7 @@ use Avtocod\B2BApi\Exceptions\BadResponseException;
 use Tarampampam\Wrappers\Exceptions\JsonEncodeDecodeException;
 use Psr\Http\Message\ResponseInterface as HttpResponseInterface;
 
-final class UserReportsResponse implements ResponseInterface
+final class UserReportsResponse implements ResponseInterface, Countable, IteratorAggregate
 {
     /**
      * @var string
@@ -131,5 +134,21 @@ final class UserReportsResponse implements ResponseInterface
     public function getTotal(): ?int
     {
         return $this->total;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function count(): int
+    {
+        return $this->size;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getIterator(): ArrayIterator
+    {
+        return new ArrayIterator($this->data);
     }
 }

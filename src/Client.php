@@ -8,6 +8,7 @@ use Closure;
 use DateTime;
 use GuzzleHttp\Psr7\Request;
 use PackageVersions\Versions;
+use Tarampampam\Wrappers\Json;
 use GuzzleHttp\Client as Guzzle;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -15,11 +16,14 @@ use Avtocod\B2BApi\Responses\UserResponse;
 use GuzzleHttp\Exception\RequestException;
 use Avtocod\B2BApi\Responses\DevPingResponse;
 use Avtocod\B2BApi\Responses\DevTokenResponse;
+use Avtocod\B2BApi\Responses\UserReportResponse;
 use Avtocod\B2BApi\Responses\UserBalanceResponse;
 use Avtocod\B2BApi\Responses\UserReportsResponse;
-use Avtocod\B2BApi\Exceptions\BadRequestException;
 use GuzzleHttp\ClientInterface as GuzzleInterface;
+use Avtocod\B2BApi\Exceptions\BadRequestException;
+use Avtocod\B2BApi\Responses\UserReportMakeResponse;
 use Avtocod\B2BApi\Responses\UserReportTypesResponse;
+use Avtocod\B2BApi\Responses\UserReportRefreshResponse;
 
 final class Client implements ClientInterface
 {
@@ -90,6 +94,92 @@ final class Client implements ClientInterface
                 ],
             ])
         );
+    }
+
+    /**
+     * @param RequestInterface $request
+     * @param array            $options
+     *
+     * @throws BadRequestException
+     *
+     * @return ResponseInterface
+     */
+    protected function doRequest(RequestInterface $request, array $options = []): ResponseInterface
+    {
+        $options = \array_replace($this->settings->getGuzzleOptions(), $options);
+
+        $options['base_uri'] = $this->settings->getBaseUri();
+
+        $options['headers'] = \array_replace([
+            'Authorization' => static::TOKEN_PREFIX . ' ' . $this->settings->getAuthToken(),
+            'User-Agent'    => $this->getDefaultUserAgent(),
+        ], $options['headers'] ?? []);
+
+        $this->dispatchEvent(new Events\BeforeRequestSendingEvent($request, $options));
+
+        try {
+            $started_at = \microtime(true);
+            $response   = $this->guzzle->send($request, $options);
+        } catch (RequestException $e) {
+            $this->dispatchEvent(new Events\RequestFailedEvent(
+                $exception_request = $e->getRequest(),
+                $exception_response = $e->getResponse()
+            ));
+
+            throw new BadRequestException($exception_request, $exception_response, null, null, $e);
+        }
+
+        $this->dispatchEvent(new Events\AfterRequestSendingEvent(
+            $request,
+            $response,
+            (int) \round((\microtime(true) - $started_at) * 1000) // in microseconds
+        ));
+
+        return $response;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getDefaultUserAgent(): string
+    {
+        $user_agent = 'b2b-api-php/' . $this->getVersion();
+
+        if (\function_exists('curl_version') && \extension_loaded('curl')) {
+            $user_agent .= ' curl/' . (\curl_version()['version'] ?? 'UNKNOWN');
+        }
+
+        return $user_agent . ' PHP/' . PHP_VERSION;
+    }
+
+    /**
+     * Get client (package) version.
+     *
+     * @param bool $without_hash
+     *
+     * @return string
+     */
+    public function getVersion(bool $without_hash = true): string
+    {
+        $version = Versions::getVersion('avtocod/b2b-api-php');
+
+        if ($without_hash === true && \is_int($delimiter_position = \mb_strpos($version, '@'))) {
+            return \mb_substr($version, 0, (int) $delimiter_position);
+        }
+
+        return $version;
+    }
+
+    /**
+     * @param object $event
+     *
+     * @return void
+     */
+    protected function dispatchEvent($event): void
+    {
+        if ($this->events_handler instanceof Closure) {
+            $this->events_handler->__invoke($event);
+        }
     }
 
     /**
@@ -182,6 +272,9 @@ final class Client implements ClientInterface
         );
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function userReports(bool $content = false,
                                 string $query = '_all',
                                 int $size = 20,
@@ -214,88 +307,77 @@ final class Client implements ClientInterface
     }
 
     /**
-     * Get client (package) version.
-     *
-     * @param bool $without_hash
-     *
-     * @return string
+     * {@inheritdoc}
      */
-    public function getVersion(bool $without_hash = true): string
+    public function userReport(string $report_uid,
+                               bool $content = true,
+                               bool $detailed = true): UserReportResponse
     {
-        $version = Versions::getVersion('avtocod/b2b-api-php');
-
-        if ($without_hash === true && \is_int($delimiter_position = \mb_strpos($version, '@'))) {
-            return \mb_substr($version, 0, (int) $delimiter_position);
-        }
-
-        return $version;
+        return UserReportResponse::fromHttpResponse(
+            $this->doRequest(new Request('get', \sprintf('user/reports/%s', \urlencode($report_uid))), [
+                'query' => [
+                    '_content'  => $content === true
+                        ? 'true'
+                        : 'false',
+                    '_detailed' => $detailed === true
+                        ? 'true'
+                        : 'false',
+                ],
+            ])
+        );
     }
 
     /**
-     * @param object $event
-     *
-     * @return void
+     * {@inheritdoc}
      */
-    protected function dispatchEvent($event): void
+    public function userReportMake(string $report_type_uid,
+                                   string $type,
+                                   string $value,
+                                   ?array $options = [],
+                                   ?bool $is_force = false,
+                                   ?string $on_update = null,
+                                   ?string $on_complete = null): UserReportMakeResponse
     {
-        if ($this->events_handler instanceof Closure) {
-            $this->events_handler->__invoke($event);
+
+        $request_options = [];
+
+        if (\is_bool($is_force)) {
+            $request_options['FORCE'] = $is_force;
         }
+
+        if (\is_string($on_update)) {
+            $request_options['webhook']['on_update'] = $on_update;
+        }
+
+        if (\is_string($on_complete)) {
+            $request_options['webhook']['on_complete'] = $on_complete;
+        }
+
+        return UserReportMakeResponse::fromHttpResponse(
+            $this->doRequest(new Request('post', \sprintf('user/reports/%s/_make', \urlencode($report_type_uid))), [
+                'body' => Json::encode((object) [
+                    'queryType' => $type,
+                    'query'     => $value,
+                    'options'   => (object) \array_replace($request_options, $options ?? []),
+                ]),
+            ])
+        );
     }
 
     /**
-     * @param RequestInterface $request
-     * @param array            $options
+     * Refresh existing report.
      *
-     * @throws BadRequestException
+     * @param string     $report_uid Report unique ID (e.g.: `some_report_uid_YV1KS9614S107357Y@domain`)
+     * @param array|null $options    Additional request options
      *
-     * @return ResponseInterface
+     * @return UserReportRefreshResponse
      */
-    protected function doRequest(RequestInterface $request, array $options = []): ResponseInterface
+    public function userReportRefresh(string $report_uid, ?array $options = []): UserReportRefreshResponse
     {
-        $options = \array_replace($this->settings->getGuzzleOptions(), $options);
-
-        $options['base_uri'] = $this->settings->getBaseUri();
-
-        $options['headers'] = \array_replace([
-            'Authorization' => static::TOKEN_PREFIX . ' ' . $this->settings->getAuthToken(),
-            'User-Agent'    => $this->getDefaultUserAgent(),
-        ], $options['headers'] ?? []);
-
-        $this->dispatchEvent(new Events\BeforeRequestSendingEvent($request, $options));
-
-        try {
-            $started_at = \microtime(true);
-            $response   = $this->guzzle->send($request, $options);
-        } catch (RequestException $e) {
-            $this->dispatchEvent(new Events\RequestFailedEvent(
-                $exception_request = $e->getRequest(),
-                $exception_response = $e->getResponse()
-            ));
-
-            throw new BadRequestException($exception_request, $exception_response, null, null, $e);
-        }
-
-        $this->dispatchEvent(new Events\AfterRequestSendingEvent(
-            $request,
-            $response,
-            (int) \round((\microtime(true) - $started_at) * 1000) // in microseconds
-        ));
-
-        return $response;
-    }
-
-    /**
-     * @return string
-     */
-    protected function getDefaultUserAgent(): string
-    {
-        $user_agent = 'b2b-api-php/' . $this->getVersion();
-
-        if (\function_exists('curl_version') && \extension_loaded('curl')) {
-            $user_agent .= ' curl/' . (\curl_version()['version'] ?? 'UNKNOWN');
-        }
-
-        return $user_agent . ' PHP/' . PHP_VERSION;
+        return UserReportRefreshResponse::fromHttpResponse(
+            $this->doRequest(new Request('post', \sprintf('user/reports/%s/_refresh', \urlencode($report_uid))), [
+                'body' => Json::encode((object) ($options ?? [])),
+            ])
+        );
     }
 }

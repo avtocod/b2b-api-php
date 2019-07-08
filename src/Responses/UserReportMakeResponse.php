@@ -10,12 +10,12 @@ use ArrayIterator;
 use IteratorAggregate;
 use Tarampampam\Wrappers\Json;
 use Avtocod\B2BApi\DateTimeFactory;
-use Avtocod\B2BApi\Responses\Entities\User;
+use Avtocod\B2BApi\Responses\Entities\ReportMade;
 use Avtocod\B2BApi\Exceptions\BadResponseException;
 use Tarampampam\Wrappers\Exceptions\JsonEncodeDecodeException;
 use Psr\Http\Message\ResponseInterface as HttpResponseInterface;
 
-final class UserResponse implements ResponseInterface, Countable, IteratorAggregate
+final class UserReportMakeResponse implements ResponseInterface, Countable, IteratorAggregate
 {
     /**
      * @var string
@@ -33,17 +33,17 @@ final class UserResponse implements ResponseInterface, Countable, IteratorAggreg
     protected $stamp;
 
     /**
-     * @var User[]
+     * @var ReportMade[]
      */
     protected $data;
 
     /**
      * Create a new response instance.
      *
-     * @param string   $state
-     * @param int      $size
-     * @param DateTime $stamp
-     * @param User[]   $data
+     * @param string       $state
+     * @param int          $size
+     * @param DateTime     $stamp
+     * @param ReportMade[] $data
      */
     private function __construct(string $state, int $size, DateTime $stamp, array $data)
     {
@@ -66,8 +66,8 @@ final class UserResponse implements ResponseInterface, Countable, IteratorAggreg
             throw BadResponseException::wrongJson($response, $e->getMessage(), $e);
         }
 
-        $as_array['data'] = \array_map(function (array $user_data): User {
-            return User::fromArray($user_data);
+        $as_array['data'] = \array_map(function (array $data): ReportMade {
+            return ReportMade::fromArray($data);
         }, $as_array['data']);
 
         return new static(
@@ -109,9 +109,9 @@ final class UserResponse implements ResponseInterface, Countable, IteratorAggreg
     }
 
     /**
-     * Get users data.
+     * Get reports data.
      *
-     * @return User[]
+     * @return ReportMade[]
      */
     public function getData(): array
     {

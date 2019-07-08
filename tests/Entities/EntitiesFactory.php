@@ -42,18 +42,6 @@ class EntitiesFactory
     }
 
     /**
-     * @return Faker
-     */
-    protected static function getFaker(): Faker
-    {
-        static $faker;
-
-        return $faker instanceof Faker
-            ? $faker
-            : $faker = \Faker\Factory::create();
-    }
-
-    /**
      * @return void
      */
     protected static function bootUpFactories(): void
@@ -188,5 +176,17 @@ class EntitiesFactory
                 $attributes['deleted']
             );
         };
+    }
+
+    /**
+     * @return Faker
+     */
+    protected static function getFaker(): Faker
+    {
+        static $faker;
+
+        return $faker instanceof Faker
+            ? $faker
+            : $faker = \Faker\Factory::create();
     }
 }

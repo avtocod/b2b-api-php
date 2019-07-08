@@ -8,7 +8,7 @@ use DateTime;
 use Avtocod\B2BApi\DateTimeFactory;
 
 /**
- * @group datetime
+ * @group  datetime
  *
  * @covers \Avtocod\B2BApi\DateTimeFactory<extended>
  */

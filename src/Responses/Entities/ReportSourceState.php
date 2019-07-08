@@ -73,6 +73,16 @@ class ReportSourceState implements CanCreateSelfFromArrayInterface
     }
 
     /**
+     * Source work is completed?
+     *
+     * @return bool
+     */
+    public function isCompleted(): bool
+    {
+        return $this->isErrored() || $this->isSuccess();
+    }
+
+    /**
      * Source is errored?
      *
      * @return bool
@@ -90,16 +100,6 @@ class ReportSourceState implements CanCreateSelfFromArrayInterface
     public function isSuccess(): bool
     {
         return $this->state === self::SUCCESS;
-    }
-
-    /**
-     * Source work is completed?
-     *
-     * @return bool
-     */
-    public function isCompleted(): bool
-    {
-        return $this->isErrored() || $this->isSuccess();
     }
 
     /**
