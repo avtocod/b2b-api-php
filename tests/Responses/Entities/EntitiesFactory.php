@@ -11,6 +11,7 @@ use Avtocod\B2BApi\Responses\Entities\User;
 use Avtocod\B2BApi\Responses\Entities\Group;
 use Avtocod\B2BApi\Responses\Entities\Domain;
 use Avtocod\B2BApi\Responses\Entities\Balance;
+use Avtocod\B2BApi\Responses\Entities\CleanOptions;
 
 class EntitiesFactory
 {
@@ -267,6 +268,26 @@ class EntitiesFactory
                     $attributes['quote_use'],
                     $attributes['created_at'],
                     $attributes['updated_at']
+                );
+        };
+
+        static::$factories[CleanOptions::class] = function (
+            Faker $faker,
+            array $attributes = [],
+            bool $as_array = false
+        ) {
+            $attributes = \array_replace([
+                'process_response' => $faker->randomNumber(),
+                'process_request'  => $faker->randomNumber(),
+                'report_log'       => $faker->randomNumber(),
+            ], $attributes);
+
+            return $as_array === true
+                ? $attributes
+                : new CleanOptions(
+                    $attributes['process_response'],
+                    $attributes['process_request'],
+                    $attributes['report_log']
                 );
         };
     }
