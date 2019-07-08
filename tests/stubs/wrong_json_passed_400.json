@@ -1,0 +1,8 @@
+{
+    "timestamp": "2019-07-08T10:27:40.705Z",
+    "status": 400,
+    "error": "Bad Request",
+    "exception": "org.springframework.http.converter.HttpMessageNotReadableException",
+    "message": "Bad Request",
+    "path": "/b2b/api/v1/user/reports/report_type_uid%40some_domain/_make"
+}

@@ -1,0 +1,17 @@
+{
+    "uid": "",
+    "stamp": "2019-07-08T10:31:58.900Z",
+    "cls": "Security",
+    "type": "SecurityAuthMalformedToken",
+    "name": "Неверная структура токена авторизации",
+    "message": "Неверная структура токена авторизации:WRONG_TOKEN_GOES_HERE==",
+    "data": {
+        "token": "WRONG_TOKEN_GOES_HERE==",
+        "error_cause": {
+            "detailMessage": "Input byte array has incorrect ending byte at 96",
+            "stackTrace": [],
+            "suppressedExceptions": []
+        }
+    },
+    "events": []
+}

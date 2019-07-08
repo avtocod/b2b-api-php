@@ -1,16 +1,16 @@
 {
     "state": "fail",
-    "stamp": "2019-07-07T19:24:47.635Z",
+    "stamp": "2019-07-08T10:23:14.071Z",
     "event": {
         "uid": "",
-        "stamp": "2019-07-07T19:24:47.634Z",
+        "stamp": "2019-07-08T10:23:14.071Z",
         "cls": "Data",
         "type": "DataSeekObjectError",
         "name": "Отсутствие объекта с заданным идентификатором",
-        "message": "Отсутствует объект типа api.model.Report_Type с UID wrong_report_type_uid_here",
+        "message": "Отсутствует объект типа api.model.Report_Type с UID report_type_uid@some_domain",
         "data": {
             "entity_type": "api.model.Report_Type",
-            "entity_uid": "wrong_report_type_uid_here"
+            "entity_uid": "report_type_uid@some_domain"
         },
         "events": []
     }

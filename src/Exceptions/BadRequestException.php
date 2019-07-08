@@ -28,7 +28,7 @@ class BadRequestException extends RuntimeException implements B2BApiExceptionInt
      *
      * @param RequestInterface       $http_request
      * @param ResponseInterface|null $http_response
-     * @param string                 $message
+     * @param string|null            $message
      * @param int|null               $code
      * @param Throwable|null         $previous
      */
@@ -90,6 +90,10 @@ class BadRequestException extends RuntimeException implements B2BApiExceptionInt
 
             if (isset($as_array['type'], $as_array['name'], $as_array['message'])) {
                 return "{$as_array['type']}: {$as_array['name']} ({$as_array['message']})";
+            }
+
+            if (isset($as_array['error'], $as_array['exception'], $as_array['message'])) {
+                return "{$as_array['error']}: {$as_array['exception']} ({$as_array['message']})";
             }
 
             if (isset($as_array['event']) && \is_array($event = $as_array['event'])) {

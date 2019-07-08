@@ -10,6 +10,21 @@ use Avtocod\B2BApi\DateTimeFactory;
 class User implements CanCreateSelfFromArrayInterface
 {
     /**
+     * User state - activation is required.
+     */
+    public const STATE_ACTIVATION_REQUIRED = 'ACTIVATION_REQUIRED';
+
+    /**
+     * User state - active.
+     */
+    public const STATE_ACTIVE = 'ACTIVE';
+
+    /**
+     * User state - banned.
+     */
+    public const STATE_BANNED = 'BANNED';
+
+    /**
      * @var string
      */
     protected $uid;

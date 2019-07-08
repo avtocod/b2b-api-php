@@ -13,6 +13,7 @@ use Avtocod\B2BApi\Exceptions\BadRequestException;
 use Avtocod\B2BApi\Exceptions\BadResponseException;
 use Avtocod\B2BApi\Responses\UserReportMakeResponse;
 use Avtocod\B2BApi\Responses\UserReportTypesResponse;
+use Avtocod\B2BApi\Responses\UserReportRefreshResponse;
 
 interface ClientInterface
 {
@@ -163,4 +164,17 @@ interface ClientInterface
                                    ?bool $is_force = false,
                                    ?string $on_update = null,
                                    ?string $on_complete = null): UserReportMakeResponse;
+
+    /**
+     * Refresh existing report.
+     *
+     * @param string     $report_uid Report unique ID (e.g.: `some_report_uid_YV1KS9614S107357Y@domain`)
+     * @param array|null $options    Additional request options
+     *
+     * @throws BadRequestException
+     * @throws BadResponseException
+     *
+     * @return UserReportRefreshResponse
+     */
+    public function userReportRefresh(string $report_uid, ?array $options = []): UserReportRefreshResponse;
 }

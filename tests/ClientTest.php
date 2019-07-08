@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Tests;
 
+use Avtocod\B2BApi\ClientInterface;
 use DateTime;
 use Avtocod\B2BApi\Client;
 use Avtocod\B2BApi\Settings;
@@ -54,6 +55,14 @@ class ClientTest extends AbstractTestCase
                 'handler' => HandlerStack::create($this->guzzle_handler),
             ])
         );
+    }
+
+    /**
+     * @return void
+     */
+    public function testImplementations(): void
+    {
+        $this->assertInstanceOf(ClientInterface::class, $this->client);
     }
 
     /**

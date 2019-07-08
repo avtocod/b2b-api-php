@@ -6,6 +6,7 @@ namespace Avtocod\B2BApi\Tests;
 
 use DateTime;
 use Avtocod\B2BApi\DateTimeFactory;
+use InvalidArgumentException;
 
 /**
  * @group  datetime
@@ -96,5 +97,16 @@ class DateTimeFactoryTest extends AbstractTestCase
         $date_time = DateTime::createFromFormat('Y-m-d H:i:s', '2009-02-15 15:16:17');
 
         $this->assertSame('2009-02-15T15:16:17.000Z', DateTimeFactory::toIso8601Zulu($date_time));
+    }
+
+    /**
+     * @return void
+     */
+    public function testCreateFromIso8601ZuluThrowsAnException(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessageRegExp('~Wrong time.*passed~');
+
+        DateTimeFactory::createFromIso8601Zulu('foo bar');
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Tests\Exceptions;
 
+use Avtocod\B2BApi\Exceptions\B2BApiExceptionInterface;
 use RuntimeException;
 use Avtocod\B2BApi\Tests\AbstractTestCase;
 use Avtocod\B2BApi\Exceptions\TokenParserException;
@@ -19,6 +20,7 @@ class TokenParserExceptionTest extends AbstractTestCase
     public function testInstance(): void
     {
         $this->assertInstanceOf(RuntimeException::class, new TokenParserException);
+        $this->assertInstanceOf(B2BApiExceptionInterface::class, new TokenParserException);
     }
 
     /**

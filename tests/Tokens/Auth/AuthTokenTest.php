@@ -8,6 +8,9 @@ use Avtocod\B2BApi\Tokens\Auth\AuthToken;
 use Avtocod\B2BApi\Tests\AbstractTestCase;
 use Avtocod\B2BApi\Exceptions\TokenParserException;
 
+/**
+ * @covers \Avtocod\B2BApi\Tokens\Auth\AuthToken
+ */
 class AuthTokenTest extends AbstractTestCase
 {
     /**
