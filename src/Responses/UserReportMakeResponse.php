@@ -119,7 +119,7 @@ final class UserReportMakeResponse implements ResponseInterface, Countable, Iter
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function count(): int
     {

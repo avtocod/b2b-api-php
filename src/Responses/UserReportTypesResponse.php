@@ -155,7 +155,7 @@ final class UserReportTypesResponse implements ResponseInterface, Countable, Ite
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function count(): int
     {

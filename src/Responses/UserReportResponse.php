@@ -119,7 +119,7 @@ final class UserReportResponse implements ResponseInterface, Countable, Iterator
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function count(): int
     {

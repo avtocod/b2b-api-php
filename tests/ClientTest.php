@@ -42,6 +42,21 @@ class ClientTest extends AbstractTestCase
     protected $settings;
 
     /**
+     * {@inheritdoc}
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->client = new Client(
+            $this->settings = new Settings('TEST_TOKEN'),
+            $this->guzzle = new Guzzle([
+                'handler' => HandlerStack::create($this->guzzle_handler),
+            ])
+        );
+    }
+
+    /**
      * @return void
      */
     public function testGetVersion(): void
@@ -1136,21 +1151,6 @@ class ClientTest extends AbstractTestCase
         $this->assertTrue($made->isNew());
         $this->assertEquals(
             DateTimeFactory::createFromIso8601Zulu('2019-07-08T07:45:46.913Z'), $made->getSuggestGet()
-        );
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->client = new Client(
-            $this->settings = new Settings('TEST_TOKEN'),
-            $this->guzzle = new Guzzle([
-                'handler' => HandlerStack::create($this->guzzle_handler),
-            ])
         );
     }
 }

@@ -61,6 +61,22 @@ class BadRequestException extends RuntimeException implements B2BApiExceptionInt
     }
 
     /**
+     * @return RequestInterface
+     */
+    public function getHttpRequest(): RequestInterface
+    {
+        return $this->http_request;
+    }
+
+    /**
+     * @return ResponseInterface|null
+     */
+    public function getHttpResponse(): ?ResponseInterface
+    {
+        return $this->http_response;
+    }
+
+    /**
      * Extract service error information from response.
      *
      * @param ResponseInterface $response
@@ -88,21 +104,5 @@ class BadRequestException extends RuntimeException implements B2BApiExceptionInt
         }
 
         return null;
-    }
-
-    /**
-     * @return RequestInterface
-     */
-    public function getHttpRequest(): RequestInterface
-    {
-        return $this->http_request;
-    }
-
-    /**
-     * @return ResponseInterface|null
-     */
-    public function getHttpResponse(): ?ResponseInterface
-    {
-        return $this->http_response;
     }
 }

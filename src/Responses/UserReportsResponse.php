@@ -137,7 +137,7 @@ final class UserReportsResponse implements ResponseInterface, Countable, Iterato
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function count(): int
     {

@@ -119,7 +119,7 @@ final class UserReportRefreshResponse implements ResponseInterface, Countable, I
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function count(): int
     {
