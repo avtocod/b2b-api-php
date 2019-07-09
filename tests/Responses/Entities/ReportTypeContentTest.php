@@ -39,7 +39,7 @@ class ReportTypeContentTest extends AbstractTestCase
 
         $report_type_content = ReportTypeContent::fromArray([
             'sources' => $sources = $attributes['sources'],
-            'fields' => $fields = $attributes['fields']
+            'fields'  => $fields = $attributes['fields'],
         ]);
 
         $this->assertSame($sources, $report_type_content->getSources());

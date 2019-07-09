@@ -4,9 +4,9 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Tests\Responses\Entities;
 
-use Avtocod\B2BApi\Responses\Entities\ReportSourceState;
-use Avtocod\B2BApi\Responses\Entities\ReportState;
 use Avtocod\B2BApi\Tests\AbstractTestCase;
+use Avtocod\B2BApi\Responses\Entities\ReportState;
+use Avtocod\B2BApi\Responses\Entities\ReportSourceState;
 
 /**
  * @covers \Avtocod\B2BApi\Responses\Entities\ReportState
@@ -44,7 +44,7 @@ class ReportStateTest extends AbstractTestCase
     {
         /** @var ReportSourceState $report_source_state */
         $instance = ReportState::fromArray([
-            'sources' => [$report_source_state = EntitiesFactory::make(ReportSourceState::class, [], true)]
+            'sources' => [$report_source_state = EntitiesFactory::make(ReportSourceState::class, [], true)],
         ]);
 
         $this->assertSame($report_source_state['_id'], $instance->getSourceStates()[0]->getName());

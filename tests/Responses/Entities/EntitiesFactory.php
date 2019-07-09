@@ -12,14 +12,14 @@ use Avtocod\B2BApi\Responses\Entities\Group;
 use Avtocod\B2BApi\Responses\Entities\Domain;
 use Avtocod\B2BApi\Responses\Entities\Report;
 use Avtocod\B2BApi\Responses\Entities\Balance;
-use Avtocod\B2BApi\Responses\Entities\ReportType;
 use Avtocod\B2BApi\Responses\Entities\ReportMade;
+use Avtocod\B2BApi\Responses\Entities\ReportType;
 use Avtocod\B2BApi\Responses\Entities\ReportQuery;
 use Avtocod\B2BApi\Responses\Entities\ReportState;
 use Avtocod\B2BApi\Responses\Entities\CleanOptions;
 use Avtocod\B2BApi\Responses\Entities\ReportContent;
-use Avtocod\B2BApi\Responses\Entities\ReportTypeContent;
 use Avtocod\B2BApi\Responses\Entities\ReportSourceState;
+use Avtocod\B2BApi\Responses\Entities\ReportTypeContent;
 
 class EntitiesFactory
 {
