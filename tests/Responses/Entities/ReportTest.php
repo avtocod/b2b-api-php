@@ -7,8 +7,8 @@ namespace Avtocod\B2BApi\Tests\Responses\Entities;
 use Avtocod\B2BApi\DateTimeFactory;
 use Avtocod\B2BApi\Tests\AbstractTestCase;
 use Avtocod\B2BApi\Responses\Entities\Report;
-use Avtocod\B2BApi\Responses\Entities\ReportState;
 use Avtocod\B2BApi\Responses\Entities\ReportQuery;
+use Avtocod\B2BApi\Responses\Entities\ReportState;
 use Avtocod\B2BApi\Responses\Entities\ReportContent;
 
 /**
