@@ -12,6 +12,7 @@ use Avtocod\B2BApi\Responses\Entities\Group;
 use Avtocod\B2BApi\Responses\Entities\Report;
 use Avtocod\B2BApi\Responses\Entities\Domain;
 use Avtocod\B2BApi\Responses\Entities\Balance;
+use Avtocod\B2BApi\Responses\Entities\ReportMade;
 use Avtocod\B2BApi\Responses\Entities\ReportState;
 use Avtocod\B2BApi\Responses\Entities\ReportQuery;
 use Avtocod\B2BApi\Responses\Entities\CleanOptions;
@@ -436,6 +437,30 @@ class EntitiesFactory
                     $attributes['_id'],
                     $attributes['state'],
                     $attributes['data']
+                );
+        };
+
+        static::$factories[ReportMade::class] = function (
+            Faker $faker,
+            array $attributes = [],
+            bool $as_array = false
+        ) {
+            $attributes = \array_replace([
+                'report_uid'          => ($user = $faker->userName) . '@' . ($domain = $faker->domainWord),
+                'is_new'              => $faker->boolean,
+                'process_request_uid' => $faker->randomElement([null, $user . '_' . $faker->sha256 . '@' . $domain]),
+                'suggest_get'         => $as_array
+                    ? DateTimeFactory::toIso8601Zulu($faker->dateTimeThisMonth)
+                    : $faker->dateTimeThisMonth,
+            ], $attributes);
+
+            return $as_array === true
+                ? $attributes
+                : new ReportMade(
+                    $attributes['report_uid'],
+                    $attributes['is_new'],
+                    $attributes['process_request_uid'],
+                    $attributes['suggest_get']
                 );
         };
     }
