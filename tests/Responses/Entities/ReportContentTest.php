@@ -36,7 +36,7 @@ class ReportContentTest extends AbstractTestCase
                 'bar' => [
                     'baz',
                     'zoo',
-                    123
+                    123,
                 ],
             ],
         ]);
