@@ -431,7 +431,7 @@ class Report implements CanCreateSelfFromArrayInterface
      *
      * @return bool|null
      */
-    public function getDeleted(): ?bool
+    public function isDeleted(): ?bool
     {
         return $this->deleted;
     }

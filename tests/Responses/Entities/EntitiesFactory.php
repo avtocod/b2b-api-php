@@ -9,9 +9,14 @@ use InvalidArgumentException;
 use Avtocod\B2BApi\DateTimeFactory;
 use Avtocod\B2BApi\Responses\Entities\User;
 use Avtocod\B2BApi\Responses\Entities\Group;
+use Avtocod\B2BApi\Responses\Entities\Report;
 use Avtocod\B2BApi\Responses\Entities\Domain;
 use Avtocod\B2BApi\Responses\Entities\Balance;
+use Avtocod\B2BApi\Responses\Entities\ReportState;
+use Avtocod\B2BApi\Responses\Entities\ReportQuery;
 use Avtocod\B2BApi\Responses\Entities\CleanOptions;
+use Avtocod\B2BApi\Responses\Entities\ReportContent;
+use Avtocod\B2BApi\Responses\Entities\ReportSourceState;
 
 class EntitiesFactory
 {
@@ -239,6 +244,76 @@ class EntitiesFactory
                 );
         };
 
+        static::$factories[Report::class] = function (
+            Faker $faker,
+            array $attributes = [],
+            bool $as_array = false
+        ) {
+            $attributes = \array_replace([
+                'uid'             => ($group_name = $faker->userName) . '@' . ($domain = $faker->domainWord),
+                'comment'         => $faker->randomElement(['', '------', $group_name, $faker->sentence]),
+                'name'            => $faker->randomElement(['', $faker->sentence]),
+                'content'         => $faker->randomElement([null, static::make(ReportContent::class, [], $as_array)]),
+                'query'           => static::make(ReportQuery::class, [], $as_array),
+                'vehicle_id'      => $vehicle_id = $faker->randomElement([
+                    null,
+                    '5TDDKRFH80S073711',
+                    'Z94C241BAKR127472',
+                ]),
+                'report_type_uid' => $faker->word . '@' . $domain,
+                'domain_uid'      => $domain,
+                'tags'            => $as_array
+                    ? \implode(',', $faker->randomElement([[], [$faker->word, $faker->word]]))
+                    : $faker->randomElement([[], [$faker->word, $faker->word]]),
+                'created_at'      => $as_array
+                    ? DateTimeFactory::toIso8601Zulu($faker->dateTimeThisYear)
+                    : $faker->dateTimeThisYear,
+                'created_by'      => $faker->userName,
+                'updated_at'      => $as_array
+                    ? DateTimeFactory::toIso8601Zulu($faker->dateTimeThisMonth)
+                    : $faker->dateTimeThisMonth,
+                'updated_by'      => $faker->userName,
+                'active_from'     => $as_array
+                    ? DateTimeFactory::toIso8601Zulu($faker->dateTimeThisMonth)
+                    : $faker->dateTimeThisMonth,
+                'active_to'       => $as_array
+                    ? DateTimeFactory::toIso8601Zulu($faker->dateTimeThisMonth)
+                    : $faker->dateTimeThisMonth,
+                'progress_ok'     => $faker->numberBetween(0, 15),
+                'progress_wait'   => $faker->numberBetween(0, 15),
+                'progress_error'  => $faker->numberBetween(0, 15),
+                'state'           => static::make(ReportState::class, [], $as_array),
+                'id'              => $faker->randomElement([null, $faker->randomNumber()]),
+                'deleted'         => $faker->randomElement([null, $faker->boolean]),
+            ], $attributes);
+
+            return $as_array === true
+                ? $attributes
+                : new Report(
+                    $attributes['uid'],
+                    $attributes['comment'],
+                    $attributes['name'],
+                    $attributes['content'],
+                    $attributes['query'],
+                    $attributes['vehicle_id'],
+                    $attributes['report_type_uid'],
+                    $attributes['domain_uid'],
+                    $attributes['tags'],
+                    $attributes['created_at'],
+                    $attributes['created_by'],
+                    $attributes['updated_at'],
+                    $attributes['updated_by'],
+                    $attributes['active_from'],
+                    $attributes['active_to'],
+                    $attributes['progress_ok'],
+                    $attributes['progress_wait'],
+                    $attributes['progress_error'],
+                    $attributes['state'],
+                    $attributes['id'],
+                    $attributes['deleted']
+                );
+        };
+
         static::$factories[Balance::class] = function (
             Faker $faker,
             array $attributes = [],
@@ -271,6 +346,59 @@ class EntitiesFactory
                 );
         };
 
+        static::$factories[ReportContent::class] = function (
+            Faker $faker,
+            array $attributes = [],
+            bool $as_array = false
+        ) {
+            $data = [
+                'string' => $faker->word,
+                'number' => $faker->randomNumber(),
+                'bool'   => $faker->boolean,
+                'array'  => [
+                    'string' => $faker->word,
+                    'number' => $faker->randomNumber(),
+                    'bool'   => $faker->boolean,
+                ],
+            ];
+
+            return $as_array === true
+                ? $data
+                : new ReportContent($data);
+        };
+
+        static::$factories[ReportQuery::class] = function (
+            Faker $faker,
+            array $attributes = [],
+            bool $as_array = false
+        ) {
+            $attributes = \array_replace([
+                'type' => $faker->randomElement([null, 'GRZ', 'VIN', 'BODY']),
+                'body' => $faker->randomElement([null, '5TDDKRFH80S073711', 'Z94C241BAKR127472']),
+                'data' => $faker->randomElement([null, ['foo' => 'bar']]),
+            ], $attributes);
+
+            return $as_array === true
+                ? $attributes
+                : new ReportQuery(
+                    $attributes['type'],
+                    $attributes['body'],
+                    $attributes['data']
+                );
+        };
+
+        static::$factories[ReportState::class] = function (
+            Faker $faker,
+            array $attributes = [],
+            bool $as_array = false
+        ) {
+            $data = $faker->randomElement([[], [static::make(ReportSourceState::class, [], $as_array)]]);
+
+            return $as_array === true
+                ? $data
+                : new ReportState($data);
+        };
+
         static::$factories[CleanOptions::class] = function (
             Faker $faker,
             array $attributes = [],
@@ -288,6 +416,26 @@ class EntitiesFactory
                     $attributes['process_response'],
                     $attributes['process_request'],
                     $attributes['report_log']
+                );
+        };
+
+        static::$factories[ReportSourceState::class] = function (
+            Faker $faker,
+            array $attributes = [],
+            bool $as_array = false
+        ) {
+            $attributes = \array_replace([
+                '_id'   => $faker->randomElement(['base', 'base.ext', 'references.base', 'images.avtonomer']),
+                'state' => $faker->randomElement(['ERROR', 'OK', 'PROGRESS']),
+                'data'  => $faker->randomElement([null, ['foo' => 'bar']]),
+            ], $attributes);
+
+            return $as_array === true
+                ? $attributes
+                : new ReportSourceState(
+                    $attributes['_id'],
+                    $attributes['state'],
+                    $attributes['data']
                 );
         };
     }

@@ -22,15 +22,15 @@ class CleanOptionsTest extends AbstractTestCase
         /** @var array $attributes */
         $attributes = EntitiesFactory::make(CleanOptions::class, [], true);
 
-        $balance = new CleanOptions(
+        $clean_options = new CleanOptions(
             $process_response = $attributes['process_response'],
             $process_request = $attributes['process_request'],
             $report_log = $attributes['report_log']
         );
 
-        $this->assertSame($process_response, $balance->getProcessResponse());
-        $this->assertSame($process_request, $balance->getProcessRequest());
-        $this->assertSame($report_log, $balance->getReportLog());
+        $this->assertSame($process_response, $clean_options->getProcessResponse());
+        $this->assertSame($process_request, $clean_options->getProcessRequest());
+        $this->assertSame($report_log, $clean_options->getReportLog());
     }
 
     /**
@@ -41,15 +41,15 @@ class CleanOptionsTest extends AbstractTestCase
         /** @var array $attributes */
         $attributes = EntitiesFactory::make(CleanOptions::class, [], true);
 
-        $balance = CleanOptions::fromArray([
+        $clean_options = CleanOptions::fromArray([
             'Process_Response' => $process_response = $attributes['process_response'],
             'Process_Request'  => $process_request = $attributes['process_request'],
             'ReportLog'        => $report_log = $attributes['report_log'],
         ]);
 
-        $this->assertSame($process_response, $balance->getProcessResponse());
-        $this->assertSame($process_request, $balance->getProcessRequest());
-        $this->assertSame($report_log, $balance->getReportLog());
+        $this->assertSame($process_response, $clean_options->getProcessResponse());
+        $this->assertSame($process_request, $clean_options->getProcessRequest());
+        $this->assertSame($report_log, $clean_options->getReportLog());
     }
 
     /**
@@ -57,10 +57,10 @@ class CleanOptionsTest extends AbstractTestCase
      */
     public function testConstructingFromArrayRequiredValuesOnly(): void
     {
-        $balance = CleanOptions::fromArray([]);
+        $clean_options = CleanOptions::fromArray([]);
 
-        $this->assertNull($balance->getProcessResponse());
-        $this->assertNull($balance->getProcessRequest());
-        $this->assertNull($balance->getReportLog());
+        $this->assertNull($clean_options->getProcessResponse());
+        $this->assertNull($clean_options->getProcessRequest());
+        $this->assertNull($clean_options->getReportLog());
     }
 }
