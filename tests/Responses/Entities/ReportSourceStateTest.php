@@ -15,6 +15,16 @@ class ReportSourceStateTest extends AbstractTestCase
     /**
      * @return void
      */
+    public function testConstants(): void
+    {
+        $this->assertSame('ERROR', ReportSourceState::ERROR);
+        $this->assertSame('OK', ReportSourceState::SUCCESS);
+        $this->assertSame('PROGRESS', ReportSourceState::PROGRESS);
+    }
+
+    /**
+     * @return void
+     */
     public function testGetters(): void
     {
         /** @var array $attributes */
@@ -29,6 +39,54 @@ class ReportSourceStateTest extends AbstractTestCase
         $this->assertSame($name, $instance->getName());
         $this->assertSame($state, $instance->getState());
         $this->assertSame($data, $instance->getData());
+    }
+
+    /**
+     * @return void
+     */
+    public function testProgressState(): void
+    {
+        /** @var ReportSourceState $instance */
+        $instance = EntitiesFactory::make(ReportSourceState::class, [
+            'state' => 'PROGRESS',
+        ]);
+
+        $this->assertTrue($instance->isInProgress());
+        $this->assertFalse($instance->isCompleted());
+        $this->assertFalse($instance->isSuccess());
+        $this->assertFalse($instance->isErrored());
+    }
+
+    /**
+     * @return void
+     */
+    public function testErrorState(): void
+    {
+        /** @var ReportSourceState $instance */
+        $instance = EntitiesFactory::make(ReportSourceState::class, [
+            'state' => 'ERROR',
+        ]);
+
+        $this->assertFalse($instance->isInProgress());
+        $this->assertTrue($instance->isCompleted());
+        $this->assertFalse($instance->isSuccess());
+        $this->assertTrue($instance->isErrored());
+    }
+
+    /**
+     * @return void
+     */
+    public function testOkState(): void
+    {
+        /** @var ReportSourceState $instance */
+        $instance = EntitiesFactory::make(ReportSourceState::class, [
+            'state' => 'OK',
+        ]);
+
+        $this->assertFalse($instance->isInProgress());
+        $this->assertTrue($instance->isCompleted());
+        $this->assertTrue($instance->isSuccess());
+        $this->assertFalse($instance->isErrored());
     }
 
     /**

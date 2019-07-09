@@ -87,7 +87,7 @@ class ReportTest extends AbstractTestCase
             'name'            => $name = $attributes['name'],
             'content'         => $content = EntitiesFactory::make(ReportContent::class, [], true),
             'query'           => $query = EntitiesFactory::make(ReportQuery::class, [], true),
-            'vehicle_id'      => $vehicle_id = $attributes['vehicle_id'], //
+            'vehicle_id'      => $vehicle_id = $attributes['vehicle_id'],
             'report_type_uid' => $report_type_uid = $attributes['report_type_uid'],
             'domain_uid'      => $domain_uid = $attributes['domain_uid'],
             'tags'            => $tags = $attributes['tags'],
@@ -101,8 +101,8 @@ class ReportTest extends AbstractTestCase
             'progress_wait'   => $progress_wait = $attributes['progress_wait'],
             'progress_error'  => $progress_error = $attributes['progress_error'],
             'state'           => ['sources' => $state = EntitiesFactory::make(ReportState::class, [], true)],
-            'id'              => $id = $attributes['id'], //
-            'deleted'         => $deleted = $attributes['deleted'], //
+            'id'              => $id = $attributes['id'],
+            'deleted'         => $deleted = $attributes['deleted'],
         ]);
 
         $this->assertSame($uid, $report->getUid());

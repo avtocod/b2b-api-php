@@ -12,11 +12,13 @@ use Avtocod\B2BApi\Responses\Entities\Group;
 use Avtocod\B2BApi\Responses\Entities\Domain;
 use Avtocod\B2BApi\Responses\Entities\Report;
 use Avtocod\B2BApi\Responses\Entities\Balance;
+use Avtocod\B2BApi\Responses\Entities\ReportType;
 use Avtocod\B2BApi\Responses\Entities\ReportMade;
 use Avtocod\B2BApi\Responses\Entities\ReportQuery;
 use Avtocod\B2BApi\Responses\Entities\ReportState;
 use Avtocod\B2BApi\Responses\Entities\CleanOptions;
 use Avtocod\B2BApi\Responses\Entities\ReportContent;
+use Avtocod\B2BApi\Responses\Entities\ReportTypeContent;
 use Avtocod\B2BApi\Responses\Entities\ReportSourceState;
 
 class EntitiesFactory
@@ -56,6 +58,13 @@ class EntitiesFactory
      */
     protected static function bootUpFactories(): void
     {
+        /**
+         * @param Faker $faker
+         * @param array $attributes
+         * @param bool  $as_array
+         *
+         * @return array|Domain
+         */
         static::$factories[Domain::class] = function (
             Faker $faker,
             array $attributes = [],
@@ -110,6 +119,13 @@ class EntitiesFactory
                 );
         };
 
+        /**
+         * @param Faker $faker
+         * @param array $attributes
+         * @param bool  $as_array
+         *
+         * @return array|User
+         */
         static::$factories[User::class] = function (
             Faker $faker,
             array $attributes = [],
@@ -184,6 +200,13 @@ class EntitiesFactory
                 );
         };
 
+        /**
+         * @param Faker $faker
+         * @param array $attributes
+         * @param bool  $as_array
+         *
+         * @return array|Group
+         */
         static::$factories[Group::class] = function (
             Faker $faker,
             array $attributes = [],
@@ -245,6 +268,13 @@ class EntitiesFactory
                 );
         };
 
+        /**
+         * @param Faker $faker
+         * @param array $attributes
+         * @param bool  $as_array
+         *
+         * @return array|Report
+         */
         static::$factories[Report::class] = function (
             Faker $faker,
             array $attributes = [],
@@ -315,6 +345,13 @@ class EntitiesFactory
                 );
         };
 
+        /**
+         * @param Faker $faker
+         * @param array $attributes
+         * @param bool  $as_array
+         *
+         * @return array|Balance
+         */
         static::$factories[Balance::class] = function (
             Faker $faker,
             array $attributes = [],
@@ -347,6 +384,13 @@ class EntitiesFactory
                 );
         };
 
+        /**
+         * @param Faker $faker
+         * @param array $attributes
+         * @param bool  $as_array
+         *
+         * @return array|ReportContent
+         */
         static::$factories[ReportContent::class] = function (
             Faker $faker,
             array $attributes = [],
@@ -368,6 +412,13 @@ class EntitiesFactory
                 : new ReportContent($data);
         };
 
+        /**
+         * @param Faker $faker
+         * @param array $attributes
+         * @param bool  $as_array
+         *
+         * @return array|ReportQuery
+         */
         static::$factories[ReportQuery::class] = function (
             Faker $faker,
             array $attributes = [],
@@ -388,6 +439,13 @@ class EntitiesFactory
                 );
         };
 
+        /**
+         * @param Faker $faker
+         * @param array $attributes
+         * @param bool  $as_array
+         *
+         * @return ReportState|mixed
+         */
         static::$factories[ReportState::class] = function (
             Faker $faker,
             array $attributes = [],
@@ -400,6 +458,13 @@ class EntitiesFactory
                 : new ReportState($data);
         };
 
+        /**
+         * @param Faker $faker
+         * @param array $attributes
+         * @param bool  $as_array
+         *
+         * @return array|CleanOptions
+         */
         static::$factories[CleanOptions::class] = function (
             Faker $faker,
             array $attributes = [],
@@ -420,6 +485,13 @@ class EntitiesFactory
                 );
         };
 
+        /**
+         * @param Faker $faker
+         * @param array $attributes
+         * @param bool  $as_array
+         *
+         * @return array|ReportSourceState
+         */
         static::$factories[ReportSourceState::class] = function (
             Faker $faker,
             array $attributes = [],
@@ -440,6 +512,13 @@ class EntitiesFactory
                 );
         };
 
+        /**
+         * @param Faker $faker
+         * @param array $attributes
+         * @param bool  $as_array
+         *
+         * @return array|ReportMade
+         */
         static::$factories[ReportMade::class] = function (
             Faker $faker,
             array $attributes = [],
@@ -461,6 +540,123 @@ class EntitiesFactory
                     $attributes['is_new'],
                     $attributes['process_request_uid'],
                     $attributes['suggest_get']
+                );
+        };
+
+        /**
+         * @param Faker $faker
+         * @param array $attributes
+         * @param bool  $as_array
+         *
+         * @return array|ReportTypeContent
+         */
+        static::$factories[ReportTypeContent::class] = function (
+            Faker $faker,
+            array $attributes = [],
+            bool $as_array = false
+        ) {
+            $attributes = \array_replace([
+                'sources' => $faker->words($faker->numberBetween(3, 15)),
+                'fields'  => $faker->words($faker->numberBetween(3, 15)),
+            ], $attributes);
+
+            return $as_array === true
+                ? $attributes
+                : new ReportTypeContent(
+                    $attributes['sources'],
+                    $attributes['fields']
+                );
+        };
+
+        /**
+         * @param Faker $faker
+         * @param array $attributes
+         * @param bool  $as_array
+         *
+         * @return array|ReportType
+         */
+        static::$factories[ReportType::class] = function (
+            Faker $faker,
+            array $attributes = [],
+            bool $as_array = false
+        ) {
+            $attributes = \array_replace([
+                'uid'              => $faker->word . '@' . $faker->domainWord,
+                'comment'          => $faker->randomElement(['', '------', $faker->domainWord, $faker->sentence]),
+                'name'             => $faker->randomElement(['', $faker->sentence]),
+                'state'            => $faker->randomElement(['DRAFT', 'PUBLISHED', 'OBSOLETE']),
+                'tags'             => $as_array
+                    ? \implode(',', $faker->randomElement([[], [$faker->word, $faker->word]]))
+                    : $faker->randomElement([[], [$faker->word, $faker->word]]),
+                'max_age'          => $faker->numberBetween(),
+                'domain_uid'       => $faker->domainWord,
+                'content'          => $faker->randomElement([
+                    static::make(ReportTypeContent::class, [], $as_array),
+                    null,
+                ]),
+                'day_quote'        => $faker->numberBetween(),
+                'month_quote'      => $faker->numberBetween(),
+                'total_quote'      => $faker->numberBetween(),
+                'min_priority'     => $faker->numberBetween(),
+                'max_priority'     => $faker->numberBetween(),
+                'period_priority'  => $faker->numberBetween(),
+                'max_request'      => $faker->numberBetween(),
+                'created_at'       => $as_array
+                    ? DateTimeFactory::toIso8601Zulu($faker->dateTimeThisYear)
+                    : $faker->dateTimeThisYear,
+                'created_by'       => $faker->userName,
+                'updated_at'       => $as_array
+                    ? DateTimeFactory::toIso8601Zulu($faker->dateTimeThisMonth)
+                    : $faker->dateTimeThisMonth,
+                'updated_by'       => $faker->userName,
+                'active_from'      => $as_array
+                    ? DateTimeFactory::toIso8601Zulu($faker->dateTimeThisMonth)
+                    : $faker->dateTimeThisMonth,
+                'active_to'        => $as_array
+                    ? DateTimeFactory::toIso8601Zulu($faker->dateTimeThisMonth)
+                    : $faker->dateTimeThisMonth,
+                'clean_options'    => $faker->randomElement([
+                    static::make(CleanOptions::class, [], $as_array),
+                    null,
+                ]),
+                'report_make_mode' => $faker->randomElement([
+                    'TRANSACTIONAL',
+                    'FAST_NON_TRANSACTIONAL',
+                    'FAST_NON_BALANCE',
+                    null,
+                ]),
+                'id'               => $faker->randomElement([null, $faker->randomNumber()]),
+                'deleted'          => $faker->randomElement([null, $faker->boolean]),
+            ], $attributes);
+
+            return $as_array === true
+                ? $attributes
+                : new ReportType(
+                    $attributes['uid'],
+                    $attributes['comment'],
+                    $attributes['name'],
+                    $attributes['state'],
+                    $attributes['tags'],
+                    $attributes['max_age'],
+                    $attributes['domain_uid'],
+                    $attributes['content'],
+                    $attributes['day_quote'],
+                    $attributes['month_quote'],
+                    $attributes['total_quote'],
+                    $attributes['min_priority'],
+                    $attributes['max_priority'],
+                    $attributes['period_priority'],
+                    $attributes['max_request'],
+                    $attributes['created_at'],
+                    $attributes['created_by'],
+                    $attributes['updated_at'],
+                    $attributes['updated_by'],
+                    $attributes['active_from'],
+                    $attributes['active_to'],
+                    $attributes['clean_options'],
+                    $attributes['report_make_mode'],
+                    $attributes['id'],
+                    $attributes['deleted']
                 );
         };
     }
