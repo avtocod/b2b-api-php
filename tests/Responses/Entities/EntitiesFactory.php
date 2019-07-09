@@ -15,7 +15,6 @@ use Avtocod\B2BApi\Responses\Entities\Balance;
 use Avtocod\B2BApi\Responses\Entities\ReportMade;
 use Avtocod\B2BApi\Responses\Entities\ReportQuery;
 use Avtocod\B2BApi\Responses\Entities\ReportState;
-use Avtocod\B2BApi\Responses\Entities\ReportState;
 use Avtocod\B2BApi\Responses\Entities\CleanOptions;
 use Avtocod\B2BApi\Responses\Entities\ReportContent;
 use Avtocod\B2BApi\Responses\Entities\ReportSourceState;

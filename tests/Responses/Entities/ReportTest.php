@@ -178,4 +178,43 @@ class ReportTest extends AbstractTestCase
         $this->assertSame($progress_error, $report->getProgressError());
         $this->assertSameSize($state, $report->getState()->getSourceStates());
     }
+
+    /**
+     * @return void
+     */
+    public function testIsCompleted(): void
+    {
+        /** @var Report $report */
+        $report = EntitiesFactory::make(Report::class, [
+            'progress_error' => 0,
+            'progress_ok'    => 0,
+            'state'          => new ReportState([EntitiesFactory::make(ReportState::class)]),
+        ]);
+
+        $this->assertFalse($report->isCompleted());
+
+        $report = EntitiesFactory::make(Report::class, [
+            'progress_error' => 1,
+            'progress_ok'    => 0,
+            'state'          => new ReportState([EntitiesFactory::make(ReportState::class)]),
+        ]);
+
+        $this->assertTrue($report->isCompleted());
+
+        $report = EntitiesFactory::make(Report::class, [
+            'progress_error' => 0,
+            'progress_ok'    => 1,
+            'state'          => new ReportState([EntitiesFactory::make(ReportState::class)]),
+        ]);
+
+        $this->assertTrue($report->isCompleted());
+
+        $report = EntitiesFactory::make(Report::class, [
+            'progress_error' => 1,
+            'progress_ok'    => 1,
+            'state'          => new ReportState([EntitiesFactory::make(ReportState::class)]),
+        ]);
+
+        $this->assertTrue($report->isCompleted());
+    }
 }

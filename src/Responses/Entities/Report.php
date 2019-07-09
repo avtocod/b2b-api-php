@@ -413,7 +413,7 @@ class Report implements CanCreateSelfFromArrayInterface
      */
     public function isCompleted(): bool
     {
-        return ($this->progress_error + $this->progress_ok) === \count($this->state->getSourceStates());
+        return ($this->progress_error + $this->progress_ok) >= \count($this->state->getSourceStates());
     }
 
     /**
