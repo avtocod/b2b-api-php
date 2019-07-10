@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Avtocod\B2BApi\Tests\Tokens\Auth;
+namespace Avtocod\B2BApi\Tests\Unit\Tokens\Auth;
 
 use Avtocod\B2BApi\Tokens\Auth\TokenInfo;
 use Avtocod\B2BApi\Tests\AbstractTestCase;
@@ -13,8 +13,6 @@ use Avtocod\B2BApi\Tests\AbstractTestCase;
 class TokenInfoTest extends AbstractTestCase
 {
     /**
-     * @small
-     *
      * @return void
      */
     public function testBasicGetters(): void
@@ -33,8 +31,6 @@ class TokenInfoTest extends AbstractTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testDomainAndUsernameGetters(): void

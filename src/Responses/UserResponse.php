@@ -5,6 +5,9 @@ declare(strict_types = 1);
 namespace Avtocod\B2BApi\Responses;
 
 use DateTime;
+use Countable;
+use ArrayIterator;
+use IteratorAggregate;
 use Tarampampam\Wrappers\Json;
 use Avtocod\B2BApi\DateTimeFactory;
 use Avtocod\B2BApi\Responses\Entities\User;
@@ -12,7 +15,7 @@ use Avtocod\B2BApi\Exceptions\BadResponseException;
 use Tarampampam\Wrappers\Exceptions\JsonEncodeDecodeException;
 use Psr\Http\Message\ResponseInterface as HttpResponseInterface;
 
-final class UserResponse implements ResponseInterface
+class UserResponse implements ResponseInterface, Countable, IteratorAggregate
 {
     /**
      * @var string
@@ -113,5 +116,39 @@ final class UserResponse implements ResponseInterface
     public function getData(): array
     {
         return $this->data;
+    }
+
+    /**
+     * Get **first** user entry by UID.
+     *
+     * @param string $uid
+     *
+     * @return User|null
+     */
+    public function getByUid(string $uid): ?User
+    {
+        $result = \array_values(\array_filter($this->data, function (User $user) use (&$uid): bool {
+            return $user->getUid() === $uid;
+        }));
+
+        return \count($result) >= 1
+            ? $result[0]
+            : null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function count(): int
+    {
+        return $this->size;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getIterator(): ArrayIterator
+    {
+        return new ArrayIterator($this->data);
     }
 }

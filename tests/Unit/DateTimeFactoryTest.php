@@ -5,18 +5,17 @@ declare(strict_types = 1);
 namespace Avtocod\B2BApi\Tests;
 
 use DateTime;
+use InvalidArgumentException;
 use Avtocod\B2BApi\DateTimeFactory;
 
 /**
- * @group datetime
+ * @group  datetime
  *
  * @covers \Avtocod\B2BApi\DateTimeFactory<extended>
  */
 class DateTimeFactoryTest extends AbstractTestCase
 {
     /**
-     * @small
-     *
      * @return void
      */
     public function testCreateFromIso8601ZuluWithZeroMicroseconds(): void
@@ -33,8 +32,6 @@ class DateTimeFactoryTest extends AbstractTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testCreateFromIso8601ZuluWithSixZeroMicroseconds(): void
@@ -51,8 +48,6 @@ class DateTimeFactoryTest extends AbstractTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testCreateFromIso8601ZuluWithMicroseconds(): void
@@ -69,8 +64,6 @@ class DateTimeFactoryTest extends AbstractTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testCreateFromIso8601ZuluWithSixMicroseconds(): void
@@ -87,8 +80,6 @@ class DateTimeFactoryTest extends AbstractTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testToIso8601ZuluWitMicroseconds(): void
@@ -99,8 +90,6 @@ class DateTimeFactoryTest extends AbstractTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testToIso8601ZuluWithoutMicroseconds(): void
@@ -108,5 +97,26 @@ class DateTimeFactoryTest extends AbstractTestCase
         $date_time = DateTime::createFromFormat('Y-m-d H:i:s', '2009-02-15 15:16:17');
 
         $this->assertSame('2009-02-15T15:16:17.000Z', DateTimeFactory::toIso8601Zulu($date_time));
+    }
+
+    /**
+     * @return void
+     */
+    public function testToIso8601ZuluWithoutMs(): void
+    {
+        $date_time = DateTime::createFromFormat('Y-m-d H:i:s', '2009-02-15 15:16:17');
+
+        $this->assertSame('2009-02-15T15:16:17Z', DateTimeFactory::toIso8601ZuluWithoutMs($date_time));
+    }
+
+    /**
+     * @return void
+     */
+    public function testCreateFromIso8601ZuluThrowsAnException(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessageRegExp('~Wrong time.*passed~');
+
+        DateTimeFactory::createFromIso8601Zulu('foo bar');
     }
 }

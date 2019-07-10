@@ -14,7 +14,7 @@ interface ResponseInterface
     /**
      * Response status - something goes wrong.
      */
-    public const STATE_FAILED  = 'fail';
+    public const STATE_FAILED = 'fail';
 
     /**
      * Create self from HTTP response.

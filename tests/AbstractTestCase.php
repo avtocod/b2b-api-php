@@ -9,7 +9,7 @@ use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 use Tarampampam\GuzzleUrlMock\UrlsMockHandler;
 
-class AbstractTestCase extends TestCase
+abstract class AbstractTestCase extends TestCase
 {
     /**
      * @var Faker
@@ -35,7 +35,7 @@ class AbstractTestCase extends TestCase
         // Setup default responses
         foreach (['get', 'post', 'put', 'delete', 'head', 'update'] as $method) {
             $this->guzzle_handler->onUriRegexpRequested("~(?'{$method}').*~iu", $method, new Response(
-                404, [], 'Resource mocked for testing'
+                404, [], 'Response mocked for testing'
             ));
         }
     }

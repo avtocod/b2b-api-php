@@ -1,0 +1,1882 @@
+{
+    "state": "ok",
+    "size": 1,
+    "stamp": "2019-07-07T19:25:42.558Z",
+    "data": [
+        {
+            "domain_uid": "some_domain_uid",
+            "report_type_uid": "some_report_uid@some_domain_uid",
+            "vehicle_id": "Z94CB41AAGR323020",
+            "query": {
+                "type": "VIN",
+                "body": "Z94CB41AAGR323020"
+            },
+            "progress_ok": 18,
+            "progress_wait": 2,
+            "progress_error": 0,
+            "state": {
+                "sources": [
+                    {
+                        "_id": "gibdd.wanted",
+                        "state": "OK",
+                        "data": {
+                            "from_cache": false,
+                            "real_status": "OK"
+                        }
+                    },
+                    {
+                        "_id": "tech.ext",
+                        "state": "OK",
+                        "data": {
+                            "from_cache": false,
+                            "real_status": "OK"
+                        }
+                    },
+                    {
+                        "_id": "gibdd.restrict",
+                        "state": "OK",
+                        "data": {
+                            "from_cache": false,
+                            "real_status": "OK"
+                        }
+                    },
+                    {
+                        "_id": "gibdd.history",
+                        "state": "OK",
+                        "data": {
+                            "from_cache": false,
+                            "real_status": "OK"
+                        }
+                    },
+                    {
+                        "_id": "calc.osago",
+                        "state": "OK",
+                        "data": {
+                            "from_cache": false,
+                            "real_status": "OK"
+                        }
+                    },
+                    {
+                        "_id": "pledge",
+                        "state": "OK",
+                        "data": {
+                            "from_cache": false,
+                            "real_status": "OK"
+                        }
+                    },
+                    {
+                        "_id": "repairs.history",
+                        "state": "OK",
+                        "data": {
+                            "from_cache": false,
+                            "real_status": "OK"
+                        }
+                    },
+                    {
+                        "_id": "gibdd.eaisto",
+                        "state": "OK",
+                        "data": {
+                            "from_cache": false,
+                            "real_status": "OK"
+                        }
+                    },
+                    {
+                        "_id": "images.avtonomer",
+                        "state": "OK",
+                        "data": {
+                            "from_cache": false,
+                            "real_status": "OK"
+                        }
+                    },
+                    {
+                        "_id": "fines.base",
+                        "state": "OK",
+                        "data": {
+                            "from_cache": false,
+                            "real_status": "OK"
+                        }
+                    },
+                    {
+                        "_id": "pledge.house",
+                        "state": "OK",
+                        "data": {
+                            "from_cache": false,
+                            "real_status": "OK"
+                        }
+                    },
+                    {
+                        "_id": "av.taxi",
+                        "state": "OK",
+                        "data": {
+                            "from_cache": false,
+                            "real_status": "OK"
+                        }
+                    },
+                    {
+                        "_id": "carprice",
+                        "state": "OK",
+                        "data": {
+                            "from_cache": true,
+                            "real_status": "OK"
+                        }
+                    },
+                    {
+                        "_id": "ramiosago.base",
+                        "state": "PROGRESS",
+                        "data": {
+                            "from_cache": false,
+                            "real_status": "PROGRESS"
+                        }
+                    },
+                    {
+                        "_id": "customs.base",
+                        "state": "OK",
+                        "data": {
+                            "from_cache": false,
+                            "real_status": "OK"
+                        }
+                    },
+                    {
+                        "_id": "references.base",
+                        "state": "OK",
+                        "data": {
+                            "from_cache": true,
+                            "real_status": "OK"
+                        }
+                    },
+                    {
+                        "_id": "base.ext",
+                        "state": "OK",
+                        "data": {
+                            "from_cache": false,
+                            "real_status": "OK"
+                        }
+                    },
+                    {
+                        "_id": "base",
+                        "state": "OK",
+                        "data": {
+                            "from_cache": false,
+                            "real_status": "OK"
+                        }
+                    },
+                    {
+                        "_id": "gibdd.dtp",
+                        "state": "PROGRESS",
+                        "data": {
+                            "from_cache": false,
+                            "real_status": "PROGRESS"
+                        }
+                    },
+                    {
+                        "_id": "sub.base",
+                        "state": "OK",
+                        "data": {
+                            "from_cache": false,
+                            "real_status": "OK"
+                        }
+                    }
+                ]
+            },
+            "content": {
+                "identifiers": {
+                    "_comment": "Идентификаторы",
+                    "vehicle": {
+                        "vin": "Z94CB41AAGR323020",
+                        "reg_num": "М289АС750",
+                        "sts": "9908854430",
+                        "pts": "47ОК939196"
+                    }
+                },
+                "tech_data": {
+                    "_comment": "Характеристики ТС",
+                    "manufacturer": {},
+                    "brand": {
+                        "_comment": "Марка",
+                        "logotype": {
+                            "uri": "https://vl.imgix.net/img/kia-logo.png"
+                        },
+                        "name": {
+                            "original": "Кiа Riо",
+                            "normalized": "Kia"
+                        },
+                        "id": "ID_MARK_KIA"
+                    },
+                    "model": {
+                        "_comment": "Модель",
+                        "name": {
+                            "normalized": "Rio",
+                            "original": "Кiа"
+                        },
+                        "id": "ID_MARK_KIA_MODEL_RIO"
+                    },
+                    "type": {
+                        "_comment": "Тип (Вид) ТС",
+                        "name": "Легковые Автомобили Седан"
+                    },
+                    "body": {
+                        "_comment": "Кузов",
+                        "color": {
+                            "name": "Темно-Серый",
+                            "type": "11"
+                        },
+                        "number": "Z94СВ41ААGR323020"
+                    },
+                    "chassis": {
+                        "_comment": "Шасси"
+                    },
+                    "engine": {
+                        "_comment": "Двигатель",
+                        "fuel": {
+                            "type": "Бензиновый"
+                        },
+                        "model": {
+                            "name": "G4FA"
+                        },
+                        "power": {
+                            "hp": 107,
+                            "kw": 79
+                        },
+                        "number": "FW471898",
+                        "volume": 1396
+                    },
+                    "weight": {
+                        "_comment": "Масса",
+                        "netto": 1160,
+                        "max": 1565
+                    },
+                    "transmission": {
+                        "_comment": "Трансмиссия"
+                    },
+                    "drive": {
+                        "_comment": "Привод",
+                        "type": "Заднеприводной"
+                    },
+                    "wheel": {
+                        "_comment": "Рулевое колесо",
+                        "position": "LEFT"
+                    },
+                    "year": 2015
+                },
+                "additional_info": {
+                    "_comment": "Дополнительная информация",
+                    "vehicle": {
+                        "category": {
+                            "code": "B",
+                            "description": "Легковые автомобили, небольшие грузовики (до 3,5 тонн)"
+                        },
+                        "owner": {
+                            "geo": {
+                                "region": "Кировская Область, Кирово-Чепецкий Р-Н",
+                                "city": "Г. Кирово-Чепецк"
+                            },
+                            "type": "PERSON"
+                        },
+                        "passport": {
+                            "date": {
+                                "receive": "2015-08-12 00:00:00"
+                            },
+                            "org": {
+                                "name": "ООО \"ХЕНДЭ МОТОР МАНУФАКТУРИНГ РУС\""
+                            },
+                            "has_dublicate": false,
+                            "number": "47ОК939196"
+                        },
+                        "sts": {
+                            "date": {
+                                "receive": "2019-02-13 00:00:00"
+                            }
+                        },
+                        "modifications": {
+                            "was_modificated": false
+                        },
+                        "notes": {
+                            "0": "04|09|2015 ПОСТАВЛ.НА УЧЕТ ПО ДОК. ДОГОВОР СОВЕРШ. В ПРОСТОЙ ПИСЬМЕННОЙ ФОРМЕ 4|263|КР ОТ 31|08|2015 ЦВЕТ ПО ПТС ТЕМНО-СЕРЫЙ",
+                            "3": "5036237765,94"
+                        }
+                    },
+                    "identifiers": {
+                        "vin": {}
+                    }
+                },
+                "registration_actions": {
+                    "_comment": "Регистрационные действия",
+                    "items": [
+                        {
+                            "_id": 3200912684,
+                            "date": {
+                                "start": "2019-02-13 00:00:00"
+                            },
+                            "reg_num": "М289АС750",
+                            "identifiers": {
+                                "pts": "47ОК939196",
+                                "sts": "9908854430"
+                            },
+                            "owner": {
+                                "type": "PERSON",
+                                "org": {}
+                            },
+                            "type": "Изменение собственника по сделкам, произведенным в любой форме с сохранением государственных регистрационных знаков",
+                            "geo": {
+                                "region": "Кировская Область",
+                                "city": "Г. Кирово-Чепецк"
+                            },
+                            "attributes": [],
+                            "usage_allowed": true
+                        },
+                        {
+                            "_id": 3491571542,
+                            "date": {
+                                "start": "2015-09-04 00:00:00",
+                                "end": "2019-02-13 00:00:00"
+                            },
+                            "reg_num": "М289АС750",
+                            "identifiers": {
+                                "pts": "47ОК939196",
+                                "sts": "5036237765"
+                            },
+                            "owner": {
+                                "type": "PERSON",
+                                "org": {}
+                            },
+                            "type": "Первичная регистрация",
+                            "geo": {
+                                "region": "Московская Область",
+                                "city": "Кирово-Чепецк"
+                            },
+                            "attributes": [],
+                            "usage_allowed": true
+                        }
+                    ],
+                    "count": 2,
+                    "has_annulment": false
+                },
+                "taxi": {
+                    "history": {
+                        "_comment": "Такси",
+                        "items": [
+                            {
+                                "_id": 37107119,
+                                "date": {
+                                    "start": "2015-12-29 00:00:00",
+                                    "end": "2020-12-28 00:00:00"
+                                },
+                                "license": {
+                                    "number": "0083389",
+                                    "issued": "2015-12-29 00:00:00",
+                                    "status": "ANNULLED"
+                                },
+                                "company": {
+                                    "name": "\"РЕНТКО\""
+                                },
+                                "ogrn": "1157746379966",
+                                "tin": "7718150809",
+                                "number_plate": {
+                                    "is_yellow": false
+                                },
+                                "vehicle": {
+                                    "brand": {
+                                        "name": "KIA",
+                                        "normalized": "Kia"
+                                    },
+                                    "model": {
+                                        "name": "RIO",
+                                        "normalized": "Rio"
+                                    },
+                                    "color": "Серый темный",
+                                    "reg_num": "М289АС750",
+                                    "year": 2015,
+                                    "sts": {
+                                        "date": {}
+                                    }
+                                },
+                                "region": {
+                                    "code": "50"
+                                },
+                                "cancel": {},
+                                "permit": {
+                                    "number": "МО 0084873"
+                                },
+                                "city": {
+                                    "name": "Московская область"
+                                }
+                            }
+                        ],
+                        "count": 1
+                    },
+                    "used_in_taxi": true
+                },
+                "repairs": {
+                    "_comment": "Ремонтные работы",
+                    "history": {
+                        "_comment": "История ремонтных работ по страховке",
+                        "items": [
+                            {
+                                "_id": 2778611515,
+                                "number": {
+                                    "calculation": "001GS16-00"
+                                },
+                                "date": {
+                                    "calculation": "2016-02-18"
+                                },
+                                "cost": {
+                                    "total": 12828,
+                                    "labour": 3840,
+                                    "paint": 8988
+                                },
+                                "car": {
+                                    "manufacturer": "KIA [R] [28]",
+                                    "model": "Rio III (Rus) 06/11- [S] [E] [34]",
+                                    "sub_model": "Rio"
+                                },
+                                "insurer": {},
+                                "assessor": {},
+                                "repairer": {
+                                    "description": "Unknown"
+                                },
+                                "details": {
+                                    "items": [
+                                        {
+                                            "name": "БОКОВИНА З ПРОТРЕМОНТИРОВАТЬ",
+                                            "repair": {
+                                                "method": "I",
+                                                "description": "Ремонт"
+                                            }
+                                        },
+                                        {
+                                            "name": "БАМПЕР ЗРЕМОНТНАЯ ОКРАСКА K3",
+                                            "repair": {
+                                                "method": "LI",
+                                                "description": "Окраска ремонтная (площадь повреждения детали меньше 20-50%)"
+                                            }
+                                        },
+                                        {
+                                            "name": "БОКОВИНА З ПРРЕМ.ОКРАСКА <50%",
+                                            "repair": {
+                                                "method": "LI",
+                                                "description": "Окраска ремонтная (площадь повреждения детали меньше 20-50%)"
+                                            }
+                                        },
+                                        {
+                                            "name": "УПЛОТНИТЕЛЬ З ПР - С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        },
+                                        {
+                                            "name": "БАМПЕР З - С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        },
+                                        {
+                                            "name": "СПОЙЛЕР БАМПЕРА З - С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        },
+                                        {
+                                            "name": "БРЫЗГОВИК З Л - С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        },
+                                        {
+                                            "name": "БРЫЗГОВИК З ПР - С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        },
+                                        {
+                                            "name": "ПОДКРЫЛОК З ПР - С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        },
+                                        {
+                                            "name": "ОБЛИЦОВКУ ПР БАГАЖНИКА С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        }
+                                    ],
+                                    "count": 10
+                                }
+                            },
+                            {
+                                "_id": 1737351111,
+                                "number": {
+                                    "calculation": "297965/16-"
+                                },
+                                "date": {
+                                    "calculation": "2016-10-27"
+                                },
+                                "cost": {
+                                    "total": 31203,
+                                    "labour": 5589,
+                                    "parts": 17904,
+                                    "paint": 7710
+                                },
+                                "car": {
+                                    "manufacturer": "KIA [R] [28]",
+                                    "model": "Rio III (Rus) 06/11- [S] [E] [34]",
+                                    "sub_model": "Rio Comfort"
+                                },
+                                "insurer": {},
+                                "assessor": {},
+                                "task_process": "OSAGO",
+                                "repairer": {
+                                    "description": "Unknown"
+                                },
+                                "details": {
+                                    "items": [
+                                        {
+                                            "name": "БАМПЕР З86610 4Y010",
+                                            "repair": {
+                                                "method": "E",
+                                                "description": "Замена"
+                                            }
+                                        },
+                                        {
+                                            "name": "СПОЙЛЕР БАМПЕРА З86612 4Y000",
+                                            "repair": {
+                                                "method": "E",
+                                                "description": "Замена"
+                                            }
+                                        },
+                                        {
+                                            "name": "ОТРАЖАТЕЛЬ З Л92405 4X000",
+                                            "repair": {
+                                                "method": "E",
+                                                "description": "Замена"
+                                            }
+                                        },
+                                        {
+                                            "name": "БАМПЕР З В СБОРЕ - С/У",
+                                            "repair": {
+                                                "method": "E",
+                                                "description": "Замена"
+                                            }
+                                        },
+                                        {
+                                            "name": "БОКОВИНА З ЛОТРЕМОНТИРОВАТЬ",
+                                            "repair": {
+                                                "method": "I",
+                                                "description": "Ремонт"
+                                            }
+                                        },
+                                        {
+                                            "name": "БАМПЕР ЗОКРАСКА НОВ.ДЕТ. K1R",
+                                            "repair": {
+                                                "method": "LE1",
+                                                "description": "Окраска новой детали K1R (ступень AZT окраски пластиковой детали)"
+                                            }
+                                        },
+                                        {
+                                            "name": "БОКОВИНА З ЛРЕМ.ОКРАСКА <50%",
+                                            "repair": {
+                                                "method": "LI",
+                                                "description": "Окраска ремонтная (площадь повреждения детали меньше 20-50%)"
+                                            }
+                                        },
+                                        {
+                                            "name": "ФИКСАТОР ЗАМКА ДВЕРЬ З Л С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        },
+                                        {
+                                            "name": "УПЛОТНИТЕЛЬ З Л - С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        },
+                                        {
+                                            "name": "УПЛОТНИТЕЛЬ КРЫШКИ БАГАЖНИКА С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        },
+                                        {
+                                            "name": "НАКЛАДКА БОКОВИНА З Л - С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        },
+                                        {
+                                            "name": "ПОДКРЫЛОК З Л - С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        },
+                                        {
+                                            "name": "ОБЛИЦОВКУ ЛЕВ БАГАЖНИКА С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        },
+                                        {
+                                            "name": "ОБЛИЦОВКА НИЖНЯЯ АРКИ КОЛЕСА З Л С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        },
+                                        {
+                                            "name": "ЛЮЧОК ТОПЛИВНОГО БАКА - С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        }
+                                    ],
+                                    "count": 15
+                                }
+                            },
+                            {
+                                "_id": 3202354377,
+                                "number": {
+                                    "calculation": "ОСАГО16308"
+                                },
+                                "date": {
+                                    "calculation": "2016-11-09"
+                                },
+                                "cost": {
+                                    "total": 3198,
+                                    "labour": 2870,
+                                    "paint": 328
+                                },
+                                "car": {
+                                    "manufacturer": "KIA [R] [28]",
+                                    "model": "Rio III (UB) 07/11- [M] [S] [E] [24]",
+                                    "sub_model": "Rio 4"
+                                },
+                                "insurer": {},
+                                "assessor": {},
+                                "task_process": "OSAGO",
+                                "repairer": {
+                                    "description": "Unknown"
+                                },
+                                "details": {
+                                    "items": [
+                                        {
+                                            "name": "НАДСТАВКА КРЫЛА З ЛРЕМОНТИРОВАТЬ",
+                                            "repair": {
+                                                "method": "I",
+                                                "description": "Ремонт"
+                                            }
+                                        },
+                                        {
+                                            "name": "НАДСТАВКА КРЫЛА З ЛРЕМ.ОКРАСКА <50%",
+                                            "repair": {
+                                                "method": "LI",
+                                                "description": "Окраска ремонтная (площадь повреждения детали меньше 20-50%)"
+                                            }
+                                        },
+                                        {
+                                            "name": "УПЛОТНИТЕЛЬ КРЫШКИ БАГАЖНИКА С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        },
+                                        {
+                                            "name": "БАМПЕР З - С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        },
+                                        {
+                                            "name": "КРОНШТЕЙН БАМПЕРА З - С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        },
+                                        {
+                                            "name": "БРЫЗГОВИК З Л - С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        },
+                                        {
+                                            "name": "ОБЛИЦОВКА Л АРКА КОЛЕСА З - С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        },
+                                        {
+                                            "name": "ОБЛИЦОВКУ ЛЕВ БАГАЖНИКА С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        }
+                                    ],
+                                    "count": 8
+                                }
+                            },
+                            {
+                                "_id": 2413855837,
+                                "number": {
+                                    "calculation": "545425"
+                                },
+                                "date": {
+                                    "calculation": "2016-12-19"
+                                },
+                                "cost": {
+                                    "total": 8186,
+                                    "labour": 1944,
+                                    "parts": 1265,
+                                    "paint": 4977
+                                },
+                                "car": {
+                                    "manufacturer": "KIA [R] [28]",
+                                    "model": "Rio III (Rus) 06/11- [S] [E] [34]",
+                                    "sub_model": "Rio"
+                                },
+                                "insurer": {},
+                                "assessor": {},
+                                "task_process": "OSAGO",
+                                "repairer": {
+                                    "description": "Unknown"
+                                },
+                                "details": {
+                                    "items": [
+                                        {
+                                            "name": "СПОЙЛЕР БАМПЕРА З86612 4Y000",
+                                            "repair": {
+                                                "method": "E",
+                                                "description": "Замена"
+                                            }
+                                        },
+                                        {
+                                            "name": "БАМПЕР З - С/У",
+                                            "repair": {
+                                                "method": "E",
+                                                "description": "Замена"
+                                            }
+                                        },
+                                        {
+                                            "name": "СПОЙЛЕР БАМПЕРА З - С/У",
+                                            "repair": {
+                                                "method": "E",
+                                                "description": "Замена"
+                                            }
+                                        },
+                                        {
+                                            "name": "БАМПЕР ЗОТРЕМОНТИРОВАТЬ",
+                                            "repair": {
+                                                "method": "I",
+                                                "description": "Ремонт"
+                                            }
+                                        },
+                                        {
+                                            "name": "БАМПЕР ЗРЕМОНТНАЯ ОКРАСКА K3",
+                                            "repair": {
+                                                "method": "LI",
+                                                "description": "Окраска ремонтная (площадь повреждения детали меньше 20-50%)"
+                                            }
+                                        },
+                                        {
+                                            "name": "ДАТЧИК/И СИСТЕМЫ ПАРКОВКИ ЗАДНИЙ С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        },
+                                        {
+                                            "name": "БРЫЗГОВИК З Л - С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        },
+                                        {
+                                            "name": "БРЫЗГОВИК З ПР - С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        }
+                                    ],
+                                    "count": 8
+                                }
+                            },
+                            {
+                                "_id": 3564339508,
+                                "number": {
+                                    "calculation": "289697/17-"
+                                },
+                                "date": {
+                                    "calculation": "2017-07-21"
+                                },
+                                "cost": {
+                                    "total": 33045,
+                                    "labour": 4788,
+                                    "parts": 19655,
+                                    "paint": 8602
+                                },
+                                "car": {
+                                    "manufacturer": "KIA [R] [28]",
+                                    "model": "Rio III (Russia production) (QB (IH/UB)) 12/14- [M] [R4]",
+                                    "sub_model": "Rio Comfort"
+                                },
+                                "insurer": {},
+                                "assessor": {},
+                                "task_process": "OSAGO",
+                                "repairer": {
+                                    "description": "Unknown"
+                                },
+                                "details": {
+                                    "items": [
+                                        {
+                                            "name": "ФОНАРЬ З НАР Л В СБ92401 4X500",
+                                            "repair": {
+                                                "method": "E",
+                                                "description": "Замена"
+                                            }
+                                        },
+                                        {
+                                            "name": "ОТРАЖАТЕЛЬ З Л92405 4Y500",
+                                            "repair": {
+                                                "method": "E",
+                                                "description": "Замена"
+                                            }
+                                        },
+                                        {
+                                            "name": "БАМПЕР З - С/У",
+                                            "repair": {
+                                                "method": "E",
+                                                "description": "Замена"
+                                            }
+                                        },
+                                        {
+                                            "name": "СВЕТООТРАЖАТЕЛЬ З Л С/У",
+                                            "repair": {
+                                                "method": "E",
+                                                "description": "Замена"
+                                            }
+                                        },
+                                        {
+                                            "name": "БОКОВИНА З ЛОТРЕМОНТИРОВАТЬ",
+                                            "repair": {
+                                                "method": "I",
+                                                "description": "Ремонт"
+                                            }
+                                        },
+                                        {
+                                            "name": "БАМПЕР ЗРЕМОНТНАЯ ОКРАСКА K3",
+                                            "repair": {
+                                                "method": "LI",
+                                                "description": "Окраска ремонтная (площадь повреждения детали меньше 20-50%)"
+                                            }
+                                        },
+                                        {
+                                            "name": "БОКОВИНА З ЛРЕМ.ОКРАСКА <50%",
+                                            "repair": {
+                                                "method": "LI",
+                                                "description": "Окраска ремонтная (площадь повреждения детали меньше 20-50%)"
+                                            }
+                                        },
+                                        {
+                                            "name": "ОБЛИЦОВКА БАГАЖНИКА З Л С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        },
+                                        {
+                                            "name": "ПОДКРЫЛОК З Л - С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        },
+                                        {
+                                            "name": "ОБЛИЦОВКА БОКОВИНЫ З Л - С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        },
+                                        {
+                                            "name": "ЛЮЧОК ТОПЛИВНОГО БАКА - С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        },
+                                        {
+                                            "name": "БРЫЗГОВИК З ПР - С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        },
+                                        {
+                                            "name": "СПОЙЛЕР БАМПЕРА З - С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        },
+                                        {
+                                            "name": "СВЕТООТРАЖАТЕЛЬ З ПР С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        },
+                                        {
+                                            "name": "УПЛОТНИТЕЛЬ КРЫШКИ БАГАЖНИКА С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        },
+                                        {
+                                            "name": "ДАТЧИК/КИ СИСТ ПАРКОВКИ ЗДН С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        }
+                                    ],
+                                    "count": 16
+                                }
+                            },
+                            {
+                                "_id": 3564339508,
+                                "number": {
+                                    "calculation": "289697/17-"
+                                },
+                                "date": {
+                                    "calculation": "2017-09-04"
+                                },
+                                "cost": {
+                                    "total": 16630,
+                                    "labour": 6132,
+                                    "parts": 1306,
+                                    "paint": 9192
+                                },
+                                "car": {
+                                    "manufacturer": "KIA [R] [28]",
+                                    "model": "Rio III (Russia production) (QB (IH/UB)) 12/14- [M] [R4]",
+                                    "sub_model": "Rio Comfort"
+                                },
+                                "insurer": {},
+                                "assessor": {},
+                                "task_process": "OSAGO",
+                                "repairer": {
+                                    "description": "Unknown"
+                                },
+                                "details": {
+                                    "items": [
+                                        {
+                                            "name": "КРОНШТ НАР Л БАМП З86613 4Y500",
+                                            "repair": {
+                                                "method": "E",
+                                                "description": "Замена"
+                                            }
+                                        },
+                                        {
+                                            "name": "БАМПЕР З - С/У",
+                                            "repair": {
+                                                "method": "E",
+                                                "description": "Замена"
+                                            }
+                                        },
+                                        {
+                                            "name": "БОКОВИНА З ЛОТРЕМОНТИРОВАТЬ",
+                                            "repair": {
+                                                "method": "I",
+                                                "description": "Ремонт"
+                                            }
+                                        },
+                                        {
+                                            "name": "КРЕП ПАН ФОНАРЯ З ЛОТРЕМОНТИРОВАТЬ",
+                                            "repair": {
+                                                "method": "I",
+                                                "description": "Ремонт"
+                                            }
+                                        },
+                                        {
+                                            "name": "БАМПЕР ЗРЕМОНТНАЯ ОКРАСКА K3",
+                                            "repair": {
+                                                "method": "LI",
+                                                "description": "Окраска ремонтная (площадь повреждения детали меньше 20-50%)"
+                                            }
+                                        },
+                                        {
+                                            "name": "БОКОВИНА З ЛРЕМ.ОКРАСКА <50%",
+                                            "repair": {
+                                                "method": "LI",
+                                                "description": "Окраска ремонтная (площадь повреждения детали меньше 20-50%)"
+                                            }
+                                        },
+                                        {
+                                            "name": "КРЕП ПАН ФОНАРЯ З ЛРЕМ.ОКРАСКА <50%",
+                                            "repair": {
+                                                "method": "LI",
+                                                "description": "Окраска ремонтная (площадь повреждения детали меньше 20-50%)"
+                                            }
+                                        },
+                                        {
+                                            "name": "УПЛОТНИТЕЛЬ З Л - С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        },
+                                        {
+                                            "name": "ОБЛИЦОВКА БАГАЖНИКА З Л С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        },
+                                        {
+                                            "name": "ПОДКРЫЛОК З Л - С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        },
+                                        {
+                                            "name": "ВОЗДУШНАЯ РЕШЕТКА З Л С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        },
+                                        {
+                                            "name": "ОБЛИЦОВКА БОКОВИНЫ З Л - С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        },
+                                        {
+                                            "name": "ЛЮЧОК ТОПЛИВНОГО БАКА - С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        },
+                                        {
+                                            "name": "СПОЙЛЕР БАМПЕРА З - С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        },
+                                        {
+                                            "name": "СВЕТООТРАЖАТЕЛЬ З Л С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        },
+                                        {
+                                            "name": "СВЕТООТРАЖАТЕЛЬ З ПР С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        },
+                                        {
+                                            "name": "УПЛОТНИТЕЛЬ КРЫШКИ БАГАЖНИКА С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        },
+                                        {
+                                            "name": "АКБ - С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        }
+                                    ],
+                                    "count": 18
+                                }
+                            },
+                            {
+                                "_id": 3754099422,
+                                "number": {
+                                    "calculation": "497302/17-"
+                                },
+                                "date": {
+                                    "calculation": "2018-01-17"
+                                },
+                                "cost": {
+                                    "total": 71618,
+                                    "labour": 11786,
+                                    "parts": 45406,
+                                    "paint": 14426
+                                },
+                                "car": {
+                                    "manufacturer": "KIA [R] [28]",
+                                    "model": "Rio III (Russia production) (QB (IH/UB)) 12/14- [M] [R4]",
+                                    "sub_model": "Rio"
+                                },
+                                "insurer": {},
+                                "assessor": {},
+                                "task_process": "OSAGO",
+                                "repairer": {
+                                    "description": "Unknown"
+                                },
+                                "details": {
+                                    "items": [
+                                        {
+                                            "name": "БАМПЕР З866104Y510",
+                                            "repair": {
+                                                "method": "E",
+                                                "description": "Замена"
+                                            }
+                                        },
+                                        {
+                                            "name": "КРОНШТ НАР Л БАМП З866134Y500",
+                                            "repair": {
+                                                "method": "E",
+                                                "description": "Замена"
+                                            }
+                                        },
+                                        {
+                                            "name": "СПОЙЛЕР БАМПЕРА З866124Y500",
+                                            "repair": {
+                                                "method": "E",
+                                                "description": "Замена"
+                                            }
+                                        },
+                                        {
+                                            "name": "ЩИТОК ЗАДКА691004Y000",
+                                            "repair": {
+                                                "method": "E",
+                                                "description": "Замена"
+                                            }
+                                        },
+                                        {
+                                            "name": "КРЫШКА БАГАЖНИКА692004Y000",
+                                            "repair": {
+                                                "method": "E",
+                                                "description": "Замена"
+                                            }
+                                        },
+                                        {
+                                            "name": "ЗАКРЫВ ПАНЕЛЬ З812103L000",
+                                            "repair": {
+                                                "method": "E",
+                                                "description": "Замена"
+                                            }
+                                        },
+                                        {
+                                            "name": "ЗАМОК КРЫШК БАГАЖН812304Y000",
+                                            "repair": {
+                                                "method": "E",
+                                                "description": "Замена"
+                                            }
+                                        },
+                                        {
+                                            "name": "ОБОЗНАЧЕНИЕ МОДЕЛИ863224Y000",
+                                            "repair": {
+                                                "method": "E",
+                                                "description": "Замена"
+                                            }
+                                        },
+                                        {
+                                            "name": "ЭМБЛЕМА ИЗГОТОВИТЕЛЯ863104Y200",
+                                            "repair": {
+                                                "method": "E",
+                                                "description": "Замена"
+                                            }
+                                        },
+                                        {
+                                            "name": "ФОНАРЬ З НАР Л В СБ924014X500",
+                                            "repair": {
+                                                "method": "E",
+                                                "description": "Замена"
+                                            }
+                                        },
+                                        {
+                                            "name": "ОТРАЖАТЕЛЬ З Л924054Y500",
+                                            "repair": {
+                                                "method": "E",
+                                                "description": "Замена"
+                                            }
+                                        },
+                                        {
+                                            "name": "БАМПЕР З - ЗАМЕНИТЬ",
+                                            "repair": {
+                                                "method": "E",
+                                                "description": "Замена"
+                                            }
+                                        },
+                                        {
+                                            "name": "ЩИТОК ЗАДКА - ЗАМЕНИТЬ",
+                                            "repair": {
+                                                "method": "E",
+                                                "description": "Замена"
+                                            }
+                                        },
+                                        {
+                                            "name": "КРЫШКА БАГАЖНИКА - ЗАМЕНИТЬ",
+                                            "repair": {
+                                                "method": "E",
+                                                "description": "Замена"
+                                            }
+                                        },
+                                        {
+                                            "name": "БАЛКА БАМПЕРА ЗОТРЕМОНТИРОВАТЬ",
+                                            "repair": {
+                                                "method": "I",
+                                                "description": "Ремонт"
+                                            }
+                                        },
+                                        {
+                                            "name": "БОКОВИНА З ЛОТРЕМОНТИРОВАТЬ",
+                                            "repair": {
+                                                "method": "I",
+                                                "description": "Ремонт"
+                                            }
+                                        },
+                                        {
+                                            "name": "КРЕП ПАН ФОНАРЯ З ЛОТРЕМОНТИРОВАТЬ",
+                                            "repair": {
+                                                "method": "I",
+                                                "description": "Ремонт"
+                                            }
+                                        },
+                                        {
+                                            "name": "УСТР.ПЕР.КРЫШ.БАГЖ",
+                                            "repair": {
+                                                "method": "I",
+                                                "description": "Ремонт"
+                                            }
+                                        },
+                                        {
+                                            "name": "ЩИТОК ЗАДКАОКР ДЛЯ НОВ.ДЕТ.ЭТ I",
+                                            "repair": {
+                                                "method": "LE",
+                                                "description": "Окраска новой детали"
+                                            }
+                                        },
+                                        {
+                                            "name": "КРЫШКА БАГАЖНИКАОКР ДЛЯ НОВ.ДЕТ.ЭТ I",
+                                            "repair": {
+                                                "method": "LE",
+                                                "description": "Окраска новой детали"
+                                            }
+                                        },
+                                        {
+                                            "name": "БАМПЕР ЗОКРАСКА НОВ.ДЕТ. K1R",
+                                            "repair": {
+                                                "method": "LE1",
+                                                "description": "Окраска новой детали K1R (ступень AZT окраски пластиковой детали)"
+                                            }
+                                        },
+                                        {
+                                            "name": "БОКОВИНА З ЛРЕМ.ОКРАСКА <50%",
+                                            "repair": {
+                                                "method": "LI",
+                                                "description": "Окраска ремонтная (площадь повреждения детали меньше 20-50%)"
+                                            }
+                                        },
+                                        {
+                                            "name": "КРЕП ПАН ФОНАРЯ З ЛРЕМ.ОКРАСКА <50%",
+                                            "repair": {
+                                                "method": "LI",
+                                                "description": "Окраска ремонтная (площадь повреждения детали меньше 20-50%)"
+                                            }
+                                        },
+                                        {
+                                            "name": "ПОДКРЫЛОК З Л - С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        },
+                                        {
+                                            "name": "ВОЗДУШНАЯ РЕШЕТКА З Л С/У",
+                                            "repair": {
+                                                "method": "N",
+                                                "description": "Вспомогательные работы (демонтаж/монтаж, чистка, устранение перекосов и пр.)"
+                                            }
+                                        }
+                                    ],
+                                    "count": 25
+                                }
+                            }
+                        ],
+                        "count": 7
+                    }
+                },
+                "carfax": {
+                    "_comment": "Данные от CarFax",
+                    "check": {
+                        "_comment": "Данные быстрой проверки на наличие данных у CarFax"
+                    }
+                },
+                "calculate": {
+                    "_comment": "Калькуляторы",
+                    "tax": {
+                        "moscow": {
+                            "yearly": {}
+                        },
+                        "regions": {
+                            "yearly": {}
+                        }
+                    },
+                    "osago": {
+                        "_comment": "Калькулятор ОСАГО",
+                        "coefficients": {
+                            "regional": {
+                                "value": 1.4
+                            }
+                        },
+                        "price": {
+                            "current": {
+                                "region": {
+                                    "name": "Московская область"
+                                },
+                                "city": {
+                                    "name": "Московская Область"
+                                },
+                                "yearly": {
+                                    "amount": 11800,
+                                    "min": 10700,
+                                    "max": 12900
+                                }
+                            },
+                            "moscow": {
+                                "yearly": {
+                                    "amount": 13900,
+                                    "min": 12600,
+                                    "max": 15100
+                                }
+                            },
+                            "moscow_region": {
+                                "yearly": {
+                                    "amount": 11800,
+                                    "min": 10700,
+                                    "max": 12900
+                                }
+                            }
+                        }
+                    }
+                },
+                "car_price": {
+                    "_comment": "Приблизительные стоимости аналогичных автомобилей",
+                    "items": [
+                        {
+                            "_id": 2292888474,
+                            "date": {},
+                            "amount": 507800,
+                            "model": {
+                                "name": "Rio Iii"
+                            },
+                            "modification": {
+                                "name": "1.4 Mt (107 Л.с.)"
+                            },
+                            "engine": {
+                                "volume": 1400
+                            },
+                            "year": 2015
+                        },
+                        {
+                            "_id": 3293405766,
+                            "date": {},
+                            "amount": 567500,
+                            "model": {
+                                "name": "Rio Iii"
+                            },
+                            "modification": {
+                                "name": "1.4 Mt (107 Л.с.)"
+                            },
+                            "engine": {
+                                "volume": 1400
+                            },
+                            "year": 2015
+                        },
+                        {
+                            "_id": 3675543036,
+                            "date": {},
+                            "amount": 530400,
+                            "model": {
+                                "name": "Rio Iii Рестайлинг"
+                            },
+                            "modification": {
+                                "name": "1.4 Mt (107 Л.с.)"
+                            },
+                            "engine": {
+                                "volume": 1400
+                            },
+                            "year": 2015
+                        },
+                        {
+                            "_id": 3447208490,
+                            "date": {},
+                            "amount": 592800,
+                            "model": {
+                                "name": "Rio Iii Рестайлинг"
+                            },
+                            "modification": {
+                                "name": "1.4 Mt (107 Л.с.)"
+                            },
+                            "engine": {
+                                "volume": 1400
+                            },
+                            "year": 2015
+                        }
+                    ],
+                    "count": 4
+                },
+                "fines": {
+                    "_comment": "Штрафы",
+                    "items": [
+                        {
+                            "_id": 1360952711,
+                            "date": {
+                                "event": "2019-07-02 00:00:00"
+                            },
+                            "article": {
+                                "code": "12.9Ч.2",
+                                "description": "Превышение установленной скорости движения транспортного средства на величину более 20, но не более 40 километров в час"
+                            },
+                            "description": "УИН 18810143190702019430 от 2019-07-02 на 250.00 руб. (с учетом скидки)",
+                            "vendor": {
+                                "name": "ЦАФАП ГИБДД УМВД России по Кировской области"
+                            },
+                            "amount": {
+                                "value": 250,
+                                "total": 500
+                            },
+                            "discount": {
+                                "percent": 50,
+                                "date": {
+                                    "end": "2019-07-22 00:00:00"
+                                }
+                            },
+                            "is_paid": false,
+                            "wire": {
+                                "user": {
+                                    "name": "УФК по Кировской области (УМВД России по Кировской области)",
+                                    "tin": "4348007235",
+                                    "kpp": "434501001"
+                                },
+                                "bank": {
+                                    "account": {
+                                        "number": "40101810222020011001"
+                                    },
+                                    "name": "Отделение г. Киров",
+                                    "bik": "043304001"
+                                },
+                                "payment": {
+                                    "purpose": "ШТРАФ ПО АДМИНИСТРАТИВНОМУ ПРАВОНАРУШЕНИЮ ПОСТАНОВЛЕНИЕ №18810143190702019430"
+                                },
+                                "kbk": "18811630020016000140",
+                                "okato": "33701000"
+                            }
+                        },
+                        {
+                            "_id": 893434046,
+                            "date": {
+                                "event": "2019-06-03 00:00:00"
+                            },
+                            "article": {
+                                "code": "12.9Ч.2",
+                                "description": "Превышение установленной скорости движения транспортного средства на величину более 20, но не более 40 километров в час"
+                            },
+                            "description": "УИН 18810143190603004710 от 2019-06-03 на 500.00 руб.",
+                            "vendor": {
+                                "name": "ЦАФАП ГИБДД УМВД России по Кировской области"
+                            },
+                            "amount": {
+                                "value": 500,
+                                "total": 500
+                            },
+                            "discount": {
+                                "percent": 50,
+                                "date": {
+                                    "end": "2019-06-24 00:00:00"
+                                }
+                            },
+                            "is_paid": false,
+                            "wire": {
+                                "user": {
+                                    "name": "УФК по Кировской области (УМВД России по Кировской области)",
+                                    "tin": "4348007235",
+                                    "kpp": "434501001"
+                                },
+                                "bank": {
+                                    "account": {
+                                        "number": "40101810222020011001"
+                                    },
+                                    "name": "Отделение г. Киров",
+                                    "bik": "043304001"
+                                },
+                                "payment": {
+                                    "purpose": "ШТРАФ ПО АДМИНИСТРАТИВНОМУ ПРАВОНАРУШЕНИЮ ПОСТАНОВЛЕНИЕ №18810143190603004710"
+                                },
+                                "kbk": "18811630020016000140",
+                                "okato": "33701000"
+                            }
+                        },
+                        {
+                            "_id": 107840615,
+                            "date": {
+                                "event": "2019-05-27 00:00:00"
+                            },
+                            "article": {
+                                "code": "12.9Ч.2",
+                                "description": "Превышение установленной скорости движения транспортного средства на величину более 20, но не более 40 километров в час"
+                            },
+                            "description": "УИН 18810143190527047787 от 2019-05-27 на 0.00 руб.",
+                            "vendor": {
+                                "name": "ЦАФАП ГИБДД УМВД России по Кировской области"
+                            },
+                            "amount": {
+                                "total": 500
+                            },
+                            "discount": {
+                                "percent": 50,
+                                "date": {
+                                    "end": "2019-06-17 00:00:00"
+                                }
+                            },
+                            "is_paid": true,
+                            "wire": {
+                                "user": {
+                                    "name": "УФК по Кировской области (УМВД России по Кировской области)",
+                                    "tin": "4348007235",
+                                    "kpp": "434501001"
+                                },
+                                "bank": {
+                                    "account": {
+                                        "number": "40101810222020011001"
+                                    },
+                                    "name": "Отделение г. Киров",
+                                    "bik": "043304001"
+                                },
+                                "payment": {
+                                    "purpose": "ШТРАФ ПО АДМИНИСТРАТИВНОМУ ПРАВОНАРУШЕНИЮ ПОСТАНОВЛЕНИЕ №18810143190527047787"
+                                },
+                                "kbk": "18811630020016000140",
+                                "okato": "33701000"
+                            }
+                        },
+                        {
+                            "_id": 1952010286,
+                            "date": {
+                                "event": "2019-05-27 00:00:00"
+                            },
+                            "article": {
+                                "code": "12.9Ч.2",
+                                "description": "Превышение установленной скорости движения транспортного средства на величину более 20, но не более 40 километров в час"
+                            },
+                            "description": "УИН 18810143190527061798 от 2019-05-27 на 0.00 руб.",
+                            "vendor": {
+                                "name": "ЦАФАП ГИБДД УМВД России по Кировской области"
+                            },
+                            "amount": {
+                                "total": 500
+                            },
+                            "discount": {
+                                "percent": 50,
+                                "date": {
+                                    "end": "2019-06-17 00:00:00"
+                                }
+                            },
+                            "is_paid": true,
+                            "wire": {
+                                "user": {
+                                    "name": "УФК по Кировской области (УМВД России по Кировской области)",
+                                    "tin": "4348007235",
+                                    "kpp": "434501001"
+                                },
+                                "bank": {
+                                    "account": {
+                                        "number": "40101810222020011001"
+                                    },
+                                    "name": "Отделение г. Киров",
+                                    "bik": "043304001"
+                                },
+                                "payment": {
+                                    "purpose": "ШТРАФ ПО АДМИНИСТРАТИВНОМУ ПРАВОНАРУШЕНИЮ ПОСТАНОВЛЕНИЕ №18810143190527061798"
+                                },
+                                "kbk": "18811630020016000140",
+                                "okato": "33701000"
+                            }
+                        }
+                    ],
+                    "has_fines": true,
+                    "count": 4
+                },
+                "leasings": {
+                    "_comment": "Лизинг",
+                    "items": [],
+                    "count": 0,
+                    "used_in_leasing": false
+                },
+                "customs": {
+                    "history": {
+                        "_comment": "История по таможне",
+                        "items": [],
+                        "count": 0
+                    }
+                },
+                "accidents": {
+                    "history": {
+                        "_comment": "История ДТП",
+                        "items": [],
+                        "count": 0
+                    },
+                    "insurance": {
+                        "_comment": "История повреждений из страховых компаний",
+                        "items": [],
+                        "count": 0
+                    }
+                },
+                "insurance": {
+                    "osago": {
+                        "_comment": "ОСАГО",
+                        "items": [],
+                        "count": 0
+                    }
+                },
+                "pledges": {
+                    "_comment": "Обременения на ТС",
+                    "items": [
+                        {
+                            "_id": 1837002069,
+                            "date": {
+                                "event": "2018-08-22 00:00:00"
+                            },
+                            "number": "2015-000-891550-099/1",
+                            "pledgors": [
+                                {
+                                    "name": "Гладышев Серафим Васильевич",
+                                    "type": "PERSON",
+                                    "dob": "1962-01-13"
+                                }
+                            ],
+                            "pledgees": [
+                                {
+                                    "name": "Открытое акционерное общество \"Плюс Банк\"",
+                                    "type": "LEGAL"
+                                }
+                            ],
+                            "type": "Исключение",
+                            "in_pledge": false
+                        },
+                        {
+                            "_id": 2224582573,
+                            "date": {
+                                "event": "2015-09-02 00:00:00"
+                            },
+                            "number": "2015-000-891550-099",
+                            "pledgors": [
+                                {
+                                    "name": "Гладышев Серафим Васильевич",
+                                    "type": "PERSON",
+                                    "dob": "1962-01-13"
+                                }
+                            ],
+                            "pledgees": [
+                                {
+                                    "name": "Открытое акционерное общество \"Плюс Банк\"",
+                                    "type": "LEGAL"
+                                }
+                            ],
+                            "type": "Возникновение",
+                            "in_pledge": true
+                        }
+                    ],
+                    "count": 2
+                },
+                "restrictions": {
+                    "registration_actions": {
+                        "_comment": "Ограничения на рег. действия",
+                        "items": [
+                            {
+                                "_id": 685180283,
+                                "date": {
+                                    "added": "2019-02-15 00:00:00",
+                                    "start": "2019-02-13 00:00:00"
+                                },
+                                "vehicle": {
+                                    "year": 2015,
+                                    "model": {}
+                                },
+                                "initiator": {
+                                    "name": "Судебный Пристав",
+                                    "region": {
+                                        "name": "Кировская Область"
+                                    }
+                                },
+                                "restrict": {
+                                    "type": "Запрет на регистрационные действия",
+                                    "reason": "Документ: 548759665/4306 от 13.02.2019, сабрекова анна александровна, спи: 33060100000281, ип: 258/19/43006-ип от 09.01.2019",
+                                    "number": "548759665/4306"
+                                }
+                            },
+                            {
+                                "_id": 2651647860,
+                                "date": {
+                                    "added": "2019-02-15 00:00:00",
+                                    "start": "2019-02-13 00:00:00"
+                                },
+                                "vehicle": {
+                                    "year": 2015,
+                                    "model": {}
+                                },
+                                "initiator": {
+                                    "name": "Судебный Пристав",
+                                    "region": {
+                                        "name": "Кировская Область"
+                                    }
+                                },
+                                "restrict": {
+                                    "type": "Запрет на регистрационные действия",
+                                    "reason": "Документ: 548759525/4306 от 13.02.2019, сабрекова анна александровна, спи: 33060100000281, ип: 429/19/43006-ип от 09.01.2019",
+                                    "number": "548759525/4306"
+                                }
+                            }
+                        ],
+                        "count": 2,
+                        "has_restrictions": true
+                    }
+                },
+                "stealings": {
+                    "_comment": "Проверка на угон",
+                    "count": 0,
+                    "is_wanted": false,
+                    "items": []
+                },
+                "ownership": {
+                    "history": {
+                        "_comment": "История владения",
+                        "items": [
+                            {
+                                "_id": 2926636319,
+                                "date": {
+                                    "start": "2019-02-13 00:00:00"
+                                },
+                                "owner": {
+                                    "type": "PERSON"
+                                },
+                                "last_operation": {
+                                    "code": "03",
+                                    "description": "Изменение собственника (владельца) в результате совершения сделки, вступления в наследство, слияние и разделение капитала у юридического лица, переход права по договору лизинга, судебные решения и др."
+                                }
+                            },
+                            {
+                                "_id": 718004471,
+                                "date": {
+                                    "start": "2015-09-04 00:00:00",
+                                    "end": "2019-02-13 00:00:00"
+                                },
+                                "owner": {
+                                    "type": "PERSON"
+                                },
+                                "last_operation": {
+                                    "code": "01",
+                                    "description": "Регистрация новых, произведенных в России или везенных, а также ввезенных в Россию бывших в эксплуатации, в том числе временно на срок более 6 месяцев, испытательной техники"
+                                }
+                            }
+                        ],
+                        "count": 2
+                    }
+                },
+                "mileages": {
+                    "_comment": "Пробеги",
+                    "items": [
+                        {
+                            "_id": 4001306766,
+                            "date": {
+                                "event": "2018-09-18 00:00:00"
+                            },
+                            "mileage": 103000
+                        }
+                    ],
+                    "count": 1
+                },
+                "diagnostic_cards": {
+                    "_comment": "Диагностические карты",
+                    "items": [
+                        {
+                            "_id": 2994358801,
+                            "date": {
+                                "from": "2018-09-18 00:00:00",
+                                "to": "2020-09-19 00:00:00"
+                            },
+                            "doc": {
+                                "number": "003890051800123",
+                                "type": "Диагностическая карта"
+                            },
+                            "inspection": {},
+                            "reg_num": "М289АС750"
+                        }
+                    ],
+                    "count": 1
+                },
+                "utilizations": {
+                    "_comment": "Утилизация",
+                    "items": [],
+                    "was_utilized": false,
+                    "count": 0
+                },
+                "images": {
+                    "_comment": "Изображения, связанные с ТС",
+                    "photos": {
+                        "_comment": "Фотографии ТС",
+                        "items": [],
+                        "count": 0
+                    }
+                },
+                "ads": {
+                    "history": {
+                        "_comment": "История объявлений",
+                        "items": [],
+                        "count": 0
+                    }
+                },
+                "_metadata": {
+                    "_comment": "Мета-данные, не связанные с отчетом",
+                    "application": {
+                        "version": "8.0.0-201907041012",
+                        "uid": "processing@processing-avtorpaort-ru"
+                    }
+                }
+            },
+            "uid": "some_report_uid_Z94CB41AAGR323020@some_domain_uid",
+            "name": "NONAME",
+            "comment": "",
+            "tags": "",
+            "created_at": "2019-07-07T19:23:58.881Z",
+            "created_by": "system",
+            "updated_at": "2019-07-07T19:24:39.313Z",
+            "updated_by": "system",
+            "active_from": "1900-01-01T00:00:00.000Z",
+            "active_to": "3000-01-01T00:00:00.000Z"
+        }
+    ]
+}

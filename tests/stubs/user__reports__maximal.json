@@ -1,0 +1,251 @@
+{
+    "state": "ok",
+    "size": 2,
+    "total": 8007997,
+    "stamp": "2019-07-07T10:53:37.032Z",
+    "data": [
+        {
+            "domain_uid": "some_domain_uid",
+            "report_type_uid": "some_report_uid_1@some_domain_uid",
+            "vehicle_id": "5TDDKRFH80S073711",
+            "query": {
+                "type": "VIN",
+                "body": "5TDDKRFH80S073711",
+                "data": {
+                    "messageId": 703182,
+                    "from": {
+                        "id": 273893635,
+                        "firstName": "Alesha"
+                    },
+                    "date": 1562495577,
+                    "chat": {
+                        "id": 273893635,
+                        "firstName": "Alesha"
+                    },
+                    "text": "5TDDKRFH80S073711"
+                }
+            },
+            "progress_ok": 4,
+            "progress_wait": 0,
+            "progress_error": 0,
+            "state": {
+                "sources": [
+                    {
+                        "_id": "references.base",
+                        "state": "OK",
+                        "data": {
+                            "from_cache": false,
+                            "real_status": "OK"
+                        }
+                    },
+                    {
+                        "_id": "images.avtonomer",
+                        "state": "OK",
+                        "data": {
+                            "from_cache": false,
+                            "real_status": "OK"
+                        }
+                    },
+                    {
+                        "_id": "base",
+                        "state": "OK",
+                        "data": {
+                            "from_cache": false,
+                            "real_status": "OK"
+                        }
+                    },
+                    {
+                        "_id": "sub.base",
+                        "state": "OK",
+                        "data": {
+                            "from_cache": false,
+                            "real_status": "OK"
+                        }
+                    }
+                ]
+            },
+            "content": {
+                "identifiers": {
+                    "vehicle": {
+                        "vin": "5TDDKRFH80S073711",
+                        "reg_num": "Р218РХ71"
+                    }
+                },
+                "images": {
+                    "photos": {
+                        "_comment": "Фотографии ТС",
+                        "items": [],
+                        "count": 0
+                    }
+                },
+                "tech_data": {
+                    "brand": {
+                        "name": {
+                            "original": "ТОУОТА НIGНLАNDЕR",
+                            "normalized": "Toyota"
+                        },
+                        "id": "ID_MARK_TOYOTA",
+                        "logotype": {
+                            "uri": "https://vl.imgix.net/img/toyota-logo.png"
+                        }
+                    },
+                    "year": 2014,
+                    "engine": {
+                        "fuel": {
+                            "type": "Бензиновый"
+                        },
+                        "volume": 3456,
+                        "power": {
+                            "hp": 248.81
+                        }
+                    },
+                    "weight": {
+                        "netto": 2060,
+                        "max": 2740
+                    },
+                    "wheel": {
+                        "position": "LEFT"
+                    },
+                    "model": {
+                        "id": "ID_MARK_TOYOTA_MODEL_HIGHLANDER",
+                        "name": {
+                            "normalized": "Highlander"
+                        }
+                    }
+                },
+                "additional_info": {
+                    "vehicle": {
+                        "category": {
+                            "code": "B"
+                        }
+                    }
+                }
+            },
+            "uid": "some_report_uid_1_5TDDKRFH80S073711@some_domain_uid",
+            "name": "NONAME",
+            "comment": "",
+            "tags": "",
+            "created_at": "2019-07-07T10:51:46.067Z",
+            "created_by": "system",
+            "updated_at": "2019-07-07T10:51:55.167Z",
+            "updated_by": "manager",
+            "active_from": "1900-01-01T00:00:00.000Z",
+            "active_to": "3000-01-01T00:00:00.000Z"
+        },
+        {
+            "domain_uid": "some_domain_uid",
+            "report_type_uid": "some_report_uid_1@some_domain_uid",
+            "vehicle_id": "Т071АЕ31",
+            "query": {
+                "type": "GRZ",
+                "body": "Т071АЕ31"
+            },
+            "progress_ok": 4,
+            "progress_wait": 0,
+            "progress_error": 0,
+            "state": {
+                "sources": [
+                    {
+                        "_id": "references.base",
+                        "state": "OK",
+                        "data": {
+                            "from_cache": true,
+                            "real_status": "OK"
+                        }
+                    },
+                    {
+                        "_id": "base",
+                        "state": "OK",
+                        "data": {
+                            "from_cache": false,
+                            "real_status": "OK"
+                        }
+                    },
+                    {
+                        "_id": "images.avtonomer",
+                        "state": "OK",
+                        "data": {
+                            "from_cache": false,
+                            "real_status": "OK"
+                        }
+                    },
+                    {
+                        "_id": "sub.base",
+                        "state": "OK",
+                        "data": {
+                            "from_cache": false,
+                            "real_status": "OK"
+                        }
+                    }
+                ]
+            },
+            "content": {
+                "identifiers": {
+                    "vehicle": {
+                        "vin": "Z94C241BAKR127472",
+                        "reg_num": "Т071АЕ31"
+                    }
+                },
+                "images": {
+                    "photos": {
+                        "_comment": "Фотографии ТС",
+                        "items": [],
+                        "count": 0
+                    }
+                },
+                "tech_data": {
+                    "brand": {
+                        "name": {
+                            "original": "КИА RIО",
+                            "normalized": "Kia"
+                        },
+                        "id": "ID_MARK_KIA",
+                        "logotype": {
+                            "uri": "https://vl.imgix.net/img/kia-logo.png"
+                        }
+                    },
+                    "year": 2019,
+                    "engine": {
+                        "fuel": {
+                            "type": "Бензиновый"
+                        },
+                        "volume": 1591,
+                        "power": {
+                            "hp": 123.04
+                        }
+                    },
+                    "weight": {
+                        "netto": 1190,
+                        "max": 1580
+                    },
+                    "wheel": {
+                        "position": "LEFT"
+                    },
+                    "model": {
+                        "id": "ID_MARK_KIA_MODEL_RIO",
+                        "name": {
+                            "normalized": "Rio"
+                        }
+                    }
+                },
+                "additional_info": {
+                    "vehicle": {
+                        "category": {
+                            "code": "B"
+                        }
+                    }
+                }
+            },
+            "uid": "some_report_uid_1_eyJ0eXBlIjoiR1JaIiwiYm9keSI6ItCiMDcx0JDQlTMxIn0=@some_domain_uid",
+            "name": "NONAME",
+            "comment": "",
+            "tags": "",
+            "created_at": "2019-07-07T10:48:51.462Z",
+            "created_by": "system",
+            "updated_at": "2019-07-07T10:49:01.127Z",
+            "updated_by": "manager",
+            "active_from": "1900-01-01T00:00:00.000Z",
+            "active_to": "3000-01-01T00:00:00.000Z"
+        }
+    ]
+}

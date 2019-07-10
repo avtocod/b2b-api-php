@@ -7,8 +7,23 @@ namespace Avtocod\B2BApi\Responses\Entities;
 use DateTime;
 use Avtocod\B2BApi\DateTimeFactory;
 
-class User
+class User implements CanCreateSelfFromArrayInterface
 {
+    /**
+     * User state - activation is required.
+     */
+    public const STATE_ACTIVATION_REQUIRED = 'ACTIVATION_REQUIRED';
+
+    /**
+     * User state - active.
+     */
+    public const STATE_ACTIVE = 'ACTIVE';
+
+    /**
+     * User state - banned.
+     */
+    public const STATE_BANNED = 'BANNED';
+
     /**
      * @var string
      */
@@ -177,11 +192,7 @@ class User
     }
 
     /**
-     * Create self using array of data.
-     *
-     * @param array $data
-     *
-     * @return self
+     * {@inheritdoc}
      */
     public static function fromArray(array $data): self
     {
@@ -252,9 +263,9 @@ class User
     }
 
     /**
-     * Get login (e.g. `user@domain`).
+     * Get login.
      *
-     * @return string
+     * @return string E.g. `user@domain`
      */
     public function getLogin(): string
     {
@@ -274,9 +285,7 @@ class User
     /**
      * Get user status.
      *
-     * E.g.: `ACTIVATION_REQUIRED`, `ACTIVE`, `BANNED`.
-     *
-     * @return string
+     * @return string E.g.: `ACTIVATION_REQUIRED`, `ACTIVE`, `BANNED`
      */
     public function getState(): string
     {

@@ -7,7 +7,7 @@ namespace Avtocod\B2BApi\Exceptions;
 use Throwable;
 use RuntimeException;
 
-class TokenParserException extends RuntimeException
+class TokenParserException extends RuntimeException implements B2BApiExceptionInterface
 {
     /**
      * @param string|null    $message

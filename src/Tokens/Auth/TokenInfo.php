@@ -7,7 +7,7 @@ namespace Avtocod\B2BApi\Tokens\Auth;
 use function mb_strpos;
 use function mb_substr;
 
-final class TokenInfo
+class TokenInfo
 {
     protected const USERNAME_AND_DOMAIN_DELIMITER = '@';
 

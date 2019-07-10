@@ -1,14 +1,17 @@
-# Composer lock file
+## Composer lock file
 composer.lock
 
-# IDEs
+## IDEs
 /nbproject
 /.idea
 
-# Vendors
+## Vendors
 /vendor
 
-# Temp dirs & trash
+## ENVs
+/tests/.env
+
+## Temp dirs & trash
 /temp
 /tmp
 /tests/temp

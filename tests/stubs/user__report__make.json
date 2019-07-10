@@ -1,0 +1,13 @@
+{
+    "state": "ok",
+    "size": 1,
+    "stamp": "2019-07-07T19:24:00.163Z",
+    "data": [
+        {
+            "uid": "some_report_uid_Z94CB41AAGR323020@some_domain_uid",
+            "isnew": true,
+            "process_request_uid": "some_report_uid_Z94CB41AAGR323020_50f08701f97a4c38ba37bd1647866d27@some_domain_uid",
+            "suggest_get": "2019-07-07T19:23:58.897Z"
+        }
+    ]
+}

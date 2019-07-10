@@ -2,17 +2,18 @@
 
 declare(strict_types = 1);
 
-namespace Avtocod\B2BApi\Tests\Tokens\Auth;
+namespace Avtocod\B2BApi\Tests\Unit\Tokens\Auth;
 
 use Avtocod\B2BApi\Tokens\Auth\AuthToken;
 use Avtocod\B2BApi\Tests\AbstractTestCase;
 use Avtocod\B2BApi\Exceptions\TokenParserException;
 
+/**
+ * @covers \Avtocod\B2BApi\Tokens\Auth\AuthToken
+ */
 class AuthTokenTest extends AbstractTestCase
 {
     /**
-     * @small
-     *
      * @return void
      */
     public function testParsing(): void
@@ -32,8 +33,6 @@ class AuthTokenTest extends AbstractTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testParsingThrowsAnExceptionWhenPassedWrongToken(): void
@@ -54,8 +53,6 @@ class AuthTokenTest extends AbstractTestCase
     }
 
     /**
-     * @small
-     *
      * @return void
      */
     public function testGeneration(): void

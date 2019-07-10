@@ -36,9 +36,10 @@ final class AuthToken
     /**
      * Generate authorization token.
      *
-     * @param string      $username
-     * @param string      $password
-     * @param string|null $domain
+     * @param string      $username  Username (e.g. `username` or `username@domain`; in second case you must NOT pass
+     *                               domain in `$domain` variable)
+     * @param string      $password  User password
+     * @param string|null $domain    User domain name
      * @param int         $age       In seconds
      * @param int|null    $timestamp Token creation unix timestamp
      *

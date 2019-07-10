@@ -8,7 +8,7 @@ use Throwable;
 use RuntimeException;
 use Psr\Http\Message\ResponseInterface;
 
-class BadResponseException extends RuntimeException
+class BadResponseException extends RuntimeException implements B2BApiExceptionInterface
 {
     /**
      * @var ResponseInterface
