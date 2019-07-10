@@ -38,19 +38,18 @@ class BadRequestException extends RuntimeException implements B2BApiExceptionInt
                                 ?int $code = null,
                                 ?Throwable $previous = null)
     {
-        $this->http_request  = $http_request;
-        $this->http_response = $http_response;
+        $this->http_request    = $http_request;
+        $this->http_response   = $http_response;
+        $service_error_message = null;
+        $http_code             = null;
 
-        $service_error_message = $http_response instanceof ResponseInterface
-            ? $this->extractErrorMessageFromResponse($http_response)
-            : null;
+        if ($http_response instanceof ResponseInterface) {
+            $service_error_message = $this->extractErrorMessageFromResponse($http_response);
+            $http_code             = $http_response->getStatusCode();
+        }
 
         $previous_exception_message = $previous instanceof Throwable && $previous->getMessage() !== ''
             ? $previous->getMessage()
-            : null;
-
-        $http_code = $http_response instanceof ResponseInterface
-            ? $http_response->getStatusCode()
             : null;
 
         parent::__construct(
