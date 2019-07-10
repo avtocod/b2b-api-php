@@ -4,11 +4,6 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Tests;
 
-use Avtocod\B2BApi\Responses\Entities\Balance;
-use Avtocod\B2BApi\Responses\Entities\Report;
-use Avtocod\B2BApi\Responses\Entities\ReportMade;
-use Avtocod\B2BApi\Responses\Entities\ReportType;
-use Avtocod\B2BApi\Responses\Entities\User;
 use DateTime;
 use Avtocod\B2BApi\Client;
 use Avtocod\B2BApi\Settings;
@@ -21,7 +16,12 @@ use GuzzleHttp\Client as Guzzle;
 use Avtocod\B2BApi\ClientInterface;
 use Avtocod\B2BApi\DateTimeFactory;
 use GuzzleHttp\Exception\ConnectException;
+use Avtocod\B2BApi\Responses\Entities\User;
 use Avtocod\B2BApi\Events\RequestFailedEvent;
+use Avtocod\B2BApi\Responses\Entities\Report;
+use Avtocod\B2BApi\Responses\Entities\Balance;
+use Avtocod\B2BApi\Responses\Entities\ReportMade;
+use Avtocod\B2BApi\Responses\Entities\ReportType;
 use Avtocod\B2BApi\Exceptions\BadRequestException;
 use Avtocod\B2BApi\Events\AfterRequestSendingEvent;
 use Avtocod\B2BApi\Exceptions\BadResponseException;
@@ -1095,7 +1095,7 @@ class ClientTest extends AbstractTestCase
         $this->assertCount($response->getSize(), $response);
     }
 
-     /**
+    /**
      * @covers \Avtocod\B2BApi\Responses\UserReportsResponse
      *
      * @return void
