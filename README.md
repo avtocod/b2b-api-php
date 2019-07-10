@@ -46,7 +46,7 @@ use Avtocod\B2BApi\Tokens\Auth\AuthToken;
 $client = new Client(new Settings(AuthToken::generate('username', 'password', 'domain')));
 ```
 
-And then we can make next operations:
+And then we can make next operations _(each call will returns an object with server response data)_:
 
 ```php
 <?php /** @var \Avtocod\B2BApi\Client $client */

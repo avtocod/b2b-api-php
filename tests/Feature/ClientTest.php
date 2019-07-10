@@ -64,6 +64,8 @@ class ClientTest extends AbstractTestCase
      */
     public function testDevPing(): void
     {
+        dd($this->client->devPing('sdf'));
+
         $this->assertSame($value = 'feature test' . \random_int(1, 9999), $this->client->devPing($value)->getValue());
     }
 
