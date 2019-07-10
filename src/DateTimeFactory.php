@@ -45,4 +45,16 @@ class DateTimeFactory extends DateTime
     {
         return $date_time->format('Y-m-d\\TH:i:s.v\\Z');
     }
+
+    /**
+     * Convert DateTime object into string, using ISO8601 (zulu) format without microseconds.
+     *
+     * @param DateTime $date_time
+     *
+     * @return string E.g.: '2017-01-05T16:45:23Z'
+     */
+    public static function toIso8601ZuluWithoutMs(DateTime $date_time): string
+    {
+        return $date_time->format('Y-m-d\\TH:i:s\\Z');
+    }
 }

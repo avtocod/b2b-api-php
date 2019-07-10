@@ -119,6 +119,20 @@ class UserReportRefreshResponse implements ResponseInterface, Countable, Iterato
     }
 
     /**
+     * Get first "report made" object.
+     *
+     * @return ReportMade|null
+     */
+    public function first(): ?ReportMade
+    {
+        if (isset($this->data[0])) {
+            return $this->data[0];
+        }
+
+        return null;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function count(): int

@@ -119,6 +119,20 @@ class UserReportResponse implements ResponseInterface, Countable, IteratorAggreg
     }
 
     /**
+     * Get first report object.
+     *
+     * @return Report|null
+     */
+    public function first(): ?Report
+    {
+        if (isset($this->data[0])) {
+            return $this->data[0];
+        }
+
+        return null;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function count(): int

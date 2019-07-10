@@ -20,12 +20,14 @@ interface ClientInterface
     /**
      * Test connection.
      *
+     * @param string $value Any string value (server must returns it back)
+     *
      * @throws BadRequestException
      * @throws BadResponseException
      *
      * @return DevPingResponse
      */
-    public function devPing(): DevPingResponse;
+    public function devPing(?string $value = null): DevPingResponse;
 
     /**
      * Debug token generation.

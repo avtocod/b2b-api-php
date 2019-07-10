@@ -119,6 +119,24 @@ class UserResponse implements ResponseInterface, Countable, IteratorAggregate
     }
 
     /**
+     * Get **first** user entry by UID.
+     *
+     * @param string $uid
+     *
+     * @return User|null
+     */
+    public function getByUid(string $uid): ?User
+    {
+        $result = \array_values(\array_filter($this->data, function (User $user) use (&$uid): bool {
+            return $user->getUid() === $uid;
+        }));
+
+        return \count($result) === 1
+            ? $result[0]
+            : null;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function count(): int

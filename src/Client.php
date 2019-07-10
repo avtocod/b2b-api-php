@@ -19,8 +19,8 @@ use Avtocod\B2BApi\Responses\DevTokenResponse;
 use Avtocod\B2BApi\Responses\UserReportResponse;
 use Avtocod\B2BApi\Responses\UserBalanceResponse;
 use Avtocod\B2BApi\Responses\UserReportsResponse;
-use Avtocod\B2BApi\Exceptions\BadRequestException;
 use GuzzleHttp\ClientInterface as GuzzleInterface;
+use Avtocod\B2BApi\Exceptions\BadRequestException;
 use Avtocod\B2BApi\Responses\UserReportMakeResponse;
 use Avtocod\B2BApi\Responses\UserReportTypesResponse;
 use Avtocod\B2BApi\Responses\UserReportRefreshResponse;
@@ -85,12 +85,12 @@ class Client implements ClientInterface
     /**
      * {@inheritdoc}
      */
-    public function devPing(): DevPingResponse
+    public function devPing(?string $value = null): DevPingResponse
     {
         return DevPingResponse::fromHttpResponse(
             $this->doRequest(new Request('get', 'dev/ping'), [
                 'query' => [
-                    'value' => \time(),
+                    'value' => $value ?? ((string) \time()),
                 ],
             ])
         );
@@ -131,7 +131,7 @@ class Client implements ClientInterface
                     'is_hash' => $is_hash === true
                         ? 'true'
                         : 'false',
-                    'date'    => DateTimeFactory::toIso8601Zulu($date_from ?? new DateTime),
+                    'date'    => DateTimeFactory::toIso8601ZuluWithoutMs($date_from ?? new DateTime),
                     'age'     => \max(1, $age),
                 ],
             ])
@@ -286,7 +286,10 @@ class Client implements ClientInterface
 
         return UserReportMakeResponse::fromHttpResponse(
             $this->doRequest(new Request('post', \sprintf('user/reports/%s/_make', \urlencode($report_type_uid))), [
-                'body' => Json::encode((object) [
+                'headers' => [
+                    'Content-Type' => 'application/json'
+                ],
+                'body'    => Json::encode((object) [
                     'queryType' => $type,
                     'query'     => $value,
                     'options'   => (object) \array_replace($request_options, $options ?? []),
@@ -302,6 +305,9 @@ class Client implements ClientInterface
     {
         return UserReportRefreshResponse::fromHttpResponse(
             $this->doRequest(new Request('post', \sprintf('user/reports/%s/_refresh', \urlencode($report_uid))), [
+                'headers' => [
+                    'Content-Type' => 'application/json'
+                ],
                 'body' => Json::encode((object) ($options ?? [])),
             ])
         );

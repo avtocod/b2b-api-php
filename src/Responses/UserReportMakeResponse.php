@@ -119,6 +119,20 @@ class UserReportMakeResponse implements ResponseInterface, Countable, IteratorAg
     }
 
     /**
+     * Get first data-object.
+     *
+     * @return ReportMade|null
+     */
+    public function first(): ?ReportMade
+    {
+        if (isset($this->data[0])) {
+            return $this->data[0];
+        }
+
+        return null;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function count(): int

@@ -29,7 +29,7 @@ class Settings
     /**
      * Create a new Settings instance.
      *
-     * @param string      $auth_token
+     * @param string      $auth_token For token generation you can use `AuthToken::generate()`
      * @param string|null $base_uri
      * @param array|null  $guzzle_options
      */

@@ -28,7 +28,8 @@
         "phpstan/phpstan": "^0.11",
         "phpunit/phpunit": "^7.5",
         "symfony/var-dumper": "^4.2",
-        "tarampampam/guzzle-url-mock": "^1.1"
+        "tarampampam/guzzle-url-mock": "^1.1",
+        "vlucas/phpdotenv": "^3.4"
     },
     "autoload": {
         "psr-4": {
@@ -40,8 +41,12 @@
             "Avtocod\\B2BApi\\Tests\\": "tests"
         }
     },
+    "suggest": {
+        "avtocod/specs": "Avtocod project public specifications."
+    },
     "scripts": {
-        "phpunit": "@php ./vendor/bin/phpunit --no-coverage --colors=always",
+        "phpunit": "@php ./vendor/bin/phpunit --no-coverage --colors=always --testsuite=Unit",
+        "phpunit-feature": "@php ./vendor/bin/phpunit --no-coverage --colors=always --testsuite=Feature",
         "phpunit-cover": "@php ./vendor/bin/phpunit --coverage-html='./coverage/html'",
         "phpstan": "@php ./vendor/bin/phpstan analyze --no-progress --ansi --level=max ./src",
         "test": [
