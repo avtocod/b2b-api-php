@@ -15,7 +15,7 @@ use Avtocod\B2BApi\Exceptions\BadResponseException;
 use Tarampampam\Wrappers\Exceptions\JsonEncodeDecodeException;
 use Psr\Http\Message\ResponseInterface as HttpResponseInterface;
 
-final class UserBalanceResponse implements ResponseInterface, Countable, IteratorAggregate
+class UserBalanceResponse implements ResponseInterface, Countable, IteratorAggregate
 {
     /**
      * @var string

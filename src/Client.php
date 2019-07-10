@@ -25,7 +25,7 @@ use Avtocod\B2BApi\Responses\UserReportMakeResponse;
 use Avtocod\B2BApi\Responses\UserReportTypesResponse;
 use Avtocod\B2BApi\Responses\UserReportRefreshResponse;
 
-final class Client implements ClientInterface
+class Client implements ClientInterface
 {
     protected const TOKEN_PREFIX = 'AR-REST';
 

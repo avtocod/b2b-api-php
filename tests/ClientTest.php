@@ -4,6 +4,11 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Tests;
 
+use Avtocod\B2BApi\Responses\Entities\Balance;
+use Avtocod\B2BApi\Responses\Entities\Report;
+use Avtocod\B2BApi\Responses\Entities\ReportMade;
+use Avtocod\B2BApi\Responses\Entities\ReportType;
+use Avtocod\B2BApi\Responses\Entities\User;
 use DateTime;
 use Avtocod\B2BApi\Client;
 use Avtocod\B2BApi\Settings;
@@ -23,7 +28,7 @@ use Avtocod\B2BApi\Exceptions\BadResponseException;
 use Avtocod\B2BApi\Events\BeforeRequestSendingEvent;
 
 /**
- * @covers \Avtocod\B2BApi\Client
+ * @covers \Avtocod\B2BApi\Client<extended>
  */
 class ClientTest extends AbstractTestCase
 {
@@ -332,6 +337,8 @@ class ClientTest extends AbstractTestCase
     }
 
     /**
+     * @covers \Avtocod\B2BApi\Responses\DevPingResponse
+     *
      * @return void
      */
     public function testDevPing(): void
@@ -358,6 +365,26 @@ class ClientTest extends AbstractTestCase
     }
 
     /**
+     * @covers \Avtocod\B2BApi\Responses\DevPingResponse
+     *
+     * @return void
+     */
+    public function testDevPingUsingWrongJson(): void
+    {
+        $this->expectException(BadResponseException::class);
+
+        $this->guzzle_handler->onUriRequested(
+            $this->settings->getBaseUri() . \sprintf('dev/ping?value=%d', $time = \time()),
+            'get',
+            new Response(200, ['content-type' => 'application/json;charset=utf-8'], '{"foo":]')
+        );
+
+        $this->client->devPing();
+    }
+
+    /**
+     * @covers \Avtocod\B2BApi\Responses\DevTokenResponse
+     *
      * @return void
      */
     public function testDevToken(): void
@@ -398,9 +425,42 @@ class ClientTest extends AbstractTestCase
         $this->assertSame($response_date, DateTimeFactory::toIso8601Zulu($response->getDate()));
         $this->assertSame($stamp, $response->getStamp());
         $this->assertSame($age, $response->getAge());
+        $this->assertSame($not_available, $response->getSalt());
+        $this->assertSame($not_available, $response->getSaltedPassHash());
+        $this->assertSame($not_available, $response->getRawToken());
+        $this->assertSame($not_available, $response->getToken());
+        $this->assertSame($not_available, $response->getHeader());
     }
 
     /**
+     * @covers \Avtocod\B2BApi\Responses\DevTokenResponse
+     *
+     * @return void
+     */
+    public function testDevTokenUsingWrongJson(): void
+    {
+        $this->expectException(BadResponseException::class);
+
+        $this->guzzle_handler->onUriRequested(
+            $this->settings->getBaseUri() . 'dev/token?' . \http_build_query([
+                'user'    => $user = 'test@test',
+                'pass'    => $pass = 'test',
+                'is_hash' => ($is_hash = true)
+                    ? 'true'
+                    : 'false',
+                'date'    => DateTimeFactory::toIso8601Zulu($date = new DateTime),
+                'age'     => $age = \random_int(1, 100),
+            ]),
+            'get',
+            new Response(200, ['content-type' => 'application/json;charset=utf-8'], '{"foo":]')
+        );
+
+        $this->client->devToken($user, $pass, $is_hash, $date, $age);
+    }
+
+    /**
+     * @covers \Avtocod\B2BApi\Responses\UserResponse
+     *
      * @return void
      */
     public function testUser(): void
@@ -469,9 +529,17 @@ class ClientTest extends AbstractTestCase
         $this->assertSame($id, $user->getId());
         $this->assertSame($deleted, $user->isDeleted());
         $this->assertSame($pass_hash, $user->getPassHash());
+
+        foreach ($response as $item) {
+            $this->assertInstanceOf(User::class, $item);
+        }
+
+        $this->assertCount($response->getSize(), $response);
     }
 
     /**
+     * @covers \Avtocod\B2BApi\Responses\UserResponse
+     *
      * @return void
      */
     public function testUserDetailed(): void
@@ -568,6 +636,26 @@ class ClientTest extends AbstractTestCase
     }
 
     /**
+     * @covers \Avtocod\B2BApi\Responses\UserResponse
+     *
+     * @return void
+     */
+    public function testUserUsingWrongJson(): void
+    {
+        $this->expectException(BadResponseException::class);
+
+        $this->guzzle_handler->onUriRequested(
+            $this->settings->getBaseUri() . 'user?_detailed=true',
+            'get',
+            new Response(200, ['content-type' => 'application/json;charset=utf-8'], '{"foo":]')
+        );
+
+        $this->client->user(true);
+    }
+
+    /**
+     * @covers \Avtocod\B2BApi\Responses\UserBalanceResponse
+     *
      * @return void
      */
     public function testUserBalance(): void
@@ -648,9 +736,17 @@ class ClientTest extends AbstractTestCase
         $this->assertSame($total_use, $totally->getQuoteUse());
         $this->assertSame($total_created_at, DateTimeFactory::toIso8601Zulu($totally->getCreatedAt()));
         $this->assertSame($total_updated_at, DateTimeFactory::toIso8601Zulu($totally->getUpdatedAt()));
+
+        foreach ($response as $item) {
+            $this->assertInstanceOf(Balance::class, $item);
+        }
+
+        $this->assertCount($response->getSize(), $response);
     }
 
     /**
+     * @covers \Avtocod\B2BApi\Responses\UserBalanceResponse
+     *
      * @return void
      */
     public function testUserBalanceDetailed(): void
@@ -734,6 +830,28 @@ class ClientTest extends AbstractTestCase
     }
 
     /**
+     * @covers \Avtocod\B2BApi\Responses\UserBalanceResponse
+     *
+     * @return void
+     */
+    public function testUserBalanceUsingWrongJson(): void
+    {
+        $this->expectException(BadResponseException::class);
+
+        $this->guzzle_handler->onUriRequested(
+            $this->settings->getBaseUri() . \sprintf(
+                'user/balance/%s?_detailed=true', \urlencode($report_type_uid = 'foo@bar')
+            ),
+            'get',
+            new Response(200, ['content-type' => 'application/json;charset=utf-8'], '{"foo":]')
+        );
+
+        $this->client->userBalance($report_type_uid, true);
+    }
+
+    /**
+     * @covers \Avtocod\B2BApi\Responses\UserReportTypesResponse
+     *
      * @return void
      */
     public function testUserReportTypes(): void
@@ -761,7 +879,8 @@ class ClientTest extends AbstractTestCase
 
         $this->assertCount(11, $response->getData());
         $this->assertSame(11, $response->getTotal());
-
+        $this->assertSame('ok', $response->getState());
+        $this->assertEquals(DateTimeFactory::createFromIso8601Zulu('2019-07-05T08:43:59.493Z'), $response->getStamp());
         $this->assertNull($response->getByUid('foo@bar'));
 
         $report_type = $response->getByUid('some_report_uid_4_test@some_domain_uid');
@@ -796,9 +915,17 @@ class ClientTest extends AbstractTestCase
         $this->assertEquals(
             DateTimeFactory::createFromIso8601Zulu('3000-01-01T00:00:00.000Z'), $report_type->getActiveTo()
         );
+
+        foreach ($response as $item) {
+            $this->assertInstanceOf(ReportType::class, $item);
+        }
+
+        $this->assertCount($response->getSize(), $response);
     }
 
     /**
+     * @covers \Avtocod\B2BApi\Responses\UserReportTypesResponse
+     *
      * @return void
      */
     public function testUserReportTypesWithMinimalData(): void
@@ -863,6 +990,35 @@ class ClientTest extends AbstractTestCase
     }
 
     /**
+     * @covers \Avtocod\B2BApi\Responses\UserReportTypesResponse
+     *
+     * @return void
+     */
+    public function testUserReportTypesUsingWrongJson(): void
+    {
+        $this->expectException(BadResponseException::class);
+
+        $this->guzzle_handler->onUriRequested(
+            $this->settings->getBaseUri() . 'user/report_types?' . \http_build_query([
+                '_can_generate' => 'false',
+                '_content'      => 'false',
+                '_query'        => '_all',
+                '_size'         => 20,
+                '_offset'       => 0,
+                '_page'         => 1,
+                '_sort'         => '-created_at',
+                '_calc_total'   => 'false',
+            ]),
+            'get',
+            new Response(200, ['content-type' => 'application/json;charset=utf-8'], '{"foo":]')
+        );
+
+        $this->client->userReportTypes();
+    }
+
+    /**
+     * @covers \Avtocod\B2BApi\Responses\UserReportsResponse
+     *
      * @return void
      */
     public function testUserReports(): void
@@ -931,9 +1087,44 @@ class ClientTest extends AbstractTestCase
             DateTimeFactory::createFromIso8601Zulu('3000-01-01T00:00:00.000Z'), $report->getActiveTo()
         );
         $this->assertTrue($report->isCompleted());
+
+        foreach ($response as $item) {
+            $this->assertInstanceOf(Report::class, $item);
+        }
+
+        $this->assertCount($response->getSize(), $response);
+    }
+
+     /**
+     * @covers \Avtocod\B2BApi\Responses\UserReportsResponse
+     *
+     * @return void
+     */
+    public function testUserReportsUsingWrongJson(): void
+    {
+        $this->expectException(BadResponseException::class);
+
+        $this->guzzle_handler->onUriRequested(
+            $this->settings->getBaseUri() . 'user/reports?' . \http_build_query([
+                '_content'    => 'true',
+                '_query'      => '_all',
+                '_size'       => 20,
+                '_offset'     => 0,
+                '_page'       => 1,
+                '_sort'       => '-created_at',
+                '_calc_total' => 'true',
+                '_detailed'   => 'true',
+            ]),
+            'get',
+            new Response(200, ['content-type' => 'application/json;charset=utf-8'], '{"foo":]')
+        );
+
+        $this->client->userReports(true, '_all', 20, 0, 1, '-created_at', true, true);
     }
 
     /**
+     * @covers \Avtocod\B2BApi\Responses\UserReportsResponse
+     *
      * @return void
      */
     public function testUserReportsWithMinimalData(): void
@@ -1003,6 +1194,8 @@ class ClientTest extends AbstractTestCase
     }
 
     /**
+     * @covers \Avtocod\B2BApi\Responses\UserReportResponse
+     *
      * @return void
      */
     public function testUserReport(): void
@@ -1068,9 +1261,40 @@ class ClientTest extends AbstractTestCase
         );
 
         $this->assertFalse($report->isCompleted());
+
+        foreach ($response as $item) {
+            $this->assertInstanceOf(Report::class, $item);
+        }
+
+        $this->assertCount($response->getSize(), $response);
     }
 
     /**
+     * @covers \Avtocod\B2BApi\Responses\UserReportResponse
+     *
+     * @return void
+     */
+    public function testUserReportUsingWrongJson(): void
+    {
+        $this->expectException(BadResponseException::class);
+
+        $this->guzzle_handler->onUriRequested(
+            $this->settings->getBaseUri() . \sprintf(
+                'user/reports/%s?', \urlencode($report_uid = 'some_report_uid_1_YV1KS9614S107357Y@some_domain_uid')
+            ) . \http_build_query([
+                '_content'  => 'true',
+                '_detailed' => 'true',
+            ]),
+            'get',
+            new Response(200, ['content-type' => 'application/json;charset=utf-8'], '{"foo":]')
+        );
+
+        $this->client->userReport($report_uid);
+    }
+
+    /**
+     * @covers \Avtocod\B2BApi\Responses\UserReportMakeResponse
+     *
      * @return void
      */
     public function testUserReportMake(): void
@@ -1122,9 +1346,42 @@ class ClientTest extends AbstractTestCase
         $this->assertSame($body, $request_body['query']);
         $this->assertSame($on_update, $request_body['options']['webhook']['on_update']);
         $this->assertSame($on_complete, $request_body['options']['webhook']['on_complete']);
+
+        foreach ($response as $item) {
+            $this->assertInstanceOf(ReportMade::class, $item);
+        }
+
+        $this->assertCount($response->getSize(), $response);
     }
 
     /**
+     * @covers \Avtocod\B2BApi\Responses\UserReportMakeResponse
+     *
+     * @return void
+     */
+    public function testUserReportMakeUsingWrongJson(): void
+    {
+        $this->expectException(BadResponseException::class);
+
+        $this->guzzle_handler->onUriRequested(
+            $this->settings->getBaseUri() . \sprintf(
+                'user/reports/%s/_make', \urlencode($report_type_uid = 'some_report_uid')
+            ),
+            'post',
+            new Response(200, ['content-type' => 'application/json;charset=utf-8'], '{"foo":]')
+        );
+
+        $this->client->userReportMake(
+            'some_report_uid',
+            $type = 'VIN',
+            $body = 'Z94CB41AAGR323020',
+            null
+        );
+    }
+
+    /**
+     * @covers \Avtocod\B2BApi\Responses\UserReportRefreshResponse
+     *
      * @return void
      */
     public function testUserReportRefresh(): void
@@ -1161,5 +1418,32 @@ class ClientTest extends AbstractTestCase
         $this->assertEquals(
             DateTimeFactory::createFromIso8601Zulu('2019-07-08T07:45:46.913Z'), $made->getSuggestGet()
         );
+
+        foreach ($response as $item) {
+            $this->assertInstanceOf(ReportMade::class, $item);
+        }
+
+        $this->assertCount($response->getSize(), $response);
+    }
+
+    /**
+     * @covers \Avtocod\B2BApi\Responses\UserReportRefreshResponse
+     *
+     * @return void
+     */
+    public function testUserReportRefreshUsingWrongJson(): void
+    {
+        $this->expectException(BadResponseException::class);
+
+        $this->guzzle_handler->onUriRequested(
+            $this->settings->getBaseUri() . \sprintf(
+                'user/reports/%s/_refresh',
+                \urlencode($report_uid = 'some_report_uid_Z94CB41AAGR323020@some_domain_uid')
+            ),
+            'post',
+            new Response(200, ['content-type' => 'application/json;charset=utf-8'], '{"foo":]')
+        );
+
+        $this->client->userReportRefresh($report_uid);
     }
 }

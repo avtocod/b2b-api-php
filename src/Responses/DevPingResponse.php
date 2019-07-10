@@ -9,7 +9,7 @@ use Avtocod\B2BApi\Exceptions\BadResponseException;
 use Tarampampam\Wrappers\Exceptions\JsonEncodeDecodeException;
 use Psr\Http\Message\ResponseInterface as HttpResponseInterface;
 
-final class DevPingResponse implements ResponseInterface
+class DevPingResponse implements ResponseInterface
 {
     /**
      * @var string
