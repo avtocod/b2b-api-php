@@ -19,8 +19,8 @@ use Avtocod\B2BApi\Responses\DevTokenResponse;
 use Avtocod\B2BApi\Responses\UserReportResponse;
 use Avtocod\B2BApi\Responses\UserBalanceResponse;
 use Avtocod\B2BApi\Responses\UserReportsResponse;
-use GuzzleHttp\ClientInterface as GuzzleInterface;
 use Avtocod\B2BApi\Exceptions\BadRequestException;
+use GuzzleHttp\ClientInterface as GuzzleInterface;
 use Avtocod\B2BApi\Responses\UserReportMakeResponse;
 use Avtocod\B2BApi\Responses\UserReportTypesResponse;
 use Avtocod\B2BApi\Responses\UserReportRefreshResponse;
@@ -287,7 +287,7 @@ class Client implements ClientInterface
         return UserReportMakeResponse::fromHttpResponse(
             $this->doRequest(new Request('post', \sprintf('user/reports/%s/_make', \urlencode($report_type_uid))), [
                 'headers' => [
-                    'Content-Type' => 'application/json'
+                    'Content-Type' => 'application/json',
                 ],
                 'body'    => Json::encode((object) [
                     'queryType' => $type,
@@ -306,7 +306,7 @@ class Client implements ClientInterface
         return UserReportRefreshResponse::fromHttpResponse(
             $this->doRequest(new Request('post', \sprintf('user/reports/%s/_refresh', \urlencode($report_uid))), [
                 'headers' => [
-                    'Content-Type' => 'application/json'
+                    'Content-Type' => 'application/json',
                 ],
                 'body' => Json::encode((object) ($options ?? [])),
             ])

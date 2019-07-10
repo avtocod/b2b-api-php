@@ -23,6 +23,18 @@ class SettingsTest extends AbstractTestCase
     protected $auth_token;
 
     /**
+     * {@inheritdoc}
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->settings = new Settings(
+            $this->auth_token = $this->faker->word
+        );
+    }
+
+    /**
      * @return void
      */
     public function testConstructorDefaults(): void
@@ -67,17 +79,5 @@ class SettingsTest extends AbstractTestCase
         $this->assertFalse($this->settings->getGuzzleOptions()[GuzzleHttpOptions::ALLOW_REDIRECTS]);
 
         $this->assertSame('https://b2bapi.avtocod.ru/b2b/api/v1/', $this->settings->getBaseUri());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->settings = new Settings(
-            $this->auth_token = $this->faker->word
-        );
     }
 }

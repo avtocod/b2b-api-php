@@ -48,6 +48,21 @@ class ClientTest extends AbstractTestCase
     protected $settings;
 
     /**
+     * {@inheritdoc}
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->client = new Client(
+            $this->settings = new Settings('TEST_TOKEN'),
+            $this->guzzle = new Guzzle([
+                'handler' => HandlerStack::create($this->guzzle_handler),
+            ])
+        );
+    }
+
+    /**
      * @return void
      */
     public function testImplementations(): void
@@ -450,7 +465,6 @@ class ClientTest extends AbstractTestCase
      */
     public function testUser(): void
     {
-
         $this->guzzle_handler->onUriRequested(
             $this->settings->getBaseUri() . 'user?_detailed=false',
             'get',
@@ -1442,20 +1456,5 @@ class ClientTest extends AbstractTestCase
         );
 
         $this->client->userReportRefresh($report_uid);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->client = new Client(
-            $this->settings = new Settings('TEST_TOKEN'),
-            $this->guzzle = new Guzzle([
-                'handler' => HandlerStack::create($this->guzzle_handler),
-            ])
-        );
     }
 }
