@@ -143,11 +143,7 @@ class UserReportsResponse implements ResponseInterface, Countable, IteratorAggre
      */
     public function first(): ?Report
     {
-        if (isset($this->data[0])) {
-            return $this->data[0];
-        }
-
-        return null;
+        return $this->data[0] ?? null;
     }
 
     /**

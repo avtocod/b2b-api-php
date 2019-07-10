@@ -186,9 +186,7 @@ class Domain implements CanCreateSelfFromArrayInterface
     /**
      * Get domain state.
      *
-     * E.g.: `DRAFT`, `ACTIVE`, `BANNED`.
-     *
-     * @return string
+     * @return string E.g.: `DRAFT`, `ACTIVE`, `BANNED`
      */
     public function getState(): string
     {

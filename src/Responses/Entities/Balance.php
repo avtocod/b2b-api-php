@@ -120,9 +120,7 @@ class Balance implements CanCreateSelfFromArrayInterface
     /**
      * Get balance entry type.
      *
-     * E.g.: `DAY`, `MONTH`, `TOTAL`.
-     *
-     * @return string
+     * @return string E.g.: `DAY`, `MONTH`, `TOTAL`
      */
     public function getBalanceType(): string
     {

@@ -217,9 +217,9 @@ class Report implements CanCreateSelfFromArrayInterface
     }
 
     /**
-     * Get unique report ID (e.g.: `report_uid@domain`).
+     * Get unique report ID.
      *
-     * @return string
+     * @return string E.g.: `report_uid@domain`
      */
     public function getUid(): string
     {

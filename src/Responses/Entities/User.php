@@ -263,9 +263,9 @@ class User implements CanCreateSelfFromArrayInterface
     }
 
     /**
-     * Get login (e.g. `user@domain`).
+     * Get login.
      *
-     * @return string
+     * @return string E.g. `user@domain`
      */
     public function getLogin(): string
     {
@@ -285,9 +285,7 @@ class User implements CanCreateSelfFromArrayInterface
     /**
      * Get user status.
      *
-     * E.g.: `ACTIVATION_REQUIRED`, `ACTIVE`, `BANNED`.
-     *
-     * @return string
+     * @return string E.g.: `ACTIVATION_REQUIRED`, `ACTIVE`, `BANNED`
      */
     public function getState(): string
     {

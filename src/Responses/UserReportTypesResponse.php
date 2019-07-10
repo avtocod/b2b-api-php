@@ -149,7 +149,7 @@ class UserReportTypesResponse implements ResponseInterface, Countable, IteratorA
             return $report_type->getUid() === $uid;
         }));
 
-        return \count($result) === 1
+        return \count($result) >= 1
             ? $result[0]
             : null;
     }

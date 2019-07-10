@@ -319,9 +319,7 @@ class ReportType implements CanCreateSelfFromArrayInterface
     /**
      * Get report type state.
      *
-     * E.g.: `DRAFT`, `PUBLISHED`, `OBSOLETE`.
-     *
-     * @return string
+     * @return string e.g.: `DRAFT`, `PUBLISHED`, `OBSOLETE`
      */
     public function getState(): string
     {
@@ -511,9 +509,7 @@ class ReportType implements CanCreateSelfFromArrayInterface
     /**
      * Get report generation mode.
      *
-     * E.g.: `TRANSACTIONAL`, `FAST_NON_TRANSACTIONAL`, `FAST_NON_BALANCE`.
-     *
-     * @return string|null
+     * @return string|null e.g.: `TRANSACTIONAL`, `FAST_NON_TRANSACTIONAL`, `FAST_NON_BALANCE`
      */
     public function getReportMakeMode(): ?string
     {

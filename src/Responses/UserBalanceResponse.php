@@ -131,7 +131,7 @@ class UserBalanceResponse implements ResponseInterface, Countable, IteratorAggre
             return $balance->getBalanceType() === $balance_type;
         }));
 
-        return \count($result) === 1
+        return \count($result) >= 1
             ? $result[0]
             : null;
     }

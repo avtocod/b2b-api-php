@@ -131,7 +131,7 @@ class UserResponse implements ResponseInterface, Countable, IteratorAggregate
             return $user->getUid() === $uid;
         }));
 
-        return \count($result) === 1
+        return \count($result) >= 1
             ? $result[0]
             : null;
     }

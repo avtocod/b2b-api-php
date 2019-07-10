@@ -393,7 +393,7 @@ class ClientTest extends AbstractTestCase
             $this->settings->getBaseUri() . 'dev/token?' . \http_build_query([
                 'user'    => $user = 'test@test',
                 'pass'    => $pass = 'test',
-                'is_hash' => ($is_hash = true)
+                'is_hash' => ($is_hash = $this->faker->boolean)
                     ? 'true'
                     : 'false',
                 'date'    => DateTimeFactory::toIso8601ZuluWithoutMs($date = new DateTime),

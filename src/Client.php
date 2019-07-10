@@ -15,12 +15,13 @@ use Psr\Http\Message\ResponseInterface;
 use Avtocod\B2BApi\Responses\UserResponse;
 use GuzzleHttp\Exception\RequestException;
 use Avtocod\B2BApi\Responses\DevPingResponse;
+use GuzzleHttp\RequestOptions as GuzzleOptions;
 use Avtocod\B2BApi\Responses\DevTokenResponse;
 use Avtocod\B2BApi\Responses\UserReportResponse;
 use Avtocod\B2BApi\Responses\UserBalanceResponse;
 use Avtocod\B2BApi\Responses\UserReportsResponse;
-use Avtocod\B2BApi\Exceptions\BadRequestException;
 use GuzzleHttp\ClientInterface as GuzzleInterface;
+use Avtocod\B2BApi\Exceptions\BadRequestException;
 use Avtocod\B2BApi\Responses\UserReportMakeResponse;
 use Avtocod\B2BApi\Responses\UserReportTypesResponse;
 use Avtocod\B2BApi\Responses\UserReportRefreshResponse;
@@ -128,7 +129,7 @@ class Client implements ClientInterface
                 'query' => [
                     'user'    => $username,
                     'pass'    => $password,
-                    'is_hash' => $is_hash === true
+                    'is_hash' => $is_hash
                         ? 'true'
                         : 'false',
                     'date'    => DateTimeFactory::toIso8601ZuluWithoutMs($date_from ?? new DateTime),
@@ -146,7 +147,7 @@ class Client implements ClientInterface
         return UserResponse::fromHttpResponse(
             $this->doRequest(new Request('get', 'user'), [
                 'query' => [
-                    '_detailed' => $detailed === true
+                    '_detailed' => $detailed
                         ? 'true'
                         : 'false',
                 ],
@@ -162,7 +163,7 @@ class Client implements ClientInterface
         return UserBalanceResponse::fromHttpResponse(
             $this->doRequest(new Request('get', \sprintf('user/balance/%s', \urlencode($report_type_uid))), [
                 'query' => [
-                    '_detailed' => $detailed === true
+                    '_detailed' => $detailed
                         ? 'true'
                         : 'false',
                 ],
@@ -185,10 +186,10 @@ class Client implements ClientInterface
         return UserReportTypesResponse::fromHttpResponse(
             $this->doRequest(new Request('get', 'user/report_types'), [
                 'query' => [
-                    '_can_generate' => $can_generate === true
+                    '_can_generate' => $can_generate
                         ? 'true'
                         : 'false',
-                    '_content'      => $content === true
+                    '_content'      => $content
                         ? 'true'
                         : 'false',
                     '_query'        => $query,
@@ -196,7 +197,7 @@ class Client implements ClientInterface
                     '_offset'       => \max(0, $offset),
                     '_page'         => \max(1, $page),
                     '_sort'         => $sort,
-                    '_calc_total'   => $calc_total === true
+                    '_calc_total'   => $calc_total
                         ? 'true'
                         : 'false',
                 ],
@@ -219,7 +220,7 @@ class Client implements ClientInterface
         return UserReportsResponse::fromHttpResponse(
             $this->doRequest(new Request('get', 'user/reports'), [
                 'query' => [
-                    '_content'    => $content === true
+                    '_content'    => $content
                         ? 'true'
                         : 'false',
                     '_query'      => $query,
@@ -227,10 +228,10 @@ class Client implements ClientInterface
                     '_offset'     => \max(0, $offset),
                     '_page'       => \max(1, $page),
                     '_sort'       => $sort,
-                    '_calc_total' => $calc_total === true
+                    '_calc_total' => $calc_total
                         ? 'true'
                         : 'false',
-                    '_detailed'   => $detailed === true
+                    '_detailed'   => $detailed
                         ? 'true'
                         : 'false',
                 ],
@@ -248,10 +249,10 @@ class Client implements ClientInterface
         return UserReportResponse::fromHttpResponse(
             $this->doRequest(new Request('get', \sprintf('user/reports/%s', \urlencode($report_uid))), [
                 'query' => [
-                    '_content'  => $content === true
+                    '_content'  => $content
                         ? 'true'
                         : 'false',
-                    '_detailed' => $detailed === true
+                    '_detailed' => $detailed
                         ? 'true'
                         : 'false',
                 ],
@@ -286,14 +287,11 @@ class Client implements ClientInterface
 
         return UserReportMakeResponse::fromHttpResponse(
             $this->doRequest(new Request('post', \sprintf('user/reports/%s/_make', \urlencode($report_type_uid))), [
-                'headers' => [
-                    'Content-Type' => 'application/json',
-                ],
-                'body'    => Json::encode((object) [
+                GuzzleOptions::JSON => (object) [
                     'queryType' => $type,
                     'query'     => $value,
                     'options'   => (object) \array_replace($request_options, $options ?? []),
-                ]),
+                ],
             ])
         );
     }
@@ -305,10 +303,7 @@ class Client implements ClientInterface
     {
         return UserReportRefreshResponse::fromHttpResponse(
             $this->doRequest(new Request('post', \sprintf('user/reports/%s/_refresh', \urlencode($report_uid))), [
-                'headers' => [
-                    'Content-Type' => 'application/json',
-                ],
-                'body' => Json::encode((object) ($options ?? [])),
+                GuzzleOptions::JSON => (object) ($options ?? []),
             ])
         );
     }

@@ -125,11 +125,7 @@ class UserReportRefreshResponse implements ResponseInterface, Countable, Iterato
      */
     public function first(): ?ReportMade
     {
-        if (isset($this->data[0])) {
-            return $this->data[0];
-        }
-
-        return null;
+        return $this->data[0] ?? null;
     }
 
     /**
