@@ -84,7 +84,7 @@ For example, if you want to generate report for `A111AA177` (`GRZ` type), you ca
 ```php
 <?php /** @var \Avtocod\B2BApi\Client $client */
 
-// Make report
+// Make report (this operation is asynchronous)
 $report_uid = $client
     ->userReportMake($this->report_type, 'GRZ', 'A111AA177', null, true)
     ->first()
