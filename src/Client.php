@@ -61,7 +61,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @return $this
      */
@@ -73,7 +73,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getSettings(): Settings
     {

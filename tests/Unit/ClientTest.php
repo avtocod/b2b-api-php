@@ -4,8 +4,6 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Tests;
 
-use Avtocod\B2BApi\WithSettingsInterface;
-use Avtocod\B2BApi\WithEventsHandlerSetterInterface;
 use DateTime;
 use Avtocod\B2BApi\Client;
 use Avtocod\B2BApi\Settings;
@@ -17,6 +15,7 @@ use Tarampampam\Wrappers\Json;
 use GuzzleHttp\Client as Guzzle;
 use Avtocod\B2BApi\ClientInterface;
 use Avtocod\B2BApi\DateTimeFactory;
+use Avtocod\B2BApi\WithSettingsInterface;
 use GuzzleHttp\Exception\ConnectException;
 use Avtocod\B2BApi\Responses\Entities\User;
 use Avtocod\B2BApi\Events\RequestFailedEvent;
@@ -28,6 +27,7 @@ use Avtocod\B2BApi\Exceptions\BadRequestException;
 use Avtocod\B2BApi\Events\AfterRequestSendingEvent;
 use Avtocod\B2BApi\Exceptions\BadResponseException;
 use Avtocod\B2BApi\Events\BeforeRequestSendingEvent;
+use Avtocod\B2BApi\WithEventsHandlerSetterInterface;
 
 /**
  * @covers \Avtocod\B2BApi\Client<extended>
