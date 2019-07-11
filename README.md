@@ -16,7 +16,7 @@
 Require this package with composer using the following command:
 
 ```shell
-$ composer require avtocod/b2b-api-php "^3.0"
+$ composer require avtocod/b2b-api-php "^3.1"
 ```
 
 > Installed `composer` is required ([how to install composer][getcomposer]).

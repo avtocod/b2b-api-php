@@ -4,6 +4,8 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Tests;
 
+use Avtocod\B2BApi\WithSettingsInterface;
+use Avtocod\B2BApi\WithEventsHandlerSetterInterface;
 use DateTime;
 use Avtocod\B2BApi\Client;
 use Avtocod\B2BApi\Settings;
@@ -68,6 +70,8 @@ class ClientTest extends AbstractTestCase
     public function testImplementations(): void
     {
         $this->assertInstanceOf(ClientInterface::class, $this->client);
+        $this->assertInstanceOf(WithSettingsInterface::class, $this->client);
+        $this->assertInstanceOf(WithEventsHandlerSetterInterface::class, $this->client);
     }
 
     /**

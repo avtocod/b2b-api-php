@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog][keepachangelog] and this project adheres to [Semantic Versioning][semver].
 
+## v3.1.0
+
+### Added
+
+- Interface `WithSettingsInterface`
+- Interface `WithEventsHandlerSetterInterface`
+
+### Changed
+
+- Class `Client` now implements `WithSettingsInterface` and `WithEventsHandlerSetterInterface`
+
 ## v3.0.0
 
 ### Changed

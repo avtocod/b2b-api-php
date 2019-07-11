@@ -8,7 +8,6 @@ use Closure;
 use DateTime;
 use GuzzleHttp\Psr7\Request;
 use PackageVersions\Versions;
-use Tarampampam\Wrappers\Json;
 use GuzzleHttp\Client as Guzzle;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -26,7 +25,7 @@ use Avtocod\B2BApi\Responses\UserReportMakeResponse;
 use Avtocod\B2BApi\Responses\UserReportTypesResponse;
 use Avtocod\B2BApi\Responses\UserReportRefreshResponse;
 
-class Client implements ClientInterface
+class Client implements ClientInterface, WithSettingsInterface, WithEventsHandlerSetterInterface
 {
     protected const TOKEN_PREFIX = 'AR-REST';
 
@@ -62,9 +61,7 @@ class Client implements ClientInterface
     }
 
     /**
-     * Set events handler.
-     *
-     * @param Closure $events_handler
+     * {@inheritDoc}
      *
      * @return $this
      */
@@ -76,7 +73,7 @@ class Client implements ClientInterface
     }
 
     /**
-     * @return Settings
+     * {@inheritDoc}
      */
     public function getSettings(): Settings
     {
