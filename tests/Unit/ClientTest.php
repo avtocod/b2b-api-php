@@ -351,7 +351,7 @@ class ClientTest extends AbstractTestCase
             $this->settings->getBaseUri() . \sprintf('dev/ping?value=%d', $time = \time()),
             'get',
             new Response(
-                200, ['content-type' => 'application/json;charset=utf-8'], \json_encode((object) [
+                200, ['content-type' => 'application/json;charset=utf-8'], $raw = \json_encode((object) [
                     'value' => $value = (string) $time,
                     'in'    => $in = $this->faker->numberBetween(0, 100),
                     'out'   => $out = ($time * 1000),
@@ -366,6 +366,8 @@ class ClientTest extends AbstractTestCase
         $this->assertSame($in, $response->getIn());
         $this->assertSame($out, $response->getOut());
         $this->assertSame($delay, $response->getDelay());
+
+        $this->assertJsonStringEqualsJsonString($raw, $response->getRawResponseContent());
     }
 
     /**
@@ -405,7 +407,7 @@ class ClientTest extends AbstractTestCase
             ]),
             'get',
             new Response(
-                200, ['content-type' => 'application/json;charset=utf-8'], \json_encode((object) [
+                200, ['content-type' => 'application/json;charset=utf-8'], $raw = \json_encode((object) [
                     'user'             => $user,
                     'pass'             => $pass,
                     'pass_hash'        => $pass_hash = \base64_encode(\md5($pass, true)),
@@ -434,6 +436,8 @@ class ClientTest extends AbstractTestCase
         $this->assertSame($not_available, $response->getRawToken());
         $this->assertSame($not_available, $response->getToken());
         $this->assertSame($not_available, $response->getHeader());
+
+        $this->assertJsonStringEqualsJsonString($raw, $response->getRawResponseContent());
     }
 
     /**
@@ -473,7 +477,7 @@ class ClientTest extends AbstractTestCase
             $this->settings->getBaseUri() . 'user?_detailed=false',
             'get',
             new Response(
-                200, ['content-type' => 'application/json;charset=utf-8'], \json_encode((object) [
+                200, ['content-type' => 'application/json;charset=utf-8'], $raw = \json_encode((object) [
                     'state' => $state = 'ok',
                     'size'  => $size = 1,
                     'stamp' => $stamp = DateTimeFactory::toIso8601Zulu(new DateTime),
@@ -542,6 +546,8 @@ class ClientTest extends AbstractTestCase
 
         $this->assertSame($uid, $response->getByUid($uid)->getUid());
         $this->assertNull($response->getByUid('foo bar'));
+
+        $this->assertJsonStringEqualsJsonString($raw, $response->getRawResponseContent());
     }
 
     /**
@@ -555,7 +561,7 @@ class ClientTest extends AbstractTestCase
             $this->settings->getBaseUri() . 'user?_detailed=true',
             'get',
             new Response(
-                200, ['content-type' => 'application/json;charset=utf-8'], \json_encode((object) [
+                200, ['content-type' => 'application/json;charset=utf-8'], $raw = \json_encode((object) [
                     'state' => $state = 'ok',
                     'size'  => $size = 1,
                     'stamp' => $stamp = DateTimeFactory::toIso8601Zulu(new DateTime),
@@ -640,6 +646,8 @@ class ClientTest extends AbstractTestCase
         $this->assertSame($domain_updated_by, $user_domain->getUpdatedBy());
         $this->assertSame($domain_active_from, DateTimeFactory::toIso8601Zulu($user_domain->getActiveFrom()));
         $this->assertSame($domain_active_to, DateTimeFactory::toIso8601Zulu($user_domain->getActiveTo()));
+
+        $this->assertJsonStringEqualsJsonString($raw, $response->getRawResponseContent());
     }
 
     /**
@@ -673,7 +681,7 @@ class ClientTest extends AbstractTestCase
             ),
             'get',
             new Response(
-                200, ['content-type' => 'application/json;charset=utf-8'], \json_encode((object) [
+                200, ['content-type' => 'application/json;charset=utf-8'], $raw = \json_encode((object) [
                     'state' => $state = 'ok',
                     'size'  => $size = 3,
                     'stamp' => $stamp = DateTimeFactory::toIso8601Zulu(new DateTime),
@@ -749,6 +757,8 @@ class ClientTest extends AbstractTestCase
         }
 
         $this->assertCount($response->getSize(), $response);
+
+        $this->assertJsonStringEqualsJsonString($raw, $response->getRawResponseContent());
     }
 
     /**
@@ -764,7 +774,7 @@ class ClientTest extends AbstractTestCase
             ),
             'get',
             new Response(
-                200, ['content-type' => 'application/json;charset=utf-8'], \json_encode((object) [
+                200, ['content-type' => 'application/json;charset=utf-8'], $raw = \json_encode((object) [
                     'state' => $state = 'ok',
                     'size'  => $size = 3,
                     'stamp' => $stamp = DateTimeFactory::toIso8601Zulu(new DateTime),
@@ -834,6 +844,8 @@ class ClientTest extends AbstractTestCase
         $this->assertSame($total_use, $totally->getQuoteUse());
         $this->assertSame($total_created_at, DateTimeFactory::toIso8601Zulu($totally->getCreatedAt()));
         $this->assertSame($total_updated_at, DateTimeFactory::toIso8601Zulu($totally->getUpdatedAt()));
+
+        $this->assertJsonStringEqualsJsonString($raw, $response->getRawResponseContent());
     }
 
     /**
@@ -878,7 +890,7 @@ class ClientTest extends AbstractTestCase
             new Response(
                 200,
                 ['content-type' => 'application/json;charset=utf-8'],
-                \file_get_contents(__DIR__ . '/../stubs/user__report_types__with_content_and_total.json')
+                $raw = \file_get_contents(__DIR__ . '/../stubs/user__report_types__with_content_and_total.json')
             )
         );
 
@@ -928,6 +940,8 @@ class ClientTest extends AbstractTestCase
         }
 
         $this->assertCount($response->getSize(), $response);
+
+        $this->assertJsonStringEqualsJsonString($raw, $response->getRawResponseContent());
     }
 
     /**
@@ -952,7 +966,7 @@ class ClientTest extends AbstractTestCase
             new Response(
                 200,
                 ['content-type' => 'application/json;charset=utf-8'],
-                \file_get_contents(__DIR__ . '/../stubs/user__report_types__minimal.json')
+                $raw = \file_get_contents(__DIR__ . '/../stubs/user__report_types__minimal.json')
             )
         );
 
@@ -994,6 +1008,8 @@ class ClientTest extends AbstractTestCase
         $this->assertEquals(
             DateTimeFactory::createFromIso8601Zulu('3000-01-01T00:00:00.000Z'), $report_type->getActiveTo()
         );
+
+        $this->assertJsonStringEqualsJsonString($raw, $response->getRawResponseContent());
     }
 
     /**
@@ -1045,7 +1061,7 @@ class ClientTest extends AbstractTestCase
             new Response(
                 200,
                 ['content-type' => 'application/json;charset=utf-8'],
-                \file_get_contents(__DIR__ . '/../stubs/user__reports__maximal.json')
+                $raw = \file_get_contents(__DIR__ . '/../stubs/user__reports__maximal.json')
             )
         );
 
@@ -1102,6 +1118,8 @@ class ClientTest extends AbstractTestCase
         }
 
         $this->assertCount($response->getSize(), $response);
+
+        $this->assertJsonStringEqualsJsonString($raw, $response->getRawResponseContent());
     }
 
     /**
@@ -1153,7 +1171,7 @@ class ClientTest extends AbstractTestCase
             new Response(
                 200,
                 ['content-type' => 'application/json;charset=utf-8'],
-                \file_get_contents(__DIR__ . '/../stubs/user__reports__minimal.json')
+                $raw = \file_get_contents(__DIR__ . '/../stubs/user__reports__minimal.json')
             )
         );
 
@@ -1200,6 +1218,8 @@ class ClientTest extends AbstractTestCase
         $this->assertTrue($response->getData()[0]->isCompleted());
         $this->assertTrue($response->getData()[1]->isCompleted());
         $this->assertFalse($response->getData()[2]->isCompleted());
+
+        $this->assertJsonStringEqualsJsonString($raw, $response->getRawResponseContent());
     }
 
     /**
@@ -1220,7 +1240,7 @@ class ClientTest extends AbstractTestCase
             new Response(
                 200,
                 ['content-type' => 'application/json;charset=utf-8'],
-                \file_get_contents(__DIR__ . '/../stubs/user__report.json')
+                $raw = \file_get_contents(__DIR__ . '/../stubs/user__report.json')
             )
         );
 
@@ -1278,6 +1298,8 @@ class ClientTest extends AbstractTestCase
         }
 
         $this->assertCount($response->getSize(), $response);
+
+        $this->assertJsonStringEqualsJsonString($raw, $response->getRawResponseContent());
     }
 
     /**
@@ -1318,7 +1340,7 @@ class ClientTest extends AbstractTestCase
             new Response(
                 200,
                 ['content-type' => 'application/json;charset=utf-8'],
-                \file_get_contents(__DIR__ . '/../stubs/user__report__make.json')
+                $raw = \file_get_contents(__DIR__ . '/../stubs/user__report__make.json')
             )
         );
 
@@ -1365,6 +1387,8 @@ class ClientTest extends AbstractTestCase
         }
 
         $this->assertCount($response->getSize(), $response);
+
+        $this->assertJsonStringEqualsJsonString($raw, $response->getRawResponseContent());
     }
 
     /**
@@ -1408,7 +1432,7 @@ class ClientTest extends AbstractTestCase
             new Response(
                 200,
                 ['content-type' => 'application/json;charset=utf-8'],
-                \file_get_contents(__DIR__ . '/../stubs/user__report__refresh.json')
+                $raw = \file_get_contents(__DIR__ . '/../stubs/user__report__refresh.json')
             )
         );
 
@@ -1439,6 +1463,8 @@ class ClientTest extends AbstractTestCase
         }
 
         $this->assertCount($response->getSize(), $response);
+
+        $this->assertJsonStringEqualsJsonString($raw, $response->getRawResponseContent());
     }
 
     /**

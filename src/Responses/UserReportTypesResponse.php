@@ -20,6 +20,11 @@ class UserReportTypesResponse implements ResponseInterface, Countable, IteratorA
     /**
      * @var string
      */
+    protected $raw_response_content;
+
+    /**
+     * @var string
+     */
     protected $state;
 
     /**
@@ -45,19 +50,34 @@ class UserReportTypesResponse implements ResponseInterface, Countable, IteratorA
     /**
      * Create a new response instance.
      *
+     * @param string       $raw_response
      * @param string       $state
      * @param int          $size
      * @param DateTime     $stamp
      * @param ReportType[] $data
      * @param int          $total
      */
-    private function __construct(string $state, int $size, DateTime $stamp, array $data, ?int $total)
+    private function __construct(string $raw_response,
+                                 string $state,
+                                 int $size,
+                                 DateTime $stamp,
+                                 array $data,
+                                 ?int $total)
     {
-        $this->state = $state;
-        $this->size  = $size;
-        $this->stamp = $stamp;
-        $this->data  = $data;
-        $this->total = $total;
+        $this->raw_response_content = $raw_response;
+        $this->state                = $state;
+        $this->size                 = $size;
+        $this->stamp                = $stamp;
+        $this->data                 = $data;
+        $this->total                = $total;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRawResponseContent(): string
+    {
+        return $this->raw_response_content;
     }
 
     /**
@@ -68,7 +88,7 @@ class UserReportTypesResponse implements ResponseInterface, Countable, IteratorA
     public static function fromHttpResponse(HttpResponseInterface $response): self
     {
         try {
-            $as_array = (array) Json::decode((string) $response->getBody());
+            $as_array = (array) Json::decode($raw_response = (string) $response->getBody());
         } catch (JsonEncodeDecodeException $e) {
             throw BadResponseException::wrongJson($response, $e->getMessage(), $e);
         }
@@ -78,6 +98,7 @@ class UserReportTypesResponse implements ResponseInterface, Countable, IteratorA
         }, $as_array['data']);
 
         return new static(
+            $raw_response,
             $as_array['state'],
             $as_array['size'],
             DateTimeFactory::createFromIso8601Zulu($as_array['stamp']),

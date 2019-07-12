@@ -20,6 +20,11 @@ class UserReportResponse implements ResponseInterface, Countable, IteratorAggreg
     /**
      * @var string
      */
+    protected $raw_response_content;
+
+    /**
+     * @var string
+     */
     protected $state;
 
     /**
@@ -40,17 +45,27 @@ class UserReportResponse implements ResponseInterface, Countable, IteratorAggreg
     /**
      * Create a new response instance.
      *
+     * @param string   $raw_response
      * @param string   $state
      * @param int      $size
      * @param DateTime $stamp
      * @param Report[] $data
      */
-    private function __construct(string $state, int $size, DateTime $stamp, array $data)
+    private function __construct(string $raw_response, string $state, int $size, DateTime $stamp, array $data)
     {
-        $this->state = $state;
-        $this->size  = $size;
-        $this->stamp = $stamp;
-        $this->data  = $data;
+        $this->raw_response_content = $raw_response;
+        $this->state                = $state;
+        $this->size                 = $size;
+        $this->stamp                = $stamp;
+        $this->data                 = $data;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRawResponseContent(): string
+    {
+        return $this->raw_response_content;
     }
 
     /**
@@ -61,7 +76,7 @@ class UserReportResponse implements ResponseInterface, Countable, IteratorAggreg
     public static function fromHttpResponse(HttpResponseInterface $response): self
     {
         try {
-            $as_array = (array) Json::decode((string) $response->getBody());
+            $as_array = (array) Json::decode($raw_response = (string) $response->getBody());
         } catch (JsonEncodeDecodeException $e) {
             throw BadResponseException::wrongJson($response, $e->getMessage(), $e);
         }
@@ -71,6 +86,7 @@ class UserReportResponse implements ResponseInterface, Countable, IteratorAggreg
         }, $as_array['data']);
 
         return new static(
+            $raw_response,
             $as_array['state'],
             $as_array['size'],
             DateTimeFactory::createFromIso8601Zulu($as_array['stamp']),
