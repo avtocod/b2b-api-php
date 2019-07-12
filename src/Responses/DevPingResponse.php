@@ -14,6 +14,11 @@ class DevPingResponse implements ResponseInterface
     /**
      * @var string
      */
+    protected $raw_response_content;
+
+    /**
+     * @var string
+     */
     protected $value;
 
     /**
@@ -34,17 +39,27 @@ class DevPingResponse implements ResponseInterface
     /**
      * Create a new response instance.
      *
+     * @param string $raw_response
      * @param string $value
      * @param int    $in
      * @param int    $out
      * @param int    $delay
      */
-    private function __construct(string $value, int $in, int $out, int $delay)
+    private function __construct(string $raw_response, string $value, int $in, int $out, int $delay)
     {
-        $this->value = $value;
-        $this->in    = $in;
-        $this->out   = $out;
-        $this->delay = $delay;
+        $this->raw_response_content = $raw_response;
+        $this->value                = $value;
+        $this->in                   = $in;
+        $this->out                  = $out;
+        $this->delay                = $delay;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getRawResponseContent(): string
+    {
+        return $this->raw_response_content;
     }
 
     /**
@@ -55,12 +70,13 @@ class DevPingResponse implements ResponseInterface
     public static function fromHttpResponse(HttpResponseInterface $response): self
     {
         try {
-            $as_array = (array) Json::decode((string) $response->getBody());
+            $as_array = (array) Json::decode($raw_response = (string) $response->getBody());
         } catch (JsonEncodeDecodeException $e) {
             throw BadResponseException::wrongJson($response, $e->getMessage(), $e);
         }
 
         return new static(
+            $raw_response,
             $as_array['value'],
             $as_array['in'],
             $as_array['out'],

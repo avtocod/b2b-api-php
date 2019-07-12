@@ -16,6 +16,11 @@ class DevTokenResponse implements ResponseInterface
     /**
      * @var string
      */
+    protected $raw_response_content;
+
+    /**
+     * @var string
+     */
     protected $user;
 
     /**
@@ -71,6 +76,7 @@ class DevTokenResponse implements ResponseInterface
     /**
      * Create a new response instance.
      *
+     * @param string   $raw_response
      * @param string   $user
      * @param string   $password
      * @param string   $password_hash
@@ -83,7 +89,8 @@ class DevTokenResponse implements ResponseInterface
      * @param string   $token
      * @param string   $header
      */
-    private function __construct(string $user,
+    private function __construct(string $raw_response,
+                                 string $user,
                                  string $password,
                                  string $password_hash,
                                  DateTime $date,
@@ -95,17 +102,26 @@ class DevTokenResponse implements ResponseInterface
                                  string $token,
                                  string $header)
     {
-        $this->user             = $user;
-        $this->password         = $password;
-        $this->password_hash    = $password_hash;
-        $this->date             = $date;
-        $this->stamp            = $stamp;
-        $this->age              = $age;
-        $this->salt             = $salt;
-        $this->salted_pass_hash = $salted_pass_hash;
-        $this->raw_token        = $raw_token;
-        $this->token            = $token;
-        $this->header           = $header;
+        $this->raw_response_content = $raw_response;
+        $this->user                 = $user;
+        $this->password             = $password;
+        $this->password_hash        = $password_hash;
+        $this->date                 = $date;
+        $this->stamp                = $stamp;
+        $this->age                  = $age;
+        $this->salt                 = $salt;
+        $this->salted_pass_hash     = $salted_pass_hash;
+        $this->raw_token            = $raw_token;
+        $this->token                = $token;
+        $this->header               = $header;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getRawResponseContent(): string
+    {
+        return $this->raw_response_content;
     }
 
     /**
@@ -116,12 +132,13 @@ class DevTokenResponse implements ResponseInterface
     public static function fromHttpResponse(HttpResponseInterface $response): self
     {
         try {
-            $as_array = (array) Json::decode((string) $response->getBody());
+            $as_array = (array) Json::decode($raw_response = (string) $response->getBody());
         } catch (JsonEncodeDecodeException $e) {
             throw BadResponseException::wrongJson($response, $e->getMessage(), $e);
         }
 
         return new static(
+            $raw_response,
             $as_array['user'],
             $as_array['pass'],
             $as_array['pass_hash'],
