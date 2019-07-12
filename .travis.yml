@@ -16,6 +16,7 @@ branches:
     - /analysis-.*/
 
 before_install:
+  - if [[ $coverage = 'false' ]]; then phpenv config-rm xdebug.ini || true; fi
   - composer global require hirak/prestissimo --update-no-dev
 
 install:
