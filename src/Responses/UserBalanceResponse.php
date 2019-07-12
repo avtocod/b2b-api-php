@@ -61,7 +61,7 @@ class UserBalanceResponse implements ResponseInterface, Countable, IteratorAggre
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getRawResponseContent(): string
     {

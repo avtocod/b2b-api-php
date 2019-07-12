@@ -55,7 +55,7 @@ class DevPingResponse implements ResponseInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getRawResponseContent(): string
     {

@@ -61,7 +61,7 @@ class UserReportResponse implements ResponseInterface, Countable, IteratorAggreg
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getRawResponseContent(): string
     {

@@ -61,7 +61,7 @@ class UserResponse implements WithRawResponseGetterInterface, ResponseInterface,
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getRawResponseContent(): string
     {

@@ -50,12 +50,12 @@ class UserReportsResponse implements ResponseInterface, Countable, IteratorAggre
     /**
      * Create a new response instance.
      *
-     * @param string $raw_response
-     * @param string $state
-     * @param int $size
+     * @param string   $raw_response
+     * @param string   $state
+     * @param int      $size
      * @param DateTime $stamp
      * @param Report[] $data
-     * @param int $total
+     * @param int      $total
      */
     private function __construct(string $raw_response,
                                  string $state,
@@ -73,7 +73,7 @@ class UserReportsResponse implements ResponseInterface, Countable, IteratorAggre
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getRawResponseContent(): string
     {

@@ -117,7 +117,7 @@ class DevTokenResponse implements ResponseInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getRawResponseContent(): string
     {
