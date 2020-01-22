@@ -61,7 +61,7 @@ class UserResponse implements WithRawResponseGetterInterface, ResponseInterface,
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getRawResponseContent(): string
     {
@@ -69,7 +69,7 @@ class UserResponse implements WithRawResponseGetterInterface, ResponseInterface,
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @throws BadResponseException
      */
@@ -153,7 +153,7 @@ class UserResponse implements WithRawResponseGetterInterface, ResponseInterface,
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function count(): int
     {
@@ -161,7 +161,7 @@ class UserResponse implements WithRawResponseGetterInterface, ResponseInterface,
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getIterator(): ArrayIterator
     {

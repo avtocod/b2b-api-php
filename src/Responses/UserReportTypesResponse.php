@@ -73,7 +73,7 @@ class UserReportTypesResponse implements ResponseInterface, Countable, IteratorA
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getRawResponseContent(): string
     {
@@ -81,7 +81,7 @@ class UserReportTypesResponse implements ResponseInterface, Countable, IteratorA
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @throws BadResponseException
      */
@@ -176,7 +176,7 @@ class UserReportTypesResponse implements ResponseInterface, Countable, IteratorA
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function count(): int
     {
@@ -184,7 +184,7 @@ class UserReportTypesResponse implements ResponseInterface, Countable, IteratorA
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getIterator(): ArrayIterator
     {

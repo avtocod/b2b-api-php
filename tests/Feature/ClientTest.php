@@ -43,7 +43,7 @@ class ClientTest extends AbstractTestCase
     protected $report_type;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function setUp(): void
     {
