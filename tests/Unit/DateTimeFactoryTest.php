@@ -97,6 +97,10 @@ class DateTimeFactoryTest extends AbstractTestCase
         $date_time = DateTime::createFromFormat('Y-m-d H:i:s', '2009-02-15 15:16:17');
 
         $this->assertSame('2009-02-15T15:16:17.000Z', DateTimeFactory::toIso8601Zulu($date_time));
+
+        $date_time = DateTime::createFromFormat('Y-m-d H:i:s', '2009-02-15 15:16:00');
+
+        $this->assertSame('2009-02-15T15:16:00.000Z', DateTimeFactory::toIso8601Zulu($date_time));
     }
 
     /**
@@ -107,6 +111,10 @@ class DateTimeFactoryTest extends AbstractTestCase
         $date_time = DateTime::createFromFormat('Y-m-d H:i:s', '2009-02-15 15:16:17');
 
         $this->assertSame('2009-02-15T15:16:17Z', DateTimeFactory::toIso8601ZuluWithoutMs($date_time));
+
+        $date_time = DateTime::createFromFormat('Y-m-d H:i:s', '2009-02-15 15:16:00');
+
+        $this->assertSame('2009-02-15T15:16:00Z', DateTimeFactory::toIso8601ZuluWithoutMs($date_time));
     }
 
     /**

@@ -93,7 +93,7 @@ class UserReportsResponse implements ResponseInterface, Countable, IteratorAggre
             throw BadResponseException::wrongJson($response, $e->getMessage(), $e);
         }
 
-        $as_array['data'] = \array_map(function (array $report_data): Report {
+        $as_array['data'] = \array_map(static function (array $report_data): Report {
             return Report::fromArray($report_data);
         }, $as_array['data']);
 

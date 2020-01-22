@@ -42,7 +42,7 @@ class ReportContent
      */
     public function getByPath(string $path, $default = null, string $delimiter = '.')
     {
-        return \array_reduce((array) \explode($delimiter, $path), function ($carry, $item) use (&$default) {
+        return \array_reduce((array) \explode($delimiter, $path), static function ($carry, $item) use (&$default) {
             return \is_numeric($item) || \is_array($carry)
                 ? ($carry[$item] ?? $default)
                 : ($carry->$item ?? $default);

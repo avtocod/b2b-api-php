@@ -81,7 +81,7 @@ class UserReportRefreshResponse implements ResponseInterface, Countable, Iterato
             throw BadResponseException::wrongJson($response, $e->getMessage(), $e);
         }
 
-        $as_array['data'] = \array_map(function (array $data): ReportMade {
+        $as_array['data'] = \array_map(static function (array $data): ReportMade {
             return ReportMade::fromArray($data);
         }, $as_array['data']);
 

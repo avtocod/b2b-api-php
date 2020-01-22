@@ -93,7 +93,7 @@ class UserReportTypesResponse implements ResponseInterface, Countable, IteratorA
             throw BadResponseException::wrongJson($response, $e->getMessage(), $e);
         }
 
-        $as_array['data'] = \array_map(function (array $report_type_data): ReportType {
+        $as_array['data'] = \array_map(static function (array $report_type_data): ReportType {
             return ReportType::fromArray($report_type_data);
         }, $as_array['data']);
 
@@ -166,7 +166,7 @@ class UserReportTypesResponse implements ResponseInterface, Countable, IteratorA
      */
     public function getByUid(string $uid): ?ReportType
     {
-        $result = \array_values(\array_filter($this->data, function (ReportType $report_type) use (&$uid): bool {
+        $result = \array_values(\array_filter($this->data, static function (ReportType $report_type) use (&$uid): bool {
             return $report_type->getUid() === $uid;
         }));
 

@@ -4,9 +4,6 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Tokens\Auth;
 
-use function mb_strpos;
-use function mb_substr;
-
 class TokenInfo
 {
     protected const USERNAME_AND_DOMAIN_DELIMITER = '@';
@@ -64,10 +61,10 @@ class TokenInfo
      */
     public function getDomainName(): ?string
     {
-        if (mb_strpos($this->user, static::USERNAME_AND_DOMAIN_DELIMITER) !== false) {
-            $domain = (string) mb_substr(
+        if (\mb_strpos($this->user, static::USERNAME_AND_DOMAIN_DELIMITER) !== false) {
+            $domain = (string) \mb_substr(
                 $this->user,
-                mb_strpos($this->user, static::USERNAME_AND_DOMAIN_DELIMITER) + 1,
+                \mb_strpos($this->user, static::USERNAME_AND_DOMAIN_DELIMITER) + 1,
                 null
             );
 
@@ -86,11 +83,11 @@ class TokenInfo
      */
     public function getUsername(): ?string
     {
-        if (mb_strpos($this->user, static::USERNAME_AND_DOMAIN_DELIMITER) !== false) {
-            $username = (string) mb_substr(
+        if (\mb_strpos($this->user, static::USERNAME_AND_DOMAIN_DELIMITER) !== false) {
+            $username = (string) \mb_substr(
                 $this->user,
                 0,
-                mb_strpos($this->user, static::USERNAME_AND_DOMAIN_DELIMITER)
+                \mb_strpos($this->user, static::USERNAME_AND_DOMAIN_DELIMITER)
             );
 
             if ($username !== '') {

@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog][keepachangelog] and this project adheres to [Semantic Versioning][semver].
 
+## v3.2.1
+
+### Added
+
+- Tests running using GitHub Actions
+- `phpstan` configuration file with disabled `checkGenericClassInNonGenericObjectType` and `checkMissingIterableValueType`
+- PHP 7.4 tests using CI
+
+### Changed
+
+- StyleCI rules. Enabled: `length_ordered_imports`, disabled: `alpha_ordered_imports`
+- Updated dev-dependency versions
+- Anonymous functions now static (where this is possible)
+
 ## v3.2.0
 
 ### Added

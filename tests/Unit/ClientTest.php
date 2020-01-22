@@ -119,20 +119,20 @@ class ClientTest extends AbstractTestCase
             'get',
             new Response(
                 403, ['content-type' => 'application/json;charset=utf-8'], \json_encode((object) [
-                'uid'     => '',
-                'stamp'   => $stamp = DateTimeFactory::toIso8601Zulu(new DateTime),
-                'cls'     => 'Security',
-                'type'    => 'SecurityAuthTimeoutedStamp',
-                'name'    => 'Метка времени просрочена',
-                'message' => 'Метка времени Thu Jan 05 16:45:23 UTC 2017 просрочена - income_age:5, ' .
-                             'server_time:Fri Jul 05 14:55:44 UTC 2019',
-                'data'    => (object) [
-                    'income_stamp' => '2017-01-05T16:45:23.000Z',
-                    'income_age'   => 5,
-                    'server_time'  => '2019-07-05T14:55:44.604Z',
-                ],
-                'events'  => [],
-            ])),
+                    'uid'     => '',
+                    'stamp'   => $stamp = DateTimeFactory::toIso8601Zulu(new DateTime),
+                    'cls'     => 'Security',
+                    'type'    => 'SecurityAuthTimeoutedStamp',
+                    'name'    => 'Метка времени просрочена',
+                    'message' => 'Метка времени Thu Jan 05 16:45:23 UTC 2017 просрочена - income_age:5, ' .
+                                 'server_time:Fri Jul 05 14:55:44 UTC 2019',
+                    'data'    => (object) [
+                        'income_stamp' => '2017-01-05T16:45:23.000Z',
+                        'income_age'   => 5,
+                        'server_time'  => '2019-07-05T14:55:44.604Z',
+                    ],
+                    'events'  => [],
+                ])),
             true
         );
 
@@ -154,22 +154,22 @@ class ClientTest extends AbstractTestCase
             'get',
             new Response(
                 500, ['content-type' => 'application/json;charset=utf-8'], \json_encode((object) [
-                'state' => $state = 'fail',
-                'stamp' => $stamp = DateTimeFactory::toIso8601Zulu(new DateTime),
-                'event' => (object) [
-                    'uid'     => '',
-                    'stamp'   => $stamp,
-                    'cls'     => 'Data',
-                    'type'    => 'DataSeekObjectError',
-                    'name'    => 'Отсутствие объекта с заданным идентификатором',
-                    'message' => "Отсутствует объект типа api.model.Report_Type с UID {$report_type_uid}",
-                    'data'    => (object) [
-                        'entity_type' => 'api.model.Report_Type',
-                        'entity_uid'  => 'some_report_uid_1@some_domain_uid',
+                    'state' => $state = 'fail',
+                    'stamp' => $stamp = DateTimeFactory::toIso8601Zulu(new DateTime),
+                    'event' => (object) [
+                        'uid'     => '',
+                        'stamp'   => $stamp,
+                        'cls'     => 'Data',
+                        'type'    => 'DataSeekObjectError',
+                        'name'    => 'Отсутствие объекта с заданным идентификатором',
+                        'message' => "Отсутствует объект типа api.model.Report_Type с UID {$report_type_uid}",
+                        'data'    => (object) [
+                            'entity_type' => 'api.model.Report_Type',
+                            'entity_uid'  => 'some_report_uid_1@some_domain_uid',
+                        ],
+                        'events'  => [],
                     ],
-                    'events'  => [],
-                ],
-            ])),
+                ])),
             true
         );
 
