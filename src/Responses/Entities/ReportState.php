@@ -26,7 +26,7 @@ class ReportState implements CanCreateSelfFromArrayInterface
      */
     public static function fromArray(array $data): self
     {
-        return new self(
+        return new static(
             \array_map(static function (array $report_data): ReportSourceState {
                 return ReportSourceState::fromArray($report_data);
             }, $data['sources'])

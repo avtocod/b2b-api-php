@@ -10,16 +10,13 @@ The format is based on [Keep a Changelog][keepachangelog] and this project adher
 
 - Tests running using GitHub Actions
 - `phpstan` configuration file with disabled `checkGenericClassInNonGenericObjectType` and `checkMissingIterableValueType`
+- PHP 7.4 tests using CI
 
 ### Changed
 
 - StyleCI rules. Enabled: `length_ordered_imports`, disabled: `alpha_ordered_imports`
 - Updated dev-dependency versions
 - Anonymous functions now static (where this is possible)
-- `BadResponseException::wrongJson` now returns `self` instead `static`
-- `TokenParserException::cannotParseToken` now returns `self` instead `static`
-- Method `::fromHttpResponse` in all response classes now returns `self` instead `static`
-- Method `::fromArray` in all entity classes now returns `self` instead `static`
 
 ## v3.2.0
 

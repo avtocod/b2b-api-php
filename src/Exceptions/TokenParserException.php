@@ -18,6 +18,6 @@ class TokenParserException extends RuntimeException implements B2BApiExceptionIn
      */
     public static function cannotParseToken(?string $message = null, int $code = 0, ?Throwable $prev = null): self
     {
-        return new self($message ?? 'Cannot parse token', $code, $prev);
+        return new static($message ?? 'Cannot parse token', $code, $prev);
     }
 }

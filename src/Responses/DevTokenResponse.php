@@ -137,7 +137,7 @@ class DevTokenResponse implements ResponseInterface
             throw BadResponseException::wrongJson($response, $e->getMessage(), $e);
         }
 
-        return new self(
+        return new static(
             $raw_response,
             $as_array['user'],
             $as_array['pass'],

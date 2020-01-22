@@ -40,7 +40,7 @@ class ReportQuery implements CanCreateSelfFromArrayInterface
      */
     public static function fromArray(array $data): self
     {
-        return new self(
+        return new static(
             $data['type'] ?? null,
             $data['body'] ?? null,
             $data['data'] ?? null

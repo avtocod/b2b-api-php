@@ -44,7 +44,7 @@ class BadResponseException extends RuntimeException implements B2BApiExceptionIn
                                      ?string $message = null,
                                      ?Throwable $prev = null): self
     {
-        return new self($http_response, $message ?? 'Server sent wrong json', 0, $prev);
+        return new static($http_response, $message ?? 'Server sent wrong json', 0, $prev);
     }
 
     /**
