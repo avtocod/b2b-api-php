@@ -192,11 +192,11 @@ class User implements CanCreateSelfFromArrayInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function fromArray(array $data): self
     {
-        return new static(
+        return new self(
             $data['uid'],
             $data['comment'],
             $data['contacts'],

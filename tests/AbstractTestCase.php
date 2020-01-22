@@ -22,7 +22,7 @@ abstract class AbstractTestCase extends TestCase
     protected $guzzle_handler;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function setUp(): void
     {

@@ -61,7 +61,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @return $this
      */
@@ -73,7 +73,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getSettings(): Settings
     {
@@ -81,7 +81,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function devPing(?string $value = null): DevPingResponse
     {
@@ -113,7 +113,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function devToken(string $username,
                              string $password,
@@ -137,7 +137,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function user(bool $detailed = false): UserResponse
     {
@@ -153,7 +153,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function userBalance(string $report_type_uid, bool $detailed = false): UserBalanceResponse
     {
@@ -169,7 +169,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function userReportTypes(bool $can_generate = false,
                                     bool $content = false,
@@ -203,7 +203,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function userReports(bool $content = false,
                                 string $query = '_all',
@@ -237,7 +237,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function userReport(string $report_uid,
                                bool $content = true,
@@ -258,7 +258,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function userReportMake(string $report_type_uid,
                                    string $type,
@@ -294,7 +294,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function userReportRefresh(string $report_uid, ?array $options = []): UserReportRefreshResponse
     {

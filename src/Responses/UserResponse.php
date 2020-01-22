@@ -61,7 +61,7 @@ class UserResponse implements WithRawResponseGetterInterface, ResponseInterface,
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getRawResponseContent(): string
     {
@@ -69,7 +69,7 @@ class UserResponse implements WithRawResponseGetterInterface, ResponseInterface,
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @throws BadResponseException
      */
@@ -81,11 +81,11 @@ class UserResponse implements WithRawResponseGetterInterface, ResponseInterface,
             throw BadResponseException::wrongJson($response, $e->getMessage(), $e);
         }
 
-        $as_array['data'] = \array_map(function (array $user_data): User {
+        $as_array['data'] = \array_map(static function (array $user_data): User {
             return User::fromArray($user_data);
         }, $as_array['data']);
 
-        return new static(
+        return new self(
             $raw_response,
             $as_array['state'],
             $as_array['size'],
@@ -143,7 +143,7 @@ class UserResponse implements WithRawResponseGetterInterface, ResponseInterface,
      */
     public function getByUid(string $uid): ?User
     {
-        $result = \array_values(\array_filter($this->data, function (User $user) use (&$uid): bool {
+        $result = \array_values(\array_filter($this->data, static function (User $user) use (&$uid): bool {
             return $user->getUid() === $uid;
         }));
 
@@ -153,7 +153,7 @@ class UserResponse implements WithRawResponseGetterInterface, ResponseInterface,
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function count(): int
     {
@@ -161,7 +161,7 @@ class UserResponse implements WithRawResponseGetterInterface, ResponseInterface,
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getIterator(): ArrayIterator
     {

@@ -61,7 +61,7 @@ class UserBalanceResponse implements ResponseInterface, Countable, IteratorAggre
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getRawResponseContent(): string
     {
@@ -69,7 +69,7 @@ class UserBalanceResponse implements ResponseInterface, Countable, IteratorAggre
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @throws BadResponseException
      */
@@ -81,11 +81,11 @@ class UserBalanceResponse implements ResponseInterface, Countable, IteratorAggre
             throw BadResponseException::wrongJson($response, $e->getMessage(), $e);
         }
 
-        $as_array['data'] = \array_map(function (array $balance_data): Balance {
+        $as_array['data'] = \array_map(static function (array $balance_data): Balance {
             return Balance::fromArray($balance_data);
         }, $as_array['data']);
 
-        return new static(
+        return new self(
             $raw_response,
             $as_array['state'],
             $as_array['size'],
@@ -143,7 +143,7 @@ class UserBalanceResponse implements ResponseInterface, Countable, IteratorAggre
      */
     public function getByType(string $balance_type): ?Balance
     {
-        $result = \array_values(\array_filter($this->data, function (Balance $balance) use (&$balance_type): bool {
+        $result = \array_values(\array_filter($this->data, static function (Balance $balance) use (&$balance_type): bool {
             return $balance->getBalanceType() === $balance_type;
         }));
 
@@ -153,7 +153,7 @@ class UserBalanceResponse implements ResponseInterface, Countable, IteratorAggre
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function count(): int
     {
@@ -161,7 +161,7 @@ class UserBalanceResponse implements ResponseInterface, Countable, IteratorAggre
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getIterator(): ArrayIterator
     {

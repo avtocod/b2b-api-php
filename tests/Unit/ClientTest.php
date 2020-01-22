@@ -50,7 +50,7 @@ class ClientTest extends AbstractTestCase
     protected $settings;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function setUp(): void
     {

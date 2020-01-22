@@ -61,7 +61,7 @@ class UserReportResponse implements ResponseInterface, Countable, IteratorAggreg
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getRawResponseContent(): string
     {
@@ -69,7 +69,7 @@ class UserReportResponse implements ResponseInterface, Countable, IteratorAggreg
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @throws BadResponseException
      */
@@ -81,11 +81,11 @@ class UserReportResponse implements ResponseInterface, Countable, IteratorAggreg
             throw BadResponseException::wrongJson($response, $e->getMessage(), $e);
         }
 
-        $as_array['data'] = \array_map(function (array $data): Report {
+        $as_array['data'] = \array_map(static function (array $data): Report {
             return Report::fromArray($data);
         }, $as_array['data']);
 
-        return new static(
+        return new self(
             $raw_response,
             $as_array['state'],
             $as_array['size'],
@@ -145,7 +145,7 @@ class UserReportResponse implements ResponseInterface, Countable, IteratorAggreg
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function count(): int
     {
@@ -153,7 +153,7 @@ class UserReportResponse implements ResponseInterface, Countable, IteratorAggreg
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getIterator(): ArrayIterator
     {

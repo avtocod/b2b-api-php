@@ -46,11 +46,11 @@ class ReportMade implements CanCreateSelfFromArrayInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function fromArray(array $data): self
     {
-        return new static(
+        return new self(
             $data['uid'],
             $data['isnew'],
             $data['process_request_uid'] ?? null,

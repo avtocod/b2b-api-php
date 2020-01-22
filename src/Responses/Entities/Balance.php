@@ -88,11 +88,11 @@ class Balance implements CanCreateSelfFromArrayInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function fromArray(array $data): self
     {
-        return new static(
+        return new self(
             $data['report_type_uid'],
             $data['balance_type'],
             $data['quote_init'],

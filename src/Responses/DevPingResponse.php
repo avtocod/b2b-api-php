@@ -55,7 +55,7 @@ class DevPingResponse implements ResponseInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getRawResponseContent(): string
     {
@@ -63,7 +63,7 @@ class DevPingResponse implements ResponseInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @throws BadResponseException
      */
@@ -75,7 +75,7 @@ class DevPingResponse implements ResponseInterface
             throw BadResponseException::wrongJson($response, $e->getMessage(), $e);
         }
 
-        return new static(
+        return new self(
             $raw_response,
             $as_array['value'],
             $as_array['in'],

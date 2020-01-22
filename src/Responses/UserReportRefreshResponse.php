@@ -61,7 +61,7 @@ class UserReportRefreshResponse implements ResponseInterface, Countable, Iterato
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getRawResponseContent(): string
     {
@@ -69,7 +69,7 @@ class UserReportRefreshResponse implements ResponseInterface, Countable, Iterato
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @throws BadResponseException
      */
@@ -81,11 +81,11 @@ class UserReportRefreshResponse implements ResponseInterface, Countable, Iterato
             throw BadResponseException::wrongJson($response, $e->getMessage(), $e);
         }
 
-        $as_array['data'] = \array_map(function (array $data): ReportMade {
+        $as_array['data'] = \array_map(static function (array $data): ReportMade {
             return ReportMade::fromArray($data);
         }, $as_array['data']);
 
-        return new static(
+        return new self(
             $raw_response,
             $as_array['state'],
             $as_array['size'],
@@ -145,7 +145,7 @@ class UserReportRefreshResponse implements ResponseInterface, Countable, Iterato
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function count(): int
     {
@@ -153,7 +153,7 @@ class UserReportRefreshResponse implements ResponseInterface, Countable, Iterato
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getIterator(): ArrayIterator
     {

@@ -19,7 +19,7 @@ class Settings
     protected $base_uri = 'https://b2bapi.avtocod.ru/b2b/api/v1/';
 
     /**
-     * @var array
+     * @var mixed[]
      */
     protected $guzzle_options = [
         GuzzleHttpOptions::VERIFY  => true,
@@ -29,9 +29,9 @@ class Settings
     /**
      * Create a new Settings instance.
      *
-     * @param string      $auth_token     For token generation you can use `AuthToken::generate()`
-     * @param string|null $base_uri
-     * @param array|null  $guzzle_options
+     * @param string       $auth_token For token generation you can use `AuthToken::generate()`
+     * @param string|null  $base_uri
+     * @param mixed[]|null $guzzle_options
      */
     public function __construct(string $auth_token,
                                 ?string $base_uri = null,
@@ -61,7 +61,7 @@ class Settings
     /**
      * Get guzzle options array.
      *
-     * @return array
+     * @return mixed[]
      */
     public function getGuzzleOptions(): array
     {

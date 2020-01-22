@@ -51,11 +51,11 @@ class ReportSourceState implements CanCreateSelfFromArrayInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function fromArray(array $data): self
     {
-        return new static(
+        return new self(
             $data['_id'] ?? $data['id'] ?? $data['name'],
             $data['state'],
             $data['data'] ?? null

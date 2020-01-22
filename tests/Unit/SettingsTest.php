@@ -23,7 +23,7 @@ class SettingsTest extends AbstractTestCase
     protected $auth_token;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function setUp(): void
     {

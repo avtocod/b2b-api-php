@@ -36,11 +36,11 @@ class ReportQuery implements CanCreateSelfFromArrayInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function fromArray(array $data): self
     {
-        return new static(
+        return new self(
             $data['type'] ?? null,
             $data['body'] ?? null,
             $data['data'] ?? null

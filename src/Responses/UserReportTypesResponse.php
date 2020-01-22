@@ -73,7 +73,7 @@ class UserReportTypesResponse implements ResponseInterface, Countable, IteratorA
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getRawResponseContent(): string
     {
@@ -81,7 +81,7 @@ class UserReportTypesResponse implements ResponseInterface, Countable, IteratorA
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      *
      * @throws BadResponseException
      */
@@ -93,11 +93,11 @@ class UserReportTypesResponse implements ResponseInterface, Countable, IteratorA
             throw BadResponseException::wrongJson($response, $e->getMessage(), $e);
         }
 
-        $as_array['data'] = \array_map(function (array $report_type_data): ReportType {
+        $as_array['data'] = \array_map(static function (array $report_type_data): ReportType {
             return ReportType::fromArray($report_type_data);
         }, $as_array['data']);
 
-        return new static(
+        return new self(
             $raw_response,
             $as_array['state'],
             $as_array['size'],
@@ -166,7 +166,7 @@ class UserReportTypesResponse implements ResponseInterface, Countable, IteratorA
      */
     public function getByUid(string $uid): ?ReportType
     {
-        $result = \array_values(\array_filter($this->data, function (ReportType $report_type) use (&$uid): bool {
+        $result = \array_values(\array_filter($this->data, static function (ReportType $report_type) use (&$uid): bool {
             return $report_type->getUid() === $uid;
         }));
 
@@ -176,7 +176,7 @@ class UserReportTypesResponse implements ResponseInterface, Countable, IteratorA
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function count(): int
     {
@@ -184,7 +184,7 @@ class UserReportTypesResponse implements ResponseInterface, Countable, IteratorA
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getIterator(): ArrayIterator
     {
