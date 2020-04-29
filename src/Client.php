@@ -266,7 +266,8 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
                                    ?array $options = [],
                                    ?bool $is_force = false,
                                    ?string $on_update = null,
-                                   ?string $on_complete = null): UserReportMakeResponse
+                                   ?string $on_complete = null,
+                                   array $data = []): UserReportMakeResponse
     {
         $request_options = [];
 
@@ -282,13 +283,18 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
             $request_options['webhook']['on_complete'] = $on_complete;
         }
 
+        $json = [
+            'queryType' => $type,
+            'query'     => $value,
+            'options'   => (object) \array_replace($request_options, $options ?? []),
+        ];
+        if ($data) {
+            $json['data'] = (object) $data;
+        }
+
         return UserReportMakeResponse::fromHttpResponse(
             $this->doRequest(new Request('post', \sprintf('user/reports/%s/_make', \urlencode($report_type_uid))), [
-                GuzzleOptions::JSON => (object) [
-                    'queryType' => $type,
-                    'query'     => $value,
-                    'options'   => (object) \array_replace($request_options, $options ?? []),
-                ],
+                GuzzleOptions::JSON => (object) $json,
             ])
         );
     }

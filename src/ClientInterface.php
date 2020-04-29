@@ -153,6 +153,7 @@ interface ClientInterface
      * @param bool|null   $is_force        Force update report, if it already was generated previously
      * @param string|null $on_update       Call (using `post` method) when report content updated
      * @param string|null $on_complete     Call (using `post` method) when report generation completed
+     * @param array|null  $data            Additional request data
      *
      * @throws BadRequestException
      * @throws BadResponseException
@@ -165,7 +166,8 @@ interface ClientInterface
                                    ?array $options = [],
                                    ?bool $is_force = false,
                                    ?string $on_update = null,
-                                   ?string $on_complete = null): UserReportMakeResponse;
+                                   ?string $on_complete = null,
+                                   array $data = []): UserReportMakeResponse;
 
     /**
      * Refresh existing report.
