@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog][keepachangelog] and this project adher
 
 ### Added
 
-- Additional parameter `data` for `::userReportMake` in `ClientInterface` and `Client` [#8]
+- Additional (optional) parameter `data` for `::userReportMake` in `ClientInterface` and `Client` [#8]
 
 [#8]:https://github.com/avtocod/b2b-api-php/pull/8
 
