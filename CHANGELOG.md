@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog][keepachangelog] and this project adheres to [Semantic Versioning][semver].
 
+## v3.3.0
+
+### Added
+
+- Additional parameter `data` for `::userReportMake` in `ClientInterface` and `Client` [#8]
+
+[#8]:https://github.com/avtocod/b2b-api-php/pull/8
+
 ## v3.2.1
 
 ### Added

@@ -1351,7 +1351,8 @@ class ClientTest extends AbstractTestCase
             null,
             true,
             $on_update = $this->faker->url,
-            $on_complete = $this->faker->url
+            $on_complete = $this->faker->url,
+            $data = ['foo' => 'bar']
         );
 
         $this->assertSame(1, $response->getSize());
@@ -1381,6 +1382,7 @@ class ClientTest extends AbstractTestCase
         $this->assertSame($body, $request_body['query']);
         $this->assertSame($on_update, $request_body['options']['webhook']['on_update']);
         $this->assertSame($on_complete, $request_body['options']['webhook']['on_complete']);
+        $this->assertSame($data, $request_body['data']);
 
         foreach ($response as $item) {
             $this->assertInstanceOf(ReportMade::class, $item);

@@ -283,18 +283,19 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
             $request_options['webhook']['on_complete'] = $on_complete;
         }
 
-        $json = [
+        $request_body = [
             'queryType' => $type,
             'query'     => $value,
             'options'   => (object) \array_replace($request_options, $options ?? []),
         ];
-        if ($data) {
-            $json['data'] = (object) $data;
+
+        if (\is_array($data)) {
+            $request_body['data'] = (object) $data;
         }
 
         return UserReportMakeResponse::fromHttpResponse(
             $this->doRequest(new Request('post', \sprintf('user/reports/%s/_make', \urlencode($report_type_uid))), [
-                GuzzleOptions::JSON => (object) $json,
+                GuzzleOptions::JSON => (object) $request_body,
             ])
         );
     }
