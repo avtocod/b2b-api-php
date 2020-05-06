@@ -267,7 +267,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
                                    ?bool $is_force = false,
                                    ?string $on_update = null,
                                    ?string $on_complete = null,
-                                   ?array $data = []): UserReportMakeResponse
+                                   ?array $data = null): UserReportMakeResponse
     {
         $request_options = [];
 
