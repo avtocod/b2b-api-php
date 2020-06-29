@@ -5,7 +5,7 @@
 # PHP client for B2B API service
 
 [![Version][badge_packagist_version]][link_packagist]
-[![Version][badge_php_version]][link_packagist]
+[![PHP Version][badge_php_version]][link_packagist]
 [![Build Status][badge_build_status]][link_build_status]
 [![Coverage][badge_coverage]][link_coverage]
 [![Downloads count][badge_downloads_count]][link_packagist]
@@ -16,7 +16,7 @@
 Require this package with composer using the following command:
 
 ```shell
-$ composer require avtocod/b2b-api-php "^3.2"
+$ composer require avtocod/b2b-api-php "^3.3"
 ```
 
 > Installed `composer` is required ([how to install composer][getcomposer]).
@@ -30,7 +30,7 @@ Before using this package you must have:
 - Service user login
 - User password
 - User domain name
-- And report type name
+- Report type name
 
 > For getting this values contact with our B2B Sale Managers (`b2b@avtocod.ru`)
 
@@ -95,7 +95,7 @@ while (true) {
     if ($client->userReport($report_uid, false)->first()->isCompleted()) {
         break;
     }
-    
+
     \sleep(1);
 }
 
@@ -135,7 +135,7 @@ This is open-sourced software licensed under the [MIT License][link_license].
 
 [badge_packagist_version]:https://img.shields.io/packagist/v/avtocod/b2b-api-php.svg?maxAge=180
 [badge_php_version]:https://img.shields.io/packagist/php-v/avtocod/b2b-api-php.svg?longCache=true
-[badge_build_status]:https://travis-ci.org/avtocod/b2b-api-php.svg?branch=master
+[badge_build_status]:https://img.shields.io/github/workflow/status/avtocod/b2b-api-php/tests/master
 [badge_coverage]:https://img.shields.io/codecov/c/github/avtocod/b2b-api-php/master.svg?maxAge=60
 [badge_downloads_count]:https://img.shields.io/packagist/dt/avtocod/b2b-api-php.svg?maxAge=180
 [badge_license]:https://img.shields.io/packagist/l/avtocod/b2b-api-php.svg?longCache=true
