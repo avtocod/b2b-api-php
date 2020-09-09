@@ -30,12 +30,12 @@ class Domain implements CanCreateSelfFromArrayInterface
     protected $state;
 
     /**
-     * @var string[]|null
+     * @var array<string>|null
      */
     protected $roles;
 
     /**
-     * @var string[]
+     * @var array<string>
      */
     protected $tags;
 
@@ -82,20 +82,20 @@ class Domain implements CanCreateSelfFromArrayInterface
     /**
      * Create a new domain instance.
      *
-     * @param string        $uid         Unique domain ID (e.g. `test`)
-     * @param string        $comment     Domain comment
-     * @param string        $name        Human-readable domain name
-     * @param string        $state       Domain state (e.g.: `DRAFT`, `ACTIVE`, `BANNED`)
-     * @param string[]|null $roles       Domain roles (optional)
-     * @param string[]      $tags        Additional domain tags
-     * @param DateTime      $created_at  Domain created at
-     * @param string        $created_by  Domain creator
-     * @param DateTime      $updated_at  Last changes was made at
-     * @param string        $updated_by  Last changes was made by
-     * @param DateTime      $active_from Active from
-     * @param DateTime      $active_to   Active to
-     * @param int|null      $id          Internal database identifier (optional, only for administrators)
-     * @param bool|null     $deleted     Is deleted flag (optional, only for administrators)
+     * @param string             $uid         Unique domain ID (e.g. `test`)
+     * @param string             $comment     Domain comment
+     * @param string             $name        Human-readable domain name
+     * @param string             $state       Domain state (e.g.: `DRAFT`, `ACTIVE`, `BANNED`)
+     * @param array<string>|null $roles       Domain roles (optional)
+     * @param array<string>      $tags        Additional domain tags
+     * @param DateTime           $created_at  Domain created at
+     * @param string             $created_by  Domain creator
+     * @param DateTime           $updated_at  Last changes was made at
+     * @param string             $updated_by  Last changes was made by
+     * @param DateTime           $active_from Active from
+     * @param DateTime           $active_to   Active to
+     * @param int|null           $id          Internal database identifier (optional, only for administrators)
+     * @param bool|null          $deleted     Is deleted flag (optional, only for administrators)
      */
     public function __construct(string $uid,
                                 string $comment,
@@ -129,7 +129,9 @@ class Domain implements CanCreateSelfFromArrayInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param array<string, mixed> $data
+     *
+     * @return self
      */
     public static function fromArray(array $data): self
     {
@@ -196,7 +198,7 @@ class Domain implements CanCreateSelfFromArrayInterface
     /**
      * Get domain roles.
      *
-     * @return string[]|null
+     * @return array<string>|null
      */
     public function getRoles(): ?array
     {
@@ -206,7 +208,7 @@ class Domain implements CanCreateSelfFromArrayInterface
     /**
      * Get additional domain tags.
      *
-     * @return array
+     * @return array<string>
      */
     public function getTags(): array
     {

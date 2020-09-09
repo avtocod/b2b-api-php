@@ -9,5 +9,3 @@ parameters:
         - src/Responses/*Response.php
         - src/Responses/Entities/*.php
         - src/Exceptions/*Exception.php
-  checkGenericClassInNonGenericObjectType: false
-  checkMissingIterableValueType: false

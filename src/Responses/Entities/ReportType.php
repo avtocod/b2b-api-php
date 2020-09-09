@@ -60,7 +60,7 @@ class ReportType implements CanCreateSelfFromArrayInterface
     protected $state;
 
     /**
-     * @var string[]
+     * @var array<string>
      */
     protected $tags;
 
@@ -171,7 +171,7 @@ class ReportType implements CanCreateSelfFromArrayInterface
      * @param string                 $comment          Report type comment
      * @param string                 $name             Human-readable report type name
      * @param string                 $state            Report type state (e.g.: `DRAFT`, `PUBLISHED`, `OBSOLETE`)
-     * @param string[]               $tags             Additional report type tags
+     * @param array<string>          $tags             Additional report type tags
      * @param int                    $max_age          Period of relevance
      * @param string                 $domain_uid       Domain unique ID
      * @param ReportTypeContent|null $content          Report type content
@@ -249,7 +249,9 @@ class ReportType implements CanCreateSelfFromArrayInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param array<string, mixed> $data
+     *
+     * @return self
      */
     public static function fromArray(array $data): self
     {
@@ -329,7 +331,7 @@ class ReportType implements CanCreateSelfFromArrayInterface
     /**
      * Get additional report type tags.
      *
-     * @return string[]
+     * @return array<string>
      */
     public function getTags()
     {

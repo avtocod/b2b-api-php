@@ -78,6 +78,6 @@ class AuthTokenTest extends AbstractTestCase
 
         $this->assertSame($username, $parsed->getUser());
         $this->assertSame($age, $parsed->getAge());
-        $this->assertEquals(time(), $parsed->getTimestamp(), '', 1);
+        $this->assertEqualsWithDelta(time(), $parsed->getTimestamp(), 1);
     }
 }

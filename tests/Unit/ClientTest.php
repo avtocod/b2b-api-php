@@ -90,7 +90,7 @@ class ClientTest extends AbstractTestCase
     public function testDoRequestWithServerSideError(): void
     {
         $this->expectException(BadRequestException::class);
-        $this->expectExceptionMessageRegExp('~GenericSystemError~');
+        $this->expectExceptionMessageMatches('~GenericSystemError~');
 
         $this->guzzle_handler->onUriRegexpRequested(
             '~' . \preg_quote($this->settings->getBaseUri(), '/') . '.*~i',
@@ -112,7 +112,7 @@ class ClientTest extends AbstractTestCase
     public function testDoRequestWithSecurityError(): void
     {
         $this->expectException(BadRequestException::class);
-        $this->expectExceptionMessageRegExp('~SecurityAuthTimeoutedStamp~');
+        $this->expectExceptionMessageMatches('~SecurityAuthTimeoutedStamp~');
 
         $this->guzzle_handler->onUriRegexpRequested(
             '~' . \preg_quote($this->settings->getBaseUri(), '/') . '.*~i',
@@ -147,7 +147,7 @@ class ClientTest extends AbstractTestCase
         $report_type_uid = 'foo@bar';
 
         $this->expectException(BadRequestException::class);
-        $this->expectExceptionMessageRegExp("~DataSeekObjectError\:.*Отсутствие объекта.*{$report_type_uid}~i");
+        $this->expectExceptionMessageMatches("~DataSeekObjectError\:.*Отсутствие объекта.*{$report_type_uid}~i");
 
         $this->guzzle_handler->onUriRegexpRequested(
             '~' . \preg_quote($this->settings->getBaseUri(), '/') . '.*~i',
@@ -182,7 +182,7 @@ class ClientTest extends AbstractTestCase
     public function testDoRequestWithWrongJson(): void
     {
         $this->expectException(BadResponseException::class);
-        $this->expectExceptionMessageRegExp('~syntax~i');
+        $this->expectExceptionMessageMatches('~syntax~i');
 
         $this->guzzle_handler->onUriRegexpRequested(
             '~' . \preg_quote($this->settings->getBaseUri(), '/') . '.*~i',
@@ -202,7 +202,7 @@ class ClientTest extends AbstractTestCase
     public function testDoRequestWithServerError(): void
     {
         $this->expectException(BadRequestException::class);
-        $this->expectExceptionMessageRegExp('~Failed to connect~i');
+        $this->expectExceptionMessageMatches('~Failed to connect~i');
 
         $this->guzzle_handler->onUriRegexpRequested(
             '~' . \preg_quote($this->settings->getBaseUri(), '/') . '.*~i',
@@ -321,7 +321,7 @@ class ClientTest extends AbstractTestCase
             } elseif ($event instanceof BeforeRequestSendingEvent) {
                 $before_send_event = true;
             } elseif ($event instanceof AfterRequestSendingEvent && $event->getResponse() === $response) {
-                $this->assertEquals(0, $event->getDuration(), '', 5);
+                $this->assertEqualsWithDelta(0, $event->getDuration(), 5);
 
                 $sent_event = true;
             }

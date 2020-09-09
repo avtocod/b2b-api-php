@@ -123,7 +123,7 @@ class DateTimeFactoryTest extends AbstractTestCase
     public function testCreateFromIso8601ZuluThrowsAnException(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessageRegExp('~Wrong time.*passed~');
+        $this->expectExceptionMessageMatches('~Wrong time.*passed~');
 
         DateTimeFactory::createFromIso8601Zulu('foo bar');
     }

@@ -13,14 +13,15 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Avtocod\B2BApi\Responses\UserResponse;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Exception\TransferException;
 use Avtocod\B2BApi\Responses\DevPingResponse;
 use Avtocod\B2BApi\Responses\DevTokenResponse;
 use GuzzleHttp\RequestOptions as GuzzleOptions;
 use Avtocod\B2BApi\Responses\UserReportResponse;
 use Avtocod\B2BApi\Responses\UserBalanceResponse;
 use Avtocod\B2BApi\Responses\UserReportsResponse;
-use Avtocod\B2BApi\Exceptions\BadRequestException;
 use GuzzleHttp\ClientInterface as GuzzleInterface;
+use Avtocod\B2BApi\Exceptions\BadRequestException;
 use Avtocod\B2BApi\Responses\UserReportMakeResponse;
 use Avtocod\B2BApi\Responses\UserReportTypesResponse;
 use Avtocod\B2BApi\Responses\UserReportRefreshResponse;
@@ -313,8 +314,8 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     }
 
     /**
-     * @param RequestInterface $request
-     * @param array            $options
+     * @param RequestInterface     $request
+     * @param array<string, mixed> $options
      *
      * @throws BadRequestException
      *
@@ -336,10 +337,14 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
         try {
             $started_at = \microtime(true);
             $response   = $this->guzzle->send($request, $options);
-        } catch (RequestException $e) {
+        } catch (TransferException $e) {
             $this->dispatchEvent(new Events\RequestFailedEvent(
-                $exception_request = $e->getRequest(),
-                $exception_response = $e->getResponse()
+                $exception_request = $e instanceof RequestException
+                    ? $e->getRequest()
+                    : $request,
+                $exception_response = $e instanceof RequestException
+                    ? $e->getResponse()
+                    : null
             ));
 
             throw new BadRequestException($exception_request, $exception_response, null, null, $e);
