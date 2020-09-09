@@ -32,16 +32,16 @@ class ReportSourceState implements CanCreateSelfFromArrayInterface
     protected $state;
 
     /**
-     * @var array|null
+     * @var array<mixed, mixed>|null
      */
     protected $data;
 
     /**
      * Create a new report source state instance.
      *
-     * @param string     $name  Source name
-     * @param string     $state Source state
-     * @param array|null $data
+     * @param string                   $name  Source name
+     * @param string                   $state Source state
+     * @param array<mixed, mixed>|null $data
      */
     public function __construct(string $name, string $state, ?array $data)
     {
@@ -51,7 +51,9 @@ class ReportSourceState implements CanCreateSelfFromArrayInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param array<string, string|array<mixed>|null> $data
+     *
+     * @return self
      */
     public static function fromArray(array $data): self
     {
@@ -125,7 +127,7 @@ class ReportSourceState implements CanCreateSelfFromArrayInterface
     /**
      * Get additional data.
      *
-     * @return array|null
+     * @return array<mixed, mixed>|null
      */
     public function getData(): ?array
     {

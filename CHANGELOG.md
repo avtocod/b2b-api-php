@@ -4,10 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog][keepachangelog] and this project adheres to [Semantic Versioning][semver].
 
-## UNRELEASED
+## v3.4.0
 
 ### Changed
 
+- Guzzle 7 (`guzzlehttp/guzzle`) is supported now
+- Dependency `tarampampam/wrappers-php` version `~2.0` is supported
+- Code annotations is more strict
 - CI completely moved from "Travis CI" to "Github Actions" _(travis builds disabled)_
 - Minimal required PHP version now is `7.2`
 

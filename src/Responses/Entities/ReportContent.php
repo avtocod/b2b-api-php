@@ -7,14 +7,14 @@ namespace Avtocod\B2BApi\Responses\Entities;
 class ReportContent
 {
     /**
-     * @var array
+     * @var array<mixed, mixed>
      */
     protected $content;
 
     /**
      * Create a new report content instance.
      *
-     * @param array $content
+     * @param array<mixed, mixed> $content
      */
     public function __construct(array $content)
     {
@@ -24,7 +24,7 @@ class ReportContent
     /**
      * Get report content.
      *
-     * @return array
+     * @return array<mixed, mixed>
      */
     public function getContent(): array
     {

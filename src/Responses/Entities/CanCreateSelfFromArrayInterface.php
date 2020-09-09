@@ -7,7 +7,7 @@ interface CanCreateSelfFromArrayInterface
     /**
      * Create self using array of data.
      *
-     * @param array $data
+     * @param array<mixed> $data
      *
      * @return self|$this
      */

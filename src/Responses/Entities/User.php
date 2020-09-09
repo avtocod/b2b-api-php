@@ -70,12 +70,12 @@ class User implements CanCreateSelfFromArrayInterface
     protected $domain;
 
     /**
-     * @var string[]
+     * @var array<string>
      */
     protected $roles;
 
     /**
-     * @var string[]
+     * @var array<string>
      */
     protected $tags;
 
@@ -127,26 +127,26 @@ class User implements CanCreateSelfFromArrayInterface
     /**
      * Create a new user instance.
      *
-     * @param string      $uid         Unique user ID
-     * @param string      $comment     User comment
-     * @param string      $contacts    User contact info
-     * @param string      $email       User email
-     * @param string      $login       Login (e.g. `user@domain`)
-     * @param string      $name        Human-readable user name
-     * @param string      $state       User status (e.g.: `ACTIVATION_REQUIRED`, `ACTIVE`, `BANNED`)
-     * @param string      $domain_uid  User domain unique ID
-     * @param Domain|null $domain      User domain object (optional)
-     * @param string[]    $roles       User roles
-     * @param string[]    $tags        Additional user tags
-     * @param DateTime    $created_at  User created at
-     * @param string      $created_by  User creator
-     * @param DateTime    $updated_at  Last changes was made at
-     * @param string      $updated_by  Last changes was made by
-     * @param DateTime    $active_from Active from
-     * @param DateTime    $active_to   Active to
-     * @param int|null    $id          Internal database identifier (optional, only for administrators)
-     * @param bool|null   $deleted     Is deleted flag (optional, only for administrators)
-     * @param string|null $pass_hash   Password hash (optional, only for administrators)
+     * @param string        $uid         Unique user ID
+     * @param string        $comment     User comment
+     * @param string        $contacts    User contact info
+     * @param string        $email       User email
+     * @param string        $login       Login (e.g. `user@domain`)
+     * @param string        $name        Human-readable user name
+     * @param string        $state       User status (e.g.: `ACTIVATION_REQUIRED`, `ACTIVE`, `BANNED`)
+     * @param string        $domain_uid  User domain unique ID
+     * @param Domain|null   $domain      User domain object (optional)
+     * @param array<string> $roles       User roles
+     * @param array<string> $tags        Additional user tags
+     * @param DateTime      $created_at  User created at
+     * @param string        $created_by  User creator
+     * @param DateTime      $updated_at  Last changes was made at
+     * @param string        $updated_by  Last changes was made by
+     * @param DateTime      $active_from Active from
+     * @param DateTime      $active_to   Active to
+     * @param int|null      $id          Internal database identifier (optional, only for administrators)
+     * @param bool|null     $deleted     Is deleted flag (optional, only for administrators)
+     * @param string|null   $pass_hash   Password hash (optional, only for administrators)
      */
     public function __construct(string $uid,
                                 string $comment,
@@ -192,7 +192,9 @@ class User implements CanCreateSelfFromArrayInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param array<string, mixed> $data
+     *
+     * @return self
      */
     public static function fromArray(array $data): self
     {
@@ -315,7 +317,7 @@ class User implements CanCreateSelfFromArrayInterface
     /**
      * Get user roles list.
      *
-     * @return string[]
+     * @return array<string>
      */
     public function getRoles(): array
     {
@@ -325,7 +327,7 @@ class User implements CanCreateSelfFromArrayInterface
     /**
      * Get additional user tags.
      *
-     * @return string[]
+     * @return array<string>
      */
     public function getTags(): array
     {

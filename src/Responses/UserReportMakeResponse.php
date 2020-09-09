@@ -15,6 +15,9 @@ use Avtocod\B2BApi\Exceptions\BadResponseException;
 use Tarampampam\Wrappers\Exceptions\JsonEncodeDecodeException;
 use Psr\Http\Message\ResponseInterface as HttpResponseInterface;
 
+/**
+ * @implements IteratorAggregate<int, ReportMade>
+ */
 class UserReportMakeResponse implements ResponseInterface, Countable, IteratorAggregate
 {
     /**
@@ -38,18 +41,18 @@ class UserReportMakeResponse implements ResponseInterface, Countable, IteratorAg
     protected $stamp;
 
     /**
-     * @var ReportMade[]
+     * @var array<int, ReportMade>
      */
     protected $data;
 
     /**
      * Create a new response instance.
      *
-     * @param string       $raw_response
-     * @param string       $state
-     * @param int          $size
-     * @param DateTime     $stamp
-     * @param ReportMade[] $data
+     * @param string                 $raw_response
+     * @param string                 $state
+     * @param int                    $size
+     * @param DateTime               $stamp
+     * @param array<int, ReportMade> $data
      */
     private function __construct(string $raw_response, string $state, int $size, DateTime $stamp, array $data)
     {
@@ -127,7 +130,7 @@ class UserReportMakeResponse implements ResponseInterface, Countable, IteratorAg
     /**
      * Get reports data.
      *
-     * @return ReportMade[]
+     * @return array<int, ReportMade>
      */
     public function getData(): array
     {
@@ -153,7 +156,7 @@ class UserReportMakeResponse implements ResponseInterface, Countable, IteratorAg
     }
 
     /**
-     * {@inheritdoc}
+     * @return ArrayIterator<int, ReportMade>
      */
     public function getIterator(): ArrayIterator
     {

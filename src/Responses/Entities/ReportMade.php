@@ -46,7 +46,9 @@ class ReportMade implements CanCreateSelfFromArrayInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param array<string, string|bool|null> $data
+     *
+     * @return self
      */
     public static function fromArray(array $data): self
     {
@@ -54,7 +56,7 @@ class ReportMade implements CanCreateSelfFromArrayInterface
             $data['uid'],
             $data['isnew'],
             $data['process_request_uid'] ?? null,
-            DateTimeFactory::createFromIso8601Zulu($data['suggest_get'])
+            DateTimeFactory::createFromIso8601Zulu((string) $data['suggest_get'])
         );
     }
 

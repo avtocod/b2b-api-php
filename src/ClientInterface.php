@@ -20,7 +20,7 @@ interface ClientInterface
     /**
      * Test connection.
      *
-     * @param string $value Any string value (server must returns it back)
+     * @param string|null $value Any string value (server must returns it back)
      *
      * @throws BadRequestException
      * @throws BadResponseException
@@ -146,14 +146,15 @@ interface ClientInterface
     /**
      * Make report.
      *
-     * @param string      $report_type_uid Unique report type ID (e.g.: `some_report_uid` or `some_report_uid@domain`)
-     * @param string      $type            Request type (e.g.: `VIN`, `GRZ`, `STS`, `PTS`, `CHASSIS`, `BODY`, etc.)
-     * @param string      $value           Request body (e.g.: `Z94CB41AAGR323020` (VIN-code), `А111АА177` (GRZ-code))
-     * @param array|null  $options         Additional request options
-     * @param bool|null   $is_force        Force update report, if it already was generated previously
-     * @param string|null $on_update       Call (using `post` method) when report content updated
-     * @param string|null $on_complete     Call (using `post` method) when report generation completed
-     * @param array|null  $data            Additional request data
+     * @param string            $report_type_uid Unique report type ID (e.g.: `some_report_uid` or
+     *                                           `some_report_uid@domain`)
+     * @param string            $type            Request type (e.g.: `VIN`, `GRZ`, `STS`, `PTS`, `CHASSIS`, etc.)
+     * @param string            $value           Request body (e.g.: `Z94CB41AAGR323020` (VIN), `А111АА177` (GRZ))
+     * @param array<mixed>|null $options         Additional request options
+     * @param bool|null         $is_force        Force update report, if it already was generated previously
+     * @param string|null       $on_update       Call (using `post` method) when report content updated
+     * @param string|null       $on_complete     Call (using `post` method) when report generation completed
+     * @param array<mixed>|null $data            Additional request data
      *
      * @throws BadRequestException
      * @throws BadResponseException
@@ -172,8 +173,8 @@ interface ClientInterface
     /**
      * Refresh existing report.
      *
-     * @param string     $report_uid Report unique ID (e.g.: `some_report_uid_YV1KS9614S107357Y@domain`)
-     * @param array|null $options    Additional request options
+     * @param string            $report_uid Report unique ID (e.g.: `some_report_uid_YV1KS9614S107357Y@domain`)
+     * @param array<mixed>|null $options    Additional request options
      *
      * @throws BadRequestException
      * @throws BadResponseException

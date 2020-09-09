@@ -50,7 +50,7 @@ class Report implements CanCreateSelfFromArrayInterface
     protected $domain_uid;
 
     /**
-     * @var array|string[]
+     * @var array<string>
      */
     protected $tags;
 
@@ -125,7 +125,7 @@ class Report implements CanCreateSelfFromArrayInterface
      * @param string|null        $vehicle_id      Vehicle identifier
      * @param string             $report_type_uid Report type unique ID
      * @param string             $domain_uid      Domain unique ID
-     * @param string[]           $tags            Tags list
+     * @param array<string>      $tags            Tags list
      * @param DateTime           $created_at      Created at
      * @param string             $created_by      Creator name
      * @param DateTime           $updated_at      Last changes was made at
@@ -185,7 +185,9 @@ class Report implements CanCreateSelfFromArrayInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param array<string, mixed> $data
+     *
+     * @return self
      */
     public static function fromArray(array $data): self
     {
@@ -299,7 +301,7 @@ class Report implements CanCreateSelfFromArrayInterface
     /**
      * Get tags list.
      *
-     * @return array|string[]
+     * @return array<string>
      */
     public function getTags()
     {

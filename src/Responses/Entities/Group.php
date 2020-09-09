@@ -24,17 +24,17 @@ class Group
     protected $name;
 
     /**
-     * @var User[]|null
+     * @var array<int, User>|null
      */
     protected $users;
 
     /**
-     * @var string[]|null
+     * @var array<string>|null
      */
     protected $roles;
 
     /**
-     * @var string[]
+     * @var array<string>
      */
     protected $tags;
 
@@ -81,20 +81,20 @@ class Group
     /**
      * Create a new group instance.
      *
-     * @param string        $uid         Unique group ID
-     * @param string        $comment     Group comment
-     * @param string        $name        Human-readable group name
-     * @param User[]|null   $users       Group users list (optional)
-     * @param string[]|null $roles       Group roles list (optional)
-     * @param string[]      $tags        Additional group tags
-     * @param DateTime      $created_at  Group created at
-     * @param string        $created_by  Group creator
-     * @param DateTime      $updated_at  Last changes was made at
-     * @param string        $updated_by  Last changes was made by
-     * @param DateTime      $active_from Active from
-     * @param DateTime      $active_to   Active to
-     * @param int|null      $id          Internal database identifier (optional, only for administrators)
-     * @param bool|null     $deleted     Is deleted flag (optional, only for administrators)
+     * @param string                $uid         Unique group ID
+     * @param string                $comment     Group comment
+     * @param string                $name        Human-readable group name
+     * @param array<int, User>|null $users       Group users list (optional)
+     * @param array<string>|null    $roles       Group roles list (optional)
+     * @param array<string>         $tags        Additional group tags
+     * @param DateTime              $created_at  Group created at
+     * @param string                $created_by  Group creator
+     * @param DateTime              $updated_at  Last changes was made at
+     * @param string                $updated_by  Last changes was made by
+     * @param DateTime              $active_from Active from
+     * @param DateTime              $active_to   Active to
+     * @param int|null              $id          Internal database identifier (optional, only for administrators)
+     * @param bool|null             $deleted     Is deleted flag (optional, only for administrators)
      */
     public function __construct(string $uid,
                                 string $comment,
@@ -160,7 +160,7 @@ class Group
     /**
      * Get group users list.
      *
-     * @return User[]|null
+     * @return array<int, User>|null
      */
     public function getUsers(): ?array
     {
@@ -170,7 +170,7 @@ class Group
     /**
      * Get group roles list.
      *
-     * @return string[]|null
+     * @return array<string>|null
      */
     public function getRoles(): ?array
     {
@@ -180,7 +180,7 @@ class Group
     /**
      * Get additional group tags.
      *
-     * @return string[]
+     * @return array<string>
      */
     public function getTags(): array
     {
