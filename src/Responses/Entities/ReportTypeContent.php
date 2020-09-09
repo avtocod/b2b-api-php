@@ -29,7 +29,7 @@ class ReportTypeContent implements CanCreateSelfFromArrayInterface
     }
 
     /**
-     * @param array<string, mixed> $data
+     * @param array<string, array<string>> $data
      *
      * @return self
      */

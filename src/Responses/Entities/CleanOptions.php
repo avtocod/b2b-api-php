@@ -36,7 +36,7 @@ class CleanOptions implements CanCreateSelfFromArrayInterface
     }
 
     /**
-     * @param array<string, mixed> $data
+     * @param array<string, int|null> $data
      *
      * @return self
      */

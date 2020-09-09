@@ -36,7 +36,7 @@ class ReportQuery implements CanCreateSelfFromArrayInterface
     }
 
     /**
-     * @param array<string, mixed> $data
+     * @param array<string, string|array<mixed>|null> $data
      *
      * @return self
      */
