@@ -84,7 +84,7 @@ class ReportMakeRequest
     }
 
     /**
-     * Return data to make request
+     * Return data to make request.
      *
      * @return object
      */
@@ -96,7 +96,7 @@ class ReportMakeRequest
         ];
 
         $options = [
-            'FORCE' => $this->is_force
+            'FORCE' => $this->is_force,
         ];
 
         if ($this->on_update_url !== null) {
@@ -112,10 +112,10 @@ class ReportMakeRequest
         }
 
         if ($this->data !== null) {
-            $request_body['data'] = (object)$this->data;
+            $request_body['data'] = (object) $this->data;
         }
 
-        $request_body['options'] = (object)\array_replace($options, $this->options ?? []);
+        $request_body['options'] = (object) \array_replace($options, $this->options ?? []);
 
         return (object) $request_body;
     }

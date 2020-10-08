@@ -4,8 +4,8 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Tests\Unit\Requests;
 
-use Avtocod\B2BApi\Requests\ReportMakeRequest;
 use Avtocod\B2BApi\Tests\AbstractTestCase;
+use Avtocod\B2BApi\Requests\ReportMakeRequest;
 
 /**
  * @covers \Avtocod\B2BApi\Requests\ReportMakeRequest
@@ -51,7 +51,7 @@ class ReportMakeRequestTest extends AbstractTestCase
         $this->assertSame($on_update, $body_object->options->webhook['on_update']);
         $this->assertSame($on_complete, $body_object->options->webhook['on_complete']);
         $this->assertSame($is_force, $body_object->options->FORCE);
-        $this->assertSame($data, (array)$body_object->data);
+        $this->assertSame($data, (array) $body_object->data);
 
         $this->assertObjectHasAttribute($key_one, $body_object->options);
         $this->assertObjectHasAttribute($key_two, $body_object->options);
