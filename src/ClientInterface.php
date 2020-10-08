@@ -156,7 +156,7 @@ interface ClientInterface
      * @param string|null       $on_complete     Call (using `post` method) when report generation completed
      * @param array<mixed>|null $data            Additional request data
      * @param string|null       $idempotence_key Idempotence key which the server uses to recognize subsequent retries
-     *                                           of the same request.
+     *                                           of the same request
      *
      * @throws BadRequestException
      * @throws BadResponseException
