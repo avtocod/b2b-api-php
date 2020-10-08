@@ -268,7 +268,8 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
                                    ?bool $is_force = false,
                                    ?string $on_update = null,
                                    ?string $on_complete = null,
-                                   ?array $data = null): UserReportMakeResponse
+                                   ?array $data = null,
+                                   ?string $idempotence_key = null): UserReportMakeResponse
     {
         $request_options = [];
 
@@ -289,6 +290,10 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
             'query'     => $value,
             'options'   => (object) \array_replace($request_options, $options ?? []),
         ];
+
+        if (\is_string($idempotence_key)) {
+            $request_body['idempotenceKey'] = $idempotence_key;
+        }
 
         if (\is_array($data)) {
             $request_body['data'] = (object) $data;

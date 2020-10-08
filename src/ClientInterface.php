@@ -155,10 +155,11 @@ interface ClientInterface
      * @param string|null       $on_update       Call (using `post` method) when report content updated
      * @param string|null       $on_complete     Call (using `post` method) when report generation completed
      * @param array<mixed>|null $data            Additional request data
+     * @param string|null       $idempotence_key Idempotence key which the server uses to recognize subsequent retries
+     *                                           of the same request.
      *
      * @throws BadRequestException
      * @throws BadResponseException
-     *
      * @return UserReportMakeResponse
      */
     public function userReportMake(string $report_type_uid,
@@ -168,7 +169,8 @@ interface ClientInterface
                                    ?bool $is_force = false,
                                    ?string $on_update = null,
                                    ?string $on_complete = null,
-                                   ?array $data = null): UserReportMakeResponse;
+                                   ?array $data = null,
+                                   ?string $idempotence_key = null): UserReportMakeResponse;
 
     /**
      * Refresh existing report.
