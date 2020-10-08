@@ -17,8 +17,8 @@ use Avtocod\B2BApi\ClientInterface;
 use Avtocod\B2BApi\DateTimeFactory;
 use Avtocod\B2BApi\WithSettingsInterface;
 use GuzzleHttp\Exception\ConnectException;
-use Avtocod\B2BApi\Params\ReportMakeParams;
 use Avtocod\B2BApi\Responses\Entities\User;
+use Avtocod\B2BApi\Params\ReportMakeRequest;
 use Avtocod\B2BApi\Events\RequestFailedEvent;
 use Avtocod\B2BApi\Responses\Entities\Report;
 use Avtocod\B2BApi\Responses\Entities\Balance;
@@ -1345,7 +1345,7 @@ class ClientTest extends AbstractTestCase
             )
         );
 
-        $params = new ReportMakeParams($report_type_uid, $type = 'VIN', $body = 'Z94CB41AAGR323020');
+        $params = new ReportMakeRequest($report_type_uid, $type = 'VIN', $body = 'Z94CB41AAGR323020');
         $params
             ->setForce(true)
             ->setOnUpdateUrl($on_update = $this->faker->url)
@@ -1409,7 +1409,7 @@ class ClientTest extends AbstractTestCase
             new Response(200, ['content-type' => 'application/json;charset=utf-8'], '{"foo":]')
         );
 
-        $params = new ReportMakeParams($report_type_uid, $type = 'VIN', $body = 'Z94CB41AAGR323020');
+        $params = new ReportMakeRequest($report_type_uid, $type = 'VIN', $body = 'Z94CB41AAGR323020');
 
         $this->client->userReportMake($params);
     }
@@ -1433,7 +1433,7 @@ class ClientTest extends AbstractTestCase
             )
         );
 
-        $params = new ReportMakeParams($report_type_uid, $type = 'VIN', $body = 'Z94CB41AAGR323020');
+        $params = new ReportMakeRequest($report_type_uid, $type = 'VIN', $body = 'Z94CB41AAGR323020');
         $params
             ->setIdempotenceKey($idempotence_key = $this->faker->word)
             ->setForce($this->faker->boolean)

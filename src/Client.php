@@ -13,7 +13,7 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Avtocod\B2BApi\Responses\UserResponse;
 use GuzzleHttp\Exception\RequestException;
-use Avtocod\B2BApi\Params\ReportMakeParams;
+use Avtocod\B2BApi\Params\ReportMakeRequest;
 use GuzzleHttp\Exception\TransferException;
 use Avtocod\B2BApi\Responses\DevPingResponse;
 use Avtocod\B2BApi\Responses\DevTokenResponse;
@@ -262,40 +262,12 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     /**
      * {@inheritdoc}
      */
-    public function userReportMake(ReportMakeParams $params): UserReportMakeResponse
+    public function userReportMake(ReportMakeRequest $request): UserReportMakeResponse
     {
-        $request_options = [];
-
-        if ($params->isForce()) {
-            $request_options['FORCE'] = $params->isForce();
-        }
-
-        if ($params->getOnUpdateUrl() !== null) {
-            $request_options['webhook']['on_update'] = $params->getOnUpdateUrl();
-        }
-
-        if ($params->getOnCompleteUrl() !== null) {
-            $request_options['webhook']['on_complete'] = $params->getOnCompleteUrl();
-        }
-
-        $request_body = [
-            'queryType' => $params->getType(),
-            'query'     => $params->getValue(),
-            'options'   => (object) \array_replace($request_options, $params->getOptions() ?? []),
-        ];
-
-        if ($params->getIdempotenceKey() !== null) {
-            $request_body['idempotenceKey'] = $params->getIdempotenceKey();
-        }
-
-        if ($params->getData() !== null) {
-            $request_body['data'] = (object) $params->getData();
-        }
-
         return UserReportMakeResponse::fromHttpResponse(
             $this->doRequest(
-                new Request('post', \sprintf('user/reports/%s/_make', \urlencode($params->getReportTypeUid()))),
-                [GuzzleOptions::JSON => (object) $request_body]
+                new Request('post', \sprintf('user/reports/%s/_make', \urlencode($request->getReportTypeUid()))),
+                [GuzzleOptions::JSON => $request->getBodyObject()]
             )
         );
     }
