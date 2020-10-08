@@ -17,6 +17,7 @@ use Avtocod\B2BApi\ClientInterface;
 use Avtocod\B2BApi\DateTimeFactory;
 use Avtocod\B2BApi\WithSettingsInterface;
 use GuzzleHttp\Exception\ConnectException;
+use Avtocod\B2BApi\Params\ReportMakeParams;
 use Avtocod\B2BApi\Responses\Entities\User;
 use Avtocod\B2BApi\Events\RequestFailedEvent;
 use Avtocod\B2BApi\Responses\Entities\Report;
@@ -1344,16 +1345,14 @@ class ClientTest extends AbstractTestCase
             )
         );
 
-        $response = $this->client->userReportMake(
-            'some_report_uid',
-            $type = 'VIN',
-            $body = 'Z94CB41AAGR323020',
-            null,
-            true,
-            $on_update = $this->faker->url,
-            $on_complete = $this->faker->url,
-            $data = ['foo' => 'bar']
-        );
+        $params = new ReportMakeParams($report_type_uid, $type = 'VIN', $body = 'Z94CB41AAGR323020');
+        $params
+            ->setForce(true)
+            ->setOnUpdateUrl($on_update = $this->faker->url)
+            ->setOnCompleteUrl($on_complete = $this->faker->url)
+            ->setData($data = ['foo' => 'bar']);
+
+        $response = $this->client->userReportMake($params);
 
         $this->assertSame(1, $response->getSize());
         $this->assertSame('ok', $response->getState());
@@ -1410,12 +1409,9 @@ class ClientTest extends AbstractTestCase
             new Response(200, ['content-type' => 'application/json;charset=utf-8'], '{"foo":]')
         );
 
-        $this->client->userReportMake(
-            'some_report_uid',
-            $type = 'VIN',
-            $body = 'Z94CB41AAGR323020',
-            null
-        );
+        $params = new ReportMakeParams($report_type_uid, $type = 'VIN', $body = 'Z94CB41AAGR323020');
+
+        $this->client->userReportMake($params);
     }
 
     /**
@@ -1437,17 +1433,14 @@ class ClientTest extends AbstractTestCase
             )
         );
 
-        $response = $this->client->userReportMake(
-            $report_type_uid,
-            $type = 'VIN',
-            $body = 'Z94CB41AAGR323020',
-            null,
-            $this->faker->boolean,
-            $this->faker->url,
-            $this->faker->url,
-            null,
-            $idempotence_key = $this->faker->word
-        );
+        $params = new ReportMakeParams($report_type_uid, $type = 'VIN', $body = 'Z94CB41AAGR323020');
+        $params
+            ->setIdempotenceKey($idempotence_key = $this->faker->word)
+            ->setForce($this->faker->boolean)
+            ->setOnUpdateUrl($this->faker->url)
+            ->setOnCompleteUrl($this->faker->url);
+
+        $response = $this->client->userReportMake($params);
 
         // Common checks: Response is successful and we received a correct content
         $this->assertSame(1, $response->getSize());

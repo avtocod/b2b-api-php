@@ -4,6 +4,7 @@ namespace Avtocod\B2BApi;
 
 use DateTime;
 use Avtocod\B2BApi\Responses\UserResponse;
+use Avtocod\B2BApi\Params\ReportMakeParams;
 use Avtocod\B2BApi\Responses\DevPingResponse;
 use Avtocod\B2BApi\Responses\DevTokenResponse;
 use Avtocod\B2BApi\Responses\UserReportResponse;
@@ -146,32 +147,14 @@ interface ClientInterface
     /**
      * Make report.
      *
-     * @param string            $report_type_uid Unique report type ID (e.g.: `some_report_uid` or
-     *                                           `some_report_uid@domain`)
-     * @param string            $type            Request type (e.g.: `VIN`, `GRZ`, `STS`, `PTS`, `CHASSIS`, etc.)
-     * @param string            $value           Request body (e.g.: `Z94CB41AAGR323020` (VIN), `А111АА177` (GRZ))
-     * @param array<mixed>|null $options         Additional request options
-     * @param bool|null         $is_force        Force update report, if it already was generated previously
-     * @param string|null       $on_update       Call (using `post` method) when report content updated
-     * @param string|null       $on_complete     Call (using `post` method) when report generation completed
-     * @param array<mixed>|null $data            Additional request data
-     * @param string|null       $idempotence_key Idempotence key which the server uses to recognize subsequent retries
-     *                                           of the same request
+     * @param ReportMakeParams $report_make_parameter Object with parameters to make report
      *
      * @throws BadRequestException
      * @throws BadResponseException
      *
      * @return UserReportMakeResponse
      */
-    public function userReportMake(string $report_type_uid,
-                                   string $type,
-                                   string $value,
-                                   ?array $options = [],
-                                   ?bool $is_force = false,
-                                   ?string $on_update = null,
-                                   ?string $on_complete = null,
-                                   ?array $data = null,
-                                   ?string $idempotence_key = null): UserReportMakeResponse;
+    public function userReportMake(ReportMakeParams $report_make_parameter): UserReportMakeResponse;
 
     /**
      * Refresh existing report.

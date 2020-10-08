@@ -8,7 +8,12 @@ The format is based on [Keep a Changelog][keepachangelog] and this project adher
 
 ### Added
 
-- Optional request body parameter `idempotenceKey` for `::userReportMake` in `ClientInterface` and `Client`
+- Class `ReportMakeParams` to build make-report parameters 
+- Optional parameter `idempotenceKey` for report-make requests
+
+### Changed
+
+- Method `userReportMake` in `ClientInterface` (now he takes `ReportMakeParams` as parameter)
 
 ## v3.4.0
 

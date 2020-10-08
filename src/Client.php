@@ -13,6 +13,7 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Avtocod\B2BApi\Responses\UserResponse;
 use GuzzleHttp\Exception\RequestException;
+use Avtocod\B2BApi\Params\ReportMakeParams;
 use GuzzleHttp\Exception\TransferException;
 use Avtocod\B2BApi\Responses\DevPingResponse;
 use Avtocod\B2BApi\Responses\DevTokenResponse;
@@ -261,48 +262,41 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     /**
      * {@inheritdoc}
      */
-    public function userReportMake(string $report_type_uid,
-                                   string $type,
-                                   string $value,
-                                   ?array $options = [],
-                                   ?bool $is_force = false,
-                                   ?string $on_update = null,
-                                   ?string $on_complete = null,
-                                   ?array $data = null,
-                                   ?string $idempotence_key = null): UserReportMakeResponse
+    public function userReportMake(ReportMakeParams $params): UserReportMakeResponse
     {
         $request_options = [];
 
-        if (\is_bool($is_force)) {
-            $request_options['FORCE'] = $is_force;
+        if ($params->isForce()) {
+            $request_options['FORCE'] = $params->isForce();
         }
 
-        if (\is_string($on_update)) {
-            $request_options['webhook']['on_update'] = $on_update;
+        if ($params->getOnUpdateUrl() !== null) {
+            $request_options['webhook']['on_update'] = $params->getOnUpdateUrl();
         }
 
-        if (\is_string($on_complete)) {
-            $request_options['webhook']['on_complete'] = $on_complete;
+        if ($params->getOnCompleteUrl() !== null) {
+            $request_options['webhook']['on_complete'] = $params->getOnCompleteUrl();
         }
 
         $request_body = [
-            'queryType' => $type,
-            'query'     => $value,
-            'options'   => (object) \array_replace($request_options, $options ?? []),
+            'queryType' => $params->getType(),
+            'query'     => $params->getValue(),
+            'options'   => (object)\array_replace($request_options, $params->getOptions() ?? []),
         ];
 
-        if (\is_string($idempotence_key)) {
-            $request_body['idempotenceKey'] = $idempotence_key;
+        if ($params->getIdempotenceKey() !== null) {
+            $request_body['idempotenceKey'] = $params->getIdempotenceKey();
         }
 
-        if (\is_array($data)) {
-            $request_body['data'] = (object) $data;
+        if ($params->getData() !== null) {
+            $request_body['data'] = (object)$params->getData();
         }
 
         return UserReportMakeResponse::fromHttpResponse(
-            $this->doRequest(new Request('post', \sprintf('user/reports/%s/_make', \urlencode($report_type_uid))), [
-                GuzzleOptions::JSON => (object) $request_body,
-            ])
+            $this->doRequest(
+                new Request('post', \sprintf('user/reports/%s/_make', \urlencode($params->getReportTypeUid()))),
+                [GuzzleOptions::JSON => (object)$request_body]
+            )
         );
     }
 
