@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Avtocod\B2BApi\Params;
+namespace Avtocod\B2BApi\Requests;
 
 class ReportMakeRequest
 {
@@ -84,27 +84,28 @@ class ReportMakeRequest
     }
 
     /**
+     * Return data to make request
+     *
      * @return object
      */
     public function getBodyObject(): object
     {
-        $request_options = [];
-
-        $request_options['FORCE'] = $this->is_force;
-
-        if ($this->on_update_url !== null) {
-            $request_options['webhook']['on_update'] = $this->on_update_url;
-        }
-
-        if ($this->on_complete_url !== null) {
-            $request_options['webhook']['on_complete'] = $this->on_complete_url;
-        }
-
         $request_body = [
             'queryType' => $this->type,
             'query'     => $this->value,
-            'options'   => (object)\array_replace($request_options, $this->options ?? []),
         ];
+
+        $options = [
+            'FORCE' => $this->is_force
+        ];
+
+        if ($this->on_update_url !== null) {
+            $options['webhook']['on_update'] = $this->on_update_url;
+        }
+
+        if ($this->on_complete_url !== null) {
+            $options['webhook']['on_complete'] = $this->on_complete_url;
+        }
 
         if ($this->idempotence_key !== null) {
             $request_body['idempotenceKey'] = $this->idempotence_key;
@@ -114,7 +115,9 @@ class ReportMakeRequest
             $request_body['data'] = (object)$this->data;
         }
 
-        return (object)$request_body;
+        $request_body['options'] = (object)\array_replace($options, $this->options ?? []);
+
+        return (object) $request_body;
     }
 
     /**
