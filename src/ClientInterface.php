@@ -160,6 +160,7 @@ interface ClientInterface
      *
      * @throws BadRequestException
      * @throws BadResponseException
+     *
      * @return UserReportMakeResponse
      */
     public function userReportMake(string $report_type_uid,
