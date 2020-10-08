@@ -18,7 +18,7 @@ use Avtocod\B2BApi\DateTimeFactory;
 use Avtocod\B2BApi\WithSettingsInterface;
 use GuzzleHttp\Exception\ConnectException;
 use Avtocod\B2BApi\Responses\Entities\User;
-use Avtocod\B2BApi\Params\ReportMakeRequest;
+use Avtocod\B2BApi\Requests\ReportMakeRequest;
 use Avtocod\B2BApi\Events\RequestFailedEvent;
 use Avtocod\B2BApi\Responses\Entities\Report;
 use Avtocod\B2BApi\Responses\Entities\Balance;
