@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog][keepachangelog] and this project adher
 
 ### Added
 
-- Class `ReportMakeParams` to build make-report parameters 
+- Class `ReportMakeParams` to build make-report parameters
 - Optional parameter `idempotenceKey` for report-make requests
 
 ### Changed

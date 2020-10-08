@@ -281,7 +281,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
         $request_body = [
             'queryType' => $params->getType(),
             'query'     => $params->getValue(),
-            'options'   => (object)\array_replace($request_options, $params->getOptions() ?? []),
+            'options'   => (object) \array_replace($request_options, $params->getOptions() ?? []),
         ];
 
         if ($params->getIdempotenceKey() !== null) {
@@ -289,13 +289,13 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
         }
 
         if ($params->getData() !== null) {
-            $request_body['data'] = (object)$params->getData();
+            $request_body['data'] = (object) $params->getData();
         }
 
         return UserReportMakeResponse::fromHttpResponse(
             $this->doRequest(
                 new Request('post', \sprintf('user/reports/%s/_make', \urlencode($params->getReportTypeUid()))),
-                [GuzzleOptions::JSON => (object)$request_body]
+                [GuzzleOptions::JSON => (object) $request_body]
             )
         );
     }
