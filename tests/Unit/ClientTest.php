@@ -1419,6 +1419,47 @@ class ClientTest extends AbstractTestCase
     }
 
     /**
+     * @covers \Avtocod\B2BApi\Responses\UserReportMakeResponse
+     *
+     * @return void
+     */
+    public function testUserReportMakeWithIdempotenceKey(): void
+    {
+        $this->guzzle_handler->onUriRequested(
+            $this->settings->getBaseUri() . \sprintf(
+                'user/reports/%s/_make', \urlencode($report_type_uid = 'some_report_uid')
+            ),
+            'post',
+            new Response(
+                200,
+                ['content-type' => 'application/json;charset=utf-8'],
+                $raw = \file_get_contents(__DIR__ . '/../stubs/user__report__make.json')
+            )
+        );
+
+        $response = $this->client->userReportMake(
+            $report_type_uid,
+            $type = 'VIN',
+            $body = 'Z94CB41AAGR323020',
+            null,
+            $this->faker->boolean,
+            $this->faker->url,
+            $this->faker->url,
+            null,
+            $idempotence_key = $this->faker->word
+        );
+
+        // Common checks: Response is successful and we received a correct content
+        $this->assertSame(1, $response->getSize());
+        $this->assertSame('ok', $response->getState());
+        $this->assertJsonStringEqualsJsonString($raw, $response->getRawResponseContent());
+
+        // Check that we received correct 'idempotenceKey' in request body
+        $request_body = Json::decode($this->guzzle_handler->getLastRequest()->getBody()->getContents());
+        $this->assertSame($idempotence_key, $request_body['idempotenceKey']);
+    }
+
+    /**
      * @covers \Avtocod\B2BApi\Responses\UserReportRefreshResponse
      *
      * @return void
