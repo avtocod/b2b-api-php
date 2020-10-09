@@ -4,8 +4,8 @@ namespace Avtocod\B2BApi;
 
 use DateTime;
 use Avtocod\B2BApi\Responses\UserResponse;
-use Avtocod\B2BApi\Responses\DevPingResponse;
 use Avtocod\B2BApi\Params\ReportMakeParams;
+use Avtocod\B2BApi\Responses\DevPingResponse;
 use Avtocod\B2BApi\Responses\DevTokenResponse;
 use Avtocod\B2BApi\Responses\UserReportResponse;
 use Avtocod\B2BApi\Responses\UserBalanceResponse;

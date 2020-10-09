@@ -49,7 +49,7 @@ class ReportMakeParamsTest extends AbstractTestCase
         $this->assertSame($idempotence_key, $params->getIdempotenceKey());
         $this->assertSame($on_update, $params->getOnUpdateUrl());
         $this->assertSame($on_complete, $params->getOnCompleteUrl());
-        $this->assertSame($data, (array)$params->getData());
+        $this->assertSame($data, (array) $params->getData());
 
         $this->assertArrayHasKey($key_one, $params->getOptions());
         $this->assertArrayHasKey($key_two, $params->getOptions());
