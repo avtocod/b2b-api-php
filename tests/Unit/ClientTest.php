@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace Avtocod\B2BApi\Tests;
+namespace Avtocod\B2BApi\Tests\Unit;
 
 use DateTime;
 use Avtocod\B2BApi\Client;
@@ -16,6 +16,7 @@ use GuzzleHttp\Client as Guzzle;
 use Avtocod\B2BApi\ClientInterface;
 use Avtocod\B2BApi\DateTimeFactory;
 use Avtocod\B2BApi\WithSettingsInterface;
+use Avtocod\B2BApi\Tests\AbstractTestCase;
 use GuzzleHttp\Exception\ConnectException;
 use Avtocod\B2BApi\Responses\Entities\User;
 use Avtocod\B2BApi\Events\RequestFailedEvent;
