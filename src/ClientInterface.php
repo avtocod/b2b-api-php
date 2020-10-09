@@ -5,7 +5,7 @@ namespace Avtocod\B2BApi;
 use DateTime;
 use Avtocod\B2BApi\Responses\UserResponse;
 use Avtocod\B2BApi\Responses\DevPingResponse;
-use Avtocod\B2BApi\Requests\ReportMakeRequest;
+use Avtocod\B2BApi\Params\ReportMakeParams;
 use Avtocod\B2BApi\Responses\DevTokenResponse;
 use Avtocod\B2BApi\Responses\UserReportResponse;
 use Avtocod\B2BApi\Responses\UserBalanceResponse;
@@ -147,14 +147,14 @@ interface ClientInterface
     /**
      * Make report.
      *
-     * @param ReportMakeRequest $report_make_request Object with data to make report
+     * @param ReportMakeParams $report_make_params Object with data to make report
      *
      * @throws BadRequestException
      * @throws BadResponseException
      *
      * @return UserReportMakeResponse
      */
-    public function userReportMake(ReportMakeRequest $report_make_request): UserReportMakeResponse;
+    public function userReportMake(ReportMakeParams $report_make_params): UserReportMakeResponse;
 
     /**
      * Refresh existing report.

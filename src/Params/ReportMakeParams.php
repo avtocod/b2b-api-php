@@ -2,9 +2,9 @@
 
 declare(strict_types = 1);
 
-namespace Avtocod\B2BApi\Requests;
+namespace Avtocod\B2BApi\Params;
 
-class ReportMakeRequest
+class ReportMakeParams
 {
     /**
      * Unique report type ID (e.g.: `some_report_uid` or `some_report_uid@domain`).
@@ -84,48 +84,27 @@ class ReportMakeRequest
     }
 
     /**
-     * Return data to make request.
-     *
-     * @return object
-     */
-    public function getBodyObject(): object
-    {
-        $request_body = [
-            'queryType' => $this->type,
-            'query'     => $this->value,
-        ];
-
-        $options = [
-            'FORCE' => $this->is_force,
-        ];
-
-        if ($this->on_update_url !== null) {
-            $options['webhook']['on_update'] = $this->on_update_url;
-        }
-
-        if ($this->on_complete_url !== null) {
-            $options['webhook']['on_complete'] = $this->on_complete_url;
-        }
-
-        if ($this->idempotence_key !== null) {
-            $request_body['idempotenceKey'] = $this->idempotence_key;
-        }
-
-        if ($this->data !== null) {
-            $request_body['data'] = (object) $this->data;
-        }
-
-        $request_body['options'] = (object) \array_replace($options, $this->options ?? []);
-
-        return (object) $request_body;
-    }
-
-    /**
      * @return string
      */
     public function getReportTypeUid(): string
     {
         return $this->report_type_uid;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    /**
+     * @return string
+     */
+    public function getValue(): string
+    {
+        return $this->value;
     }
 
     /**
@@ -141,6 +120,14 @@ class ReportMakeRequest
     }
 
     /**
+     * @return array<mixed>|null
+     */
+    public function getOptions(): ?array
+    {
+        return $this->options;
+    }
+
+    /**
      * @param bool $is_force
      *
      * @return $this
@@ -150,6 +137,14 @@ class ReportMakeRequest
         $this->is_force = $is_force;
 
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isForce(): bool
+    {
+        return $this->is_force;
     }
 
     /**
@@ -165,6 +160,14 @@ class ReportMakeRequest
     }
 
     /**
+     * @return string|null
+     */
+    public function getOnUpdateUrl(): ?string
+    {
+        return $this->on_update_url;
+    }
+
+    /**
      * @param string|null $on_complete_url
      *
      * @return $this
@@ -174,6 +177,14 @@ class ReportMakeRequest
         $this->on_complete_url = $on_complete_url;
 
         return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getOnCompleteUrl(): ?string
+    {
+        return $this->on_complete_url;
     }
 
     /**
@@ -191,6 +202,14 @@ class ReportMakeRequest
     }
 
     /**
+     * @return array<mixed>|null
+     */
+    public function getData(): ?array
+    {
+        return $this->data;
+    }
+
+    /**
      * Set idempotence key for request.
      *
      * @param string|null $idempotence_key
@@ -202,5 +221,13 @@ class ReportMakeRequest
         $this->idempotence_key = $idempotence_key;
 
         return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getIdempotenceKey(): ?string
+    {
+        return $this->idempotence_key;
     }
 }

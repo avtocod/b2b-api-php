@@ -15,7 +15,7 @@ use Avtocod\B2BApi\Responses\UserResponse;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\TransferException;
 use Avtocod\B2BApi\Responses\DevPingResponse;
-use Avtocod\B2BApi\Requests\ReportMakeRequest;
+use Avtocod\B2BApi\Params\ReportMakeParams;
 use Avtocod\B2BApi\Responses\DevTokenResponse;
 use GuzzleHttp\RequestOptions as GuzzleOptions;
 use Avtocod\B2BApi\Responses\UserReportResponse;
@@ -262,12 +262,39 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     /**
      * {@inheritdoc}
      */
-    public function userReportMake(ReportMakeRequest $request): UserReportMakeResponse
+    public function userReportMake(ReportMakeParams $params): UserReportMakeResponse
     {
+        $request_body = [
+            'queryType' => $params->getType(),
+            'query'     => $params->getValue(),
+        ];
+
+        $options = [
+            'FORCE' => $params->isForce(),
+        ];
+
+        if ($params->getOnUpdateUrl() !== null) {
+            $options['webhook']['on_update'] = $params->getOnUpdateUrl();
+        }
+
+        if ($params->getOnCompleteUrl() !== null) {
+            $options['webhook']['on_complete'] = $params->getOnCompleteUrl();
+        }
+
+        if ($params->getIdempotenceKey() !== null) {
+            $request_body['idempotenceKey'] = $params->getIdempotenceKey();
+        }
+
+        if ($params->getData() !== null) {
+            $request_body['data'] = (object) $params->getData();
+        }
+
+        $request_body['options'] = (object) \array_replace($options, $params->getOptions() ?? []);
+
         return UserReportMakeResponse::fromHttpResponse(
             $this->doRequest(
-                new Request('post', \sprintf('user/reports/%s/_make', \urlencode($request->getReportTypeUid()))),
-                [GuzzleOptions::JSON => $request->getBodyObject()]
+                new Request('post', \sprintf('user/reports/%s/_make', \urlencode($params->getReportTypeUid()))),
+                [GuzzleOptions::JSON => (object) $request_body]
             )
         );
     }
