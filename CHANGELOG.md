@@ -13,7 +13,7 @@ The format is based on [Keep a Changelog][keepachangelog] and this project adher
 
 ### Changed
 
-- Method `userReportMake` in `ClientInterface` (now he takes `ReportMakeParams` as parameter)
+- Method `ClientInterface::userReportMake` now takes `ReportMakeParams` as parameter
 
 ## v3.4.0
 

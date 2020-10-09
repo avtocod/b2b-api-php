@@ -82,11 +82,20 @@ $client->userReportRefresh('report_uid_SOMEIDENTIFIERGOESHERE@domain');
 For example, if you want to generate report for `A111AA177` (`GRZ` type), you can:
 
 ```php
-<?php /** @var \Avtocod\B2BApi\Client $client */
+<?php 
+/** @var \Avtocod\B2BApi\Client $client */
+/** @var \Avtocod\B2BApi\Params\ReportMakeParams $params */
+
+// Prepare parameters for making a report 
+$params = new ReportMakeParams($this->report_type, 'GRZ', 'A111AA177');
+$params
+    ->setForce(true)
+    ->setOnUpdateUrl('https://some.site/foo/update')
+    ->setOnCompleteUrl('https://some.site/bar/complete');
 
 // Make report (this operation is asynchronous)
 $report_uid = $client
-    ->userReportMake($this->report_type, 'GRZ', 'A111AA177', null, true)
+    ->userReportMake($params)
     ->first()
     ->getReportUid();
 
