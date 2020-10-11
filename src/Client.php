@@ -273,20 +273,20 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
             'FORCE' => $params->isForce(),
         ];
 
-        if ($params->getOnUpdateUrl() !== null) {
-            $options['webhook']['on_update'] = $params->getOnUpdateUrl();
+        if (\is_string($on_update = $params->getOnUpdateUrl())) {
+            $options['webhook']['on_update'] = $on_update;
         }
 
-        if ($params->getOnCompleteUrl() !== null) {
-            $options['webhook']['on_complete'] = $params->getOnCompleteUrl();
+        if (\is_string($on_complete = $params->getOnCompleteUrl())) {
+            $options['webhook']['on_complete'] = $on_complete;
         }
 
-        if ($params->getIdempotenceKey() !== null) {
-            $request_body['idempotenceKey'] = $params->getIdempotenceKey();
+        if (\is_string($idempotence_key = $params->getIdempotenceKey())) {
+            $request_body['idempotenceKey'] = $idempotence_key;
         }
 
-        if ($params->getData() !== null) {
-            $request_body['data'] = (object) $params->getData();
+        if (\is_array($data = $params->getData())) {
+            $request_body['data'] = (object) $data;
         }
 
         $request_body['options'] = (object) \array_replace($options, $params->getOptions() ?? []);
