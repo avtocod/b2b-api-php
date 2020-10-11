@@ -30,7 +30,7 @@ class ReportMakeParams
     /**
      * Additional request options.
      *
-     * @var array<mixed>|null
+     * @var array<string, string|int|float|bool|array<mixed>>|null
      */
     private $options = [];
 
@@ -108,7 +108,7 @@ class ReportMakeParams
     }
 
     /**
-     * @param array<mixed>|null $options
+     * @param array<string, string|int|float|bool|array<mixed>>|null $options
      *
      * @return $this
      */
