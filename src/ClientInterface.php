@@ -147,14 +147,14 @@ interface ClientInterface
     /**
      * Make report.
      *
-     * @param ReportMakeParams $report_make_params Object with data to make report
+     * @param ReportMakeParams $params Object with data to make report
      *
      * @throws BadRequestException
      * @throws BadResponseException
      *
      * @return UserReportMakeResponse
      */
-    public function userReportMake(ReportMakeParams $report_make_params): UserReportMakeResponse;
+    public function userReportMake(ReportMakeParams $params): UserReportMakeResponse;
 
     /**
      * Refresh existing report.
