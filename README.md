@@ -73,7 +73,9 @@ $client->userReports();
 $client->userReport('report_uid_SOMEIDENTIFIERGOESHERE@domain');
 
 // Make (generate) report
-$client->userReportMake('report_type_uid@domain', 'VIN', 'Z94CB41AAGR323020');
+$client->userReportMake(
+    new ReportMakeParams('report_type_uid@domain', 'VIN', 'Z94CB41AAGR323020')
+);
 
 // Refresh existing report
 $client->userReportRefresh('report_uid_SOMEIDENTIFIERGOESHERE@domain');
@@ -82,20 +84,16 @@ $client->userReportRefresh('report_uid_SOMEIDENTIFIERGOESHERE@domain');
 For example, if you want to generate report for `A111AA177` (`GRZ` type), you can:
 
 ```php
-<?php 
-/** @var \Avtocod\B2BApi\Client $client */
-/** @var \Avtocod\B2BApi\Params\ReportMakeParams $params */
-
-// Prepare parameters for making a report 
-$params = new ReportMakeParams($this->report_type, 'GRZ', 'A111AA177');
-$params
-    ->setForce(true)
-    ->setOnUpdateUrl('https://some.site/foo/update')
-    ->setOnCompleteUrl('https://some.site/bar/complete');
+<?php /** @var \Avtocod\B2BApi\Client $client */
 
 // Make report (this operation is asynchronous)
 $report_uid = $client
-    ->userReportMake($params)
+    ->userReportMake(
+        (new ReportMakeParams(`some_report_uid`, 'GRZ', 'A111AA177'))
+            ->setForce(true)
+            ->setOnUpdateUrl('https://some.site/foo/update')
+            ->setOnCompleteUrl('https://some.site/bar/complete')
+    )
     ->first()
     ->getReportUid();
 
