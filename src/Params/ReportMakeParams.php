@@ -58,7 +58,7 @@ class ReportMakeParams
     /**
      * Additional request data.
      *
-     * @var array<mixed>|null
+     * @var array<string, string|int|float|bool|null|array<mixed>>|null
      */
     private $data;
 
@@ -120,7 +120,7 @@ class ReportMakeParams
     }
 
     /**
-     * @return array<mixed>|null
+     * @return array<string, string|int|float|bool|array<mixed>>|null
      */
     public function getOptions(): ?array
     {
@@ -190,7 +190,7 @@ class ReportMakeParams
     /**
      * Set additional request data.
      *
-     * @param array<mixed> $data
+     * @param array<string, string|int|float|bool|null|array<mixed>> $data
      *
      * @return $this
      */
@@ -202,7 +202,7 @@ class ReportMakeParams
     }
 
     /**
-     * @return array<mixed>|null
+     * @return array<string, string|int|float|bool|null|array<mixed>>|null
      */
     public function getData(): ?array
     {
