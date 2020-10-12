@@ -62,7 +62,7 @@ class ReportMakeParamsTest extends AbstractTestCase
     {
         $params = new ReportMakeParams($this->faker->word, $this->faker->word, $this->faker->word);
 
-        $this->assertFalse($params->isForce());
+        $this->assertNull($params->isForce());
         $this->assertNull($params->getIdempotenceKey());
         $this->assertNull($params->getOnUpdateUrl());
         $this->assertNull($params->getOnCompleteUrl());

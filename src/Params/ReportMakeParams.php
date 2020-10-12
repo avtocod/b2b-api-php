@@ -32,14 +32,14 @@ class ReportMakeParams
      *
      * @var array<string, string|int|float|bool|array<mixed>>|null
      */
-    private $options = [];
+    private $options;
 
     /**
      * Force update report, if it already was generated previously.
      *
-     * @var bool
+     * @var bool|null
      */
-    private $is_force = false;
+    private $is_force;
 
     /**
      * URL to call (using `post` method) when report content updated.
@@ -108,11 +108,11 @@ class ReportMakeParams
     }
 
     /**
-     * @param array<string, string|int|float|bool|array<mixed>>|null $options
+     * @param array<string, string|int|float|bool|array<mixed>> $options
      *
      * @return $this
      */
-    public function setOptions(?array $options): self
+    public function setOptions(array $options): self
     {
         $this->options = $options;
 
@@ -140,19 +140,19 @@ class ReportMakeParams
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
-    public function isForce(): bool
+    public function isForce(): ?bool
     {
         return $this->is_force;
     }
 
     /**
-     * @param string|null $on_update_url
+     * @param string $on_update_url
      *
      * @return $this
      */
-    public function setOnUpdateUrl(?string $on_update_url): self
+    public function setOnUpdateUrl(string $on_update_url): self
     {
         $this->on_update_url = $on_update_url;
 
@@ -168,11 +168,11 @@ class ReportMakeParams
     }
 
     /**
-     * @param string|null $on_complete_url
+     * @param string $on_complete_url
      *
      * @return $this
      */
-    public function setOnCompleteUrl(?string $on_complete_url): self
+    public function setOnCompleteUrl(string $on_complete_url): self
     {
         $this->on_complete_url = $on_complete_url;
 
@@ -190,11 +190,11 @@ class ReportMakeParams
     /**
      * Set additional request data.
      *
-     * @param array<mixed>|null $data
+     * @param array<mixed> $data
      *
      * @return $this
      */
-    public function setData(?array $data): self
+    public function setData(array $data): self
     {
         $this->data = $data;
 
@@ -212,11 +212,11 @@ class ReportMakeParams
     /**
      * Set idempotence key for request.
      *
-     * @param string|null $idempotence_key
+     * @param string $idempotence_key
      *
      * @return $this
      */
-    public function setIdempotenceKey(?string $idempotence_key): self
+    public function setIdempotenceKey(string $idempotence_key): self
     {
         $this->idempotence_key = $idempotence_key;
 
