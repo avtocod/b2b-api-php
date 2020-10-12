@@ -162,12 +162,10 @@ class ClientTest extends AbstractTestCase
      */
     public function testUserReportMake(): void
     {
-        $make_params = (new ReportMakeParams($this->report_type, 'VIN', $vin = 'Z94CB41AAGR323020'))->setForce(true);
-
         $this->assertStringContainsString(
-            $vin,
+            $vin = 'Z94CB41AAGR323020',
             $this->client
-                ->userReportMake($make_params)
+                ->userReportMake((new ReportMakeParams($this->report_type, 'VIN', $vin))->setForce(true))
                 ->first()
                 ->getReportUid()
         );
