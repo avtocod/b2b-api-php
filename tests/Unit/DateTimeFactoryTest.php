@@ -2,11 +2,12 @@
 
 declare(strict_types = 1);
 
-namespace Avtocod\B2BApi\Tests;
+namespace Avtocod\B2BApi\Tests\Unit;
 
 use DateTime;
 use InvalidArgumentException;
 use Avtocod\B2BApi\DateTimeFactory;
+use Avtocod\B2BApi\Tests\AbstractTestCase;
 
 /**
  * @group  datetime

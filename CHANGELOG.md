@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog][keepachangelog] and this project adheres to [Semantic Versioning][semver].
 
+## UNRELEASED
+
+### Fixed
+
+- Namespaces in unit-tests `ClientTest`, `DateTimeFactoryTest` and `SettingsTest`
+
 ## v3.4.0
 
 ### Changed
