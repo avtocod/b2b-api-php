@@ -91,8 +91,8 @@ $report_uid = $client
     ->userReportMake(
         (new ReportMakeParams(`some_report_uid`, 'GRZ', 'A111AA177'))
             ->setForce(true)
-            ->setOnUpdateUrl('https://some.site/foo/update')
-            ->setOnCompleteUrl('https://some.site/bar/complete')
+            ->setOnUpdateUrl('https://example.com/webhook/updated')
+            ->setOnCompleteUrl('https://example.com/webhook/completed')
     )
     ->first()
     ->getReportUid();
