@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Params;
 
-class ReportMakeParams
+class ReportMakeParams implements ReportMakeParamsInterface
 {
     /**
      * Unique report type ID (e.g.: `some_report_uid` or `some_report_uid@domain`).
@@ -84,7 +84,7 @@ class ReportMakeParams
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getReportTypeUid(): string
     {
@@ -92,7 +92,7 @@ class ReportMakeParams
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getType(): string
     {
@@ -100,7 +100,7 @@ class ReportMakeParams
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getValue(): string
     {
@@ -108,11 +108,9 @@ class ReportMakeParams
     }
 
     /**
-     * @param array<string, string|int|float|bool|array<mixed>> $options
-     *
-     * @return $this
+     * {@inheritdoc}
      */
-    public function setOptions(array $options): self
+    public function setOptions(array $options): ReportMakeParamsInterface
     {
         $this->options = $options;
 
@@ -120,7 +118,7 @@ class ReportMakeParams
     }
 
     /**
-     * @return array<string, string|int|float|bool|array<mixed>>|null
+     * {@inheritdoc}
      */
     public function getOptions(): ?array
     {
@@ -128,11 +126,9 @@ class ReportMakeParams
     }
 
     /**
-     * @param bool $is_force
-     *
-     * @return $this
+     * {@inheritdoc}
      */
-    public function setForce(bool $is_force): self
+    public function setForce(bool $is_force): ReportMakeParamsInterface
     {
         $this->is_force = $is_force;
 
@@ -140,7 +136,7 @@ class ReportMakeParams
     }
 
     /**
-     * @return bool|null
+     * {@inheritdoc}
      */
     public function isForce(): ?bool
     {
@@ -148,11 +144,9 @@ class ReportMakeParams
     }
 
     /**
-     * @param string $on_update_url
-     *
-     * @return $this
+     * {@inheritdoc}
      */
-    public function setOnUpdateUrl(string $on_update_url): self
+    public function setOnUpdateUrl(string $on_update_url): ReportMakeParamsInterface
     {
         $this->on_update_url = $on_update_url;
 
@@ -160,7 +154,7 @@ class ReportMakeParams
     }
 
     /**
-     * @return string|null
+     * {@inheritdoc}
      */
     public function getOnUpdateUrl(): ?string
     {
@@ -168,11 +162,9 @@ class ReportMakeParams
     }
 
     /**
-     * @param string $on_complete_url
-     *
-     * @return $this
+     * {@inheritdoc}
      */
-    public function setOnCompleteUrl(string $on_complete_url): self
+    public function setOnCompleteUrl(string $on_complete_url): ReportMakeParamsInterface
     {
         $this->on_complete_url = $on_complete_url;
 
@@ -180,7 +172,7 @@ class ReportMakeParams
     }
 
     /**
-     * @return string|null
+     * {@inheritdoc}
      */
     public function getOnCompleteUrl(): ?string
     {
@@ -188,13 +180,9 @@ class ReportMakeParams
     }
 
     /**
-     * Set additional request data.
-     *
-     * @param array<string, string|int|float|bool|null|array<mixed>> $data
-     *
-     * @return $this
+     * {@inheritdoc}
      */
-    public function setData(array $data): self
+    public function setData(array $data): ReportMakeParamsInterface
     {
         $this->data = $data;
 
@@ -202,7 +190,7 @@ class ReportMakeParams
     }
 
     /**
-     * @return array<string, string|int|float|bool|null|array<mixed>>|null
+     * {@inheritdoc}
      */
     public function getData(): ?array
     {
@@ -210,13 +198,9 @@ class ReportMakeParams
     }
 
     /**
-     * Set idempotence key for request.
-     *
-     * @param string $idempotence_key
-     *
-     * @return $this
+     * {@inheritdoc}
      */
-    public function setIdempotenceKey(string $idempotence_key): self
+    public function setIdempotenceKey(string $idempotence_key): ReportMakeParamsInterface
     {
         $this->idempotence_key = $idempotence_key;
 
@@ -224,7 +208,7 @@ class ReportMakeParams
     }
 
     /**
-     * @return string|null
+     * {@inheritdoc}
      */
     public function getIdempotenceKey(): ?string
     {

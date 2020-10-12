@@ -13,7 +13,6 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Avtocod\B2BApi\Responses\UserResponse;
 use GuzzleHttp\Exception\RequestException;
-use Avtocod\B2BApi\Params\ReportMakeParams;
 use GuzzleHttp\Exception\TransferException;
 use Avtocod\B2BApi\Responses\DevPingResponse;
 use Avtocod\B2BApi\Responses\DevTokenResponse;
@@ -23,6 +22,7 @@ use Avtocod\B2BApi\Responses\UserBalanceResponse;
 use Avtocod\B2BApi\Responses\UserReportsResponse;
 use Avtocod\B2BApi\Exceptions\BadRequestException;
 use GuzzleHttp\ClientInterface as GuzzleInterface;
+use Avtocod\B2BApi\Params\ReportMakeParamsInterface;
 use Avtocod\B2BApi\Responses\UserReportMakeResponse;
 use Avtocod\B2BApi\Responses\UserReportTypesResponse;
 use Avtocod\B2BApi\Responses\UserReportRefreshResponse;
@@ -262,7 +262,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     /**
      * {@inheritdoc}
      */
-    public function userReportMake(ReportMakeParams $params): UserReportMakeResponse
+    public function userReportMake(ReportMakeParamsInterface $params): UserReportMakeResponse
     {
         $request_body = [
             'queryType' => $params->getType(),

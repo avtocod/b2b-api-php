@@ -8,12 +8,12 @@ The format is based on [Keep a Changelog][keepachangelog] and this project adher
 
 ### Added
 
-- Class `ReportMakeParams` to build make-report parameters
+- Class `ReportMakeParams` & interface `ReportMakeParamsInterface` to build make-report parameters
 - Optional parameter `idempotenceKey` for report-make requests
 
 ### Changed
 
-- Method `ClientInterface::userReportMake` now takes `ReportMakeParams` as parameter
+- Method `ClientInterface::userReportMake` now takes object implementing `ReportMakeParamsInterface` as parameter
 
 ## v3.4.0
 
