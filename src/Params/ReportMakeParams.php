@@ -108,7 +108,11 @@ class ReportMakeParams implements ReportMakeParamsInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Set additional request options.
+     *
+     * @param array<string, string|int|float|bool|array<mixed>> $options
+     *
+     * @return $this
      */
     public function setOptions(array $options): ReportMakeParamsInterface
     {
@@ -126,7 +130,11 @@ class ReportMakeParams implements ReportMakeParamsInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Set `force update report` flag, if it already was generated previously.
+     *
+     * @param bool $is_force
+     *
+     * @return $this
      */
     public function setForce(bool $is_force): ReportMakeParamsInterface
     {
@@ -144,7 +152,11 @@ class ReportMakeParams implements ReportMakeParamsInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Set URL to call (using `post` method) when report content updated.
+     *
+     * @param string $on_update_url
+     *
+     * @return $this
      */
     public function setOnUpdateUrl(string $on_update_url): ReportMakeParamsInterface
     {
@@ -162,7 +174,11 @@ class ReportMakeParams implements ReportMakeParamsInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Set URL to call (using `post` method) when report generation completed.
+     *
+     * @param string $on_complete_url
+     *
+     * @return $this
      */
     public function setOnCompleteUrl(string $on_complete_url): ReportMakeParamsInterface
     {
@@ -180,7 +196,11 @@ class ReportMakeParams implements ReportMakeParamsInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Set additional request data.
+     *
+     * @param array<string, string|int|float|bool|null|array<mixed>> $data
+     *
+     * @return $this
      */
     public function setData(array $data): ReportMakeParamsInterface
     {
@@ -198,7 +218,11 @@ class ReportMakeParams implements ReportMakeParamsInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Set idempotence key for request.
+     *
+     * @param string $idempotence_key
+     *
+     * @return $this
      */
     public function setIdempotenceKey(string $idempotence_key): ReportMakeParamsInterface
     {
