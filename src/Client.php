@@ -269,9 +269,11 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
             'query'     => $params->getValue(),
         ];
 
-        $options = [
-            'FORCE' => $params->isForce(),
-        ];
+        $options = [];
+
+        if (\is_bool($is_force = $params->isForce())) {
+            $options['FORCE'] = $is_force;
+        }
 
         if (\is_string($on_update = $params->getOnUpdateUrl())) {
             $options['webhook']['on_update'] = $on_update;
