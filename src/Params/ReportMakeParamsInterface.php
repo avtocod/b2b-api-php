@@ -34,7 +34,7 @@ interface ReportMakeParamsInterface
      *
      * @return $this
      */
-    public function setOptions(array $options): ReportMakeParamsInterface;
+    public function setOptions(array $options): self;
 
     /**
      * Get additional request options.
@@ -50,7 +50,7 @@ interface ReportMakeParamsInterface
      *
      * @return $this
      */
-    public function setForce(bool $is_force): ReportMakeParamsInterface;
+    public function setForce(bool $is_force): self;
 
     /**
      * Get force update report flag.
@@ -66,7 +66,7 @@ interface ReportMakeParamsInterface
      *
      * @return $this
      */
-    public function setOnUpdateUrl(string $on_update_url): ReportMakeParamsInterface;
+    public function setOnUpdateUrl(string $on_update_url): self;
 
     /**
      * Get URL to call (using `post` method) when report content updated.
@@ -82,7 +82,7 @@ interface ReportMakeParamsInterface
      *
      * @return $this
      */
-    public function setOnCompleteUrl(string $on_complete_url): ReportMakeParamsInterface;
+    public function setOnCompleteUrl(string $on_complete_url): self;
 
     /**
      * Get URL to call (using `post` method) when report generation completed.
@@ -98,7 +98,7 @@ interface ReportMakeParamsInterface
      *
      * @return $this
      */
-    public function setData(array $data): ReportMakeParamsInterface;
+    public function setData(array $data): self;
 
     /**
      * Get additional request data.
@@ -114,7 +114,7 @@ interface ReportMakeParamsInterface
      *
      * @return $this
      */
-    public function setIdempotenceKey(string $idempotence_key): ReportMakeParamsInterface;
+    public function setIdempotenceKey(string $idempotence_key): self;
 
     /**
      * Get idempotence key for request.
