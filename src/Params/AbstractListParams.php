@@ -190,7 +190,7 @@ abstract class AbstractListParams
     /**
      * @return bool
      */
-    public function getCalcTotal(): bool
+    public function isCalcTotal(): bool
     {
         return $this->calc_total;
     }

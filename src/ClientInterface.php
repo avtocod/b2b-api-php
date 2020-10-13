@@ -2,6 +2,8 @@
 
 namespace Avtocod\B2BApi;
 
+use Avtocod\B2BApi\Params\ReportsParams;
+use Avtocod\B2BApi\Params\ReportTypesParams;
 use DateTime;
 use Avtocod\B2BApi\Responses\UserResponse;
 use Avtocod\B2BApi\Params\ReportMakeParams;
@@ -84,58 +86,26 @@ interface ClientInterface
     /**
      * Retrieve report types data.
      *
-     * @param bool   $can_generate User nac generate reports for report type?
-     * @param bool   $content      Include report content rules
-     * @param string $query
-     * @param int    $size         Maximum entries per page
-     * @param int    $offset       Pagination offset
-     * @param int    $page         Page number
-     * @param string $sort         Sorting rules
-     * @param bool   $calc_total   Calculate total report types count
+     * @param ReportTypesParams $params
      *
      * @throws BadRequestException
      * @throws BadResponseException
      *
      * @return UserReportTypesResponse
      */
-    public function userReportTypes(
-        bool $can_generate = false,
-        bool $content = false,
-        string $query = '_all',
-        int $size = 20,
-        int $offset = 0,
-        int $page = 1,
-        string $sort = '-created_at',
-        bool $calc_total = false
-    ): UserReportTypesResponse;
+    public function userReportTypes(ReportTypesParams $params): UserReportTypesResponse;
 
     /**
      * Get reports list.
      *
-     * @param bool   $content    Include reports content into response
-     * @param string $query
-     * @param int    $size       Maximum entries per page
-     * @param int    $offset     Pagination offset
-     * @param int    $page       Page number
-     * @param string $sort       Sorting rules
-     * @param bool   $calc_total Calculate total reports count
-     * @param bool   $detailed
+     * @param ReportsParams $params
      *
      * @throws BadRequestException
      * @throws BadResponseException
      *
      * @return UserReportsResponse
      */
-    public function userReports(
-        bool $content = false,
-        string $query = '_all',
-        int $size = 20,
-        int $offset = 0,
-        int $page = 1,
-        string $sort = '-created_at',
-        bool $calc_total = false,
-        bool $detailed = false
-    ): UserReportsResponse;
+    public function userReports(ReportsParams $params): UserReportsResponse;
 
     /**
      * Get report by unique report ID.
