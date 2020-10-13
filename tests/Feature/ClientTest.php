@@ -6,6 +6,7 @@ namespace Avtocod\B2BApi\Tests\Feature;
 
 use Avtocod\B2BApi\Params\BalanceParams;
 use Avtocod\B2BApi\Params\DevPingParams;
+use Avtocod\B2BApi\Params\DevTokenParams;
 use Avtocod\B2BApi\Params\ReportParams;
 use Avtocod\B2BApi\Params\ReportsParams;
 use Avtocod\B2BApi\Params\ReportTypesParams;
@@ -83,11 +84,14 @@ class ClientTest extends AbstractTestCase
      */
     public function testDevToken(): void
     {
-        $now = new DateTime;
-        $age = 60;
+        // Prepare params to request without domain
+        $params = new DevTokenParams($this->username, $this->password);
+        $params
+            ->setPasswordHashed(false)
+            ->setDateFrom($now = new \DateTimeImmutable)
+            ->setTokenLifetime($age = 60);
 
-        // Without domain
-        $response = $this->client->devToken($this->username, $this->password, false, $now, $age);
+        $response = $this->client->devToken($params);
 
         $this->assertSame($this->username, $response->getUser());
         $this->assertSame(
@@ -95,8 +99,14 @@ class ClientTest extends AbstractTestCase
             $response->getToken()
         );
 
-        // With domain
-        $response = $this->client->devToken($this->username . '@' . $this->domain, $this->password, false, $now, $age);
+        // Prepare params to request with domain
+        $params = new DevTokenParams($this->username . '@' . $this->domain, $this->password);
+        $params
+            ->setPasswordHashed(false)
+            ->setDateFrom($now)
+            ->setTokenLifetime($age);
+
+        $response = $this->client->devToken($params);
 
         $this->assertSame($this->username . '@' . $this->domain, $response->getUser());
         $this->assertSame(

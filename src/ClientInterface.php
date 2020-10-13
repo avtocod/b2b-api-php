@@ -4,6 +4,7 @@ namespace Avtocod\B2BApi;
 
 use Avtocod\B2BApi\Params\BalanceParams;
 use Avtocod\B2BApi\Params\DevPingParams;
+use Avtocod\B2BApi\Params\DevTokenParams;
 use Avtocod\B2BApi\Params\ReportParams;
 use Avtocod\B2BApi\Params\ReportsParams;
 use Avtocod\B2BApi\Params\ReportTypesParams;
@@ -40,24 +41,14 @@ interface ClientInterface
     /**
      * Debug token generation.
      *
-     * @param string        $username  User identifier (e.g.: `test@test`)
-     * @param string        $password  User password
-     * @param bool          $is_hash   Password hashed?
-     * @param DateTime|null $date_from Token availability start date
-     * @param int           $age       Token lifetime (in seconds)
+     * @param DevTokenParams $params
      *
      * @throws BadRequestException
      * @throws BadResponseException
      *
      * @return DevTokenResponse
      */
-    public function devToken(
-        string $username,
-        string $password,
-        bool $is_hash = false,
-        ?DateTime $date_from = null,
-        int $age = 60
-    ): DevTokenResponse;
+    public function devToken(DevTokenParams $params): DevTokenResponse;
 
     /**
      * Retrieve information about current user.

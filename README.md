@@ -55,7 +55,7 @@ And then we can make next operations _(each call will returns an object with ser
 $client->devPing(new DevPingParams());
 
 // Debug token generation
-$client->devToken('username', 'password');
+$client->devToken(new DevTokenParams('username', 'password'));
 
 // Retrieve information about current user
 $client->user(true);

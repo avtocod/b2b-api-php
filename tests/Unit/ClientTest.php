@@ -6,6 +6,7 @@ namespace Avtocod\B2BApi\Tests\Unit;
 
 use Avtocod\B2BApi\Params\BalanceParams;
 use Avtocod\B2BApi\Params\DevPingParams;
+use Avtocod\B2BApi\Params\DevTokenParams;
 use Avtocod\B2BApi\Params\ReportParams;
 use Avtocod\B2BApi\Params\ReportRefreshParams;
 use Avtocod\B2BApi\Params\ReportsParams;
@@ -432,7 +433,13 @@ class ClientTest extends AbstractTestCase
             )
         );
 
-        $response = $this->client->devToken($user, $pass, $is_hash, $date, $age);
+        $params = new DevTokenParams($user, $pass);
+        $params
+            ->setPasswordHashed($is_hash)
+            ->setDateFrom(\DateTimeImmutable::createFromMutable($date))
+            ->setTokenLifetime($age);
+
+        $response = $this->client->devToken($params);
 
         $this->assertSame($user, $response->getUser());
         $this->assertSame($pass, $response->getPassword());
@@ -472,7 +479,13 @@ class ClientTest extends AbstractTestCase
             new Response(200, ['content-type' => 'application/json;charset=utf-8'], '{"foo":]')
         );
 
-        $this->client->devToken($user, $pass, $is_hash, $date, $age);
+        $params = new DevTokenParams($user, $pass);
+        $params
+            ->setPasswordHashed($is_hash)
+            ->setDateFrom(\DateTimeImmutable::createFromMutable($date))
+            ->setTokenLifetime($age);
+
+        $this->client->devToken($params);
     }
 
     /**

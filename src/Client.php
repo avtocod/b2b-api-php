@@ -6,6 +6,7 @@ namespace Avtocod\B2BApi;
 
 use Avtocod\B2BApi\Params\BalanceParams;
 use Avtocod\B2BApi\Params\DevPingParams;
+use Avtocod\B2BApi\Params\DevTokenParams;
 use Avtocod\B2BApi\Params\ReportParams;
 use Avtocod\B2BApi\Params\ReportsParams;
 use Avtocod\B2BApi\Params\ReportTypesParams;
@@ -124,22 +125,18 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     /**
      * {@inheritdoc}
      */
-    public function devToken(string $username,
-                             string $password,
-                             bool $is_hash = false,
-                             ?DateTime $date_from = null,
-                             int $age = 60): DevTokenResponse
+    public function devToken(DevTokenParams $params): DevTokenResponse
     {
         return DevTokenResponse::fromHttpResponse(
             $this->doRequest(new Request('get', 'dev/token'), [
                 'query' => [
-                    'user'    => $username,
-                    'pass'    => $password,
-                    'is_hash' => $is_hash
+                    'user'    => $params->getUsername(),
+                    'pass'    => $params->getPassword(),
+                    'is_hash' => $params->isPasswordHashed()
                         ? 'true'
                         : 'false',
                     'date'    => DateTimeFactory::toIso8601ZuluWithoutMs($date_from ?? new DateTime),
-                    'age'     => \max(1, $age),
+                    'age'     => \max(1, $params->getTokenLifetime()),
                 ],
             ])
         );
