@@ -3,6 +3,7 @@
 namespace Avtocod\B2BApi;
 
 use Avtocod\B2BApi\Params\DevPingParams;
+use Avtocod\B2BApi\Params\ReportParams;
 use Avtocod\B2BApi\Params\ReportsParams;
 use Avtocod\B2BApi\Params\ReportTypesParams;
 use Avtocod\B2BApi\Params\UserParams;
@@ -112,20 +113,14 @@ interface ClientInterface
     /**
      * Get report by unique report ID.
      *
-     * @param string $report_uid Report unique ID (e.g.: `some_report_uid_YV1KS9614S107357Y@domain`)
-     * @param bool   $content    Include content into response
-     * @param bool   $detailed
+     * @param ReportParams $params
      *
      * @throws BadRequestException
      * @throws BadResponseException
      *
      * @return UserReportResponse
      */
-    public function userReport(
-        string $report_uid,
-        bool $content = true,
-        bool $detailed = true
-    ): UserReportResponse;
+    public function userReport(ReportParams $params): UserReportResponse;
 
     /**
      * Make report.

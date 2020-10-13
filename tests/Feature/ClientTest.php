@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace Avtocod\B2BApi\Tests\Feature;
 
 use Avtocod\B2BApi\Params\DevPingParams;
+use Avtocod\B2BApi\Params\ReportParams;
 use Avtocod\B2BApi\Params\ReportsParams;
 use Avtocod\B2BApi\Params\ReportTypesParams;
 use Avtocod\B2BApi\Params\UserParams;
@@ -155,9 +156,10 @@ class ClientTest extends AbstractTestCase
      */
     public function testUserReport(): void
     {
-        $reports = $this->client->userReports(new ReportsParams());
+        $reports    = $this->client->userReports(new ReportsParams());
+        $report_uid = $reports->first()->getUid();
 
-        $report = $this->client->userReport($reports->first()->getUid());
+        $report = $this->client->userReport(new ReportParams($report_uid));
 
         $this->assertSame(1, $report->getSize());
 

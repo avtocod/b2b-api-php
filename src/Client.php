@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace Avtocod\B2BApi;
 
 use Avtocod\B2BApi\Params\DevPingParams;
+use Avtocod\B2BApi\Params\ReportParams;
 use Avtocod\B2BApi\Params\ReportsParams;
 use Avtocod\B2BApi\Params\ReportTypesParams;
 use Avtocod\B2BApi\Params\UserParams;
@@ -232,17 +233,15 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     /**
      * {@inheritdoc}
      */
-    public function userReport(string $report_uid,
-                               bool $content = true,
-                               bool $detailed = true): UserReportResponse
+    public function userReport(ReportParams $params): UserReportResponse
     {
         return UserReportResponse::fromHttpResponse(
-            $this->doRequest(new Request('get', \sprintf('user/reports/%s', \urlencode($report_uid))), [
+            $this->doRequest(new Request('get', \sprintf('user/reports/%s', \urlencode($params->getReportUid()))), [
                 'query' => [
-                    '_content'  => $content
+                    '_content'  => $params->isIncludeContent()
                         ? 'true'
                         : 'false',
-                    '_detailed' => $detailed
+                    '_detailed' => $params->isDetailed()
                         ? 'true'
                         : 'false',
                 ],

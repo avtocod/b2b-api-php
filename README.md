@@ -70,7 +70,9 @@ $client->userReportTypes();
 $client->userReports();
 
 // Get report by unique report ID
-$client->userReport('report_uid_SOMEIDENTIFIERGOESHERE@domain');
+$client->userReport(
+    new ReportParams('report_uid_SOMEIDENTIFIERGOESHERE@domain')
+);
 
 // Make (generate) report
 $client->userReportMake(
@@ -101,14 +103,14 @@ $report_uid = $client
 
 // Wait for report is ready
 while (true) {
-    if ($client->userReport($report_uid, false)->first()->isCompleted()) {
+    if ($client->userReport((new ReportParams($report_uid))->setIncludeContent(false))->first()->isCompleted()) {
         break;
     }
 
     \sleep(1);
 }
 
-$content = $client->userReport($report_uid)->first()->getContent();
+$content = $client->userReport(new ReportParams($report_uid))->first()->getContent();
 
 $vin_code  = $content->getByPath('identifiers.vehicle.vin');   // (string) 'JTMHX05J704083922'
 $engine_kw = $content->getByPath('tech_data.engine.power.kw'); // (int) 227
