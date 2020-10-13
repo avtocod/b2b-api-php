@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Params;
 
-class ReportMakeParams implements ReportMakeParamsInterface
+final class ReportMakeParams
 {
     /**
      * Unique report type ID (e.g.: `some_report_uid` or `some_report_uid@domain`).
@@ -84,7 +84,9 @@ class ReportMakeParams implements ReportMakeParamsInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Get unique report type ID (e.g.: `some_report_uid` or `some_report_uid@domain`).
+     *
+     * @return string
      */
     public function getReportTypeUid(): string
     {
@@ -92,7 +94,9 @@ class ReportMakeParams implements ReportMakeParamsInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Get request type (e.g.: `VIN`, `GRZ`, `STS`, `PTS`, `CHASSIS`, etc.).
+     *
+     * @return string
      */
     public function getType(): string
     {
@@ -100,7 +104,9 @@ class ReportMakeParams implements ReportMakeParamsInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Get request value (e.g.: `Z94CB41AAGR323020` (VIN), `А111АА177` (GRZ)).
+     *
+     * @return string
      */
     public function getValue(): string
     {
@@ -114,7 +120,7 @@ class ReportMakeParams implements ReportMakeParamsInterface
      *
      * @return $this
      */
-    public function setOptions(array $options): ReportMakeParamsInterface
+    public function setOptions(array $options): self
     {
         $this->options = $options;
 
@@ -122,7 +128,9 @@ class ReportMakeParams implements ReportMakeParamsInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Get additional request options.
+     *
+     * @return array<string, string|int|float|bool|array<mixed>>|null
      */
     public function getOptions(): ?array
     {
@@ -136,7 +144,7 @@ class ReportMakeParams implements ReportMakeParamsInterface
      *
      * @return $this
      */
-    public function setForce(bool $is_force): ReportMakeParamsInterface
+    public function setForce(bool $is_force): self
     {
         $this->is_force = $is_force;
 
@@ -144,7 +152,9 @@ class ReportMakeParams implements ReportMakeParamsInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Get force update report flag.
+     *
+     * @return bool|null
      */
     public function isForce(): ?bool
     {
@@ -158,7 +168,7 @@ class ReportMakeParams implements ReportMakeParamsInterface
      *
      * @return $this
      */
-    public function setOnUpdateUrl(string $on_update_url): ReportMakeParamsInterface
+    public function setOnUpdateUrl(string $on_update_url): self
     {
         $this->on_update_url = $on_update_url;
 
@@ -166,7 +176,9 @@ class ReportMakeParams implements ReportMakeParamsInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Get URL to call (using `post` method) when report content updated.
+     *
+     * @return string|null
      */
     public function getOnUpdateUrl(): ?string
     {
@@ -180,7 +192,7 @@ class ReportMakeParams implements ReportMakeParamsInterface
      *
      * @return $this
      */
-    public function setOnCompleteUrl(string $on_complete_url): ReportMakeParamsInterface
+    public function setOnCompleteUrl(string $on_complete_url): self
     {
         $this->on_complete_url = $on_complete_url;
 
@@ -188,7 +200,9 @@ class ReportMakeParams implements ReportMakeParamsInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Get URL to call (using `post` method) when report generation completed.
+     *
+     * @return string|null
      */
     public function getOnCompleteUrl(): ?string
     {
@@ -202,7 +216,7 @@ class ReportMakeParams implements ReportMakeParamsInterface
      *
      * @return $this
      */
-    public function setData(array $data): ReportMakeParamsInterface
+    public function setData(array $data): self
     {
         $this->data = $data;
 
@@ -210,7 +224,9 @@ class ReportMakeParams implements ReportMakeParamsInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Get additional request data.
+     *
+     * @return array<string, string|int|float|bool|null|array<mixed>>|null
      */
     public function getData(): ?array
     {
@@ -224,7 +240,7 @@ class ReportMakeParams implements ReportMakeParamsInterface
      *
      * @return $this
      */
-    public function setIdempotenceKey(string $idempotence_key): ReportMakeParamsInterface
+    public function setIdempotenceKey(string $idempotence_key): self
     {
         $this->idempotence_key = $idempotence_key;
 
@@ -232,7 +248,9 @@ class ReportMakeParams implements ReportMakeParamsInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Get idempotence key for request.
+     *
+     * @return string|null
      */
     public function getIdempotenceKey(): ?string
     {
