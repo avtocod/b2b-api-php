@@ -6,6 +6,7 @@ namespace Avtocod\B2BApi;
 
 use Avtocod\B2BApi\Params\ReportsParams;
 use Avtocod\B2BApi\Params\ReportTypesParams;
+use Avtocod\B2BApi\Params\UserParams;
 use Closure;
 use DateTime;
 use GuzzleHttp\Psr7\Request;
@@ -144,12 +145,12 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     /**
      * {@inheritdoc}
      */
-    public function user(bool $detailed = false): UserResponse
+    public function user(UserParams $params): UserResponse
     {
         return UserResponse::fromHttpResponse(
             $this->doRequest(new Request('get', 'user'), [
                 'query' => [
-                    '_detailed' => $detailed
+                    '_detailed' => $params->isDetailed()
                         ? 'true'
                         : 'false',
                 ],

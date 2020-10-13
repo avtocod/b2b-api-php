@@ -6,6 +6,7 @@ namespace Avtocod\B2BApi\Tests\Feature;
 
 use Avtocod\B2BApi\Params\ReportsParams;
 use Avtocod\B2BApi\Params\ReportTypesParams;
+use Avtocod\B2BApi\Params\UserParams;
 use DateTime;
 use Dotenv\Dotenv;
 use Avtocod\B2BApi\Client;
@@ -105,7 +106,7 @@ class ClientTest extends AbstractTestCase
     {
         $this->assertSame(
             $uid = $this->username . '@' . $this->domain,
-            $this->client->user()->getByUid($uid)->getUid()
+            $this->client->user(new UserParams())->getByUid($uid)->getUid()
         );
     }
 

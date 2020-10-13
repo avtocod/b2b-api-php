@@ -4,6 +4,7 @@ namespace Avtocod\B2BApi;
 
 use Avtocod\B2BApi\Params\ReportsParams;
 use Avtocod\B2BApi\Params\ReportTypesParams;
+use Avtocod\B2BApi\Params\UserParams;
 use DateTime;
 use Avtocod\B2BApi\Responses\UserResponse;
 use Avtocod\B2BApi\Params\ReportMakeParams;
@@ -58,14 +59,14 @@ interface ClientInterface
     /**
      * Retrieve information about current user.
      *
-     * @param bool $detailed
+     * @param UserParams $params
      *
      * @throws BadRequestException
      * @throws BadResponseException
      *
      * @return UserResponse
      */
-    public function user(bool $detailed = false): UserResponse;
+    public function user(UserParams $params): UserResponse;
 
     /**
      * Retrieve balance information for report type.

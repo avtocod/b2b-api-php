@@ -7,6 +7,7 @@ namespace Avtocod\B2BApi\Tests\Unit;
 use Avtocod\B2BApi\Params\ReportRefreshParams;
 use Avtocod\B2BApi\Params\ReportsParams;
 use Avtocod\B2BApi\Params\ReportTypesParams;
+use Avtocod\B2BApi\Params\UserParams;
 use DateTime;
 use Avtocod\B2BApi\Client;
 use Avtocod\B2BApi\Settings;
@@ -513,7 +514,7 @@ class ClientTest extends AbstractTestCase
             )
         );
 
-        $response = $this->client->user();
+        $response = $this->client->user(new UserParams());
 
         $this->assertSame($state, $response->getState());
         $this->assertSame($size, $response->getSize());
@@ -608,7 +609,9 @@ class ClientTest extends AbstractTestCase
             )
         );
 
-        $response = $this->client->user(true);
+        $response = $this->client->user(
+            (new UserParams())->setDetailed(true)
+        );
 
         $this->assertSame($state, $response->getState());
         $this->assertSame($size, $response->getSize());
@@ -670,7 +673,9 @@ class ClientTest extends AbstractTestCase
             new Response(200, ['content-type' => 'application/json;charset=utf-8'], '{"foo":]')
         );
 
-        $this->client->user(true);
+        $this->client->user(
+            (new UserParams())->setDetailed(true)
+        );
     }
 
     /**
