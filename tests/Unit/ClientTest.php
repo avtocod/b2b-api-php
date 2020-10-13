@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Tests\Unit;
 
+use Avtocod\B2BApi\Params\BalanceParams;
 use Avtocod\B2BApi\Params\DevPingParams;
 use Avtocod\B2BApi\Params\ReportParams;
 use Avtocod\B2BApi\Params\ReportRefreshParams;
@@ -726,7 +727,7 @@ class ClientTest extends AbstractTestCase
             )
         );
 
-        $response = $this->client->userBalance($report_type_uid);
+        $response = $this->client->userBalance(new BalanceParams($report_type_uid));
 
         $this->assertSame($state, $response->getState());
         $this->assertSame($size, $response->getSize());
@@ -819,7 +820,7 @@ class ClientTest extends AbstractTestCase
             )
         );
 
-        $response = $this->client->userBalance($report_type_uid, true);
+        $response = $this->client->userBalance((new BalanceParams($report_type_uid))->setDetailed(true));
 
         $this->assertSame($state, $response->getState());
         $this->assertSame($size, $response->getSize());
@@ -877,7 +878,7 @@ class ClientTest extends AbstractTestCase
             new Response(200, ['content-type' => 'application/json;charset=utf-8'], '{"foo":]')
         );
 
-        $this->client->userBalance($report_type_uid, true);
+        $this->client->userBalance((new BalanceParams($report_type_uid))->setDetailed(true));
     }
 
     /**

@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi;
 
+use Avtocod\B2BApi\Params\BalanceParams;
 use Avtocod\B2BApi\Params\DevPingParams;
 use Avtocod\B2BApi\Params\ReportParams;
 use Avtocod\B2BApi\Params\ReportsParams;
@@ -163,12 +164,12 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     /**
      * {@inheritdoc}
      */
-    public function userBalance(string $report_type_uid, bool $detailed = false): UserBalanceResponse
+    public function userBalance(BalanceParams $params): UserBalanceResponse
     {
         return UserBalanceResponse::fromHttpResponse(
-            $this->doRequest(new Request('get', \sprintf('user/balance/%s', \urlencode($report_type_uid))), [
+            $this->doRequest(new Request('get', \sprintf('user/balance/%s', \urlencode($params->getReportTypeUid()))), [
                 'query' => [
-                    '_detailed' => $detailed
+                    '_detailed' => $params->isDetailed()
                         ? 'true'
                         : 'false',
                 ],

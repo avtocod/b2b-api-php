@@ -61,7 +61,7 @@ $client->devToken('username', 'password');
 $client->user(true);
 
 // Retrieve balance information for report type
-$client->userBalance('report_type_uid@domain');
+$client->userBalance(new BalanceParams('report_type_uid@domain'));
 
 // Retrieve report types data
 $client->userReportTypes();

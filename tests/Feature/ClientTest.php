@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Tests\Feature;
 
+use Avtocod\B2BApi\Params\BalanceParams;
 use Avtocod\B2BApi\Params\DevPingParams;
 use Avtocod\B2BApi\Params\ReportParams;
 use Avtocod\B2BApi\Params\ReportsParams;
@@ -122,7 +123,10 @@ class ClientTest extends AbstractTestCase
     {
         $this->assertSame(
             $this->report_type,
-            $this->client->userBalance($this->report_type)->getByType(Balance::TOTALLY)->getReportTypeUid()
+            $this->client
+                ->userBalance(new BalanceParams($this->report_type))
+                ->getByType(Balance::TOTALLY)
+                ->getReportTypeUid()
         );
     }
 

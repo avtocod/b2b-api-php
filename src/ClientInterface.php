@@ -2,6 +2,7 @@
 
 namespace Avtocod\B2BApi;
 
+use Avtocod\B2BApi\Params\BalanceParams;
 use Avtocod\B2BApi\Params\DevPingParams;
 use Avtocod\B2BApi\Params\ReportParams;
 use Avtocod\B2BApi\Params\ReportsParams;
@@ -73,18 +74,14 @@ interface ClientInterface
     /**
      * Retrieve balance information for report type.
      *
-     * @param string $report_type_uid E.g.: `report_type@domain`
-     * @param bool   $detailed
+     * @param BalanceParams $params
      *
      * @throws BadRequestException
      * @throws BadResponseException
      *
      * @return UserBalanceResponse
      */
-    public function userBalance(
-        string $report_type_uid,
-        bool $detailed = false
-    ): UserBalanceResponse;
+    public function userBalance(BalanceParams $params): UserBalanceResponse;
 
     /**
      * Retrieve report types data.
