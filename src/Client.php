@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi;
 
+use Avtocod\B2BApi\Params\ReportRefreshParams;
 use Closure;
 use DateTime;
 use GuzzleHttp\Psr7\Request;
@@ -304,11 +305,11 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     /**
      * {@inheritdoc}
      */
-    public function userReportRefresh(string $report_uid, ?array $options = []): UserReportRefreshResponse
+    public function userReportRefresh(ReportRefreshParams $params): UserReportRefreshResponse
     {
         return UserReportRefreshResponse::fromHttpResponse(
-            $this->doRequest(new Request('post', \sprintf('user/reports/%s/_refresh', \urlencode($report_uid))), [
-                GuzzleOptions::JSON => (object) ($options ?? []),
+            $this->doRequest(new Request('post', \sprintf('user/reports/%s/_refresh', \urlencode($params->getReportUid()))), [
+                GuzzleOptions::JSON => (object) ($params->getOptions() ?? []),
             ])
         );
     }
