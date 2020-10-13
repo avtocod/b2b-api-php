@@ -73,7 +73,9 @@ $client->userReports();
 $client->userReport('report_uid_SOMEIDENTIFIERGOESHERE@domain');
 
 // Make (generate) report
-$client->userReportMake('report_type_uid@domain', 'VIN', 'Z94CB41AAGR323020');
+$client->userReportMake(
+    new ReportMakeParams('report_type_uid@domain', 'VIN', 'Z94CB41AAGR323020')
+);
 
 // Refresh existing report
 $client->userReportRefresh('report_uid_SOMEIDENTIFIERGOESHERE@domain');
@@ -86,7 +88,12 @@ For example, if you want to generate report for `A111AA177` (`GRZ` type), you ca
 
 // Make report (this operation is asynchronous)
 $report_uid = $client
-    ->userReportMake($this->report_type, 'GRZ', 'A111AA177', null, true)
+    ->userReportMake(
+        (new ReportMakeParams(`some_report_uid`, 'GRZ', 'A111AA177'))
+            ->setForce(true)
+            ->setOnUpdateUrl('https://example.com/webhook/updated')
+            ->setOnCompleteUrl('https://example.com/webhook/completed')
+    )
     ->first()
     ->getReportUid();
 

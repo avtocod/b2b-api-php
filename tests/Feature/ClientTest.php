@@ -10,6 +10,7 @@ use Avtocod\B2BApi\Client;
 use Avtocod\B2BApi\Settings;
 use Avtocod\B2BApi\Tokens\Auth\AuthToken;
 use Avtocod\B2BApi\Tests\AbstractTestCase;
+use Avtocod\B2BApi\Params\ReportMakeParams;
 use Avtocod\B2BApi\Responses\Entities\Balance;
 
 /**
@@ -49,7 +50,7 @@ class ClientTest extends AbstractTestCase
     {
         parent::setUp();
 
-        Dotenv::create(__DIR__ . '/../')->load();
+        Dotenv::createUnsafeImmutable(__DIR__ . '/../')->load();
 
         $this->username    = \getenv('B2B_USER');
         $this->password    = \getenv('B2B_PASSWORD');
@@ -163,7 +164,10 @@ class ClientTest extends AbstractTestCase
     {
         $this->assertStringContainsString(
             $vin = 'Z94CB41AAGR323020',
-            $this->client->userReportMake($this->report_type, 'VIN', $vin, null, true)->first()->getReportUid()
+            $this->client
+                ->userReportMake((new ReportMakeParams($this->report_type, 'VIN', $vin))->setForce(true))
+                ->first()
+                ->getReportUid()
         );
     }
 
