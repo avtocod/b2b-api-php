@@ -52,7 +52,7 @@ And then we can make next operations _(each call will returns an object with ser
 <?php /** @var \Avtocod\B2BApi\Client $client */
 
 // Test connection
-$client->devPing();
+$client->devPing(new DevPingParams());
 
 // Debug token generation
 $client->devToken('username', 'password');

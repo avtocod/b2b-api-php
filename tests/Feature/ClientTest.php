@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Tests\Feature;
 
+use Avtocod\B2BApi\Params\DevPingParams;
 use Avtocod\B2BApi\Params\ReportsParams;
 use Avtocod\B2BApi\Params\ReportTypesParams;
 use Avtocod\B2BApi\Params\UserParams;
@@ -69,7 +70,10 @@ class ClientTest extends AbstractTestCase
      */
     public function testDevPing(): void
     {
-        $this->assertSame($value = 'feature test' . \random_int(1, 9999), $this->client->devPing($value)->getValue());
+        $this->assertSame(
+            $value = 'feature test' . \random_int(1, 9999),
+            $this->client->devPing((new DevPingParams())->setValue($value))->getValue()
+        );
     }
 
     /**

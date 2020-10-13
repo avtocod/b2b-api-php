@@ -2,6 +2,7 @@
 
 namespace Avtocod\B2BApi;
 
+use Avtocod\B2BApi\Params\DevPingParams;
 use Avtocod\B2BApi\Params\ReportsParams;
 use Avtocod\B2BApi\Params\ReportTypesParams;
 use Avtocod\B2BApi\Params\UserParams;
@@ -25,14 +26,14 @@ interface ClientInterface
     /**
      * Test connection.
      *
-     * @param string|null $value Any string value (server must returns it back)
+     * @param DevPingParams $params
      *
      * @throws BadRequestException
      * @throws BadResponseException
      *
      * @return DevPingResponse
      */
-    public function devPing(?string $value = null): DevPingResponse;
+    public function devPing(DevPingParams $params): DevPingResponse;
 
     /**
      * Debug token generation.

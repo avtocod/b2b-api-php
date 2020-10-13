@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Tests\Unit;
 
+use Avtocod\B2BApi\Params\DevPingParams;
 use Avtocod\B2BApi\Params\ReportRefreshParams;
 use Avtocod\B2BApi\Params\ReportsParams;
 use Avtocod\B2BApi\Params\ReportTypesParams;
@@ -109,7 +110,7 @@ class ClientTest extends AbstractTestCase
             true
         );
 
-        $this->client->devPing();
+        $this->client->devPing(new DevPingParams());
     }
 
     /**
@@ -142,7 +143,7 @@ class ClientTest extends AbstractTestCase
             true
         );
 
-        $this->client->devPing();
+        $this->client->devPing(new DevPingParams());
     }
 
     /**
@@ -179,7 +180,7 @@ class ClientTest extends AbstractTestCase
             true
         );
 
-        $this->client->devPing();
+        $this->client->devPing(new DevPingParams());
     }
 
     /**
@@ -199,7 +200,7 @@ class ClientTest extends AbstractTestCase
             true
         );
 
-        $this->client->devPing();
+        $this->client->devPing(new DevPingParams());
     }
 
     /**
@@ -220,7 +221,7 @@ class ClientTest extends AbstractTestCase
             true
         );
 
-        $this->client->devPing();
+        $this->client->devPing(new DevPingParams());
     }
 
     /**
@@ -242,7 +243,7 @@ class ClientTest extends AbstractTestCase
             true
         );
 
-        $this->client->devPing();
+        $this->client->devPing(new DevPingParams());
 
         $this->assertSame(
             'AR-REST ' . $this->client->getSettings()->getAuthToken(),
@@ -283,7 +284,7 @@ class ClientTest extends AbstractTestCase
         });
 
         try {
-            $this->client->devPing();
+            $this->client->devPing(new DevPingParams());
         } catch (BadRequestException $e) {
             $catch = true;
         }
@@ -334,7 +335,7 @@ class ClientTest extends AbstractTestCase
         });
 
         try {
-            $this->client->devPing();
+            $this->client->devPing(new DevPingParams());
         } catch (BadRequestException $e) {
             $catch = true;
         }
@@ -366,7 +367,7 @@ class ClientTest extends AbstractTestCase
             )
         );
 
-        $response = $this->client->devPing($value);
+        $response = $this->client->devPing((new DevPingParams())->setValue($value));
 
         $this->assertSame($value, $response->getValue());
         $this->assertSame($in, $response->getIn());
@@ -391,7 +392,7 @@ class ClientTest extends AbstractTestCase
             new Response(200, ['content-type' => 'application/json;charset=utf-8'], '{"foo":]')
         );
 
-        $this->client->devPing();
+        $this->client->devPing(new DevPingParams());
     }
 
     /**

@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi;
 
+use Avtocod\B2BApi\Params\DevPingParams;
 use Avtocod\B2BApi\Params\ReportsParams;
 use Avtocod\B2BApi\Params\ReportTypesParams;
 use Avtocod\B2BApi\Params\UserParams;
@@ -89,12 +90,12 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     /**
      * {@inheritdoc}
      */
-    public function devPing(?string $value = null): DevPingResponse
+    public function devPing(DevPingParams $params): DevPingResponse
     {
         return DevPingResponse::fromHttpResponse(
             $this->doRequest(new Request('get', 'dev/ping'), [
                 'query' => [
-                    'value' => $value ?? ((string) \time()),
+                    'value' => $params->getValue() ?? ((string) \time()),
                 ],
             ])
         );
