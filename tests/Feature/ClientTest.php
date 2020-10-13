@@ -4,6 +4,8 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Tests\Feature;
 
+use Avtocod\B2BApi\Params\ReportsParams;
+use Avtocod\B2BApi\Params\ReportTypesParams;
 use DateTime;
 use Dotenv\Dotenv;
 use Avtocod\B2BApi\Client;
@@ -125,7 +127,7 @@ class ClientTest extends AbstractTestCase
     {
         $this->assertSame(
             $this->domain,
-            $this->client->userReportTypes()->getByUid($this->report_type)->getDomainUid()
+            $this->client->userReportTypes(new ReportTypesParams())->getByUid($this->report_type)->getDomainUid()
         );
     }
 
@@ -134,7 +136,7 @@ class ClientTest extends AbstractTestCase
      */
     public function testUserReports(): void
     {
-        $response = $this->client->userReports();
+        $response = $this->client->userReports(new ReportsParams());
 
         $this->assertGreaterThanOrEqual(1, $response->getSize());
 
@@ -148,7 +150,7 @@ class ClientTest extends AbstractTestCase
      */
     public function testUserReport(): void
     {
-        $reports = $this->client->userReports();
+        $reports = $this->client->userReports(new ReportsParams());
 
         $report = $this->client->userReport($reports->first()->getUid());
 
@@ -179,7 +181,7 @@ class ClientTest extends AbstractTestCase
      */
     public function testUserReportRefresh(): void
     {
-        $reports    = $this->client->userReports();
+        $reports    = $this->client->userReports(new ReportsParams());
         $report_uid = $reports->first()->getUid();
         $response   = $this->client->userReportRefresh(new ReportRefreshParams($report_uid));
 

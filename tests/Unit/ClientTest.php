@@ -5,6 +5,8 @@ declare(strict_types = 1);
 namespace Avtocod\B2BApi\Tests\Unit;
 
 use Avtocod\B2BApi\Params\ReportRefreshParams;
+use Avtocod\B2BApi\Params\ReportsParams;
+use Avtocod\B2BApi\Params\ReportTypesParams;
 use DateTime;
 use Avtocod\B2BApi\Client;
 use Avtocod\B2BApi\Settings;
@@ -897,7 +899,17 @@ class ClientTest extends AbstractTestCase
             )
         );
 
-        $response = $this->client->userReportTypes(true, true, '_all', 20, 0, 1, '-created_at', true);
+        $params = new ReportTypesParams();
+        $params->setCanGenerate(true)
+            ->setIncludeContent(true)
+            ->setQuery('_all')
+            ->setPerPage(20)
+            ->setOffset(0)
+            ->setPage(1)
+            ->setSortBy('-created_at')
+            ->setCalcTotal(true);
+
+        $response = $this->client->userReportTypes($params);
 
         $this->assertCount(11, $response->getData());
         $this->assertSame(11, $response->getTotal());
@@ -973,7 +985,7 @@ class ClientTest extends AbstractTestCase
             )
         );
 
-        $response = $this->client->userReportTypes();
+        $response = $this->client->userReportTypes(new ReportTypesParams());
 
         $this->assertCount(11, $response->getData());
         $this->assertNull($response->getTotal());
@@ -1039,7 +1051,7 @@ class ClientTest extends AbstractTestCase
             new Response(200, ['content-type' => 'application/json;charset=utf-8'], '{"foo":]')
         );
 
-        $this->client->userReportTypes();
+        $this->client->userReportTypes(new ReportTypesParams());
     }
 
     /**
@@ -1068,7 +1080,18 @@ class ClientTest extends AbstractTestCase
             )
         );
 
-        $response = $this->client->userReports(true, '_all', 20, 0, 1, '-created_at', true, true);
+        $params = new ReportsParams();
+        $params
+            ->setIncludeContent(true)
+            ->setQuery('_all')
+            ->setPerPage(20)
+            ->setOffset(0)
+            ->setPage(1)
+            ->setSortBy('-created_at')
+            ->setCalcTotal(true)
+            ->setDetailed(true);
+
+        $response = $this->client->userReports($params);
 
         $this->assertSame(8007997, $response->getTotal());
         $this->assertSame(2, $response->getSize());
@@ -1149,7 +1172,18 @@ class ClientTest extends AbstractTestCase
             new Response(200, ['content-type' => 'application/json;charset=utf-8'], '{"foo":]')
         );
 
-        $this->client->userReports(true, '_all', 20, 0, 1, '-created_at', true, true);
+        $params = new ReportsParams();
+        $params
+            ->setIncludeContent(true)
+            ->setQuery('_all')
+            ->setPerPage(20)
+            ->setOffset(0)
+            ->setPage(1)
+            ->setSortBy('-created_at')
+            ->setCalcTotal(true)
+            ->setDetailed(true);
+
+        $this->client->userReports($params);
     }
 
     /**
@@ -1178,7 +1212,7 @@ class ClientTest extends AbstractTestCase
             )
         );
 
-        $response = $this->client->userReports();
+        $response = $this->client->userReports(new ReportsParams());
 
         $this->assertNull($response->getTotal());
         $this->assertSame(3, $response->getSize());

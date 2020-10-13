@@ -4,6 +4,8 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi;
 
+use Avtocod\B2BApi\Params\ReportsParams;
+use Avtocod\B2BApi\Params\ReportTypesParams;
 use Closure;
 use DateTime;
 use GuzzleHttp\Psr7\Request;
@@ -174,30 +176,23 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     /**
      * {@inheritdoc}
      */
-    public function userReportTypes(bool $can_generate = false,
-                                    bool $content = false,
-                                    string $query = '_all',
-                                    int $size = 20,
-                                    int $offset = 0,
-                                    int $page = 1,
-                                    string $sort = '-created_at',
-                                    bool $calc_total = false): UserReportTypesResponse
+    public function userReportTypes(ReportTypesParams $params): UserReportTypesResponse
     {
         return UserReportTypesResponse::fromHttpResponse(
             $this->doRequest(new Request('get', 'user/report_types'), [
                 'query' => [
-                    '_can_generate' => $can_generate
+                    '_can_generate' => $params->isCanGenerate()
                         ? 'true'
                         : 'false',
-                    '_content'      => $content
+                    '_content'      => $params->isIncludeContent()
                         ? 'true'
                         : 'false',
-                    '_query'        => $query,
-                    '_size'         => \max(1, $size),
-                    '_offset'       => \max(0, $offset),
-                    '_page'         => \max(1, $page),
-                    '_sort'         => $sort,
-                    '_calc_total'   => $calc_total
+                    '_query'        => $params->getQuery(),
+                    '_size'         => \max(1, $params->getPerPage()),
+                    '_offset'       => \max(0, $params->getOffset()),
+                    '_page'         => \max(1, $params->getPage()),
+                    '_sort'         => $params->getSortBy(),
+                    '_calc_total'   => $params->isCalcTotal()
                         ? 'true'
                         : 'false',
                 ],
@@ -208,30 +203,23 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     /**
      * {@inheritdoc}
      */
-    public function userReports(bool $content = false,
-                                string $query = '_all',
-                                int $size = 20,
-                                int $offset = 0,
-                                int $page = 1,
-                                string $sort = '-created_at',
-                                bool $calc_total = false,
-                                bool $detailed = false): UserReportsResponse
+    public function userReports(ReportsParams $params): UserReportsResponse
     {
         return UserReportsResponse::fromHttpResponse(
             $this->doRequest(new Request('get', 'user/reports'), [
                 'query' => [
-                    '_content'    => $content
+                    '_content'    => $params->isIncludeContent()
                         ? 'true'
                         : 'false',
-                    '_query'      => $query,
-                    '_size'       => \max(1, $size),
-                    '_offset'     => \max(0, $offset),
-                    '_page'       => \max(1, $page),
-                    '_sort'       => $sort,
-                    '_calc_total' => $calc_total
+                    '_query'      => $params->getQuery(),
+                    '_size'       => \max(1, $params->getPerPage()),
+                    '_offset'     => \max(0, $params->getOffset()),
+                    '_page'       => \max(1, $params->getPage()),
+                    '_sort'       => $params->getSortBy(),
+                    '_calc_total' => $params->isCalcTotal()
                         ? 'true'
                         : 'false',
-                    '_detailed'   => $detailed
+                    '_detailed'   => $params->isDetailed()
                         ? 'true'
                         : 'false',
                 ],
