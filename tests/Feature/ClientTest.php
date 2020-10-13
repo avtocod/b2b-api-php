@@ -11,6 +11,7 @@ use Avtocod\B2BApi\Settings;
 use Avtocod\B2BApi\Tokens\Auth\AuthToken;
 use Avtocod\B2BApi\Tests\AbstractTestCase;
 use Avtocod\B2BApi\Params\ReportMakeParams;
+use Avtocod\B2BApi\Params\ReportRefreshParams;
 use Avtocod\B2BApi\Responses\Entities\Balance;
 
 /**
@@ -180,7 +181,7 @@ class ClientTest extends AbstractTestCase
     {
         $reports    = $this->client->userReports();
         $report_uid = $reports->first()->getUid();
-        $response   = $this->client->userReportRefresh($report_uid);
+        $response   = $this->client->userReportRefresh(new ReportRefreshParams($report_uid));
 
         $this->assertSame(
             $report_uid, $response->first()->getReportUid()

@@ -78,7 +78,9 @@ $client->userReportMake(
 );
 
 // Refresh existing report
-$client->userReportRefresh('report_uid_SOMEIDENTIFIERGOESHERE@domain');
+$client->userReportRefresh(
+    new ReportRefreshParams('report_uid_SOMEIDENTIFIERGOESHERE@domain')
+);
 ```
 
 For example, if you want to generate report for `A111AA177` (`GRZ` type), you can:

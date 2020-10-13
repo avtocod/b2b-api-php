@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi;
 
-use Avtocod\B2BApi\Params\ReportRefreshParams;
 use Closure;
 use DateTime;
 use GuzzleHttp\Psr7\Request;
@@ -17,6 +16,7 @@ use GuzzleHttp\Exception\RequestException;
 use Avtocod\B2BApi\Params\ReportMakeParams;
 use GuzzleHttp\Exception\TransferException;
 use Avtocod\B2BApi\Responses\DevPingResponse;
+use Avtocod\B2BApi\Params\ReportRefreshParams;
 use Avtocod\B2BApi\Responses\DevTokenResponse;
 use GuzzleHttp\RequestOptions as GuzzleOptions;
 use Avtocod\B2BApi\Responses\UserReportResponse;
