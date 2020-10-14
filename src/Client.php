@@ -127,6 +127,11 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
      */
     public function devToken(DevTokenParams $params): DevTokenResponse
     {
+        // Convert \DateTimeImmutable to \DateTime with timezone
+        // @notice We can use DateTime::createFromImmutable() when the PHP 7.2 support is removed
+        $date_time = new \DateTime('now', $params->getDateFrom()->getTimezone());
+        $date_time->setTimestamp($params->getDateFrom()->getTimestamp());
+
         return DevTokenResponse::fromHttpResponse(
             $this->doRequest(new Request('get', 'dev/token'), [
                 'query' => [
@@ -135,7 +140,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
                     'is_hash' => $params->isPasswordHashed()
                         ? 'true'
                         : 'false',
-                    'date'    => DateTimeFactory::toIso8601ZuluWithoutMs($date_from ?? new DateTime),
+                    'date'    => DateTimeFactory::toIso8601ZuluWithoutMs($date_time ?? new \DateTime),
                     'age'     => \max(1, $params->getTokenLifetime()),
                 ],
             ])
