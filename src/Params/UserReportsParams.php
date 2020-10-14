@@ -18,7 +18,7 @@ final class UserReportsParams extends AbstractListParams
      *
      * @return $this
      */
-    public function setDetailed(bool $detailed): UserReportsParams
+    public function setDetailed(bool $detailed): self
     {
         $this->detailed = $detailed;
 

@@ -43,7 +43,7 @@ final class UserBalanceParams
      *
      * @return $this
      */
-    public function setDetailed(bool $detailed): UserBalanceParams
+    public function setDetailed(bool $detailed): self
     {
         $this->detailed = $detailed;
 

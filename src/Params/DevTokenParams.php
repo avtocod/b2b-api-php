@@ -9,14 +9,14 @@ use DateTimeImmutable;
 final class DevTokenParams
 {
     /**
-     * User identifier (e.g.: `test@test`)
+     * User identifier (e.g.: `test@test`).
      *
      * @var string
      */
     private $username;
 
     /**
-     * User password
+     * User password.
      *
      * @var string
      */
@@ -37,7 +37,7 @@ final class DevTokenParams
     private $date_from = null;
 
     /**
-     * Token lifetime (in seconds)
+     * Token lifetime (in seconds).
      *
      * @var int
      */
@@ -54,7 +54,7 @@ final class DevTokenParams
     }
 
     /**
-     * Get user identifier (e.g.: `test@test`)
+     * Get user identifier (e.g.: `test@test`).
      *
      * @return string
      */
@@ -86,7 +86,7 @@ final class DevTokenParams
      *
      * @return $this
      */
-    public function setPasswordHashed(bool $is_password_hashed): DevTokenParams
+    public function setPasswordHashed(bool $is_password_hashed): self
     {
         $this->is_password_hashed = $is_password_hashed;
 
@@ -106,7 +106,7 @@ final class DevTokenParams
      *
      * @return $this
      */
-    public function setDateFrom(?DateTimeImmutable $date_from): DevTokenParams
+    public function setDateFrom(?DateTimeImmutable $date_from): self
     {
         $this->date_from = $date_from;
 
@@ -126,7 +126,7 @@ final class DevTokenParams
      *
      * @return $this
      */
-    public function setTokenLifetime(int $token_lifetime): DevTokenParams
+    public function setTokenLifetime(int $token_lifetime): self
     {
         $this->token_lifetime = $token_lifetime;
 

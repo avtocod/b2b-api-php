@@ -7,7 +7,7 @@ namespace Avtocod\B2BApi\Params;
 final class DevPingParams
 {
     /**
-     * Any string value (server must returns it back)
+     * Any string value (server must returns it back).
      *
      * @var string|null
      */
@@ -18,7 +18,7 @@ final class DevPingParams
      *
      * @return $this
      */
-    public function setValue(string $value): DevPingParams
+    public function setValue(string $value): self
     {
         $this->value = $value;
 

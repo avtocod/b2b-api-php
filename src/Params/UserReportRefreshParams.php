@@ -7,7 +7,7 @@ namespace Avtocod\B2BApi\Params;
 final class UserReportRefreshParams
 {
     /**
-     * Report unique ID (e.g.: `some_report_uid_YV1KS9614S107357Y@domain`)
+     * Report unique ID (e.g.: `some_report_uid_YV1KS9614S107357Y@domain`).
      *
      * @var string
      */

@@ -2,22 +2,22 @@
 
 namespace Avtocod\B2BApi;
 
-use Avtocod\B2BApi\Params\UserBalanceParams;
+use Avtocod\B2BApi\Params\UserParams;
 use Avtocod\B2BApi\Params\DevPingParams;
 use Avtocod\B2BApi\Params\DevTokenParams;
-use Avtocod\B2BApi\Params\UserReportParams;
-use Avtocod\B2BApi\Params\UserReportsParams;
-use Avtocod\B2BApi\Params\UserReportTypesParams;
-use Avtocod\B2BApi\Params\UserParams;
 use Avtocod\B2BApi\Responses\UserResponse;
-use Avtocod\B2BApi\Params\UserReportMakeParams;
+use Avtocod\B2BApi\Params\UserReportParams;
+use Avtocod\B2BApi\Params\UserBalanceParams;
+use Avtocod\B2BApi\Params\UserReportsParams;
 use Avtocod\B2BApi\Responses\DevPingResponse;
-use Avtocod\B2BApi\Params\UserReportRefreshParams;
 use Avtocod\B2BApi\Responses\DevTokenResponse;
+use Avtocod\B2BApi\Params\UserReportMakeParams;
+use Avtocod\B2BApi\Params\UserReportTypesParams;
 use Avtocod\B2BApi\Responses\UserReportResponse;
 use Avtocod\B2BApi\Responses\UserBalanceResponse;
 use Avtocod\B2BApi\Responses\UserReportsResponse;
 use Avtocod\B2BApi\Exceptions\BadRequestException;
+use Avtocod\B2BApi\Params\UserReportRefreshParams;
 use Avtocod\B2BApi\Exceptions\BadResponseException;
 use Avtocod\B2BApi\Responses\UserReportMakeResponse;
 use Avtocod\B2BApi\Responses\UserReportTypesResponse;

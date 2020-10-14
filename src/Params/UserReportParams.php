@@ -7,7 +7,7 @@ namespace Avtocod\B2BApi\Params;
 final class UserReportParams
 {
     /**
-     * Report unique ID (e.g.: `some_report_uid_YV1KS9614S107357Y@domain`)
+     * Report unique ID (e.g.: `some_report_uid_YV1KS9614S107357Y@domain`).
      *
      * @var string
      */
@@ -70,7 +70,7 @@ final class UserReportParams
      *
      * @return $this
      */
-    public function setDetailed(bool $detailed): UserReportParams
+    public function setDetailed(bool $detailed): self
     {
         $this->detailed = $detailed;
 

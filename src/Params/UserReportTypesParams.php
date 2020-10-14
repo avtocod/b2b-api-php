@@ -18,7 +18,7 @@ final class UserReportTypesParams extends AbstractListParams
      *
      * @return $this
      */
-    public function setCanGenerate(bool $can_generate): UserReportTypesParams
+    public function setCanGenerate(bool $can_generate): self
     {
         $this->can_generate = $can_generate;
 

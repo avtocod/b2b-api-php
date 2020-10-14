@@ -4,8 +4,8 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Tests\Unit\Params;
 
-use Avtocod\B2BApi\Tests\AbstractTestCase;
 use Avtocod\B2BApi\Params\DevTokenParams;
+use Avtocod\B2BApi\Tests\AbstractTestCase;
 
 /**
  * @covers \Avtocod\B2BApi\Params\DevTokenParams

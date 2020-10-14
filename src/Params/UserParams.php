@@ -18,7 +18,7 @@ final class UserParams
      *
      * @return $this
      */
-    public function setDetailed(bool $detailed): UserParams
+    public function setDetailed(bool $detailed): self
     {
         $this->detailed = $detailed;
 
