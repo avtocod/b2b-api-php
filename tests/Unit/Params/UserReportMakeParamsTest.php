@@ -10,7 +10,7 @@ use Avtocod\B2BApi\Params\UserReportMakeParams;
 /**
  * @covers \Avtocod\B2BApi\Params\UserReportMakeParams
  */
-class ReportMakeParamsTest extends AbstractTestCase
+class UserReportMakeParamsTest extends AbstractTestCase
 {
     /**
      * @return void
