@@ -5,10 +5,10 @@ declare(strict_types = 1);
 namespace Avtocod\B2BApi\Tests\Unit\Params;
 
 use Avtocod\B2BApi\Tests\AbstractTestCase;
-use Avtocod\B2BApi\Params\ReportMakeParams;
+use Avtocod\B2BApi\Params\UserReportMakeParams;
 
 /**
- * @covers \Avtocod\B2BApi\Params\ReportMakeParams
+ * @covers \Avtocod\B2BApi\Params\UserReportMakeParams
  */
 class ReportMakeParamsTest extends AbstractTestCase
 {
@@ -17,7 +17,7 @@ class ReportMakeParamsTest extends AbstractTestCase
      */
     public function testRequiredProperties(): void
     {
-        $params = new ReportMakeParams(
+        $params = new UserReportMakeParams(
             $report_type_uid = $this->faker->word,
             $type = $this->faker->word,
             $value = $this->faker->word
@@ -33,7 +33,7 @@ class ReportMakeParamsTest extends AbstractTestCase
      */
     public function testSettedOptionalProperties(): void
     {
-        $params = new ReportMakeParams($this->faker->word, $this->faker->word, $this->faker->word);
+        $params = new UserReportMakeParams($this->faker->word, $this->faker->word, $this->faker->word);
         $params
             ->setOptions([
                 ($key_one = $this->faker->word) => $this->faker->randomDigitNotNull,
@@ -60,7 +60,7 @@ class ReportMakeParamsTest extends AbstractTestCase
      */
     public function testNotSettedOptionalProperties(): void
     {
-        $params = new ReportMakeParams($this->faker->word, $this->faker->word, $this->faker->word);
+        $params = new UserReportMakeParams($this->faker->word, $this->faker->word, $this->faker->word);
 
         $this->assertNull($params->isForce());
         $this->assertNull($params->getIdempotenceKey());

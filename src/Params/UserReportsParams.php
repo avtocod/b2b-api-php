@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Params;
 
-final class ReportsParams extends AbstractListParams
+final class UserReportsParams extends AbstractListParams
 {
     /**
      * True, if necessary detailed information in response.
@@ -18,7 +18,7 @@ final class ReportsParams extends AbstractListParams
      *
      * @return $this
      */
-    public function setDetailed(bool $detailed): ReportsParams
+    public function setDetailed(bool $detailed): UserReportsParams
     {
         $this->detailed = $detailed;
 

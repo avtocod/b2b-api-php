@@ -4,13 +4,13 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Tests\Unit;
 
-use Avtocod\B2BApi\Params\BalanceParams;
+use Avtocod\B2BApi\Params\UserBalanceParams;
 use Avtocod\B2BApi\Params\DevPingParams;
 use Avtocod\B2BApi\Params\DevTokenParams;
-use Avtocod\B2BApi\Params\ReportParams;
-use Avtocod\B2BApi\Params\ReportRefreshParams;
-use Avtocod\B2BApi\Params\ReportsParams;
-use Avtocod\B2BApi\Params\ReportTypesParams;
+use Avtocod\B2BApi\Params\UserReportParams;
+use Avtocod\B2BApi\Params\UserReportRefreshParams;
+use Avtocod\B2BApi\Params\UserReportsParams;
+use Avtocod\B2BApi\Params\UserReportTypesParams;
 use Avtocod\B2BApi\Params\UserParams;
 use DateTime;
 use Avtocod\B2BApi\Client;
@@ -26,7 +26,7 @@ use Avtocod\B2BApi\DateTimeFactory;
 use Avtocod\B2BApi\WithSettingsInterface;
 use Avtocod\B2BApi\Tests\AbstractTestCase;
 use GuzzleHttp\Exception\ConnectException;
-use Avtocod\B2BApi\Params\ReportMakeParams;
+use Avtocod\B2BApi\Params\UserReportMakeParams;
 use Avtocod\B2BApi\Responses\Entities\User;
 use Avtocod\B2BApi\Events\RequestFailedEvent;
 use Avtocod\B2BApi\Responses\Entities\Report;
@@ -740,7 +740,7 @@ class ClientTest extends AbstractTestCase
             )
         );
 
-        $response = $this->client->userBalance(new BalanceParams($report_type_uid));
+        $response = $this->client->userBalance(new UserBalanceParams($report_type_uid));
 
         $this->assertSame($state, $response->getState());
         $this->assertSame($size, $response->getSize());
@@ -833,7 +833,7 @@ class ClientTest extends AbstractTestCase
             )
         );
 
-        $response = $this->client->userBalance((new BalanceParams($report_type_uid))->setDetailed(true));
+        $response = $this->client->userBalance((new UserBalanceParams($report_type_uid))->setDetailed(true));
 
         $this->assertSame($state, $response->getState());
         $this->assertSame($size, $response->getSize());
@@ -891,7 +891,7 @@ class ClientTest extends AbstractTestCase
             new Response(200, ['content-type' => 'application/json;charset=utf-8'], '{"foo":]')
         );
 
-        $this->client->userBalance((new BalanceParams($report_type_uid))->setDetailed(true));
+        $this->client->userBalance((new UserBalanceParams($report_type_uid))->setDetailed(true));
     }
 
     /**
@@ -920,7 +920,7 @@ class ClientTest extends AbstractTestCase
             )
         );
 
-        $params = new ReportTypesParams();
+        $params = new UserReportTypesParams();
         $params->setCanGenerate(true)
             ->setIncludeContent(true)
             ->setQuery('_all')
@@ -1006,7 +1006,7 @@ class ClientTest extends AbstractTestCase
             )
         );
 
-        $response = $this->client->userReportTypes(new ReportTypesParams());
+        $response = $this->client->userReportTypes(new UserReportTypesParams());
 
         $this->assertCount(11, $response->getData());
         $this->assertNull($response->getTotal());
@@ -1072,7 +1072,7 @@ class ClientTest extends AbstractTestCase
             new Response(200, ['content-type' => 'application/json;charset=utf-8'], '{"foo":]')
         );
 
-        $this->client->userReportTypes(new ReportTypesParams());
+        $this->client->userReportTypes(new UserReportTypesParams());
     }
 
     /**
@@ -1101,7 +1101,7 @@ class ClientTest extends AbstractTestCase
             )
         );
 
-        $params = new ReportsParams();
+        $params = new UserReportsParams();
         $params
             ->setIncludeContent(true)
             ->setQuery('_all')
@@ -1193,7 +1193,7 @@ class ClientTest extends AbstractTestCase
             new Response(200, ['content-type' => 'application/json;charset=utf-8'], '{"foo":]')
         );
 
-        $params = new ReportsParams();
+        $params = new UserReportsParams();
         $params
             ->setIncludeContent(true)
             ->setQuery('_all')
@@ -1233,7 +1233,7 @@ class ClientTest extends AbstractTestCase
             )
         );
 
-        $response = $this->client->userReports(new ReportsParams());
+        $response = $this->client->userReports(new UserReportsParams());
 
         $this->assertNull($response->getTotal());
         $this->assertSame(3, $response->getSize());
@@ -1302,7 +1302,7 @@ class ClientTest extends AbstractTestCase
             )
         );
 
-        $response = $this->client->userReport(new ReportParams($report_uid));
+        $response = $this->client->userReport(new UserReportParams($report_uid));
 
         $this->assertSame(1, $response->getSize());
         $this->assertEquals(
@@ -1380,7 +1380,7 @@ class ClientTest extends AbstractTestCase
             new Response(200, ['content-type' => 'application/json;charset=utf-8'], '{"foo":]')
         );
 
-        $this->client->userReport(new ReportParams($report_uid));
+        $this->client->userReport(new UserReportParams($report_uid));
     }
 
     /**
@@ -1402,7 +1402,7 @@ class ClientTest extends AbstractTestCase
             )
         );
 
-        $params = new ReportMakeParams($report_type_uid, $type = 'VIN', $body = 'Z94CB41AAGR323020');
+        $params = new UserReportMakeParams($report_type_uid, $type = 'VIN', $body = 'Z94CB41AAGR323020');
         $params
             ->setForce(true)
             ->setOnUpdateUrl($on_update = $this->faker->url)
@@ -1466,7 +1466,7 @@ class ClientTest extends AbstractTestCase
             new Response(200, ['content-type' => 'application/json;charset=utf-8'], '{"foo":]')
         );
 
-        $params = new ReportMakeParams($report_type_uid, $type = 'VIN', $body = 'Z94CB41AAGR323020');
+        $params = new UserReportMakeParams($report_type_uid, $type = 'VIN', $body = 'Z94CB41AAGR323020');
 
         $this->client->userReportMake($params);
     }
@@ -1490,7 +1490,7 @@ class ClientTest extends AbstractTestCase
             )
         );
 
-        $params = new ReportMakeParams($report_type_uid, $type = 'VIN', $body = 'Z94CB41AAGR323020');
+        $params = new UserReportMakeParams($report_type_uid, $type = 'VIN', $body = 'Z94CB41AAGR323020');
         $params
             ->setIdempotenceKey($idempotence_key = $this->faker->word)
             ->setForce($this->faker->boolean)
@@ -1529,7 +1529,7 @@ class ClientTest extends AbstractTestCase
             )
         );
 
-        $response = $this->client->userReportRefresh(new ReportRefreshParams($report_uid));
+        $response = $this->client->userReportRefresh(new UserReportRefreshParams($report_uid));
 
         $this->assertSame(1, $response->getSize());
         $this->assertSame('ok', $response->getState());
@@ -1578,6 +1578,6 @@ class ClientTest extends AbstractTestCase
             new Response(200, ['content-type' => 'application/json;charset=utf-8'], '{"foo":]')
         );
 
-        $this->client->userReportRefresh(new ReportRefreshParams($report_uid));
+        $this->client->userReportRefresh(new UserReportRefreshParams($report_uid));
     }
 }

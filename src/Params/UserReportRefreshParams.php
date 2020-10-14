@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Params;
 
-final class ReportRefreshParams
+final class UserReportRefreshParams
 {
     /**
      * Report unique ID (e.g.: `some_report_uid_YV1KS9614S107357Y@domain`)

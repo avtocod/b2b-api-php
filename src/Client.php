@@ -4,12 +4,12 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi;
 
-use Avtocod\B2BApi\Params\BalanceParams;
+use Avtocod\B2BApi\Params\UserBalanceParams;
 use Avtocod\B2BApi\Params\DevPingParams;
 use Avtocod\B2BApi\Params\DevTokenParams;
-use Avtocod\B2BApi\Params\ReportParams;
-use Avtocod\B2BApi\Params\ReportsParams;
-use Avtocod\B2BApi\Params\ReportTypesParams;
+use Avtocod\B2BApi\Params\UserReportParams;
+use Avtocod\B2BApi\Params\UserReportsParams;
+use Avtocod\B2BApi\Params\UserReportTypesParams;
 use Avtocod\B2BApi\Params\UserParams;
 use Closure;
 use DateTime;
@@ -20,10 +20,10 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Avtocod\B2BApi\Responses\UserResponse;
 use GuzzleHttp\Exception\RequestException;
-use Avtocod\B2BApi\Params\ReportMakeParams;
+use Avtocod\B2BApi\Params\UserReportMakeParams;
 use GuzzleHttp\Exception\TransferException;
 use Avtocod\B2BApi\Responses\DevPingResponse;
-use Avtocod\B2BApi\Params\ReportRefreshParams;
+use Avtocod\B2BApi\Params\UserReportRefreshParams;
 use Avtocod\B2BApi\Responses\DevTokenResponse;
 use GuzzleHttp\RequestOptions as GuzzleOptions;
 use Avtocod\B2BApi\Responses\UserReportResponse;
@@ -161,7 +161,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     /**
      * {@inheritdoc}
      */
-    public function userBalance(BalanceParams $params): UserBalanceResponse
+    public function userBalance(UserBalanceParams $params): UserBalanceResponse
     {
         return UserBalanceResponse::fromHttpResponse(
             $this->doRequest(new Request('get', \sprintf('user/balance/%s', \urlencode($params->getReportTypeUid()))), [
@@ -177,7 +177,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     /**
      * {@inheritdoc}
      */
-    public function userReportTypes(ReportTypesParams $params): UserReportTypesResponse
+    public function userReportTypes(UserReportTypesParams $params): UserReportTypesResponse
     {
         return UserReportTypesResponse::fromHttpResponse(
             $this->doRequest(new Request('get', 'user/report_types'), [
@@ -204,7 +204,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     /**
      * {@inheritdoc}
      */
-    public function userReports(ReportsParams $params): UserReportsResponse
+    public function userReports(UserReportsParams $params): UserReportsResponse
     {
         return UserReportsResponse::fromHttpResponse(
             $this->doRequest(new Request('get', 'user/reports'), [
@@ -231,7 +231,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     /**
      * {@inheritdoc}
      */
-    public function userReport(ReportParams $params): UserReportResponse
+    public function userReport(UserReportParams $params): UserReportResponse
     {
         return UserReportResponse::fromHttpResponse(
             $this->doRequest(new Request('get', \sprintf('user/reports/%s', \urlencode($params->getReportUid()))), [
@@ -250,7 +250,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     /**
      * {@inheritdoc}
      */
-    public function userReportMake(ReportMakeParams $params): UserReportMakeResponse
+    public function userReportMake(UserReportMakeParams $params): UserReportMakeResponse
     {
         $request_body = [
             'queryType' => $params->getType(),
@@ -292,7 +292,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     /**
      * {@inheritdoc}
      */
-    public function userReportRefresh(ReportRefreshParams $params): UserReportRefreshResponse
+    public function userReportRefresh(UserReportRefreshParams $params): UserReportRefreshResponse
     {
         return UserReportRefreshResponse::fromHttpResponse(
             $this->doRequest(new Request('post', \sprintf('user/reports/%s/_refresh', \urlencode($params->getReportUid()))), [

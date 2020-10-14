@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Params;
 
-final class BalanceParams
+final class UserBalanceParams
 {
     /**
      * Unique report type ID (e.g.: `some_report_uid` or `some_report_uid@domain`).
@@ -43,7 +43,7 @@ final class BalanceParams
      *
      * @return $this
      */
-    public function setDetailed(bool $detailed): BalanceParams
+    public function setDetailed(bool $detailed): UserBalanceParams
     {
         $this->detailed = $detailed;
 

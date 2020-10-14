@@ -2,18 +2,17 @@
 
 namespace Avtocod\B2BApi;
 
-use Avtocod\B2BApi\Params\BalanceParams;
+use Avtocod\B2BApi\Params\UserBalanceParams;
 use Avtocod\B2BApi\Params\DevPingParams;
 use Avtocod\B2BApi\Params\DevTokenParams;
-use Avtocod\B2BApi\Params\ReportParams;
-use Avtocod\B2BApi\Params\ReportsParams;
-use Avtocod\B2BApi\Params\ReportTypesParams;
+use Avtocod\B2BApi\Params\UserReportParams;
+use Avtocod\B2BApi\Params\UserReportsParams;
+use Avtocod\B2BApi\Params\UserReportTypesParams;
 use Avtocod\B2BApi\Params\UserParams;
-use DateTime;
 use Avtocod\B2BApi\Responses\UserResponse;
-use Avtocod\B2BApi\Params\ReportMakeParams;
+use Avtocod\B2BApi\Params\UserReportMakeParams;
 use Avtocod\B2BApi\Responses\DevPingResponse;
-use Avtocod\B2BApi\Params\ReportRefreshParams;
+use Avtocod\B2BApi\Params\UserReportRefreshParams;
 use Avtocod\B2BApi\Responses\DevTokenResponse;
 use Avtocod\B2BApi\Responses\UserReportResponse;
 use Avtocod\B2BApi\Responses\UserBalanceResponse;
@@ -65,72 +64,72 @@ interface ClientInterface
     /**
      * Retrieve balance information for report type.
      *
-     * @param BalanceParams $params
+     * @param UserBalanceParams $params
      *
      * @throws BadRequestException
      * @throws BadResponseException
      *
      * @return UserBalanceResponse
      */
-    public function userBalance(BalanceParams $params): UserBalanceResponse;
+    public function userBalance(UserBalanceParams $params): UserBalanceResponse;
 
     /**
      * Retrieve report types data.
      *
-     * @param ReportTypesParams $params
+     * @param UserReportTypesParams $params
      *
      * @throws BadRequestException
      * @throws BadResponseException
      *
      * @return UserReportTypesResponse
      */
-    public function userReportTypes(ReportTypesParams $params): UserReportTypesResponse;
+    public function userReportTypes(UserReportTypesParams $params): UserReportTypesResponse;
 
     /**
      * Get reports list.
      *
-     * @param ReportsParams $params
+     * @param UserReportsParams $params
      *
      * @throws BadRequestException
      * @throws BadResponseException
      *
      * @return UserReportsResponse
      */
-    public function userReports(ReportsParams $params): UserReportsResponse;
+    public function userReports(UserReportsParams $params): UserReportsResponse;
 
     /**
      * Get report by unique report ID.
      *
-     * @param ReportParams $params
+     * @param UserReportParams $params
      *
      * @throws BadRequestException
      * @throws BadResponseException
      *
      * @return UserReportResponse
      */
-    public function userReport(ReportParams $params): UserReportResponse;
+    public function userReport(UserReportParams $params): UserReportResponse;
 
     /**
      * Make report.
      *
-     * @param ReportMakeParams $params Object with data to make report
+     * @param UserReportMakeParams $params Object with data to make report
      *
      * @throws BadRequestException
      * @throws BadResponseException
      *
      * @return UserReportMakeResponse
      */
-    public function userReportMake(ReportMakeParams $params): UserReportMakeResponse;
+    public function userReportMake(UserReportMakeParams $params): UserReportMakeResponse;
 
     /**
      * Refresh existing report.
      *
-     * @param ReportRefreshParams $params
+     * @param UserReportRefreshParams $params
      *
      * @throws BadRequestException
      * @throws BadResponseException
      *
      * @return UserReportRefreshResponse
      */
-    public function userReportRefresh(ReportRefreshParams $params): UserReportRefreshResponse;
+    public function userReportRefresh(UserReportRefreshParams $params): UserReportRefreshResponse;
 }

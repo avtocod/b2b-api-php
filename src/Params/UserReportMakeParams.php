@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Params;
 
-final class ReportMakeParams
+final class UserReportMakeParams
 {
     /**
      * Unique report type ID (e.g.: `some_report_uid` or `some_report_uid@domain`).

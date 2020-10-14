@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Params;
 
-final class ReportTypesParams extends AbstractListParams
+final class UserReportTypesParams extends AbstractListParams
 {
     /**
      * True, if User can generate reports for report type.
@@ -18,7 +18,7 @@ final class ReportTypesParams extends AbstractListParams
      *
      * @return $this
      */
-    public function setCanGenerate(bool $can_generate): ReportTypesParams
+    public function setCanGenerate(bool $can_generate): UserReportTypesParams
     {
         $this->can_generate = $can_generate;
 
