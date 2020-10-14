@@ -6,14 +6,13 @@ The format is based on [Keep a Changelog][keepachangelog] and this project adher
 
 ## UNRELEASED
 
-### Added
-
-- Class `ReportMakeParams` to build make-report parameters
-- Optional parameter `idempotenceKey` for report-make requests
-
 ### Changed
 
-- Method `ClientInterface::userReportMake` now takes object `ReportMakeParams` as parameter
+- Refactory `ClientInterface` & `Client` class
+
+### Added
+
+- Optional parameter `idempotenceKey` in `ReportMakeParams` for report-make requests
 
 ### Fixed
 
