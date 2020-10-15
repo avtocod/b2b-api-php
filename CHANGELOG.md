@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog][keepachangelog] and this project adher
 ### Changed
 
 - Method `ClientInterface::userReportMake` now takes object `ReportMakeParams` as parameter
+- Replace `DateTime` with `DateTimeImmutable` in all code places
 
 ### Fixed
 
