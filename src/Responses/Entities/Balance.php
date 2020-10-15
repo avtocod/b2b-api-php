@@ -6,6 +6,7 @@ namespace Avtocod\B2BApi\Responses\Entities;
 
 use DateTime;
 use Avtocod\B2BApi\DateTimeFactory;
+use DateTimeImmutable;
 
 class Balance implements CanCreateSelfFromArrayInterface
 {
@@ -50,33 +51,33 @@ class Balance implements CanCreateSelfFromArrayInterface
     protected $quote_use;
 
     /**
-     * @var DateTime|null
+     * @var DateTimeImmutable|null
      */
     protected $created_at;
 
     /**
-     * @var DateTime|null
+     * @var DateTimeImmutable|null
      */
     protected $updated_at;
 
     /**
      * Create a new balance instance.
      *
-     * @param string        $report_type_uid Report type unique identifier
-     * @param string        $balance_type    Balance entry type (e.g.: `DAY`, `MONTH`, `TOTAL`)
-     * @param int           $quote_init      Initial quota value
-     * @param int           $quote_up        Added quota value
-     * @param int           $quote_use       Used quota value
-     * @param DateTime|null $created_at      Balance entry created at
-     * @param DateTime|null $updated_at      Last changes was made at
+     * @param string                 $report_type_uid Report type unique identifier
+     * @param string                 $balance_type    Balance entry type (e.g.: `DAY`, `MONTH`, `TOTAL`)
+     * @param int                    $quote_init      Initial quota value
+     * @param int                    $quote_up        Added quota value
+     * @param int                    $quote_use       Used quota value
+     * @param DateTimeImmutable|null $created_at      Balance entry created at
+     * @param DateTimeImmutable|null $updated_at      Last changes was made at
      */
     public function __construct(string $report_type_uid,
                                 string $balance_type,
                                 int $quote_init,
                                 int $quote_up,
                                 int $quote_use,
-                                ?DateTime $created_at,
-                                ?DateTime $updated_at)
+                                ?DateTimeImmutable $created_at,
+                                ?DateTimeImmutable $updated_at)
     {
         $this->report_type_uid = $report_type_uid;
         $this->balance_type    = $balance_type;
@@ -162,9 +163,9 @@ class Balance implements CanCreateSelfFromArrayInterface
     /**
      * Get created at date/time.
      *
-     * @return DateTime|null
+     * @return DateTimeImmutable|null
      */
-    public function getCreatedAt(): ?DateTime
+    public function getCreatedAt(): ?DateTimeImmutable
     {
         return $this->created_at;
     }
@@ -172,9 +173,9 @@ class Balance implements CanCreateSelfFromArrayInterface
     /**
      * Get last changes date/time.
      *
-     * @return DateTime|null
+     * @return DateTimeImmutable|null
      */
-    public function getUpdatedAt(): ?DateTime
+    public function getUpdatedAt(): ?DateTimeImmutable
     {
         return $this->updated_at;
     }

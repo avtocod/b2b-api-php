@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Tests\Unit\Responses\Entities;
 
+use DateTimeImmutable;
 use Faker\Generator as Faker;
 use InvalidArgumentException;
 use Avtocod\B2BApi\DateTimeFactory;
@@ -82,19 +83,19 @@ class EntitiesFactory
                     ? \implode(',', $faker->randomElement([[], ['site', 'robot']]))
                     : $faker->randomElement([[], ['site', 'robot']]),
                 'created_at'  => $as_array
-                    ? DateTimeFactory::toIso8601Zulu($faker->dateTimeThisYear)
-                    : $faker->dateTimeThisYear,
+                    ? DateTimeFactory::toIso8601Zulu(DateTimeImmutable::createFromMutable($faker->dateTimeThisYear))
+                    : DateTimeImmutable::createFromMutable($faker->dateTimeThisYear),
                 'created_by'  => $faker->userName,
                 'updated_at'  => $as_array
-                    ? DateTimeFactory::toIso8601Zulu($faker->dateTimeThisMonth)
-                    : $faker->dateTimeThisMonth,
+                    ? DateTimeFactory::toIso8601Zulu(DateTimeImmutable::createFromMutable($faker->dateTimeThisMonth))
+                    : DateTimeImmutable::createFromMutable($faker->dateTimeThisMonth),
                 'updated_by'  => $faker->userName,
                 'active_from' => $as_array
-                    ? DateTimeFactory::toIso8601Zulu($faker->dateTimeThisMonth)
-                    : $faker->dateTimeThisMonth,
+                    ? DateTimeFactory::toIso8601Zulu(DateTimeImmutable::createFromMutable($faker->dateTimeThisMonth))
+                    : DateTimeImmutable::createFromMutable($faker->dateTimeThisMonth),
                 'active_to'   => $as_array
-                    ? DateTimeFactory::toIso8601Zulu($faker->dateTimeThisMonth)
-                    : $faker->dateTimeThisMonth,
+                    ? DateTimeFactory::toIso8601Zulu(DateTimeImmutable::createFromMutable($faker->dateTimeThisMonth))
+                    : DateTimeImmutable::createFromMutable($faker->dateTimeThisMonth),
                 'id'          => $faker->randomElement([null, $faker->randomNumber()]),
                 'deleted'     => $faker->randomElement([null, $faker->boolean]),
             ], $attributes);
@@ -156,19 +157,19 @@ class EntitiesFactory
                     ? \implode(',', $faker->randomElement([[], [$faker->word, $faker->word]]))
                     : $faker->randomElement([[], [$faker->word, $faker->word]]),
                 'created_at'  => $as_array
-                    ? DateTimeFactory::toIso8601Zulu($faker->dateTimeThisYear)
-                    : $faker->dateTimeThisYear,
+                    ? DateTimeFactory::toIso8601Zulu(DateTimeImmutable::createFromMutable($faker->dateTimeThisYear))
+                    : DateTimeImmutable::createFromMutable($faker->dateTimeThisYear),
                 'created_by'  => $faker->userName,
                 'updated_at'  => $as_array
-                    ? DateTimeFactory::toIso8601Zulu($faker->dateTimeThisMonth)
-                    : $faker->dateTimeThisMonth,
+                    ? DateTimeFactory::toIso8601Zulu(DateTimeImmutable::createFromMutable($faker->dateTimeThisMonth))
+                    : DateTimeImmutable::createFromMutable($faker->dateTimeThisMonth),
                 'updated_by'  => $faker->userName,
                 'active_from' => $as_array
-                    ? DateTimeFactory::toIso8601Zulu($faker->dateTimeThisMonth)
-                    : $faker->dateTimeThisMonth,
+                    ? DateTimeFactory::toIso8601Zulu(DateTimeImmutable::createFromMutable($faker->dateTimeThisMonth))
+                    : DateTimeImmutable::createFromMutable($faker->dateTimeThisMonth),
                 'active_to'   => $as_array
-                    ? DateTimeFactory::toIso8601Zulu($faker->dateTimeThisMonth)
-                    : $faker->dateTimeThisMonth,
+                    ? DateTimeFactory::toIso8601Zulu(DateTimeImmutable::createFromMutable($faker->dateTimeThisMonth))
+                    : DateTimeImmutable::createFromMutable($faker->dateTimeThisMonth),
                 'id'          => $faker->randomElement([null, $faker->randomNumber()]),
                 'deleted'     => $faker->randomElement([null, $faker->boolean]),
                 'pass_hash'   => $faker->randomElement([null, $faker->md5]),
@@ -231,19 +232,19 @@ class EntitiesFactory
                     ? \implode(',', $faker->randomElement([[], [$faker->word, $faker->word]]))
                     : $faker->randomElement([[], [$faker->word, $faker->word]]),
                 'created_at'  => $as_array
-                    ? DateTimeFactory::toIso8601Zulu($faker->dateTimeThisYear)
-                    : $faker->dateTimeThisYear,
+                    ? DateTimeFactory::toIso8601Zulu(DateTimeImmutable::createFromMutable($faker->dateTimeThisYear))
+                    : DateTimeImmutable::createFromMutable($faker->dateTimeThisYear),
                 'created_by'  => $faker->userName,
                 'updated_at'  => $as_array
-                    ? DateTimeFactory::toIso8601Zulu($faker->dateTimeThisMonth)
-                    : $faker->dateTimeThisMonth,
+                    ? DateTimeFactory::toIso8601Zulu(DateTimeImmutable::createFromMutable($faker->dateTimeThisMonth))
+                    : DateTimeImmutable::createFromMutable($faker->dateTimeThisMonth),
                 'updated_by'  => $faker->userName,
                 'active_from' => $as_array
-                    ? DateTimeFactory::toIso8601Zulu($faker->dateTimeThisMonth)
-                    : $faker->dateTimeThisMonth,
+                    ? DateTimeFactory::toIso8601Zulu(DateTimeImmutable::createFromMutable($faker->dateTimeThisMonth))
+                    : DateTimeImmutable::createFromMutable($faker->dateTimeThisMonth),
                 'active_to'   => $as_array
-                    ? DateTimeFactory::toIso8601Zulu($faker->dateTimeThisMonth)
-                    : $faker->dateTimeThisMonth,
+                    ? DateTimeFactory::toIso8601Zulu(DateTimeImmutable::createFromMutable($faker->dateTimeThisMonth))
+                    : DateTimeImmutable::createFromMutable($faker->dateTimeThisMonth),
                 'id'          => $faker->randomElement([null, $faker->randomNumber()]),
                 'deleted'     => $faker->randomElement([null, $faker->boolean]),
             ], $attributes);
@@ -297,19 +298,19 @@ class EntitiesFactory
                     ? \implode(',', $faker->randomElement([[], [$faker->word, $faker->word]]))
                     : $faker->randomElement([[], [$faker->word, $faker->word]]),
                 'created_at'      => $as_array
-                    ? DateTimeFactory::toIso8601Zulu($faker->dateTimeThisYear)
-                    : $faker->dateTimeThisYear,
+                    ? DateTimeFactory::toIso8601Zulu(DateTimeImmutable::createFromMutable($faker->dateTimeThisYear))
+                    : DateTimeImmutable::createFromMutable($faker->dateTimeThisYear),
                 'created_by'      => $faker->userName,
                 'updated_at'      => $as_array
-                    ? DateTimeFactory::toIso8601Zulu($faker->dateTimeThisMonth)
-                    : $faker->dateTimeThisMonth,
+                    ? DateTimeFactory::toIso8601Zulu(DateTimeImmutable::createFromMutable($faker->dateTimeThisMonth))
+                    : DateTimeImmutable::createFromMutable($faker->dateTimeThisMonth),
                 'updated_by'      => $faker->userName,
                 'active_from'     => $as_array
-                    ? DateTimeFactory::toIso8601Zulu($faker->dateTimeThisMonth)
-                    : $faker->dateTimeThisMonth,
+                    ? DateTimeFactory::toIso8601Zulu(DateTimeImmutable::createFromMutable($faker->dateTimeThisMonth))
+                    : DateTimeImmutable::createFromMutable($faker->dateTimeThisMonth),
                 'active_to'       => $as_array
-                    ? DateTimeFactory::toIso8601Zulu($faker->dateTimeThisMonth)
-                    : $faker->dateTimeThisMonth,
+                    ? DateTimeFactory::toIso8601Zulu(DateTimeImmutable::createFromMutable($faker->dateTimeThisMonth))
+                    : DateTimeImmutable::createFromMutable($faker->dateTimeThisMonth),
                 'progress_ok'     => $faker->numberBetween(0, 15),
                 'progress_wait'   => $faker->numberBetween(0, 15),
                 'progress_error'  => $faker->numberBetween(0, 15),
@@ -364,11 +365,11 @@ class EntitiesFactory
                 'quote_up'        => $faker->randomNumber(),
                 'quote_use'       => $faker->randomNumber(),
                 'created_at'      => $as_array
-                    ? DateTimeFactory::toIso8601Zulu($faker->dateTimeThisYear)
-                    : $faker->dateTimeThisYear,
+                    ? DateTimeFactory::toIso8601Zulu(DateTimeImmutable::createFromMutable($faker->dateTimeThisYear))
+                    : DateTimeImmutable::createFromMutable($faker->dateTimeThisYear),
                 'updated_at'      => $as_array
-                    ? DateTimeFactory::toIso8601Zulu($faker->dateTimeThisMonth)
-                    : $faker->dateTimeThisMonth,
+                    ? DateTimeFactory::toIso8601Zulu(DateTimeImmutable::createFromMutable($faker->dateTimeThisMonth))
+                    : DateTimeImmutable::createFromMutable($faker->dateTimeThisMonth),
             ], $attributes);
 
             return $as_array === true
@@ -529,8 +530,8 @@ class EntitiesFactory
                 'is_new'              => $faker->boolean,
                 'process_request_uid' => $faker->randomElement([null, $user . '_' . $faker->sha256 . '@' . $domain]),
                 'suggest_get'         => $as_array
-                    ? DateTimeFactory::toIso8601Zulu($faker->dateTimeThisMonth)
-                    : $faker->dateTimeThisMonth,
+                    ? DateTimeFactory::toIso8601Zulu(DateTimeImmutable::createFromMutable($faker->dateTimeThisMonth))
+                    : DateTimeImmutable::createFromMutable($faker->dateTimeThisMonth),
             ], $attributes);
 
             return $as_array === true
@@ -602,19 +603,19 @@ class EntitiesFactory
                 'period_priority'  => $faker->numberBetween(),
                 'max_request'      => $faker->numberBetween(),
                 'created_at'       => $as_array
-                    ? DateTimeFactory::toIso8601Zulu($faker->dateTimeThisYear)
-                    : $faker->dateTimeThisYear,
+                    ? DateTimeFactory::toIso8601Zulu(DateTimeImmutable::createFromMutable($faker->dateTimeThisYear))
+                    : DateTimeImmutable::createFromMutable($faker->dateTimeThisYear),
                 'created_by'       => $faker->userName,
                 'updated_at'       => $as_array
-                    ? DateTimeFactory::toIso8601Zulu($faker->dateTimeThisMonth)
-                    : $faker->dateTimeThisMonth,
+                    ? DateTimeFactory::toIso8601Zulu(DateTimeImmutable::createFromMutable($faker->dateTimeThisMonth))
+                    : DateTimeImmutable::createFromMutable($faker->dateTimeThisMonth),
                 'updated_by'       => $faker->userName,
                 'active_from'      => $as_array
-                    ? DateTimeFactory::toIso8601Zulu($faker->dateTimeThisMonth)
-                    : $faker->dateTimeThisMonth,
+                    ? DateTimeFactory::toIso8601Zulu(DateTimeImmutable::createFromMutable($faker->dateTimeThisMonth))
+                    : DateTimeImmutable::createFromMutable($faker->dateTimeThisMonth),
                 'active_to'        => $as_array
-                    ? DateTimeFactory::toIso8601Zulu($faker->dateTimeThisMonth)
-                    : $faker->dateTimeThisMonth,
+                    ? DateTimeFactory::toIso8601Zulu(DateTimeImmutable::createFromMutable($faker->dateTimeThisMonth))
+                    : DateTimeImmutable::createFromMutable($faker->dateTimeThisMonth),
                 'clean_options'    => $faker->randomElement([
                     static::make(CleanOptions::class, [], $as_array),
                     null,

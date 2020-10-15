@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace Avtocod\B2BApi\Tests\Unit;
 
 use DateTime;
+use DateTimeImmutable;
 use InvalidArgumentException;
 use Avtocod\B2BApi\DateTimeFactory;
 use Avtocod\B2BApi\Tests\AbstractTestCase;
@@ -85,7 +86,7 @@ class DateTimeFactoryTest extends AbstractTestCase
      */
     public function testToIso8601ZuluWitMicroseconds(): void
     {
-        $date_time = DateTime::createFromFormat('Y-m-d H:i:s u', '2009-02-15 15:16:17 123');
+        $date_time = DateTimeImmutable::createFromFormat('Y-m-d H:i:s u', '2009-02-15 15:16:17 123');
 
         $this->assertSame('2009-02-15T15:16:17.123Z', DateTimeFactory::toIso8601Zulu($date_time));
     }
@@ -95,11 +96,11 @@ class DateTimeFactoryTest extends AbstractTestCase
      */
     public function testToIso8601ZuluWithoutMicroseconds(): void
     {
-        $date_time = DateTime::createFromFormat('Y-m-d H:i:s', '2009-02-15 15:16:17');
+        $date_time = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2009-02-15 15:16:17');
 
         $this->assertSame('2009-02-15T15:16:17.000Z', DateTimeFactory::toIso8601Zulu($date_time));
 
-        $date_time = DateTime::createFromFormat('Y-m-d H:i:s', '2009-02-15 15:16:00');
+        $date_time = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2009-02-15 15:16:00');
 
         $this->assertSame('2009-02-15T15:16:00.000Z', DateTimeFactory::toIso8601Zulu($date_time));
     }
@@ -109,11 +110,11 @@ class DateTimeFactoryTest extends AbstractTestCase
      */
     public function testToIso8601ZuluWithoutMs(): void
     {
-        $date_time = DateTime::createFromFormat('Y-m-d H:i:s', '2009-02-15 15:16:17');
+        $date_time = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2009-02-15 15:16:17');
 
         $this->assertSame('2009-02-15T15:16:17Z', DateTimeFactory::toIso8601ZuluWithoutMs($date_time));
 
-        $date_time = DateTime::createFromFormat('Y-m-d H:i:s', '2009-02-15 15:16:00');
+        $date_time = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2009-02-15 15:16:00');
 
         $this->assertSame('2009-02-15T15:16:00Z', DateTimeFactory::toIso8601ZuluWithoutMs($date_time));
     }

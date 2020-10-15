@@ -5,12 +5,13 @@ declare(strict_types = 1);
 namespace Avtocod\B2BApi;
 
 use DateTime;
+use DateTimeImmutable;
 use InvalidArgumentException;
 
 /**
  * @see <https://www.php.net/manual/ru/datetime.createfromformat.php>
  */
-class DateTimeFactory extends DateTime
+class DateTimeFactory extends DateTimeImmutable
 {
     /**
      * Create DateTime object from passed time string.
@@ -19,15 +20,15 @@ class DateTimeFactory extends DateTime
      *
      * @throws InvalidArgumentException
      *
-     * @return DateTime
+     * @return DateTimeImmutable
      */
-    public static function createFromIso8601Zulu(string $time): DateTime
+    public static function createFromIso8601Zulu(string $time): DateTimeImmutable
     {
-        $result = DateTime::createFromFormat('Y-m-d\\TH:i:s.u\\Z', $time);
+        $result = DateTimeImmutable::createFromFormat('Y-m-d\\TH:i:s.u\\Z', $time);
 
-        if (! $result instanceof DateTime) {
+        if (! $result instanceof DateTimeImmutable) {
             throw new InvalidArgumentException(
-                "Wrong time [$time] passed (" . \implode(',', DateTime::getLastErrors()['errors'] ?? []) . ')'
+                "Wrong time [$time] passed (" . \implode(',', DateTimeImmutable::getLastErrors()['errors'] ?? []) . ')'
             );
         }
 
@@ -35,25 +36,25 @@ class DateTimeFactory extends DateTime
     }
 
     /**
-     * Convert DateTime object into string, using ISO8601 (zulu) format.
+     * Convert DateTimeImmutable object into string, using ISO8601 (zulu) format.
      *
-     * @param DateTime $date_time
+     * @param DateTimeImmutable $date_time
      *
      * @return string E.g.: '2017-01-05T16:45:23.000Z'
      */
-    public static function toIso8601Zulu(DateTime $date_time): string
+    public static function toIso8601Zulu(DateTimeImmutable $date_time): string
     {
         return $date_time->format('Y-m-d\\TH:i:s.v\\Z');
     }
 
     /**
-     * Convert DateTime object into string, using ISO8601 (zulu) format without microseconds.
+     * Convert DateTimeImmutable object into string, using ISO8601 (zulu) format without microseconds.
      *
-     * @param DateTime $date_time
+     * @param DateTimeImmutable $date_time
      *
      * @return string E.g.: '2017-01-05T16:45:23Z'
      */
-    public static function toIso8601ZuluWithoutMs(DateTime $date_time): string
+    public static function toIso8601ZuluWithoutMs(DateTimeImmutable $date_time): string
     {
         return $date_time->format('Y-m-d\\TH:i:s\\Z');
     }

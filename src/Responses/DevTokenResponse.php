@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace Avtocod\B2BApi\Responses;
 
 use DateTime;
+use DateTimeImmutable;
 use Tarampampam\Wrappers\Json;
 use Avtocod\B2BApi\DateTimeFactory;
 use Avtocod\B2BApi\Exceptions\BadResponseException;
@@ -34,7 +35,7 @@ class DevTokenResponse implements ResponseInterface
     protected $password_hash;
 
     /**
-     * @var DateTime
+     * @var DateTimeImmutable
      */
     protected $date;
 
@@ -76,24 +77,24 @@ class DevTokenResponse implements ResponseInterface
     /**
      * Create a new response instance.
      *
-     * @param string   $raw_response
-     * @param string   $user
-     * @param string   $password
-     * @param string   $password_hash
-     * @param DateTime $date
-     * @param int      $stamp
-     * @param int      $age
-     * @param string   $salt
-     * @param string   $salted_pass_hash
-     * @param string   $raw_token
-     * @param string   $token
-     * @param string   $header
+     * @param string            $raw_response
+     * @param string            $user
+     * @param string            $password
+     * @param string            $password_hash
+     * @param DateTimeImmutable $date
+     * @param int               $stamp
+     * @param int               $age
+     * @param string            $salt
+     * @param string            $salted_pass_hash
+     * @param string            $raw_token
+     * @param string            $token
+     * @param string            $header
      */
     private function __construct(string $raw_response,
                                  string $user,
                                  string $password,
                                  string $password_hash,
-                                 DateTime $date,
+                                 DateTimeImmutable $date,
                                  int $stamp,
                                  int $age,
                                  string $salt,
@@ -178,9 +179,9 @@ class DevTokenResponse implements ResponseInterface
     }
 
     /**
-     * @return DateTime
+     * @return DateTimeImmutable
      */
-    public function getDate(): DateTime
+    public function getDate(): DateTimeImmutable
     {
         return $this->date;
     }

@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Responses\Entities;
 
-use DateTime;
+use DateTimeImmutable;
 
 class Group
 {
@@ -39,7 +39,7 @@ class Group
     protected $tags;
 
     /**
-     * @var DateTime
+     * @var DateTimeImmutable
      */
     protected $created_at;
 
@@ -49,7 +49,7 @@ class Group
     protected $created_by;
 
     /**
-     * @var DateTime
+     * @var DateTimeImmutable
      */
     protected $updated_at;
 
@@ -59,12 +59,12 @@ class Group
     protected $updated_by;
 
     /**
-     * @var DateTime
+     * @var DateTimeImmutable
      */
     protected $active_from;
 
     /**
-     * @var DateTime
+     * @var DateTimeImmutable
      */
     protected $active_to;
 
@@ -87,12 +87,12 @@ class Group
      * @param array<int, User>|null $users       Group users list (optional)
      * @param array<string>|null    $roles       Group roles list (optional)
      * @param array<string>         $tags        Additional group tags
-     * @param DateTime              $created_at  Group created at
+     * @param DateTimeImmutable     $created_at  Group created at
      * @param string                $created_by  Group creator
-     * @param DateTime              $updated_at  Last changes was made at
+     * @param DateTimeImmutable     $updated_at  Last changes was made at
      * @param string                $updated_by  Last changes was made by
-     * @param DateTime              $active_from Active from
-     * @param DateTime              $active_to   Active to
+     * @param DateTimeImmutable     $active_from Active from
+     * @param DateTimeImmutable     $active_to   Active to
      * @param int|null              $id          Internal database identifier (optional, only for administrators)
      * @param bool|null             $deleted     Is deleted flag (optional, only for administrators)
      */
@@ -102,12 +102,12 @@ class Group
                                 ?array $users,
                                 ?array $roles,
                                 array $tags,
-                                DateTime $created_at,
+                                DateTimeImmutable $created_at,
                                 string $created_by,
-                                DateTime $updated_at,
+                                DateTimeImmutable $updated_at,
                                 string $updated_by,
-                                DateTime $active_from,
-                                DateTime $active_to,
+                                DateTimeImmutable $active_from,
+                                DateTimeImmutable $active_to,
                                 ?int $id,
                                 ?bool $deleted)
     {
@@ -190,9 +190,9 @@ class Group
     /**
      * Get created at date/time.
      *
-     * @return DateTime
+     * @return DateTimeImmutable
      */
-    public function getCreatedAt(): DateTime
+    public function getCreatedAt(): DateTimeImmutable
     {
         return $this->created_at;
     }
@@ -210,9 +210,9 @@ class Group
     /**
      * Get last changes date/time.
      *
-     * @return DateTime
+     * @return DateTimeImmutable
      */
-    public function getUpdatedAt(): DateTime
+    public function getUpdatedAt(): DateTimeImmutable
     {
         return $this->updated_at;
     }
@@ -230,9 +230,9 @@ class Group
     /**
      * Get active from date/time.
      *
-     * @return DateTime
+     * @return DateTimeImmutable
      */
-    public function getActiveFrom(): DateTime
+    public function getActiveFrom(): DateTimeImmutable
     {
         return $this->active_from;
     }
@@ -240,9 +240,9 @@ class Group
     /**
      * Get active to date/time.
      *
-     * @return DateTime
+     * @return DateTimeImmutable
      */
-    public function getActiveTo(): DateTime
+    public function getActiveTo(): DateTimeImmutable
     {
         return $this->active_to;
     }

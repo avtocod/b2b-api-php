@@ -7,6 +7,7 @@ namespace Avtocod\B2BApi\Responses;
 use DateTime;
 use Countable;
 use ArrayIterator;
+use DateTimeImmutable;
 use IteratorAggregate;
 use Tarampampam\Wrappers\Json;
 use Avtocod\B2BApi\DateTimeFactory;
@@ -36,7 +37,7 @@ class UserReportTypesResponse implements ResponseInterface, Countable, IteratorA
     protected $size;
 
     /**
-     * @var DateTime
+     * @var DateTimeImmutable
      */
     protected $stamp;
 
@@ -56,14 +57,14 @@ class UserReportTypesResponse implements ResponseInterface, Countable, IteratorA
      * @param string                 $raw_response
      * @param string                 $state
      * @param int                    $size
-     * @param DateTime               $stamp
+     * @param DateTimeImmutable      $stamp
      * @param array<int, ReportType> $data
      * @param int|null               $total
      */
     private function __construct(string $raw_response,
                                  string $state,
                                  int $size,
-                                 DateTime $stamp,
+                                 DateTimeImmutable $stamp,
                                  array $data,
                                  ?int $total)
     {
@@ -133,9 +134,9 @@ class UserReportTypesResponse implements ResponseInterface, Countable, IteratorA
     /**
      * Get response date/time.
      *
-     * @return DateTime
+     * @return DateTimeImmutable
      */
-    public function getStamp(): DateTime
+    public function getStamp(): DateTimeImmutable
     {
         return $this->stamp;
     }

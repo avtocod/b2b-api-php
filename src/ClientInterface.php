@@ -2,7 +2,6 @@
 
 namespace Avtocod\B2BApi;
 
-use DateTime;
 use Avtocod\B2BApi\Responses\UserResponse;
 use Avtocod\B2BApi\Params\ReportMakeParams;
 use Avtocod\B2BApi\Responses\DevPingResponse;
@@ -15,6 +14,7 @@ use Avtocod\B2BApi\Exceptions\BadResponseException;
 use Avtocod\B2BApi\Responses\UserReportMakeResponse;
 use Avtocod\B2BApi\Responses\UserReportTypesResponse;
 use Avtocod\B2BApi\Responses\UserReportRefreshResponse;
+use DateTimeImmutable;
 
 interface ClientInterface
 {
@@ -33,11 +33,11 @@ interface ClientInterface
     /**
      * Debug token generation.
      *
-     * @param string        $username  User identifier (e.g.: `test@test`)
-     * @param string        $password  User password
-     * @param bool          $is_hash   Password hashed?
-     * @param DateTime|null $date_from Token availability start date
-     * @param int           $age       Token lifetime (in seconds)
+     * @param string                 $username  User identifier (e.g.: `test@test`)
+     * @param string                 $password  User password
+     * @param bool                   $is_hash   Password hashed?
+     * @param DateTimeImmutable|null $date_from Token availability start date
+     * @param int                    $age       Token lifetime (in seconds)
      *
      * @throws BadRequestException
      * @throws BadResponseException
@@ -47,7 +47,7 @@ interface ClientInterface
     public function devToken(string $username,
                              string $password,
                              bool $is_hash = false,
-                             ?DateTime $date_from = null,
+                             ?DateTimeImmutable $date_from = null,
                              int $age = 60): DevTokenResponse;
 
     /**

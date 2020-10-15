@@ -7,6 +7,7 @@ namespace Avtocod\B2BApi\Tests\Unit;
 use DateTime;
 use Avtocod\B2BApi\Client;
 use Avtocod\B2BApi\Settings;
+use DateTimeImmutable;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
@@ -122,7 +123,7 @@ class ClientTest extends AbstractTestCase
             new Response(
                 403, ['content-type' => 'application/json;charset=utf-8'], \json_encode((object) [
                     'uid'     => '',
-                    'stamp'   => $stamp = DateTimeFactory::toIso8601Zulu(new DateTime),
+                    'stamp'   => $stamp = DateTimeFactory::toIso8601Zulu(new DateTimeImmutable),
                     'cls'     => 'Security',
                     'type'    => 'SecurityAuthTimeoutedStamp',
                     'name'    => 'Метка времени просрочена',
@@ -157,7 +158,7 @@ class ClientTest extends AbstractTestCase
             new Response(
                 500, ['content-type' => 'application/json;charset=utf-8'], \json_encode((object) [
                     'state' => $state = 'fail',
-                    'stamp' => $stamp = DateTimeFactory::toIso8601Zulu(new DateTime),
+                    'stamp' => $stamp = DateTimeFactory::toIso8601Zulu(new DateTimeImmutable()),
                     'event' => (object) [
                         'uid'     => '',
                         'stamp'   => $stamp,
@@ -404,7 +405,7 @@ class ClientTest extends AbstractTestCase
                 'is_hash' => ($is_hash = $this->faker->boolean)
                     ? 'true'
                     : 'false',
-                'date'    => DateTimeFactory::toIso8601ZuluWithoutMs($date = new DateTime),
+                'date'    => DateTimeFactory::toIso8601ZuluWithoutMs($date = new DateTimeImmutable()),
                 'age'     => $age = \random_int(1, 100),
             ]),
             'get',
@@ -458,7 +459,7 @@ class ClientTest extends AbstractTestCase
                 'is_hash' => ($is_hash = true)
                     ? 'true'
                     : 'false',
-                'date'    => DateTimeFactory::toIso8601ZuluWithoutMs($date = new DateTime),
+                'date'    => DateTimeFactory::toIso8601ZuluWithoutMs($date = new DateTimeImmutable),
                 'age'     => $age = \random_int(1, 100),
             ]),
             'get',
@@ -482,7 +483,7 @@ class ClientTest extends AbstractTestCase
                 200, ['content-type' => 'application/json;charset=utf-8'], $raw = \json_encode((object) [
                     'state' => $state = 'ok',
                     'size'  => $size = 1,
-                    'stamp' => $stamp = DateTimeFactory::toIso8601Zulu(new DateTime),
+                    'stamp' => $stamp = DateTimeFactory::toIso8601Zulu(new DateTimeImmutable),
                     'data'  => [
                         (object) [
                             'login'       => $login = 'default@test',
@@ -566,7 +567,7 @@ class ClientTest extends AbstractTestCase
                 200, ['content-type' => 'application/json;charset=utf-8'], $raw = \json_encode((object) [
                     'state' => $state = 'ok',
                     'size'  => $size = 1,
-                    'stamp' => $stamp = DateTimeFactory::toIso8601Zulu(new DateTime),
+                    'stamp' => $stamp = DateTimeFactory::toIso8601Zulu(new DateTimeImmutable),
                     'data'  => [
                         (object) [
                             'login'       => $login = 'default@test',
@@ -686,7 +687,7 @@ class ClientTest extends AbstractTestCase
                 200, ['content-type' => 'application/json;charset=utf-8'], $raw = \json_encode((object) [
                     'state' => $state = 'ok',
                     'size'  => $size = 3,
-                    'stamp' => $stamp = DateTimeFactory::toIso8601Zulu(new DateTime),
+                    'stamp' => $stamp = DateTimeFactory::toIso8601Zulu(new DateTimeImmutable),
                     'data'  => $data = [
                         (object) [
                             'report_type_uid' => $report_type_uid,
@@ -779,7 +780,7 @@ class ClientTest extends AbstractTestCase
                 200, ['content-type' => 'application/json;charset=utf-8'], $raw = \json_encode((object) [
                     'state' => $state = 'ok',
                     'size'  => $size = 3,
-                    'stamp' => $stamp = DateTimeFactory::toIso8601Zulu(new DateTime),
+                    'stamp' => $stamp = DateTimeFactory::toIso8601Zulu(new DateTimeImmutable),
                     'data'  => $data = [
                         (object) [
                             'report_type_uid' => $report_type_uid,

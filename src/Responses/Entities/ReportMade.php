@@ -6,6 +6,7 @@ namespace Avtocod\B2BApi\Responses\Entities;
 
 use DateTime;
 use Avtocod\B2BApi\DateTimeFactory;
+use DateTimeImmutable;
 
 class ReportMade implements CanCreateSelfFromArrayInterface
 {
@@ -25,19 +26,19 @@ class ReportMade implements CanCreateSelfFromArrayInterface
     protected $process_request_uid;
 
     /**
-     * @var DateTime
+     * @var DateTimeImmutable
      */
     protected $suggest_get;
 
     /**
      * Create a new report made instance.
      *
-     * @param string      $report_uid          Report unique ID
-     * @param bool        $is_new              Report is new?
-     * @param string|null $process_request_uid Unique report request ID
-     * @param DateTime    $suggest_get         Suggested date/time for report getting
+     * @param string            $report_uid          Report unique ID
+     * @param bool              $is_new              Report is new?
+     * @param string|null       $process_request_uid Unique report request ID
+     * @param DateTimeImmutable $suggest_get         Suggested date/time for report getting
      */
-    public function __construct(string $report_uid, bool $is_new, ?string $process_request_uid, DateTime $suggest_get)
+    public function __construct(string $report_uid, bool $is_new, ?string $process_request_uid, DateTimeImmutable $suggest_get)
     {
         $this->report_uid          = $report_uid;
         $this->is_new              = $is_new;
@@ -93,9 +94,9 @@ class ReportMade implements CanCreateSelfFromArrayInterface
     /**
      * Get suggested date/time for report getting.
      *
-     * @return DateTime
+     * @return DateTimeImmutable
      */
-    public function getSuggestGet(): DateTime
+    public function getSuggestGet(): DateTimeImmutable
     {
         return $this->suggest_get;
     }

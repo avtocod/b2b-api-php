@@ -6,6 +6,7 @@ namespace Avtocod\B2BApi\Responses\Entities;
 
 use DateTime;
 use Avtocod\B2BApi\DateTimeFactory;
+use DateTimeImmutable;
 
 class Domain implements CanCreateSelfFromArrayInterface
 {
@@ -40,7 +41,7 @@ class Domain implements CanCreateSelfFromArrayInterface
     protected $tags;
 
     /**
-     * @var DateTime
+     * @var DateTimeImmutable
      */
     protected $created_at;
 
@@ -50,7 +51,7 @@ class Domain implements CanCreateSelfFromArrayInterface
     protected $created_by;
 
     /**
-     * @var DateTime
+     * @var DateTimeImmutable
      */
     protected $updated_at;
 
@@ -60,12 +61,12 @@ class Domain implements CanCreateSelfFromArrayInterface
     protected $updated_by;
 
     /**
-     * @var DateTime
+     * @var DateTimeImmutable
      */
     protected $active_from;
 
     /**
-     * @var DateTime
+     * @var DateTimeImmutable
      */
     protected $active_to;
 
@@ -88,12 +89,12 @@ class Domain implements CanCreateSelfFromArrayInterface
      * @param string             $state       Domain state (e.g.: `DRAFT`, `ACTIVE`, `BANNED`)
      * @param array<string>|null $roles       Domain roles (optional)
      * @param array<string>      $tags        Additional domain tags
-     * @param DateTime           $created_at  Domain created at
+     * @param DateTimeImmutable  $created_at  Domain created at
      * @param string             $created_by  Domain creator
-     * @param DateTime           $updated_at  Last changes was made at
+     * @param DateTimeImmutable  $updated_at  Last changes was made at
      * @param string             $updated_by  Last changes was made by
-     * @param DateTime           $active_from Active from
-     * @param DateTime           $active_to   Active to
+     * @param DateTimeImmutable  $active_from Active from
+     * @param DateTimeImmutable  $active_to   Active to
      * @param int|null           $id          Internal database identifier (optional, only for administrators)
      * @param bool|null          $deleted     Is deleted flag (optional, only for administrators)
      */
@@ -103,12 +104,12 @@ class Domain implements CanCreateSelfFromArrayInterface
                                 string $state,
                                 ?array $roles,
                                 array $tags,
-                                DateTime $created_at,
+                                DateTimeImmutable $created_at,
                                 string $created_by,
-                                DateTime $updated_at,
+                                DateTimeImmutable $updated_at,
                                 string $updated_by,
-                                DateTime $active_from,
-                                DateTime $active_to,
+                                DateTimeImmutable $active_from,
+                                DateTimeImmutable $active_to,
                                 ?int $id,
                                 ?bool $deleted)
     {
@@ -218,9 +219,9 @@ class Domain implements CanCreateSelfFromArrayInterface
     /**
      * Get created at date/time.
      *
-     * @return DateTime
+     * @return DateTimeImmutable
      */
-    public function getCreatedAt(): DateTime
+    public function getCreatedAt(): DateTimeImmutable
     {
         return $this->created_at;
     }
@@ -238,9 +239,9 @@ class Domain implements CanCreateSelfFromArrayInterface
     /**
      * Get last changes date/time.
      *
-     * @return DateTime
+     * @return DateTimeImmutable
      */
-    public function getUpdatedAt(): DateTime
+    public function getUpdatedAt(): DateTimeImmutable
     {
         return $this->updated_at;
     }
@@ -258,9 +259,9 @@ class Domain implements CanCreateSelfFromArrayInterface
     /**
      * Get active from date/time.
      *
-     * @return DateTime
+     * @return DateTimeImmutable
      */
-    public function getActiveFrom(): DateTime
+    public function getActiveFrom(): DateTimeImmutable
     {
         return $this->active_from;
     }
@@ -268,9 +269,9 @@ class Domain implements CanCreateSelfFromArrayInterface
     /**
      * Get active to date/time.
      *
-     * @return DateTime
+     * @return DateTimeImmutable
      */
-    public function getActiveTo(): DateTime
+    public function getActiveTo(): DateTimeImmutable
     {
         return $this->active_to;
     }

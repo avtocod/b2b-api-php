@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace Avtocod\B2BApi;
 
 use Closure;
-use DateTime;
+use DateTimeImmutable;
 use GuzzleHttp\Psr7\Request;
 use PackageVersions\Versions;
 use GuzzleHttp\Client as Guzzle;
@@ -120,7 +120,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     public function devToken(string $username,
                              string $password,
                              bool $is_hash = false,
-                             ?DateTime $date_from = null,
+                             ?DateTimeImmutable $date_from = null,
                              int $age = 60): DevTokenResponse
     {
         return DevTokenResponse::fromHttpResponse(
@@ -131,7 +131,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
                     'is_hash' => $is_hash
                         ? 'true'
                         : 'false',
-                    'date'    => DateTimeFactory::toIso8601ZuluWithoutMs($date_from ?? new DateTime),
+                    'date'    => DateTimeFactory::toIso8601ZuluWithoutMs($date_from ?? new DateTimeImmutable),
                     'age'     => \max(1, $age),
                 ],
             ])

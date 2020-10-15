@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Tests\Feature;
 
-use DateTime;
+use DateTimeImmutable;
 use Dotenv\Dotenv;
 use Avtocod\B2BApi\Client;
 use Avtocod\B2BApi\Settings;
@@ -73,7 +73,7 @@ class ClientTest extends AbstractTestCase
      */
     public function testDevToken(): void
     {
-        $now = new DateTime;
+        $now = new DateTimeImmutable();
         $age = 60;
 
         // Without domain
