@@ -73,7 +73,7 @@ class ClientTest extends AbstractTestCase
      */
     public function testDevToken(): void
     {
-        $now = new DateTimeImmutable();
+        $now = new DateTimeImmutable;
         $age = 60;
 
         // Without domain
