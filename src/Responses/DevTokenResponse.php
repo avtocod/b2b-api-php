@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Responses;
 
-use DateTime;
 use DateTimeImmutable;
 use Tarampampam\Wrappers\Json;
 use Avtocod\B2BApi\DateTimeFactory;

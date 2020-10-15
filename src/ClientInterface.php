@@ -2,6 +2,7 @@
 
 namespace Avtocod\B2BApi;
 
+use DateTimeImmutable;
 use Avtocod\B2BApi\Responses\UserResponse;
 use Avtocod\B2BApi\Params\ReportMakeParams;
 use Avtocod\B2BApi\Responses\DevPingResponse;
@@ -14,7 +15,6 @@ use Avtocod\B2BApi\Exceptions\BadResponseException;
 use Avtocod\B2BApi\Responses\UserReportMakeResponse;
 use Avtocod\B2BApi\Responses\UserReportTypesResponse;
 use Avtocod\B2BApi\Responses\UserReportRefreshResponse;
-use DateTimeImmutable;
 
 interface ClientInterface
 {

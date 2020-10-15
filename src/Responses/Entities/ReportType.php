@@ -4,9 +4,8 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Responses\Entities;
 
-use DateTime;
-use Avtocod\B2BApi\DateTimeFactory;
 use DateTimeImmutable;
+use Avtocod\B2BApi\DateTimeFactory;
 
 class ReportType implements CanCreateSelfFromArrayInterface
 {

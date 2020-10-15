@@ -4,10 +4,9 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Tests\Unit;
 
-use DateTime;
+use DateTimeImmutable;
 use Avtocod\B2BApi\Client;
 use Avtocod\B2BApi\Settings;
-use DateTimeImmutable;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;

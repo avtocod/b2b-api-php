@@ -4,8 +4,8 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Tests\Feature;
 
-use DateTimeImmutable;
 use Dotenv\Dotenv;
+use DateTimeImmutable;
 use Avtocod\B2BApi\Client;
 use Avtocod\B2BApi\Settings;
 use Avtocod\B2BApi\Tokens\Auth\AuthToken;

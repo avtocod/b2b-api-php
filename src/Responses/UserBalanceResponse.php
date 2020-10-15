@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Responses;
 
-use DateTime;
 use Countable;
 use ArrayIterator;
 use DateTimeImmutable;
