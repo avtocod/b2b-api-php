@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Params;
 
+use DateTime;
 use DateTimeImmutable;
 
 final class DevTokenParams
@@ -32,7 +33,7 @@ final class DevTokenParams
     /**
      * Token availability start date.
      *
-     * @var DateTimeImmutable|null
+     * @var DateTime|null
      */
     private $date_from = null;
 
@@ -94,19 +95,19 @@ final class DevTokenParams
     }
 
     /**
-     * @return DateTimeImmutable|null
+     * @return DateTime|null
      */
-    public function getDateFrom(): ?DateTimeImmutable
+    public function getDateFrom(): ?DateTime
     {
         return $this->date_from;
     }
 
     /**
-     * @param DateTimeImmutable|null $date_from
+     * @param DateTime|null $date_from
      *
      * @return $this
      */
-    public function setDateFrom(?DateTimeImmutable $date_from): self
+    public function setDateFrom(?DateTime $date_from): self
     {
         $this->date_from = $date_from;
 

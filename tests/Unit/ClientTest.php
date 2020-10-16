@@ -436,7 +436,7 @@ class ClientTest extends AbstractTestCase
         $params = new DevTokenParams($user, $pass);
         $params
             ->setPasswordHashed($is_hash)
-            ->setDateFrom(\DateTimeImmutable::createFromMutable($date))
+            ->setDateFrom($date)
             ->setTokenLifetime($age);
 
         $response = $this->client->devToken($params);
@@ -482,7 +482,7 @@ class ClientTest extends AbstractTestCase
         $params = new DevTokenParams($user, $pass);
         $params
             ->setPasswordHashed($is_hash)
-            ->setDateFrom(\DateTimeImmutable::createFromMutable($date))
+            ->setDateFrom($date)
             ->setTokenLifetime($age);
 
         $this->client->devToken($params);

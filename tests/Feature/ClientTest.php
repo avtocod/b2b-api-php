@@ -84,7 +84,7 @@ class ClientTest extends AbstractTestCase
         $params = new DevTokenParams($this->username, $this->password);
         $params
             ->setPasswordHashed(false)
-            ->setDateFrom($now = new \DateTimeImmutable)
+            ->setDateFrom($now = new \DateTime)
             ->setTokenLifetime($age = 60);
 
         $response = $this->client->devToken($params);
