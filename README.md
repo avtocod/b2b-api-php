@@ -65,7 +65,7 @@ use \Avtocod\B2BApi\Params\UserReportRefreshParams;
 /** @var Client $client */
 
 // Test connection
-$client->devPing(new DevPingParams());
+$client->devPing(new DevPingParams);
 
 // Debug token generation
 $client->devToken(new DevTokenParams('username', 'password'));

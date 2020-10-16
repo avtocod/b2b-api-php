@@ -74,7 +74,7 @@ class ClientTest extends AbstractTestCase
     {
         $this->assertSame(
             $value = 'feature test' . \random_int(1, 9999),
-            $this->client->devPing((new DevPingParams())->setValue($value))->getValue()
+            $this->client->devPing((new DevPingParams)->setValue($value))->getValue()
         );
     }
 
@@ -121,7 +121,7 @@ class ClientTest extends AbstractTestCase
     {
         $this->assertSame(
             $uid = $this->username . '@' . $this->domain,
-            $this->client->user(new UserParams())->getByUid($uid)->getUid()
+            $this->client->user(new UserParams)->getByUid($uid)->getUid()
         );
     }
 
@@ -146,7 +146,7 @@ class ClientTest extends AbstractTestCase
     {
         $this->assertSame(
             $this->domain,
-            $this->client->userReportTypes(new UserReportTypesParams())->getByUid($this->report_type)->getDomainUid()
+            $this->client->userReportTypes(new UserReportTypesParams)->getByUid($this->report_type)->getDomainUid()
         );
     }
 
@@ -155,7 +155,7 @@ class ClientTest extends AbstractTestCase
      */
     public function testUserReports(): void
     {
-        $response = $this->client->userReports(new UserReportsParams());
+        $response = $this->client->userReports(new UserReportsParams);
 
         $this->assertGreaterThanOrEqual(1, $response->getSize());
 
@@ -169,7 +169,7 @@ class ClientTest extends AbstractTestCase
      */
     public function testUserReport(): void
     {
-        $reports    = $this->client->userReports(new UserReportsParams());
+        $reports    = $this->client->userReports(new UserReportsParams);
         $report_uid = $reports->first()->getUid();
 
         $report = $this->client->userReport(new UserReportParams($report_uid));
@@ -201,7 +201,7 @@ class ClientTest extends AbstractTestCase
      */
     public function testUserReportRefresh(): void
     {
-        $reports    = $this->client->userReports(new UserReportsParams());
+        $reports    = $this->client->userReports(new UserReportsParams);
         $report_uid = $reports->first()->getUid();
         $response   = $this->client->userReportRefresh(new UserReportRefreshParams($report_uid));
 

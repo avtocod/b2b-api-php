@@ -113,7 +113,7 @@ class ClientTest extends AbstractTestCase
             true
         );
 
-        $this->client->devPing(new DevPingParams());
+        $this->client->devPing(new DevPingParams);
     }
 
     /**
@@ -146,7 +146,7 @@ class ClientTest extends AbstractTestCase
             true
         );
 
-        $this->client->devPing(new DevPingParams());
+        $this->client->devPing(new DevPingParams);
     }
 
     /**
@@ -183,7 +183,7 @@ class ClientTest extends AbstractTestCase
             true
         );
 
-        $this->client->devPing(new DevPingParams());
+        $this->client->devPing(new DevPingParams);
     }
 
     /**
@@ -203,7 +203,7 @@ class ClientTest extends AbstractTestCase
             true
         );
 
-        $this->client->devPing(new DevPingParams());
+        $this->client->devPing(new DevPingParams);
     }
 
     /**
@@ -224,7 +224,7 @@ class ClientTest extends AbstractTestCase
             true
         );
 
-        $this->client->devPing(new DevPingParams());
+        $this->client->devPing(new DevPingParams);
     }
 
     /**
@@ -246,7 +246,7 @@ class ClientTest extends AbstractTestCase
             true
         );
 
-        $this->client->devPing(new DevPingParams());
+        $this->client->devPing(new DevPingParams);
 
         $this->assertSame(
             'AR-REST ' . $this->client->getSettings()->getAuthToken(),
@@ -287,7 +287,7 @@ class ClientTest extends AbstractTestCase
         });
 
         try {
-            $this->client->devPing(new DevPingParams());
+            $this->client->devPing(new DevPingParams);
         } catch (BadRequestException $e) {
             $catch = true;
         }
@@ -338,7 +338,7 @@ class ClientTest extends AbstractTestCase
         });
 
         try {
-            $this->client->devPing(new DevPingParams());
+            $this->client->devPing(new DevPingParams);
         } catch (BadRequestException $e) {
             $catch = true;
         }
@@ -370,7 +370,7 @@ class ClientTest extends AbstractTestCase
             )
         );
 
-        $response = $this->client->devPing((new DevPingParams())->setValue($value));
+        $response = $this->client->devPing((new DevPingParams)->setValue($value));
 
         $this->assertSame($value, $response->getValue());
         $this->assertSame($in, $response->getIn());
@@ -395,7 +395,7 @@ class ClientTest extends AbstractTestCase
             new Response(200, ['content-type' => 'application/json;charset=utf-8'], '{"foo":]')
         );
 
-        $this->client->devPing(new DevPingParams());
+        $this->client->devPing(new DevPingParams);
     }
 
     /**
@@ -530,7 +530,7 @@ class ClientTest extends AbstractTestCase
             )
         );
 
-        $response = $this->client->user(new UserParams());
+        $response = $this->client->user(new UserParams);
 
         $this->assertSame($state, $response->getState());
         $this->assertSame($size, $response->getSize());
@@ -626,7 +626,7 @@ class ClientTest extends AbstractTestCase
         );
 
         $response = $this->client->user(
-            (new UserParams())->setDetailed(true)
+            (new UserParams)->setDetailed(true)
         );
 
         $this->assertSame($state, $response->getState());
@@ -690,7 +690,7 @@ class ClientTest extends AbstractTestCase
         );
 
         $this->client->user(
-            (new UserParams())->setDetailed(true)
+            (new UserParams)->setDetailed(true)
         );
     }
 
@@ -920,7 +920,7 @@ class ClientTest extends AbstractTestCase
             )
         );
 
-        $params = new UserReportTypesParams();
+        $params = new UserReportTypesParams;
         $params->setCanGenerate(true)
             ->setIncludeContent(true)
             ->setQuery('_all')
@@ -1006,7 +1006,7 @@ class ClientTest extends AbstractTestCase
             )
         );
 
-        $response = $this->client->userReportTypes(new UserReportTypesParams());
+        $response = $this->client->userReportTypes(new UserReportTypesParams);
 
         $this->assertCount(11, $response->getData());
         $this->assertNull($response->getTotal());
@@ -1072,7 +1072,7 @@ class ClientTest extends AbstractTestCase
             new Response(200, ['content-type' => 'application/json;charset=utf-8'], '{"foo":]')
         );
 
-        $this->client->userReportTypes(new UserReportTypesParams());
+        $this->client->userReportTypes(new UserReportTypesParams);
     }
 
     /**
@@ -1101,7 +1101,7 @@ class ClientTest extends AbstractTestCase
             )
         );
 
-        $params = new UserReportsParams();
+        $params = new UserReportsParams;
         $params
             ->setIncludeContent(true)
             ->setQuery('_all')
@@ -1193,7 +1193,7 @@ class ClientTest extends AbstractTestCase
             new Response(200, ['content-type' => 'application/json;charset=utf-8'], '{"foo":]')
         );
 
-        $params = new UserReportsParams();
+        $params = new UserReportsParams;
         $params
             ->setIncludeContent(true)
             ->setQuery('_all')
@@ -1233,7 +1233,7 @@ class ClientTest extends AbstractTestCase
             )
         );
 
-        $response = $this->client->userReports(new UserReportsParams());
+        $response = $this->client->userReports(new UserReportsParams);
 
         $this->assertNull($response->getTotal());
         $this->assertSame(3, $response->getSize());
