@@ -192,7 +192,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
                     '_can_generate' => $params->isCanGenerate()
                         ? 'true'
                         : 'false',
-                    '_content'      => $params->isIncludeContent()
+                    '_content'      => $params->isWithContent()
                         ? 'true'
                         : 'false',
                     '_query'        => $params->getQuery(),
@@ -216,7 +216,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
         return UserReportsResponse::fromHttpResponse(
             $this->doRequest(new Request('get', 'user/reports'), [
                 'query' => [
-                    '_content'    => $params->isIncludeContent()
+                    '_content'    => $params->isWithContent()
                         ? 'true'
                         : 'false',
                     '_query'      => $params->getQuery(),

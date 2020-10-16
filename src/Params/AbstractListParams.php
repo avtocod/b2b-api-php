@@ -46,7 +46,7 @@ abstract class AbstractListParams
      *
      * @var bool
      */
-    private $include_content = false;
+    private $with_content = false;
 
     /**
      * True, if necessary calculate total items count.
@@ -156,13 +156,13 @@ abstract class AbstractListParams
     }
 
     /**
-     * @param bool $include_content
+     * @param bool $with_content
      *
      * @return $this
      */
-    public function setIncludeContent(bool $include_content): self
+    public function setWithContent(bool $with_content): self
     {
-        $this->include_content = $include_content;
+        $this->with_content = $with_content;
 
         return $this;
     }
@@ -170,9 +170,9 @@ abstract class AbstractListParams
     /**
      * @return bool
      */
-    public function isIncludeContent(): bool
+    public function isWithContent(): bool
     {
-        return $this->include_content;
+        return $this->with_content;
     }
 
     /**

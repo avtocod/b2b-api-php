@@ -25,7 +25,7 @@ class UserReportsParamsTest extends AbstractTestCase
             ->setPerPage($per_page = $this->faker->randomDigitNotNull)
             ->setOffset($offset = $this->faker->randomDigitNotNull)
             ->setSortBy($sort_by = $this->faker->word)
-            ->setIncludeContent($include_content = $this->faker->boolean)
+            ->setWithContent($include_content = $this->faker->boolean)
             ->setCalcTotal($calc_total = $this->faker->boolean);
 
         $this->assertSame($is_detailed, $params->isDetailed());
@@ -34,7 +34,7 @@ class UserReportsParamsTest extends AbstractTestCase
         $this->assertSame($per_page, $params->getPerPage());
         $this->assertSame($offset, $params->getOffset());
         $this->assertSame($sort_by, $params->getSortBy());
-        $this->assertSame($include_content, $params->isIncludeContent());
+        $this->assertSame($include_content, $params->isWithContent());
         $this->assertSame($calc_total, $params->isCalcTotal());
     }
 
@@ -51,7 +51,7 @@ class UserReportsParamsTest extends AbstractTestCase
         $this->assertSame(20, $params->getPerPage());
         $this->assertSame(0, $params->getOffset());
         $this->assertSame('-created_at', $params->getSortBy());
-        $this->assertFalse($params->isIncludeContent());
+        $this->assertFalse($params->isWithContent());
         $this->assertFalse($params->isCalcTotal());
     }
 }

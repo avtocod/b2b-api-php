@@ -922,7 +922,7 @@ class ClientTest extends AbstractTestCase
 
         $params = new UserReportTypesParams;
         $params->setCanGenerate(true)
-            ->setIncludeContent(true)
+            ->setWithContent(true)
             ->setQuery('_all')
             ->setPerPage(20)
             ->setOffset(0)
@@ -1103,7 +1103,7 @@ class ClientTest extends AbstractTestCase
 
         $params = new UserReportsParams;
         $params
-            ->setIncludeContent(true)
+            ->setWithContent(true)
             ->setQuery('_all')
             ->setPerPage(20)
             ->setOffset(0)
@@ -1195,7 +1195,7 @@ class ClientTest extends AbstractTestCase
 
         $params = new UserReportsParams;
         $params
-            ->setIncludeContent(true)
+            ->setWithContent(true)
             ->setQuery('_all')
             ->setPerPage(20)
             ->setOffset(0)
