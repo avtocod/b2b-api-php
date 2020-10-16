@@ -16,7 +16,7 @@ final class UserReportRefreshParams
     /**
      * Additional request options.
      *
-     * @var array<string, string|int|float|bool|array<mixed>>
+     * @var array<string, string|int|float|bool|array<mixed>>|null
      */
     private $options;
 
