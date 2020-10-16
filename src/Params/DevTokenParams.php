@@ -102,11 +102,11 @@ final class DevTokenParams
     }
 
     /**
-     * @param DateTime|null $date_from
+     * @param DateTime $date_from
      *
      * @return $this
      */
-    public function setDateFrom(?DateTime $date_from): self
+    public function setDateFrom(DateTime $date_from): self
     {
         $this->date_from = $date_from;
 
