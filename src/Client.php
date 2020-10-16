@@ -5,7 +5,6 @@ declare(strict_types = 1);
 namespace Avtocod\B2BApi;
 
 use Closure;
-use DateTime;
 use GuzzleHttp\Psr7\Request;
 use PackageVersions\Versions;
 use GuzzleHttp\Client as Guzzle;

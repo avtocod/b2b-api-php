@@ -5,7 +5,6 @@ declare(strict_types = 1);
 namespace Avtocod\B2BApi\Params;
 
 use DateTime;
-use DateTimeImmutable;
 
 final class DevTokenParams
 {
