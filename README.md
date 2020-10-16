@@ -65,22 +65,22 @@ use \Avtocod\B2BApi\Params\UserReportRefreshParams;
 /** @var Client $client */
 
 // Test connection
-$client->devPing(new DevPingParams);
+$client->devPing();
 
 // Debug token generation
 $client->devToken(new DevTokenParams('username', 'password'));
 
 // Retrieve information about current user
-$client->user((new UserParams)->setDetailed(true));
+$client->user();
 
 // Retrieve balance information for report type
 $client->userBalance(new UserBalanceParams('report_type_uid@domain'));
 
 // Retrieve report types data
-$client->userReportTypes(new UserReportTypesParams);
+$client->userReportTypes();
 
 // Get reports list
-$client->userReports(new UserReportsParams);
+$client->userReports();
 
 // Get report by unique report ID
 $client->userReport(new UserReportParams('report_uid_SOMEIDENTIFIERGOESHERE@domain'));

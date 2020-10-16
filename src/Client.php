@@ -93,8 +93,12 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     /**
      * {@inheritdoc}
      */
-    public function devPing(DevPingParams $params): DevPingResponse
+    public function devPing(?DevPingParams $params = null): DevPingResponse
     {
+        if ($params === null) {
+            $params = new DevPingParams;
+        }
+
         return DevPingResponse::fromHttpResponse(
             $this->doRequest(new Request('get', 'dev/ping'), [
                 'query' => [
@@ -152,8 +156,12 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     /**
      * {@inheritdoc}
      */
-    public function user(UserParams $params): UserResponse
+    public function user(?UserParams $params = null): UserResponse
     {
+        if ($params === null) {
+            $params = new UserParams;
+        }
+
         return UserResponse::fromHttpResponse(
             $this->doRequest(new Request('get', 'user'), [
                 'query' => [
@@ -184,8 +192,12 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     /**
      * {@inheritdoc}
      */
-    public function userReportTypes(UserReportTypesParams $params): UserReportTypesResponse
+    public function userReportTypes(?UserReportTypesParams $params = null): UserReportTypesResponse
     {
+        if ($params === null) {
+            $params = new UserReportTypesParams;
+        }
+
         return UserReportTypesResponse::fromHttpResponse(
             $this->doRequest(new Request('get', 'user/report_types'), [
                 'query' => [
@@ -211,8 +223,12 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     /**
      * {@inheritdoc}
      */
-    public function userReports(UserReportsParams $params): UserReportsResponse
+    public function userReports(?UserReportsParams $params = null): UserReportsResponse
     {
+        if ($params === null) {
+            $params = new UserReportsParams;
+        }
+
         return UserReportsResponse::fromHttpResponse(
             $this->doRequest(new Request('get', 'user/reports'), [
                 'query' => [

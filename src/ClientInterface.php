@@ -28,14 +28,14 @@ interface ClientInterface
     /**
      * Test connection.
      *
-     * @param DevPingParams $params
+     * @param DevPingParams|null $params
      *
      * @throws BadRequestException
      * @throws BadResponseException
      *
      * @return DevPingResponse
      */
-    public function devPing(DevPingParams $params): DevPingResponse;
+    public function devPing(?DevPingParams $params = null): DevPingResponse;
 
     /**
      * Debug token generation.
@@ -52,14 +52,14 @@ interface ClientInterface
     /**
      * Retrieve information about current user.
      *
-     * @param UserParams $params
+     * @param UserParams|null $params
      *
      * @throws BadRequestException
      * @throws BadResponseException
      *
      * @return UserResponse
      */
-    public function user(UserParams $params): UserResponse;
+    public function user(?UserParams $params = null): UserResponse;
 
     /**
      * Retrieve balance information for report type.
@@ -76,26 +76,26 @@ interface ClientInterface
     /**
      * Retrieve report types data.
      *
-     * @param UserReportTypesParams $params
+     * @param UserReportTypesParams|null $params
      *
      * @throws BadRequestException
      * @throws BadResponseException
      *
      * @return UserReportTypesResponse
      */
-    public function userReportTypes(UserReportTypesParams $params): UserReportTypesResponse;
+    public function userReportTypes(?UserReportTypesParams $params = null): UserReportTypesResponse;
 
     /**
      * Get reports list.
      *
-     * @param UserReportsParams $params
+     * @param UserReportsParams|null $params
      *
      * @throws BadRequestException
      * @throws BadResponseException
      *
      * @return UserReportsResponse
      */
-    public function userReports(UserReportsParams $params): UserReportsResponse;
+    public function userReports(?UserReportsParams $params = null): UserReportsResponse;
 
     /**
      * Get report by unique report ID.
