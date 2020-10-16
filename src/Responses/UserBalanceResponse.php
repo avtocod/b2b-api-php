@@ -88,7 +88,7 @@ class UserBalanceResponse implements ResponseInterface, Countable, IteratorAggre
             return Balance::fromArray($balance_data);
         }, $as_array['data']);
 
-        return new static(
+        return new self(
             $raw_response,
             $as_array['state'],
             $as_array['size'],
