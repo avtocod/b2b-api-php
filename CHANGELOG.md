@@ -6,13 +6,22 @@ The format is based on [Keep a Changelog][keepachangelog] and this project adher
 
 ## UNRELEASED
 
-### Changed
-
-- Refactory `ClientInterface` & `Client` class
-
 ### Added
 
-- Optional parameter `idempotenceKey` in `ReportMakeParams` for report-make requests
+- Class `ReportMakeParams` to build make-report parameters
+- Optional parameter `idempotenceKey` for report-make requests
+
+### Changed
+
+- Method `ClientInterface::userReportMake` now takes object `ReportMakeParams` as parameter
+- Method `ClientInterface::devPing` now takes optional object `DevPingParams` as parameter
+- Method `ClientInterface::devToken` now takes object `DevTokenParams` as parameter
+- Method `ClientInterface::user` now takes optional object `UserParams` as parameter
+- Method `ClientInterface::userBalance` now takes object `UserBalanceParams` as parameter
+- Method `ClientInterface::userReportTypes` now takes optional object `UserReportTypesParams` as parameter
+- Method `ClientInterface::userReports` now takes optional object `UserReportsParams` as parameter
+- Method `ClientInterface::userReport` now takes object `UserReportParams` as parameter
+- Method `ClientInterface::userReportRefresh` now takes object `UserReportRefreshParams` as parameter
 
 ### Fixed
 
