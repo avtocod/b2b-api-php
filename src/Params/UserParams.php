@@ -9,9 +9,9 @@ final class UserParams
     /**
      * True, if necessary detailed information about user.
      *
-     * @var bool
+     * @var bool|null
      */
-    private $detailed = false;
+    private $detailed;
 
     /**
      * @param bool $detailed
@@ -26,9 +26,9 @@ final class UserParams
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
-    public function isDetailed(): bool
+    public function isDetailed(): ?bool
     {
         return $this->detailed;
     }

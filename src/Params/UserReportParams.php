@@ -16,16 +16,16 @@ final class UserReportParams
     /**
      * True, if necessary include report content into response.
      *
-     * @var bool
+     * @var bool|null
      */
-    private $include_content = true;
+    private $include_content;
 
     /**
      * True, if necessary detailed information about report.
      *
-     * @var bool
+     * @var bool|null
      */
-    private $detailed = true;
+    private $detailed;
 
     /**
      * @param string $report_uid Report unique ID (e.g.: `some_report_uid_YV1KS9614S107357Y@domain`)
@@ -58,9 +58,9 @@ final class UserReportParams
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
-    public function isIncludeContent(): bool
+    public function isIncludeContent(): ?bool
     {
         return $this->include_content;
     }
@@ -78,9 +78,9 @@ final class UserReportParams
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
-    public function isDetailed(): bool
+    public function isDetailed(): ?bool
     {
         return $this->detailed;
     }

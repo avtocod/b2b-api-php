@@ -45,13 +45,13 @@ class UserReportsParamsTest extends AbstractTestCase
     {
         $params = new UserReportsParams;
 
-        $this->assertFalse($params->isDetailed());
-        $this->assertSame('_all', $params->getQuery());
-        $this->assertSame(1, $params->getPage());
-        $this->assertSame(20, $params->getPerPage());
-        $this->assertSame(0, $params->getOffset());
-        $this->assertSame('-created_at', $params->getSortBy());
-        $this->assertFalse($params->isWithContent());
-        $this->assertFalse($params->isCalcTotal());
+        $this->assertNull($params->isDetailed());
+        $this->assertNull($params->getQuery());
+        $this->assertNull($params->getPage());
+        $this->assertNull($params->getPerPage());
+        $this->assertNull($params->getOffset());
+        $this->assertNull($params->getSortBy());
+        $this->assertNull($params->isWithContent());
+        $this->assertNull($params->isCalcTotal());
     }
 }

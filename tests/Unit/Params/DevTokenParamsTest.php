@@ -46,8 +46,8 @@ class DevTokenParamsTest extends AbstractTestCase
     {
         $params = new DevTokenParams($this->faker->word, $this->faker->word);
 
-        $this->assertFalse($params->isPasswordHashed());
+        $this->assertNull($params->isPasswordHashed());
         $this->assertNull($params->getDateFrom());
-        $this->assertSame(60, $params->getTokenLifetime());
+        $this->assertNull($params->getTokenLifetime());
     }
 }

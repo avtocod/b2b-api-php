@@ -25,23 +25,23 @@ final class DevTokenParams
     /**
      * True, if user password hashed.
      *
-     * @var bool
+     * @var bool|null
      */
-    private $is_password_hashed = false;
+    private $is_password_hashed;
 
     /**
      * Token availability start date.
      *
      * @var DateTime|null
      */
-    private $date_from = null;
+    private $date_from;
 
     /**
      * Token lifetime (in seconds).
      *
-     * @var int
+     * @var int|null
      */
-    private $token_lifetime = 60;
+    private $token_lifetime;
 
     /**
      * @param string $username User identifier (e.g.: `test@test`)
@@ -66,17 +66,17 @@ final class DevTokenParams
     /**
      * Get user password.
      *
-     * @return string
+     * @return string|null
      */
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
-    public function isPasswordHashed(): bool
+    public function isPasswordHashed(): ?bool
     {
         return $this->is_password_hashed;
     }
@@ -114,9 +114,9 @@ final class DevTokenParams
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getTokenLifetime(): int
+    public function getTokenLifetime(): ?int
     {
         return $this->token_lifetime;
     }

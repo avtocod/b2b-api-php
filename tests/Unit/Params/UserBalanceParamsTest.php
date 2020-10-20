@@ -42,6 +42,6 @@ class UserBalanceParamsTest extends AbstractTestCase
     {
         $params = new UserBalanceParams($this->faker->word);
 
-        $this->assertFalse($params->isDetailed());
+        $this->assertNull($params->isDetailed());
     }
 }

@@ -45,7 +45,7 @@ class UserReportParamsTest extends AbstractTestCase
     {
         $params = new UserReportParams($this->faker->word);
 
-        $this->assertTrue($params->isIncludeContent());
-        $this->assertTrue($params->isDetailed());
+        $this->assertNull($params->isIncludeContent());
+        $this->assertNull($params->isDetailed());
     }
 }

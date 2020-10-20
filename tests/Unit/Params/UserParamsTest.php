@@ -30,6 +30,6 @@ class UserParamsTest extends AbstractTestCase
     {
         $params = new UserParams;
 
-        $this->assertFalse($params->isDetailed());
+        $this->assertNull($params->isDetailed());
     }
 }

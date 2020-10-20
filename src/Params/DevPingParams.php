@@ -11,7 +11,7 @@ final class DevPingParams
      *
      * @var string|null
      */
-    private $value = null;
+    private $value;
 
     /**
      * @param string $value

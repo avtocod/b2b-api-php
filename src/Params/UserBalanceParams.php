@@ -16,9 +16,9 @@ final class UserBalanceParams
     /**
      * True, if necessary detailed balance information for report type.
      *
-     * @var bool
+     * @var bool|null
      */
-    private $detailed = false;
+    private $detailed;
 
     /**
      * @param string $report_type_uid Unique report type ID (e.g.: `some_report_uid` or `some_report_uid@domain`)
@@ -51,9 +51,9 @@ final class UserBalanceParams
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
-    public function isDetailed(): bool
+    public function isDetailed(): ?bool
     {
         return $this->detailed;
     }
