@@ -94,14 +94,10 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
      */
     public function devPing(?DevPingParams $params = null): DevPingResponse
     {
-        if ($params === null) {
-            $params = new DevPingParams;
-        }
-
         return DevPingResponse::fromHttpResponse(
             $this->doRequest(new Request('get', 'dev/ping'), [
                 'query' => [
-                    'value' => $params->getValue() ?? ((string) \time()),
+                    'value' => $params instanceof DevPingParams ? $params->getValue() : ((string) \time()),
                 ],
             ])
         );
