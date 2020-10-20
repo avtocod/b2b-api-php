@@ -148,13 +148,14 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     {
         // Set default query options
         $query = [
-            '_detailed' =>'false',
+            '_detailed' => 'false',
         ];
 
         // Modify query, if needed
         if ($params instanceof UserParams) {
-            if (is_bool($is_detailed = $params->isDetailed()))
-            $query['_detailed'] = $is_detailed ? 'true' : 'false';
+            if (is_bool($is_detailed = $params->isDetailed())) {
+                $query['_detailed'] = $is_detailed ? 'true' : 'false';
+            }
         }
 
         return UserResponse::fromHttpResponse(

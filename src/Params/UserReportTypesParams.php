@@ -221,5 +221,4 @@ final class UserReportTypesParams
     {
         return $this->calc_total;
     }
-
 }

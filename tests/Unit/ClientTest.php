@@ -1302,7 +1302,12 @@ class ClientTest extends AbstractTestCase
             )
         );
 
-        $response = $this->client->userReport(new UserReportParams($report_uid));
+        $params = new UserReportParams($report_uid);
+        $params
+            ->setIncludeContent(true)
+            ->setDetailed(true);
+
+        $response = $this->client->userReport($params);
 
         $this->assertSame(1, $response->getSize());
         $this->assertEquals(
