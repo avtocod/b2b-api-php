@@ -263,7 +263,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
             }
 
             if (\is_int($offset = $params->getOffset())) {
-                $query['_offset'] = $offset;
+                $query['_offset'] = \max(0, $offset);
             }
 
             if (\is_int($page = $params->getPage())) {
