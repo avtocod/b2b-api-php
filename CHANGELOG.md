@@ -8,7 +8,15 @@ The format is based on [Keep a Changelog][keepachangelog] and this project adher
 
 ### Added
 
+- Class `DevPingParams` as parameter to test connection
+- Class `DevTokenParams` as parameter to debug token generation
 - Class `ReportMakeParams` to build make-report parameters
+- Class `UserParams` as parameter to retrieve information about current user
+- Class `UserBalanceParams` as parameter to retrieve balance information
+- Class `UserReportTypesParams` as parameter to retrieve report types data
+- Class `UserReportsParams` as parameter to get reports list
+- Class `UserReportParams` as parameter to get report by unique report ID
+- Class `UserReportRefreshParams` as parameter to refresh existing report
 - Optional parameter `idempotenceKey` for report-make requests
 
 ### Changed
