@@ -134,7 +134,9 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
                 'query' => [
                     'user'    => $params->getUsername(),
                     'pass'    => $params->getPassword(),
-                    'is_hash' => $params->isPasswordHashed() ? 'true' : 'false',
+                    'is_hash' => $params->isPasswordHashed()
+                        ? 'true'
+                        : 'false',
                     'date'    => DateTimeFactory::toIso8601ZuluWithoutMs($params->getDateFrom() ?? new DateTime),
                     'age'     => \max(1, $params->getTokenLifetime() ?? 60),
                 ],
@@ -150,7 +152,9 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
         return UserResponse::fromHttpResponse(
             $this->doRequest(new Request('get', 'user'), [
                 'query' => [
-                    '_detailed' => $params instanceof UserParams && $params->isDetailed() === true ? 'true' : 'false',
+                    '_detailed' => $params instanceof UserParams && $params->isDetailed() === true
+                        ? 'true'
+                        : 'false',
                 ],
             ])
         );
@@ -161,14 +165,14 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
      */
     public function userBalance(UserBalanceParams $params): UserBalanceResponse
     {
-        $request_url = \sprintf('user/balance/%s', \urlencode($params->getReportTypeUid()));
-
-        $query = [
-            '_detailed' => $params->isDetailed() ? 'true' : 'false',
-        ];
-
         return UserBalanceResponse::fromHttpResponse(
-            $this->doRequest(new Request('get', $request_url), ['query' => $query])
+            $this->doRequest(new Request('get', \sprintf('user/balance/%s', \urlencode($params->getReportTypeUid()))), [
+                'query' => [
+                    '_detailed' => $params->isDetailed()
+                        ? 'true'
+                        : 'false',
+                ],
+            ])
         );
     }
 
