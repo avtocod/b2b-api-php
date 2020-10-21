@@ -147,16 +147,12 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
      */
     public function user(?UserParams $params = null): UserResponse
     {
-        $query = [
-            '_detailed' => 'false',
-        ];
-
-        if ($params instanceof UserParams && is_bool($is_detailed = $params->isDetailed())) {
-            $query['_detailed'] = $is_detailed ? 'true' : 'false';
-        }
-
         return UserResponse::fromHttpResponse(
-            $this->doRequest(new Request('get', 'user'), ['query' => $query])
+            $this->doRequest(new Request('get', 'user'), [
+                'query' => [
+                    '_detailed' => $params instanceof UserParams && $params->isDetailed() === true ? 'true' : 'false',
+                ]
+            ])
         );
     }
 
