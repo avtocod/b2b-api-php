@@ -899,6 +899,7 @@ class ClientTest extends AbstractTestCase
     {
         $this->guzzle_handler->onUriRequested(
             $this->settings->getBaseUri() . 'user/report_types?' . \http_build_query([
+                '_can_generate' => 'true',
                 '_content'      => 'true',
                 '_query'        => '_all',
                 '_size'         => 20,
@@ -906,7 +907,6 @@ class ClientTest extends AbstractTestCase
                 '_page'         => 1,
                 '_sort'         => '-created_at',
                 '_calc_total'   => 'true',
-                '_can_generate' => 'true',
             ]),
             'get',
             new Response(
@@ -986,6 +986,7 @@ class ClientTest extends AbstractTestCase
     {
         $this->guzzle_handler->onUriRequested(
             $this->settings->getBaseUri() . 'user/report_types?' . \http_build_query([
+                '_can_generate' => 'false',
                 '_content'      => 'false',
                 '_query'        => '_all',
                 '_size'         => 20,
@@ -993,7 +994,6 @@ class ClientTest extends AbstractTestCase
                 '_page'         => 1,
                 '_sort'         => '-created_at',
                 '_calc_total'   => 'false',
-                '_can_generate' => 'false',
             ]),
             'get',
             new Response(
@@ -1056,6 +1056,7 @@ class ClientTest extends AbstractTestCase
 
         $this->guzzle_handler->onUriRequested(
             $this->settings->getBaseUri() . 'user/report_types?' . \http_build_query([
+                '_can_generate' => 'false',
                 '_content'      => 'false',
                 '_query'        => '_all',
                 '_size'         => 20,
@@ -1063,7 +1064,6 @@ class ClientTest extends AbstractTestCase
                 '_page'         => 1,
                 '_sort'         => '-created_at',
                 '_calc_total'   => 'false',
-                '_can_generate' => 'false',
             ]),
             'get',
             new Response(200, ['content-type' => 'application/json;charset=utf-8'], '{"foo":]')
@@ -1299,12 +1299,7 @@ class ClientTest extends AbstractTestCase
             )
         );
 
-        $params = new UserReportParams($report_uid);
-        $params
-            ->setIncludeContent(true)
-            ->setDetailed(true);
-
-        $response = $this->client->userReport($params);
+        $response = $this->client->userReport(new UserReportParams($report_uid));
 
         $this->assertSame(1, $response->getSize());
         $this->assertEquals(

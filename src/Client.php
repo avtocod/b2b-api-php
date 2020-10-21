@@ -181,10 +181,23 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
      */
     public function userReportTypes(?UserReportTypesParams $params = null): UserReportTypesResponse
     {
-        $query = $this->getListQueryProperties(['_can_generate' => 'false']);
+        $query = [
+            '_can_generate' => 'false',
+            '_content'      => 'false',
+            '_query'        => '_all',
+            '_size'         => 20,
+            '_offset'       => 0,
+            '_page'         => 1,
+            '_sort'         => '-created_at',
+            '_calc_total'   => 'false',
+        ];
 
         // Modify query, if needed
         if ($params instanceof UserReportTypesParams) {
+            if (is_bool($can_generate = $params->isCanGenerate())) {
+                $query['_can_generate'] = $can_generate ? 'true' : 'false';
+            }
+
             if (is_bool($with_content = $params->isWithContent())) {
                 $query['_content'] = $with_content ? 'true' : 'false';
             }
@@ -212,11 +225,6 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
             if (is_bool($is_calc_total = $params->isCalcTotal())) {
                 $query['_calc_total'] = $is_calc_total ? 'true' : 'false';
             }
-
-            // Unique property for `user/reports`
-            if (is_bool($can_generate = $params->isCanGenerate())) {
-                $query['_can_generate'] = $can_generate ? 'true' : 'false';
-            }
         }
 
         return UserReportTypesResponse::fromHttpResponse(
@@ -229,7 +237,16 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
      */
     public function userReports(?UserReportsParams $params = null): UserReportsResponse
     {
-        $query = $this->getListQueryProperties(['_detailed' => 'false']);
+        $query = [
+            '_content'    => 'false',
+            '_query'      => '_all',
+            '_size'       => 20,
+            '_offset'     => 0,
+            '_page'       => 1,
+            '_sort'       => '-created_at',
+            '_calc_total' => 'false',
+            '_detailed'   => 'false'
+        ];
 
         // Modify query, if needed
         if ($params instanceof UserReportsParams) {
@@ -415,25 +432,5 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
         if ($this->events_handler instanceof Closure) {
             $this->events_handler->__invoke($event);
         }
-    }
-
-    /**
-     * Common query part for requests `user/repors` and `user/report_types`.
-     *
-     * @param array<string, string|int>|null $additional_params
-     *
-     * @return array<string, string|int>
-     */
-    private function getListQueryProperties(?array $additional_params = null): array
-    {
-        return array_merge([
-            '_content'    => 'false',
-            '_query'      => '_all',
-            '_size'       => 20,
-            '_offset'     => 0,
-            '_page'       => 1,
-            '_sort'       => '-created_at',
-            '_calc_total' => 'false',
-        ], $additional_params ?? []);
     }
 }
