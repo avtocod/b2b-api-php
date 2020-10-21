@@ -9,58 +9,58 @@ final class UserReportTypesParams
     /**
      * True, if User can generate reports for report type.
      *
-     * @var bool
+     * @var bool|null
      */
-    private $can_generate = false;
+    private $can_generate;
 
     /**
      * Description of query for fetching list data.
      *
-     * @var string
+     * @var string|null
      */
-    private $query = '_all';
+    private $query;
 
     /**
      * Page number.
      *
-     * @var int
+     * @var int|null
      */
-    private $page = 1;
+    private $page;
 
     /**
      * Items per page.
      *
-     * @var int
+     * @var int|null
      */
-    private $per_page = 20;
+    private $per_page;
 
     /**
      * Pagination offset.
      *
-     * @var int
+     * @var int|null
      */
-    private $offset = 0;
+    private $offset;
 
     /**
      * Sorting rules.
      *
-     * @var string
+     * @var string|null
      */
-    private $sort_by = '-created_at';
+    private $sort_by;
 
     /**
      * True, if necessary include list item content into response.
      *
-     * @var bool
+     * @var bool|null
      */
-    private $with_content = false;
+    private $with_content;
 
     /**
      * True, if necessary calculate total items count.
      *
-     * @var bool
+     * @var bool|null
      */
-    private $calc_total = false;
+    private $calc_total;
 
     /**
      * @param bool $can_generate
@@ -75,9 +75,9 @@ final class UserReportTypesParams
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
-    public function isCanGenerate(): bool
+    public function isCanGenerate(): ?bool
     {
         return $this->can_generate;
     }
@@ -95,9 +95,9 @@ final class UserReportTypesParams
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getQuery(): string
+    public function getQuery(): ?string
     {
         return $this->query;
     }
@@ -115,9 +115,9 @@ final class UserReportTypesParams
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getPage(): int
+    public function getPage(): ?int
     {
         return $this->page;
     }
@@ -135,9 +135,9 @@ final class UserReportTypesParams
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getPerPage(): int
+    public function getPerPage(): ?int
     {
         return $this->per_page;
     }
@@ -155,9 +155,9 @@ final class UserReportTypesParams
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getOffset(): int
+    public function getOffset(): ?int
     {
         return $this->offset;
     }
@@ -175,9 +175,9 @@ final class UserReportTypesParams
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSortBy(): string
+    public function getSortBy(): ?string
     {
         return $this->sort_by;
     }
@@ -195,9 +195,9 @@ final class UserReportTypesParams
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
-    public function isWithContent(): bool
+    public function isWithContent(): ?bool
     {
         return $this->with_content;
     }
@@ -215,9 +215,9 @@ final class UserReportTypesParams
     }
 
     /**
-     * @return bool
+     * @return bool|null
      */
-    public function isCalcTotal(): bool
+    public function isCalcTotal(): ?bool
     {
         return $this->calc_total;
     }

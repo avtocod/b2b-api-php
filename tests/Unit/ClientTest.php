@@ -896,14 +896,14 @@ class ClientTest extends AbstractTestCase
 
     /**
      * @covers \Avtocod\B2BApi\Responses\UserReportTypesResponse
-     *
+     * @group xxx
      * @return void
      */
     public function testUserReportTypes(): void
     {
         $this->guzzle_handler->onUriRequested(
             $this->settings->getBaseUri() . 'user/report_types?' . \http_build_query([
-                '_can_generate' => 'true',
+                // Common part for list queries
                 '_content'      => 'true',
                 '_query'        => '_all',
                 '_size'         => 20,
@@ -911,6 +911,8 @@ class ClientTest extends AbstractTestCase
                 '_page'         => 1,
                 '_sort'         => '-created_at',
                 '_calc_total'   => 'true',
+                // Unique part for `user/reports` list
+                '_can_generate' => 'true',
             ]),
             'get',
             new Response(
@@ -921,7 +923,8 @@ class ClientTest extends AbstractTestCase
         );
 
         $params = new UserReportTypesParams;
-        $params->setCanGenerate(true)
+        $params
+            ->setCanGenerate(true)
             ->setWithContent(true)
             ->setQuery('_all')
             ->setPerPage(20)
@@ -989,7 +992,6 @@ class ClientTest extends AbstractTestCase
     {
         $this->guzzle_handler->onUriRequested(
             $this->settings->getBaseUri() . 'user/report_types?' . \http_build_query([
-                '_can_generate' => 'false',
                 '_content'      => 'false',
                 '_query'        => '_all',
                 '_size'         => 20,
@@ -997,6 +999,7 @@ class ClientTest extends AbstractTestCase
                 '_page'         => 1,
                 '_sort'         => '-created_at',
                 '_calc_total'   => 'false',
+                '_can_generate' => 'false',
             ]),
             'get',
             new Response(
@@ -1059,7 +1062,6 @@ class ClientTest extends AbstractTestCase
 
         $this->guzzle_handler->onUriRequested(
             $this->settings->getBaseUri() . 'user/report_types?' . \http_build_query([
-                '_can_generate' => 'false',
                 '_content'      => 'false',
                 '_query'        => '_all',
                 '_size'         => 20,
@@ -1067,6 +1069,7 @@ class ClientTest extends AbstractTestCase
                 '_page'         => 1,
                 '_sort'         => '-created_at',
                 '_calc_total'   => 'false',
+                '_can_generate' => 'false',
             ]),
             'get',
             new Response(200, ['content-type' => 'application/json;charset=utf-8'], '{"foo":]')
@@ -1084,6 +1087,7 @@ class ClientTest extends AbstractTestCase
     {
         $this->guzzle_handler->onUriRequested(
             $this->settings->getBaseUri() . 'user/reports?' . \http_build_query([
+                // Common part for list queries
                 '_content'    => 'true',
                 '_query'      => '_all',
                 '_size'       => 20,
@@ -1091,6 +1095,7 @@ class ClientTest extends AbstractTestCase
                 '_page'       => 1,
                 '_sort'       => '-created_at',
                 '_calc_total' => 'true',
+                // Unique part for `user/reports` list
                 '_detailed'   => 'true',
             ]),
             'get',
