@@ -137,7 +137,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
                     'is_hash' => $params->isPasswordHashed() ? 'true' : 'false',
                     'date'    => DateTimeFactory::toIso8601ZuluWithoutMs($params->getDateFrom() ?? new DateTime),
                     'age'     => \max(1, $params->getTokenLifetime() ?? 60),
-                ]
+                ],
             ])
         );
     }
@@ -151,7 +151,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
             $this->doRequest(new Request('get', 'user'), [
                 'query' => [
                     '_detailed' => $params instanceof UserParams && $params->isDetailed() === true ? 'true' : 'false',
-                ]
+                ],
             ])
         );
     }
