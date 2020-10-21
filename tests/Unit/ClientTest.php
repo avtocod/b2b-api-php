@@ -896,7 +896,7 @@ class ClientTest extends AbstractTestCase
 
     /**
      * @covers \Avtocod\B2BApi\Responses\UserReportTypesResponse
-     * @group xxx
+     *
      * @return void
      */
     public function testUserReportTypes(): void
