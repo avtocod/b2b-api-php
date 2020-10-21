@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace Avtocod\B2BApi;
 
 use Closure;
+use DateTime;
 use GuzzleHttp\Psr7\Request;
 use PackageVersions\Versions;
 use GuzzleHttp\Client as Guzzle;
@@ -94,12 +95,16 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
      */
     public function devPing(?DevPingParams $params = null): DevPingResponse
     {
+        $query = [
+            'value' => (string) \time(),
+        ];
+
+        if ($params instanceof DevPingParams && is_string($value = $params->getValue())) {
+            $query['value'] = $value;
+        }
+
         return DevPingResponse::fromHttpResponse(
-            $this->doRequest(new Request('get', 'dev/ping'), [
-                'query' => [
-                    'value' => $params instanceof DevPingParams ? $params->getValue() : ((string) \time()),
-                ],
-            ])
+            $this->doRequest(new Request('get', 'dev/ping'), ['query' => $query])
         );
     }
 
@@ -126,18 +131,16 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
      */
     public function devToken(DevTokenParams $params): DevTokenResponse
     {
+        $query = [
+            'user'    => $params->getUsername(),
+            'pass'    => $params->getPassword(),
+            'is_hash' => $params->isPasswordHashed() ? 'true' : 'false',
+            'date'    => DateTimeFactory::toIso8601ZuluWithoutMs($params->getDateFrom() ?? new DateTime),
+            'age'     => \max(1, $params->getTokenLifetime() ?? 60),
+        ];
+
         return DevTokenResponse::fromHttpResponse(
-            $this->doRequest(new Request('get', 'dev/token'), [
-                'query' => [
-                    'user'    => $params->getUsername(),
-                    'pass'    => $params->getPassword(),
-                    'is_hash' => $params->isPasswordHashed()
-                        ? 'true'
-                        : 'false',
-                    'date'    => DateTimeFactory::toIso8601ZuluWithoutMs($params->getDateFrom() ?? new \DateTime),
-                    'age'     => \max(1, $params->getTokenLifetime() ?? 60),
-                ],
-            ])
+            $this->doRequest(new Request('get', 'dev/token'), ['query' => $query])
         );
     }
 
@@ -146,16 +149,12 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
      */
     public function user(?UserParams $params = null): UserResponse
     {
-        // Set default query options
         $query = [
             '_detailed' => 'false',
         ];
 
-        // Modify query, if needed
-        if ($params instanceof UserParams) {
-            if (is_bool($is_detailed = $params->isDetailed())) {
-                $query['_detailed'] = $is_detailed ? 'true' : 'false';
-            }
+        if ($params instanceof UserParams && is_bool($is_detailed = $params->isDetailed())) {
+            $query['_detailed'] = $is_detailed ? 'true' : 'false';
         }
 
         return UserResponse::fromHttpResponse(
@@ -168,14 +167,14 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
      */
     public function userBalance(UserBalanceParams $params): UserBalanceResponse
     {
+        $request_url = \sprintf('user/balance/%s', \urlencode($params->getReportTypeUid()));
+
+        $query = [
+            '_detailed' => $params->isDetailed() ? 'true' : 'false',
+        ];
+
         return UserBalanceResponse::fromHttpResponse(
-            $this->doRequest(new Request('get', \sprintf('user/balance/%s', \urlencode($params->getReportTypeUid()))), [
-                'query' => [
-                    '_detailed' => $params->isDetailed()
-                        ? 'true'
-                        : 'false',
-                ],
-            ])
+            $this->doRequest(new Request('get', $request_url), ['query' => $query])
         );
     }
 
@@ -184,7 +183,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
      */
     public function userReportTypes(?UserReportTypesParams $params = null): UserReportTypesResponse
     {
-        $query = $this->getCommonListQuery(['_can_generate' => 'false']);
+        $query = $this->getListQueryProperties(['_can_generate' => 'false']);
 
         // Modify query, if needed
         if ($params instanceof UserReportTypesParams) {
@@ -232,7 +231,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
      */
     public function userReports(?UserReportsParams $params = null): UserReportsResponse
     {
-        $query = $this->getCommonListQuery(['_detailed' => 'false']);
+        $query = $this->getListQueryProperties(['_detailed' => 'false']);
 
         // Modify query, if needed
         if ($params instanceof UserReportsParams) {
@@ -280,7 +279,8 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
      */
     public function userReport(UserReportParams $params): UserReportResponse
     {
-        // Set default query options
+        $request_url = \sprintf('user/reports/%s', \urlencode($params->getReportUid()));
+
         $query = [
             '_content'  => 'true',
             '_detailed' => 'true',
@@ -295,9 +295,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
         }
 
         return UserReportResponse::fromHttpResponse(
-            $this->doRequest(new Request('get', \sprintf('user/reports/%s', \urlencode($params->getReportUid()))), [
-                'query' => $query,
-            ])
+            $this->doRequest(new Request('get', $request_url), ['query' => $query])
         );
     }
 
@@ -378,7 +376,6 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
 
         try {
             $started_at = \microtime(true);
-            //var_dump($options);
             $response   = $this->guzzle->send($request, $options);
         } catch (TransferException $e) {
             $this->dispatchEvent(new Events\RequestFailedEvent(
@@ -435,7 +432,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
      *
      * @return array<string, string|int>
      */
-    private function getCommonListQuery(?array $additional_params = null): array
+    private function getListQueryProperties(?array $additional_params = null): array
     {
         return array_merge([
             '_content'    => 'false',
