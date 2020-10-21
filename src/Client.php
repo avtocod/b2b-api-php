@@ -168,7 +168,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
         return UserBalanceResponse::fromHttpResponse(
             $this->doRequest(new Request('get', \sprintf('user/balance/%s', \urlencode($params->getReportTypeUid()))), [
                 'query' => [
-                    '_detailed' => $params->isDetailed()
+                    '_detailed' => $params->isDetailed() === true
                         ? 'true'
                         : 'false',
                 ],
