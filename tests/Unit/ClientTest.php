@@ -625,9 +625,7 @@ class ClientTest extends AbstractTestCase
             )
         );
 
-        $response = $this->client->user(
-            (new UserParams)->setDetailed(true)
-        );
+        $response = $this->client->user((new UserParams)->setDetailed(true));
 
         $this->assertSame($state, $response->getState());
         $this->assertSame($size, $response->getSize());
@@ -689,9 +687,7 @@ class ClientTest extends AbstractTestCase
             new Response(200, ['content-type' => 'application/json;charset=utf-8'], '{"foo":]')
         );
 
-        $this->client->user(
-            (new UserParams)->setDetailed(true)
-        );
+        $this->client->user((new UserParams)->setDetailed(true));
     }
 
     /**
@@ -903,7 +899,6 @@ class ClientTest extends AbstractTestCase
     {
         $this->guzzle_handler->onUriRequested(
             $this->settings->getBaseUri() . 'user/report_types?' . \http_build_query([
-                // Common part for list queries
                 '_content'      => 'true',
                 '_query'        => '_all',
                 '_size'         => 20,
@@ -911,7 +906,6 @@ class ClientTest extends AbstractTestCase
                 '_page'         => 1,
                 '_sort'         => '-created_at',
                 '_calc_total'   => 'true',
-                // Unique part for `user/reports` list
                 '_can_generate' => 'true',
             ]),
             'get',
@@ -1087,7 +1081,6 @@ class ClientTest extends AbstractTestCase
     {
         $this->guzzle_handler->onUriRequested(
             $this->settings->getBaseUri() . 'user/reports?' . \http_build_query([
-                // Common part for list queries
                 '_content'    => 'true',
                 '_query'      => '_all',
                 '_size'       => 20,
@@ -1095,7 +1088,6 @@ class ClientTest extends AbstractTestCase
                 '_page'       => 1,
                 '_sort'       => '-created_at',
                 '_calc_total' => 'true',
-                // Unique part for `user/reports` list
                 '_detailed'   => 'true',
             ]),
             'get',
