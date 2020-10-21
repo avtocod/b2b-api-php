@@ -98,7 +98,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
         return DevPingResponse::fromHttpResponse(
             $this->doRequest(new Request('get', 'dev/ping'), [
                 'query' => [
-                    'value' => $params instanceof DevPingParams && is_string($value = $params->getValue())
+                    'value' => $params instanceof DevPingParams && \is_string($value = $params->getValue())
                             ? $value
                             : ((string) \time()),
                 ],
@@ -194,35 +194,35 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
 
         // Modify query, if needed
         if ($params instanceof UserReportTypesParams) {
-            if (is_bool($can_generate = $params->isCanGenerate())) {
+            if (\is_bool($can_generate = $params->isCanGenerate())) {
                 $query['_can_generate'] = $can_generate ? 'true' : 'false';
             }
 
-            if (is_bool($with_content = $params->isWithContent())) {
+            if (\is_bool($with_content = $params->isWithContent())) {
                 $query['_content'] = $with_content ? 'true' : 'false';
             }
 
-            if (is_string($filter_query = $params->getQuery())) {
+            if (\is_string($filter_query = $params->getQuery())) {
                 $query['_query'] = $filter_query;
             }
 
-            if (is_int($per_page = $params->getPerPage())) {
+            if (\is_int($per_page = $params->getPerPage())) {
                 $query['_size'] = \max(1, $per_page);
             }
 
-            if (is_int($offset = $params->getOffset())) {
+            if (\is_int($offset = $params->getOffset())) {
                 $query['_offset'] = $offset;
             }
 
-            if (is_int($page = $params->getPage())) {
+            if (\is_int($page = $params->getPage())) {
                 $query['_page'] = \max(1, $page);
             }
 
-            if (is_string($sort_by = $params->getSortBy())) {
+            if (\is_string($sort_by = $params->getSortBy())) {
                 $query['_sort'] = $sort_by;
             }
 
-            if (is_bool($is_calc_total = $params->isCalcTotal())) {
+            if (\is_bool($is_calc_total = $params->isCalcTotal())) {
                 $query['_calc_total'] = $is_calc_total ? 'true' : 'false';
             }
         }
@@ -245,41 +245,40 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
             '_page'       => 1,
             '_sort'       => '-created_at',
             '_calc_total' => 'false',
-            '_detailed'   => 'false'
+            '_detailed'   => 'false',
         ];
 
         // Modify query, if needed
         if ($params instanceof UserReportsParams) {
-            if (is_bool($with_content = $params->isWithContent())) {
+            if (\is_bool($with_content = $params->isWithContent())) {
                 $query['_content'] = $with_content ? 'true' : 'false';
             }
 
-            if (is_string($filter_query = $params->getQuery())) {
+            if (\is_string($filter_query = $params->getQuery())) {
                 $query['_query'] = $filter_query;
             }
 
-            if (is_int($per_page = $params->getPerPage())) {
+            if (\is_int($per_page = $params->getPerPage())) {
                 $query['_size'] = \max(1, $per_page);
             }
 
-            if (is_int($offset = $params->getOffset())) {
+            if (\is_int($offset = $params->getOffset())) {
                 $query['_offset'] = $offset;
             }
 
-            if (is_int($page = $params->getPage())) {
+            if (\is_int($page = $params->getPage())) {
                 $query['_page'] = \max(1, $page);
             }
 
-            if (is_string($sort_by = $params->getSortBy())) {
+            if (\is_string($sort_by = $params->getSortBy())) {
                 $query['_sort'] = $sort_by;
             }
 
-            if (is_bool($is_calc_total = $params->isCalcTotal())) {
+            if (\is_bool($is_calc_total = $params->isCalcTotal())) {
                 $query['_calc_total'] = $is_calc_total ? 'true' : 'false';
             }
 
-            // Unique property for `user/reports`
-            if (is_bool($is_detailed = $params->isDetailed())) {
+            if (\is_bool($is_detailed = $params->isDetailed())) {
                 $query['_detailed'] = $is_detailed ? 'true' : 'false';
             }
         }
