@@ -277,23 +277,17 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
      */
     public function userReport(UserReportParams $params): UserReportResponse
     {
-        $request_url = \sprintf('user/reports/%s', \urlencode($params->getReportUid()));
-
-        $query = [
-            '_content'  => 'true',
-            '_detailed' => 'true',
-        ];
-
-        if (is_bool($is_include_content = $params->isIncludeContent())) {
-            $query['_content'] = $is_include_content ? 'true' : 'false';
-        }
-
-        if (is_bool($is_detailed = $params->isDetailed())) {
-            $query['_detailed'] = $is_detailed ? 'true' : 'false';
-        }
-
         return UserReportResponse::fromHttpResponse(
-            $this->doRequest(new Request('get', $request_url), ['query' => $query])
+            $this->doRequest(new Request('get', \sprintf('user/reports/%s', \urlencode($params->getReportUid()))), [
+                'query' => [
+                    '_content'  => is_bool($is_include_content = $params->isIncludeContent())
+                        ? $is_include_content ? 'true' : 'false'
+                        : 'true',
+                    '_detailed' => is_bool($is_detailed = $params->isDetailed())
+                        ? $is_detailed ? 'true' : 'false'
+                        : 'true',
+                ],
+            ])
         );
     }
 
