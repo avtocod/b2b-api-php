@@ -100,7 +100,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
                 'query' => [
                     'value' => $params instanceof DevPingParams && is_string($value = $params->getValue())
                             ? $value
-                            : ((string) \time())
+                            : ((string) \time()),
                 ],
             ])
         );
@@ -129,16 +129,16 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
      */
     public function devToken(DevTokenParams $params): DevTokenResponse
     {
-        $query = [
-            'user'    => $params->getUsername(),
-            'pass'    => $params->getPassword(),
-            'is_hash' => $params->isPasswordHashed() ? 'true' : 'false',
-            'date'    => DateTimeFactory::toIso8601ZuluWithoutMs($params->getDateFrom() ?? new DateTime),
-            'age'     => \max(1, $params->getTokenLifetime() ?? 60),
-        ];
-
         return DevTokenResponse::fromHttpResponse(
-            $this->doRequest(new Request('get', 'dev/token'), ['query' => $query])
+            $this->doRequest(new Request('get', 'dev/token'), [
+                'query' => [
+                    'user'    => $params->getUsername(),
+                    'pass'    => $params->getPassword(),
+                    'is_hash' => $params->isPasswordHashed() ? 'true' : 'false',
+                    'date'    => DateTimeFactory::toIso8601ZuluWithoutMs($params->getDateFrom() ?? new DateTime),
+                    'age'     => \max(1, $params->getTokenLifetime() ?? 60),
+                ]
+            ])
         );
     }
 
