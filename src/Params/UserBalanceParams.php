@@ -4,21 +4,21 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Params;
 
-final class UserBalanceParams
+class UserBalanceParams
 {
     /**
      * Unique report type ID (e.g.: `some_report_uid` or `some_report_uid@domain`).
      *
      * @var string
      */
-    private $report_type_uid;
+    protected $report_type_uid;
 
     /**
      * True, if necessary detailed balance information for report type.
      *
      * @var bool|null
      */
-    private $detailed;
+    protected $detailed;
 
     /**
      * @param string $report_type_uid Unique report type ID (e.g.: `some_report_uid` or `some_report_uid@domain`)

@@ -4,14 +4,14 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Params;
 
-final class DevPingParams
+class DevPingParams
 {
     /**
      * Any string value (server must returns it back).
      *
      * @var string|null
      */
-    private $value;
+    protected $value;
 
     /**
      * @param string $value

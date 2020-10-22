@@ -4,63 +4,63 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Params;
 
-final class UserReportsParams
+class UserReportsParams
 {
     /**
      * True, if necessary detailed information in response.
      *
      * @var bool|null
      */
-    private $detailed;
+    protected $detailed;
 
     /**
      * Description of query for fetching list data.
      *
      * @var string|null
      */
-    private $query;
+    protected $query;
 
     /**
      * Page number.
      *
      * @var int|null
      */
-    private $page;
+    protected $page;
 
     /**
      * Items per page.
      *
      * @var int|null
      */
-    private $per_page;
+    protected $per_page;
 
     /**
      * Pagination offset.
      *
      * @var int|null
      */
-    private $offset;
+    protected $offset;
 
     /**
      * Sorting rules.
      *
      * @var string|null
      */
-    private $sort_by;
+    protected $sort_by;
 
     /**
      * True, if necessary include list item content into response.
      *
      * @var bool|null
      */
-    private $with_content;
+    protected $with_content;
 
     /**
      * True, if necessary calculate total items count.
      *
      * @var bool|null
      */
-    private $calc_total;
+    protected $calc_total;
 
     /**
      * @param bool $detailed

@@ -4,28 +4,28 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Params;
 
-final class UserReportParams
+class UserReportParams
 {
     /**
      * Report unique ID (e.g.: `some_report_uid_YV1KS9614S107357Y@domain`).
      *
      * @var string
      */
-    private $report_uid;
+    protected $report_uid;
 
     /**
      * True, if necessary include report content into response.
      *
      * @var bool|null
      */
-    private $include_content;
+    protected $include_content;
 
     /**
      * True, if necessary detailed information about report.
      *
      * @var bool|null
      */
-    private $detailed;
+    protected $detailed;
 
     /**
      * @param string $report_uid Report unique ID (e.g.: `some_report_uid_YV1KS9614S107357Y@domain`)

@@ -4,70 +4,70 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Params;
 
-final class UserReportMakeParams
+class UserReportMakeParams
 {
     /**
      * Unique report type ID (e.g.: `some_report_uid` or `some_report_uid@domain`).
      *
      * @var string
      */
-    private $report_type_uid;
+    protected $report_type_uid;
 
     /**
      * Request type (e.g.: `VIN`, `GRZ`, `STS`, `PTS`, `CHASSIS`, etc.).
      *
      * @var string
      */
-    private $type;
+    protected $type;
 
     /**
      * Request body (e.g.: `Z94CB41AAGR323020` (VIN), `А111АА177` (GRZ)).
      *
      * @var string
      */
-    private $value;
+    protected $value;
 
     /**
      * Additional request options.
      *
      * @var array<string, string|int|float|bool|array<mixed>>|null
      */
-    private $options;
+    protected $options;
 
     /**
      * Force update report, if it already was generated previously.
      *
      * @var bool|null
      */
-    private $is_force;
+    protected $is_force;
 
     /**
      * URL to call (using `post` method) when report content updated.
      *
      * @var string|null
      */
-    private $on_update_url;
+    protected $on_update_url;
 
     /**
      * URL to call (using `post` method) when report generation completed.
      *
      * @var string|null
      */
-    private $on_complete_url;
+    protected $on_complete_url;
 
     /**
      * Additional request data.
      *
      * @var array<string, string|int|float|bool|null|array<mixed>>|null
      */
-    private $data;
+    protected $data;
 
     /**
      * Idempotence key which the server uses to recognize subsequent retries of the same request.
      *
      * @var string|null
      */
-    private $idempotence_key;
+    protected $idempotence_key;
 
     /**
      * ReportMakeParameter constructor.

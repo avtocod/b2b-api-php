@@ -6,42 +6,42 @@ namespace Avtocod\B2BApi\Params;
 
 use DateTime;
 
-final class DevTokenParams
+class DevTokenParams
 {
     /**
      * User identifier (e.g.: `test@test`).
      *
      * @var string
      */
-    private $username;
+    protected $username;
 
     /**
      * User password.
      *
      * @var string
      */
-    private $password;
+    protected $password;
 
     /**
      * True, if user password hashed.
      *
      * @var bool|null
      */
-    private $is_password_hashed;
+    protected $is_password_hashed;
 
     /**
      * Token availability start date.
      *
      * @var DateTime|null
      */
-    private $date_from;
+    protected $date_from;
 
     /**
      * Token lifetime (in seconds).
      *
      * @var int|null
      */
-    private $token_lifetime;
+    protected $token_lifetime;
 
     /**
      * @param string $username User identifier (e.g.: `test@test`)

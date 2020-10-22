@@ -4,14 +4,14 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Params;
 
-final class UserParams
+class UserParams
 {
     /**
      * True, if necessary detailed information about user.
      *
      * @var bool|null
      */
-    private $detailed;
+    protected $detailed;
 
     /**
      * @param bool $detailed
