@@ -34,6 +34,7 @@ The format is based on [Keep a Changelog][keepachangelog] and this project adher
 ### Fixed
 
 - Namespaces in unit-tests `ClientTest`, `DateTimeFactoryTest` and `SettingsTest`
+- Now the parameters `_content` and `_detailed` (when requested `user/reports`) are sent by default as `false`
 
 ## v3.4.0
 

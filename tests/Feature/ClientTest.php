@@ -169,7 +169,7 @@ class ClientTest extends AbstractTestCase
         $reports    = $this->client->userReports();
         $report_uid = $reports->first()->getUid();
 
-        $report = $this->client->userReport(new UserReportParams($report_uid));
+        $report = $this->client->userReport((new UserReportParams($report_uid))->setIncludeContent(true));
 
         $this->assertSame(1, $report->getSize());
 
