@@ -7,6 +7,7 @@ namespace Avtocod\B2BApi\Tests\Unit\Responses\Entities;
 use Avtocod\B2BApi\DateTimeFactory;
 use Avtocod\B2BApi\Tests\AbstractTestCase;
 use Avtocod\B2BApi\Responses\Entities\Group;
+use DateTimeImmutable;
 
 /**
  * @group  entities
@@ -30,12 +31,12 @@ class GroupTest extends AbstractTestCase
             $users = $attributes['users'],
             $roles = \explode(',', $attributes['roles']),
             $tags = \explode(',', $attributes['tags']),
-            $created_at = DateTimeFactory::createFromIso8601Zulu($attributes['created_at']),
+            $created_at = DateTimeImmutable::createFromMutable(DateTimeFactory::createFromIso8601Zulu($attributes['created_at'])),
             $created_by = $attributes['created_by'],
-            $updated_at = DateTimeFactory::createFromIso8601Zulu($attributes['updated_at']),
+            $updated_at = DateTimeImmutable::createFromMutable(DateTimeFactory::createFromIso8601Zulu($attributes['updated_at'])),
             $updated_by = $attributes['updated_by'],
-            $active_from = DateTimeFactory::createFromIso8601Zulu($attributes['active_from']),
-            $active_to = DateTimeFactory::createFromIso8601Zulu($attributes['active_to']),
+            $active_from = DateTimeImmutable::createFromMutable(DateTimeFactory::createFromIso8601Zulu($attributes['active_from'])),
+            $active_to = DateTimeImmutable::createFromMutable(DateTimeFactory::createFromIso8601Zulu($attributes['active_to'])),
             $id = $attributes['id'],
             $deleted = $attributes['deleted']
         );

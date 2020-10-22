@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Responses\Entities;
 
-use DateTime;
+use DateTimeImmutable;
 use Avtocod\B2BApi\DateTimeFactory;
 
 class Report implements CanCreateSelfFromArrayInterface
@@ -55,7 +55,7 @@ class Report implements CanCreateSelfFromArrayInterface
     protected $tags;
 
     /**
-     * @var DateTime
+     * @var DateTimeImmutable
      */
     protected $created_at;
 
@@ -65,7 +65,7 @@ class Report implements CanCreateSelfFromArrayInterface
     protected $created_by;
 
     /**
-     * @var DateTime
+     * @var DateTimeImmutable
      */
     protected $updated_at;
 
@@ -75,12 +75,12 @@ class Report implements CanCreateSelfFromArrayInterface
     protected $updated_by;
 
     /**
-     * @var DateTime
+     * @var DateTimeImmutable
      */
     protected $active_from;
 
     /**
-     * @var DateTime
+     * @var DateTimeImmutable
      */
     protected $active_to;
 
@@ -126,12 +126,12 @@ class Report implements CanCreateSelfFromArrayInterface
      * @param string             $report_type_uid Report type unique ID
      * @param string             $domain_uid      Domain unique ID
      * @param array<string>      $tags            Tags list
-     * @param DateTime           $created_at      Created at
+     * @param DateTimeImmutable           $created_at      Created at
      * @param string             $created_by      Creator name
-     * @param DateTime           $updated_at      Last changes was made at
+     * @param DateTimeImmutable           $updated_at      Last changes was made at
      * @param string             $updated_by      Last changes was made by
-     * @param DateTime           $active_from     Active from
-     * @param DateTime           $active_to       Active to
+     * @param DateTimeImmutable           $active_from     Active from
+     * @param DateTimeImmutable           $active_to       Active to
      * @param int                $progress_ok     Successfully completed sources count
      * @param int                $progress_wait   Sources in a progress count
      * @param int                $progress_error  Errored sources count
@@ -148,12 +148,12 @@ class Report implements CanCreateSelfFromArrayInterface
                                 string $report_type_uid,
                                 string $domain_uid,
                                 array $tags,
-                                DateTime $created_at,
+                                DateTimeImmutable $created_at,
                                 string $created_by,
-                                DateTime $updated_at,
+                                DateTimeImmutable $updated_at,
                                 string $updated_by,
-                                DateTime $active_from,
-                                DateTime $active_to,
+                                DateTimeImmutable $active_from,
+                                DateTimeImmutable $active_to,
                                 int $progress_ok,
                                 int $progress_wait,
                                 int $progress_error,
@@ -201,12 +201,12 @@ class Report implements CanCreateSelfFromArrayInterface
             $data['report_type_uid'],
             $data['domain_uid'],
             \array_filter(\explode(',', $data['tags'])),
-            DateTimeFactory::createFromIso8601Zulu($data['created_at']),
+            DateTimeImmutable::createFromMutable(DateTimeFactory::createFromIso8601Zulu($data['created_at'])),
             $data['created_by'],
-            DateTimeFactory::createFromIso8601Zulu($data['updated_at']),
+            DateTimeImmutable::createFromMutable(DateTimeFactory::createFromIso8601Zulu($data['updated_at'])),
             $data['updated_by'],
-            DateTimeFactory::createFromIso8601Zulu($data['active_from']),
-            DateTimeFactory::createFromIso8601Zulu($data['active_to']),
+            DateTimeImmutable::createFromMutable(DateTimeFactory::createFromIso8601Zulu($data['active_from'])),
+            DateTimeImmutable::createFromMutable(DateTimeFactory::createFromIso8601Zulu($data['active_to'])),
             $data['progress_ok'],
             $data['progress_wait'],
             $data['progress_error'],
@@ -309,9 +309,9 @@ class Report implements CanCreateSelfFromArrayInterface
     /**
      * Get created at date/time.
      *
-     * @return DateTime
+     * @return DateTimeImmutable
      */
-    public function getCreatedAt(): DateTime
+    public function getCreatedAt(): DateTimeImmutable
     {
         return $this->created_at;
     }
@@ -329,9 +329,9 @@ class Report implements CanCreateSelfFromArrayInterface
     /**
      * Get last changes date/time.
      *
-     * @return DateTime
+     * @return DateTimeImmutable
      */
-    public function getUpdatedAt(): DateTime
+    public function getUpdatedAt(): DateTimeImmutable
     {
         return $this->updated_at;
     }
@@ -349,9 +349,9 @@ class Report implements CanCreateSelfFromArrayInterface
     /**
      * Get active from date/time.
      *
-     * @return DateTime
+     * @return DateTimeImmutable
      */
-    public function getActiveFrom(): DateTime
+    public function getActiveFrom(): DateTimeImmutable
     {
         return $this->active_from;
     }
@@ -359,9 +359,9 @@ class Report implements CanCreateSelfFromArrayInterface
     /**
      * Get active to date/time.
      *
-     * @return DateTime
+     * @return DateTimeImmutable
      */
-    public function getActiveTo(): DateTime
+    public function getActiveTo(): DateTimeImmutable
     {
         return $this->active_to;
     }

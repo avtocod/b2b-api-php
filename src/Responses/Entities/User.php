@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Responses\Entities;
 
-use DateTime;
+use DateTimeImmutable;
 use Avtocod\B2BApi\DateTimeFactory;
 
 class User implements CanCreateSelfFromArrayInterface
@@ -80,7 +80,7 @@ class User implements CanCreateSelfFromArrayInterface
     protected $tags;
 
     /**
-     * @var DateTime
+     * @var DateTimeImmutable
      */
     protected $created_at;
 
@@ -90,7 +90,7 @@ class User implements CanCreateSelfFromArrayInterface
     protected $created_by;
 
     /**
-     * @var DateTime
+     * @var DateTimeImmutable
      */
     protected $updated_at;
 
@@ -100,12 +100,12 @@ class User implements CanCreateSelfFromArrayInterface
     protected $updated_by;
 
     /**
-     * @var DateTime
+     * @var DateTimeImmutable
      */
     protected $active_from;
 
     /**
-     * @var DateTime
+     * @var DateTimeImmutable
      */
     protected $active_to;
 
@@ -138,12 +138,12 @@ class User implements CanCreateSelfFromArrayInterface
      * @param Domain|null   $domain      User domain object (optional)
      * @param array<string> $roles       User roles
      * @param array<string> $tags        Additional user tags
-     * @param DateTime      $created_at  User created at
+     * @param DateTimeImmutable      $created_at  User created at
      * @param string        $created_by  User creator
-     * @param DateTime      $updated_at  Last changes was made at
+     * @param DateTimeImmutable      $updated_at  Last changes was made at
      * @param string        $updated_by  Last changes was made by
-     * @param DateTime      $active_from Active from
-     * @param DateTime      $active_to   Active to
+     * @param DateTimeImmutable      $active_from Active from
+     * @param DateTimeImmutable      $active_to   Active to
      * @param int|null      $id          Internal database identifier (optional, only for administrators)
      * @param bool|null     $deleted     Is deleted flag (optional, only for administrators)
      * @param string|null   $pass_hash   Password hash (optional, only for administrators)
@@ -159,12 +159,12 @@ class User implements CanCreateSelfFromArrayInterface
                                 ?Domain $domain,
                                 array $roles,
                                 array $tags,
-                                DateTime $created_at,
+                                DateTimeImmutable $created_at,
                                 string $created_by,
-                                DateTime $updated_at,
+                                DateTimeImmutable $updated_at,
                                 string $updated_by,
-                                DateTime $active_from,
-                                DateTime $active_to,
+                                DateTimeImmutable $active_from,
+                                DateTimeImmutable $active_to,
                                 ?int $id,
                                 ?bool $deleted,
                                 ?string $pass_hash)
@@ -210,12 +210,12 @@ class User implements CanCreateSelfFromArrayInterface
                 : null,
             \array_filter(\explode(',', $data['roles'])),
             \array_filter(\explode(',', $data['tags'])),
-            DateTimeFactory::createFromIso8601Zulu($data['created_at']),
+            DateTimeImmutable::createFromMutable(DateTimeFactory::createFromIso8601Zulu($data['created_at'])),
             $data['created_by'],
-            DateTimeFactory::createFromIso8601Zulu($data['updated_at']),
+            DateTimeImmutable::createFromMutable(DateTimeFactory::createFromIso8601Zulu($data['updated_at'])),
             $data['updated_by'],
-            DateTimeFactory::createFromIso8601Zulu($data['active_from']),
-            DateTimeFactory::createFromIso8601Zulu($data['active_to']),
+            DateTimeImmutable::createFromMutable(DateTimeFactory::createFromIso8601Zulu($data['active_from'])),
+            DateTimeImmutable::createFromMutable(DateTimeFactory::createFromIso8601Zulu($data['active_to'])),
             $data['id'] ?? null,
             $data['deleted'] ?? null,
             $data['pass_hash'] ?? null
@@ -335,9 +335,9 @@ class User implements CanCreateSelfFromArrayInterface
     /**
      * Get created at date/time.
      *
-     * @return DateTime
+     * @return DateTimeImmutable
      */
-    public function getCreatedAt(): DateTime
+    public function getCreatedAt(): DateTimeImmutable
     {
         return $this->created_at;
     }
@@ -355,9 +355,9 @@ class User implements CanCreateSelfFromArrayInterface
     /**
      * Get last changes date/time.
      *
-     * @return DateTime
+     * @return DateTimeImmutable
      */
-    public function getUpdatedAt(): DateTime
+    public function getUpdatedAt(): DateTimeImmutable
     {
         return $this->updated_at;
     }
@@ -375,9 +375,9 @@ class User implements CanCreateSelfFromArrayInterface
     /**
      * Get active from date/time.
      *
-     * @return DateTime
+     * @return DateTimeImmutable
      */
-    public function getActiveFrom(): DateTime
+    public function getActiveFrom(): DateTimeImmutable
     {
         return $this->active_from;
     }
@@ -385,9 +385,9 @@ class User implements CanCreateSelfFromArrayInterface
     /**
      * Get active to date/time.
      *
-     * @return DateTime
+     * @return DateTimeImmutable
      */
-    public function getActiveTo(): DateTime
+    public function getActiveTo(): DateTimeImmutable
     {
         return $this->active_to;
     }

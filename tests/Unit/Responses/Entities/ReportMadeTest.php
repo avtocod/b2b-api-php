@@ -7,6 +7,7 @@ namespace Avtocod\B2BApi\Tests\Unit\Responses\Entities;
 use Avtocod\B2BApi\DateTimeFactory;
 use Avtocod\B2BApi\Tests\AbstractTestCase;
 use Avtocod\B2BApi\Responses\Entities\ReportMade;
+use DateTimeImmutable;
 
 /**
  * @covers \Avtocod\B2BApi\Responses\Entities\ReportMade
@@ -25,7 +26,7 @@ class ReportMadeTest extends AbstractTestCase
             $report_uid = $attributes['report_uid'],
             $is_new = $attributes['is_new'],
             $process_request_uid = $attributes['process_request_uid'],
-            $suggest_get = DateTimeFactory::createFromIso8601Zulu($attributes['suggest_get'])
+            $suggest_get = DateTimeImmutable::createFromMutable(DateTimeFactory::createFromIso8601Zulu($attributes['suggest_get']))
         );
 
         $this->assertSame($report_uid, $made->getReportUid());
