@@ -299,9 +299,9 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
                     '_content'  => $params->isIncludeContent() === false
                         ? 'false'
                         : 'true',
-                    '_detailed' => $params->isDetailed() === false
-                        ? 'false'
-                        : 'true',
+                    '_detailed' => $params->isDetailed() === true
+                        ? 'true'
+                        : 'false',
                 ],
             ])
         );
