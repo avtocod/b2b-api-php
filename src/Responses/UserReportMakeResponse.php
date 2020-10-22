@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Responses;
 
-use DateTime;
+use DateTimeImmutable;
 use Countable;
 use ArrayIterator;
 use IteratorAggregate;
@@ -36,7 +36,7 @@ class UserReportMakeResponse implements ResponseInterface, Countable, IteratorAg
     protected $size;
 
     /**
-     * @var DateTime
+     * @var DateTimeImmutable
      */
     protected $stamp;
 
@@ -51,10 +51,10 @@ class UserReportMakeResponse implements ResponseInterface, Countable, IteratorAg
      * @param string                 $raw_response
      * @param string                 $state
      * @param int                    $size
-     * @param DateTime               $stamp
+     * @param DateTimeImmutable               $stamp
      * @param array<int, ReportMade> $data
      */
-    private function __construct(string $raw_response, string $state, int $size, DateTime $stamp, array $data)
+    private function __construct(string $raw_response, string $state, int $size, DateTimeImmutable $stamp, array $data)
     {
         $this->raw_response_content = $raw_response;
         $this->state                = $state;
@@ -92,7 +92,7 @@ class UserReportMakeResponse implements ResponseInterface, Countable, IteratorAg
             $raw_response,
             $as_array['state'],
             $as_array['size'],
-            DateTimeFactory::createFromIso8601Zulu($as_array['stamp']),
+            DateTimeFactory::createImmutableFromIso8601Zulu($as_array['stamp']),
             $as_array['data']
         );
     }
@@ -120,9 +120,9 @@ class UserReportMakeResponse implements ResponseInterface, Countable, IteratorAg
     /**
      * Get response date/time.
      *
-     * @return DateTime
+     * @return DateTimeImmutable
      */
-    public function getStamp(): DateTime
+    public function getStamp(): DateTimeImmutable
     {
         return $this->stamp;
     }
