@@ -10,7 +10,7 @@ The format is based on [Keep a Changelog][keepachangelog] and this project adher
 
 - Class `DevPingParams` as parameter to test connection
 - Class `DevTokenParams` as parameter to debug token generation
-- Class `ReportMakeParams` to build make-report parameters
+- Class `UserReportMakeParams` to build make-report parameters
 - Class `UserParams` as parameter to retrieve information about current user
 - Class `UserBalanceParams` as parameter to retrieve balance information
 - Class `UserReportTypesParams` as parameter to retrieve report types data
