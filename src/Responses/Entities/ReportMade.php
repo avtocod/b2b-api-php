@@ -32,10 +32,10 @@ class ReportMade implements CanCreateSelfFromArrayInterface
     /**
      * Create a new report made instance.
      *
-     * @param string      $report_uid          Report unique ID
-     * @param bool        $is_new              Report is new?
-     * @param string|null $process_request_uid Unique report request ID
-     * @param DateTimeImmutable    $suggest_get         Suggested date/time for report getting
+     * @param string            $report_uid          Report unique ID
+     * @param bool              $is_new              Report is new?
+     * @param string|null       $process_request_uid Unique report request ID
+     * @param DateTimeImmutable $suggest_get         Suggested date/time for report getting
      */
     public function __construct(string $report_uid, bool $is_new, ?string $process_request_uid, DateTimeImmutable $suggest_get)
     {

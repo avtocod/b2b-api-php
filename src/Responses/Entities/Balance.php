@@ -62,11 +62,11 @@ class Balance implements CanCreateSelfFromArrayInterface
     /**
      * Create a new balance instance.
      *
-     * @param string        $report_type_uid Report type unique identifier
-     * @param string        $balance_type    Balance entry type (e.g.: `DAY`, `MONTH`, `TOTAL`)
-     * @param int           $quote_init      Initial quota value
-     * @param int           $quote_up        Added quota value
-     * @param int           $quote_use       Used quota value
+     * @param string                 $report_type_uid Report type unique identifier
+     * @param string                 $balance_type    Balance entry type (e.g.: `DAY`, `MONTH`, `TOTAL`)
+     * @param int                    $quote_init      Initial quota value
+     * @param int                    $quote_up        Added quota value
+     * @param int                    $quote_use       Used quota value
      * @param DateTimeImmutable|null $created_at      Balance entry created at
      * @param DateTimeImmutable|null $updated_at      Last changes was made at
      */

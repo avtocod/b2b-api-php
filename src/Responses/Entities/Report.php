@@ -126,12 +126,12 @@ class Report implements CanCreateSelfFromArrayInterface
      * @param string             $report_type_uid Report type unique ID
      * @param string             $domain_uid      Domain unique ID
      * @param array<string>      $tags            Tags list
-     * @param DateTimeImmutable           $created_at      Created at
+     * @param DateTimeImmutable  $created_at      Created at
      * @param string             $created_by      Creator name
-     * @param DateTimeImmutable           $updated_at      Last changes was made at
+     * @param DateTimeImmutable  $updated_at      Last changes was made at
      * @param string             $updated_by      Last changes was made by
-     * @param DateTimeImmutable           $active_from     Active from
-     * @param DateTimeImmutable           $active_to       Active to
+     * @param DateTimeImmutable  $active_from     Active from
+     * @param DateTimeImmutable  $active_to       Active to
      * @param int                $progress_ok     Successfully completed sources count
      * @param int                $progress_wait   Sources in a progress count
      * @param int                $progress_error  Errored sources count

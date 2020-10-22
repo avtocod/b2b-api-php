@@ -4,10 +4,10 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Tests\Unit\Responses\Entities;
 
+use DateTimeImmutable;
 use Avtocod\B2BApi\DateTimeFactory;
 use Avtocod\B2BApi\Tests\AbstractTestCase;
 use Avtocod\B2BApi\Responses\Entities\Group;
-use DateTimeImmutable;
 
 /**
  * @group  entities

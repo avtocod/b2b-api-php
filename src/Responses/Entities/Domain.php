@@ -88,12 +88,12 @@ class Domain implements CanCreateSelfFromArrayInterface
      * @param string             $state       Domain state (e.g.: `DRAFT`, `ACTIVE`, `BANNED`)
      * @param array<string>|null $roles       Domain roles (optional)
      * @param array<string>      $tags        Additional domain tags
-     * @param DateTimeImmutable           $created_at  Domain created at
+     * @param DateTimeImmutable  $created_at  Domain created at
      * @param string             $created_by  Domain creator
-     * @param DateTimeImmutable           $updated_at  Last changes was made at
+     * @param DateTimeImmutable  $updated_at  Last changes was made at
      * @param string             $updated_by  Last changes was made by
-     * @param DateTimeImmutable           $active_from Active from
-     * @param DateTimeImmutable           $active_to   Active to
+     * @param DateTimeImmutable  $active_from Active from
+     * @param DateTimeImmutable  $active_to   Active to
      * @param int|null           $id          Internal database identifier (optional, only for administrators)
      * @param bool|null          $deleted     Is deleted flag (optional, only for administrators)
      */

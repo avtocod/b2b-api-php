@@ -183,12 +183,12 @@ class ReportType implements CanCreateSelfFromArrayInterface
      * @param int                    $period_priority  Time unit (in milliseconds) for priority calculation
      * @param int                    $max_request      Number of requests in a given time unit, which will lower the
      *                                                 priority to a minimum
-     * @param DateTimeImmutable               $created_at       Report type created at
+     * @param DateTimeImmutable      $created_at       Report type created at
      * @param string                 $created_by       Report type creator
-     * @param DateTimeImmutable               $updated_at       Last changes was made at
+     * @param DateTimeImmutable      $updated_at       Last changes was made at
      * @param string                 $updated_by       Last changes was made by
-     * @param DateTimeImmutable               $active_from      Active from
-     * @param DateTimeImmutable               $active_to        Active to
+     * @param DateTimeImmutable      $active_from      Active from
+     * @param DateTimeImmutable      $active_to        Active to
      * @param CleanOptions|null      $clean_options    Objects obsolescence
      * @param string|null            $report_make_mode Report generation mode (e.g.: `TRANSACTIONAL`,
      *                                                 `FAST_NON_TRANSACTIONAL`, `FAST_NON_BALANCE`)

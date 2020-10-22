@@ -4,12 +4,12 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Tests\Unit\Responses\Entities;
 
+use DateTimeImmutable;
 use Avtocod\B2BApi\DateTimeFactory;
 use Avtocod\B2BApi\Tests\AbstractTestCase;
 use Avtocod\B2BApi\Responses\Entities\ReportType;
 use Avtocod\B2BApi\Responses\Entities\CleanOptions;
 use Avtocod\B2BApi\Responses\Entities\ReportTypeContent;
-use DateTimeImmutable;
 
 /**
  * @covers \Avtocod\B2BApi\Responses\Entities\ReportType
