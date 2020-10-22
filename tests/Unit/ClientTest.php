@@ -1288,8 +1288,8 @@ class ClientTest extends AbstractTestCase
             $this->settings->getBaseUri() . \sprintf(
                 'user/reports/%s?', \urlencode($report_uid = 'some_report_uid_1_YV1KS9614S107357Y@some_domain_uid')
             ) . \http_build_query([
-                '_content'  => 'false',
-                '_detailed' => 'false',
+                '_content'  => 'true',
+                '_detailed' => 'true',
             ]),
             'get',
             new Response(
@@ -1370,8 +1370,8 @@ class ClientTest extends AbstractTestCase
             $this->settings->getBaseUri() . \sprintf(
                 'user/reports/%s?', \urlencode($report_uid = 'some_report_uid_1_YV1KS9614S107357Y@some_domain_uid')
             ) . \http_build_query([
-                '_content'  => 'false',
-                '_detailed' => 'false',
+                '_content'  => 'true',
+                '_detailed' => 'true',
             ]),
             'get',
             new Response(200, ['content-type' => 'application/json;charset=utf-8'], '{"foo":]')

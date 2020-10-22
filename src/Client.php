@@ -168,7 +168,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
         return UserBalanceResponse::fromHttpResponse(
             $this->doRequest(new Request('get', \sprintf('user/balance/%s', \urlencode($params->getReportTypeUid()))), [
                 'query' => [
-                    '_detailed' => $params->isDetailed() === true || $params->isDetailed() === null // detailed by default
+                    '_detailed' => $params->isDetailed() === true
                         ? 'true'
                         : 'false',
                 ],
@@ -296,10 +296,10 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
         return UserReportResponse::fromHttpResponse(
             $this->doRequest(new Request('get', \sprintf('user/reports/%s', \urlencode($params->getReportUid()))), [
                 'query' => [
-                    '_content'  => $params->isIncludeContent() === true
+                    '_content'  => $params->isIncludeContent() === true || $params->isIncludeContent() === null
                         ? 'true'
                         : 'false',
-                    '_detailed' => $params->isDetailed() === true
+                    '_detailed' => $params->isDetailed() === true || $params->isDetailed() === null
                         ? 'true'
                         : 'false',
                 ],
