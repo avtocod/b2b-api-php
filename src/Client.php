@@ -134,7 +134,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
                 'query' => [
                     'user'    => $params->getUsername(),
                     'pass'    => $params->getPassword(),
-                    'is_hash' => $params->isPasswordHashed()
+                    'is_hash' => $params->isPasswordHashed() === true
                         ? 'true'
                         : 'false',
                     'date'    => DateTimeFactory::toIso8601ZuluWithoutMs($params->getDateFrom() ?? new DateTime),
