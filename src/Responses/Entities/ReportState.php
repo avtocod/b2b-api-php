@@ -22,13 +22,11 @@ class ReportState implements CanCreateSelfFromArrayInterface
     }
 
     /**
-     * @param array<string, array<string, mixed>> $data
-     *
-     * @return self
+     * @inheritDoc
      */
     public static function fromArray(array $data): self
     {
-        return new static(
+        return new self(
             \array_map(static function (array $report_data): ReportSourceState {
                 return ReportSourceState::fromArray($report_data);
             }, $data['sources'])

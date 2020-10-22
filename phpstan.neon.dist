@@ -2,10 +2,3 @@ parameters:
   level: 'max'
   paths:
     - src
-  ignoreErrors:
-    - # Replacing with `return new self` or classes finalization requires major version upping. Make it on next major release
-      message: '#Unsafe usage of new static\(\)#'
-      paths:
-        - src/Responses/*Response.php
-        - src/Responses/Entities/*.php
-        - src/Exceptions/*Exception.php

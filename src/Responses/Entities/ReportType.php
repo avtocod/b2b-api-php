@@ -249,13 +249,11 @@ class ReportType implements CanCreateSelfFromArrayInterface
     }
 
     /**
-     * @param array<string, mixed> $data
-     *
-     * @return self
+     * @inheritDoc
      */
     public static function fromArray(array $data): self
     {
-        return new static(
+        return new self(
             $data['uid'],
             $data['comment'],
             $data['name'],
