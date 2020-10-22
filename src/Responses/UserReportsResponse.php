@@ -104,7 +104,7 @@ class UserReportsResponse implements ResponseInterface, Countable, IteratorAggre
             $raw_response,
             $as_array['state'],
             $as_array['size'],
-            DateTimeFactory::createImmutableFromIso8601Zulu($as_array['stamp']),
+            DateTimeImmutable::createFromMutable(DateTimeFactory::createFromIso8601Zulu($as_array['stamp'])),
             $as_array['data'],
             $as_array['total'] ?? null
         );

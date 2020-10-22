@@ -92,7 +92,7 @@ class UserReportRefreshResponse implements ResponseInterface, Countable, Iterato
             $raw_response,
             $as_array['state'],
             $as_array['size'],
-            DateTimeFactory::createImmutableFromIso8601Zulu($as_array['stamp']),
+            DateTimeImmutable::createFromMutable(DateTimeFactory::createFromIso8601Zulu($as_array['stamp'])),
             $as_array['data']
         );
     }

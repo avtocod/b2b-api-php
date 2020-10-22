@@ -142,7 +142,7 @@ class DevTokenResponse implements ResponseInterface
             $as_array['user'],
             $as_array['pass'],
             $as_array['pass_hash'],
-            DateTimeFactory::createImmutableFromIso8601Zulu($as_array['date']),
+            DateTimeImmutable::createFromMutable(DateTimeFactory::createFromIso8601Zulu($as_array['date'])),
             $as_array['stamp'],
             $as_array['age'],
             $as_array['salt'],
