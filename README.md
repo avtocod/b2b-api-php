@@ -52,33 +52,31 @@ And then we can make next operations _(each call will returns an object with ser
 <?php /** @var \Avtocod\B2BApi\Client $client */
 
 // Test connection
-$client->devPing();
+$client->devPing(new \Avtocod\B2BApi\Params\DevPingParams);
 
 // Debug token generation
-$client->devToken('username', 'password');
+$client->devToken(new \Avtocod\B2BApi\Params\DevTokenParams('username', 'password'));
 
 // Retrieve information about current user
-$client->user(true);
+$client->user(new \Avtocod\B2BApi\Params\UserParams);
 
 // Retrieve balance information for report type
-$client->userBalance('report_type_uid@domain');
+$client->userBalance(new \Avtocod\B2BApi\Params\UserBalanceParams('report_type_uid@domain'));
 
 // Retrieve report types data
-$client->userReportTypes();
+$client->userReportTypes(new \Avtocod\B2BApi\Params\UserReportTypesParams);
 
 // Get reports list
-$client->userReports();
+$client->userReports(new \Avtocod\B2BApi\Params\UserReportsParams);
 
 // Get report by unique report ID
-$client->userReport('report_uid_SOMEIDENTIFIERGOESHERE@domain');
+$client->userReport(new \Avtocod\B2BApi\Params\UserReportParams('report_uid_SOMEIDENTIFIERGOESHERE@domain'));
 
 // Make (generate) report
-$client->userReportMake(
-    new ReportMakeParams('report_type_uid@domain', 'VIN', 'Z94CB41AAGR323020')
-);
+$client->userReportMake(new \Avtocod\B2BApi\Params\UserReportMakeParams('report_type_uid@domain', 'VIN', 'Z94CB41AAGR323020'));
 
 // Refresh existing report
-$client->userReportRefresh('report_uid_SOMEIDENTIFIERGOESHERE@domain');
+$client->userReportRefresh(new \Avtocod\B2BApi\Params\UserReportRefreshParams('report_uid_SOMEIDENTIFIERGOESHERE@domain'));
 ```
 
 For example, if you want to generate report for `A111AA177` (`GRZ` type), you can:
@@ -89,7 +87,7 @@ For example, if you want to generate report for `A111AA177` (`GRZ` type), you ca
 // Make report (this operation is asynchronous)
 $report_uid = $client
     ->userReportMake(
-        (new ReportMakeParams(`some_report_uid`, 'GRZ', 'A111AA177'))
+        (new \Avtocod\B2BApi\Params\UserReportMakeParams(`some_report_uid`, 'GRZ', 'A111AA177'))
             ->setForce(true)
             ->setOnUpdateUrl('https://example.com/webhook/updated')
             ->setOnCompleteUrl('https://example.com/webhook/completed')
@@ -99,14 +97,15 @@ $report_uid = $client
 
 // Wait for report is ready
 while (true) {
-    if ($client->userReport($report_uid, false)->first()->isCompleted()) {
+    $user_report_params = (new \Avtocod\B2BApi\Params\UserReportParams($report_uid))->setIncludeContent(false);
+    if ($client->userReport($user_report_params)->first()->isCompleted()) {
         break;
     }
 
     \sleep(1);
 }
 
-$content = $client->userReport($report_uid)->first()->getContent();
+$content = $client->userReport(new \Avtocod\B2BApi\Params\UserReportParams($report_uid))->first()->getContent();
 
 $vin_code  = $content->getByPath('identifiers.vehicle.vin');   // (string) 'JTMHX05J704083922'
 $engine_kw = $content->getByPath('tech_data.engine.power.kw'); // (int) 227

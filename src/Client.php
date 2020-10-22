@@ -9,19 +9,27 @@ use DateTime;
 use GuzzleHttp\Psr7\Request;
 use PackageVersions\Versions;
 use GuzzleHttp\Client as Guzzle;
+use Avtocod\B2BApi\Params\UserParams;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Avtocod\B2BApi\Params\DevPingParams;
+use Avtocod\B2BApi\Params\DevTokenParams;
 use Avtocod\B2BApi\Responses\UserResponse;
 use GuzzleHttp\Exception\RequestException;
-use Avtocod\B2BApi\Params\ReportMakeParams;
+use Avtocod\B2BApi\Params\UserReportParams;
 use GuzzleHttp\Exception\TransferException;
+use Avtocod\B2BApi\Params\UserBalanceParams;
+use Avtocod\B2BApi\Params\UserReportsParams;
 use Avtocod\B2BApi\Responses\DevPingResponse;
 use Avtocod\B2BApi\Responses\DevTokenResponse;
+use Avtocod\B2BApi\Params\UserReportMakeParams;
 use GuzzleHttp\RequestOptions as GuzzleOptions;
+use Avtocod\B2BApi\Params\UserReportTypesParams;
 use Avtocod\B2BApi\Responses\UserReportResponse;
 use Avtocod\B2BApi\Responses\UserBalanceResponse;
 use Avtocod\B2BApi\Responses\UserReportsResponse;
 use Avtocod\B2BApi\Exceptions\BadRequestException;
+use Avtocod\B2BApi\Params\UserReportRefreshParams;
 use GuzzleHttp\ClientInterface as GuzzleInterface;
 use Avtocod\B2BApi\Responses\UserReportMakeResponse;
 use Avtocod\B2BApi\Responses\UserReportTypesResponse;
@@ -85,12 +93,14 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     /**
      * {@inheritdoc}
      */
-    public function devPing(?string $value = null): DevPingResponse
+    public function devPing(?DevPingParams $params = null): DevPingResponse
     {
         return DevPingResponse::fromHttpResponse(
             $this->doRequest(new Request('get', 'dev/ping'), [
                 'query' => [
-                    'value' => $value ?? ((string) \time()),
+                    'value' => $params instanceof DevPingParams && \is_string($value = $params->getValue())
+                            ? $value
+                            : ((string) \time()),
                 ],
             ])
         );
@@ -117,22 +127,18 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     /**
      * {@inheritdoc}
      */
-    public function devToken(string $username,
-                             string $password,
-                             bool $is_hash = false,
-                             ?DateTime $date_from = null,
-                             int $age = 60): DevTokenResponse
+    public function devToken(DevTokenParams $params): DevTokenResponse
     {
         return DevTokenResponse::fromHttpResponse(
             $this->doRequest(new Request('get', 'dev/token'), [
                 'query' => [
-                    'user'    => $username,
-                    'pass'    => $password,
-                    'is_hash' => $is_hash
+                    'user'    => $params->getUsername(),
+                    'pass'    => $params->getPassword(),
+                    'is_hash' => $params->isPasswordHashed() === true
                         ? 'true'
                         : 'false',
-                    'date'    => DateTimeFactory::toIso8601ZuluWithoutMs($date_from ?? new DateTime),
-                    'age'     => \max(1, $age),
+                    'date'    => DateTimeFactory::toIso8601ZuluWithoutMs($params->getDateFrom() ?? new DateTime),
+                    'age'     => \max(1, $params->getTokenLifetime() ?? 60),
                 ],
             ])
         );
@@ -141,12 +147,12 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     /**
      * {@inheritdoc}
      */
-    public function user(bool $detailed = false): UserResponse
+    public function user(?UserParams $params = null): UserResponse
     {
         return UserResponse::fromHttpResponse(
             $this->doRequest(new Request('get', 'user'), [
                 'query' => [
-                    '_detailed' => $detailed
+                    '_detailed' => $params instanceof UserParams && $params->isDetailed() === true
                         ? 'true'
                         : 'false',
                 ],
@@ -157,12 +163,12 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     /**
      * {@inheritdoc}
      */
-    public function userBalance(string $report_type_uid, bool $detailed = false): UserBalanceResponse
+    public function userBalance(UserBalanceParams $params): UserBalanceResponse
     {
         return UserBalanceResponse::fromHttpResponse(
-            $this->doRequest(new Request('get', \sprintf('user/balance/%s', \urlencode($report_type_uid))), [
+            $this->doRequest(new Request('get', \sprintf('user/balance/%s', \urlencode($params->getReportTypeUid()))), [
                 'query' => [
-                    '_detailed' => $detailed
+                    '_detailed' => $params->isDetailed() === true
                         ? 'true'
                         : 'false',
                 ],
@@ -173,85 +179,127 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     /**
      * {@inheritdoc}
      */
-    public function userReportTypes(bool $can_generate = false,
-                                    bool $content = false,
-                                    string $query = '_all',
-                                    int $size = 20,
-                                    int $offset = 0,
-                                    int $page = 1,
-                                    string $sort = '-created_at',
-                                    bool $calc_total = false): UserReportTypesResponse
+    public function userReportTypes(?UserReportTypesParams $params = null): UserReportTypesResponse
     {
+        $query = [
+            '_can_generate' => 'false',
+            '_content'      => 'false',
+            '_query'        => '_all',
+            '_size'         => 20,
+            '_offset'       => 0,
+            '_page'         => 1,
+            '_sort'         => '-created_at',
+            '_calc_total'   => 'false',
+        ];
+
+        // Modify query, if needed
+        if ($params instanceof UserReportTypesParams) {
+            if (\is_bool($can_generate = $params->isCanGenerate())) {
+                $query['_can_generate'] = $can_generate ? 'true' : 'false';
+            }
+
+            if (\is_bool($with_content = $params->isWithContent())) {
+                $query['_content'] = $with_content ? 'true' : 'false';
+            }
+
+            if (\is_string($filter_query = $params->getQuery())) {
+                $query['_query'] = $filter_query;
+            }
+
+            if (\is_int($per_page = $params->getPerPage())) {
+                $query['_size'] = \max(1, $per_page);
+            }
+
+            if (\is_int($offset = $params->getOffset())) {
+                $query['_offset'] = \max(0, $offset);
+            }
+
+            if (\is_int($page = $params->getPage())) {
+                $query['_page'] = \max(1, $page);
+            }
+
+            if (\is_string($sort_by = $params->getSortBy())) {
+                $query['_sort'] = $sort_by;
+            }
+
+            if (\is_bool($is_calc_total = $params->isCalcTotal())) {
+                $query['_calc_total'] = $is_calc_total ? 'true' : 'false';
+            }
+        }
+
         return UserReportTypesResponse::fromHttpResponse(
-            $this->doRequest(new Request('get', 'user/report_types'), [
-                'query' => [
-                    '_can_generate' => $can_generate
-                        ? 'true'
-                        : 'false',
-                    '_content'      => $content
-                        ? 'true'
-                        : 'false',
-                    '_query'        => $query,
-                    '_size'         => \max(1, $size),
-                    '_offset'       => \max(0, $offset),
-                    '_page'         => \max(1, $page),
-                    '_sort'         => $sort,
-                    '_calc_total'   => $calc_total
-                        ? 'true'
-                        : 'false',
-                ],
-            ])
+            $this->doRequest(new Request('get', 'user/report_types'), ['query' => $query])
         );
     }
 
     /**
      * {@inheritdoc}
      */
-    public function userReports(bool $content = false,
-                                string $query = '_all',
-                                int $size = 20,
-                                int $offset = 0,
-                                int $page = 1,
-                                string $sort = '-created_at',
-                                bool $calc_total = false,
-                                bool $detailed = false): UserReportsResponse
+    public function userReports(?UserReportsParams $params = null): UserReportsResponse
     {
+        $query = [
+            '_content'    => 'false',
+            '_query'      => '_all',
+            '_size'       => 20,
+            '_offset'     => 0,
+            '_page'       => 1,
+            '_sort'       => '-created_at',
+            '_calc_total' => 'false',
+            '_detailed'   => 'false',
+        ];
+
+        // Modify query, if needed
+        if ($params instanceof UserReportsParams) {
+            if (\is_bool($with_content = $params->isWithContent())) {
+                $query['_content'] = $with_content ? 'true' : 'false';
+            }
+
+            if (\is_string($filter_query = $params->getQuery())) {
+                $query['_query'] = $filter_query;
+            }
+
+            if (\is_int($per_page = $params->getPerPage())) {
+                $query['_size'] = \max(1, $per_page);
+            }
+
+            if (\is_int($offset = $params->getOffset())) {
+                $query['_offset'] = \max(0, $offset);
+            }
+
+            if (\is_int($page = $params->getPage())) {
+                $query['_page'] = \max(1, $page);
+            }
+
+            if (\is_string($sort_by = $params->getSortBy())) {
+                $query['_sort'] = $sort_by;
+            }
+
+            if (\is_bool($is_calc_total = $params->isCalcTotal())) {
+                $query['_calc_total'] = $is_calc_total ? 'true' : 'false';
+            }
+
+            if (\is_bool($is_detailed = $params->isDetailed())) {
+                $query['_detailed'] = $is_detailed ? 'true' : 'false';
+            }
+        }
+
         return UserReportsResponse::fromHttpResponse(
-            $this->doRequest(new Request('get', 'user/reports'), [
-                'query' => [
-                    '_content'    => $content
-                        ? 'true'
-                        : 'false',
-                    '_query'      => $query,
-                    '_size'       => \max(1, $size),
-                    '_offset'     => \max(0, $offset),
-                    '_page'       => \max(1, $page),
-                    '_sort'       => $sort,
-                    '_calc_total' => $calc_total
-                        ? 'true'
-                        : 'false',
-                    '_detailed'   => $detailed
-                        ? 'true'
-                        : 'false',
-                ],
-            ])
+            $this->doRequest(new Request('get', 'user/reports'), ['query' => $query])
         );
     }
 
     /**
      * {@inheritdoc}
      */
-    public function userReport(string $report_uid,
-                               bool $content = true,
-                               bool $detailed = true): UserReportResponse
+    public function userReport(UserReportParams $params): UserReportResponse
     {
         return UserReportResponse::fromHttpResponse(
-            $this->doRequest(new Request('get', \sprintf('user/reports/%s', \urlencode($report_uid))), [
+            $this->doRequest(new Request('get', \sprintf('user/reports/%s', \urlencode($params->getReportUid()))), [
                 'query' => [
-                    '_content'  => $content
+                    '_content'  => $params->isIncludeContent() === true || $params->isIncludeContent() === null
                         ? 'true'
                         : 'false',
-                    '_detailed' => $detailed
+                    '_detailed' => $params->isDetailed() === true || $params->isDetailed() === null
                         ? 'true'
                         : 'false',
                 ],
@@ -262,7 +310,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     /**
      * {@inheritdoc}
      */
-    public function userReportMake(ReportMakeParams $params): UserReportMakeResponse
+    public function userReportMake(UserReportMakeParams $params): UserReportMakeResponse
     {
         $request_body = [
             'queryType' => $params->getType(),
@@ -304,11 +352,11 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
     /**
      * {@inheritdoc}
      */
-    public function userReportRefresh(string $report_uid, ?array $options = []): UserReportRefreshResponse
+    public function userReportRefresh(UserReportRefreshParams $params): UserReportRefreshResponse
     {
         return UserReportRefreshResponse::fromHttpResponse(
-            $this->doRequest(new Request('post', \sprintf('user/reports/%s/_refresh', \urlencode($report_uid))), [
-                GuzzleOptions::JSON => (object) ($options ?? []),
+            $this->doRequest(new Request('post', \sprintf('user/reports/%s/_refresh', \urlencode($params->getReportUid()))), [
+                GuzzleOptions::JSON => (object) ($params->getOptions() ?? []),
             ])
         );
     }

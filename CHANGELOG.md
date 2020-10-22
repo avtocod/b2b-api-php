@@ -8,12 +8,28 @@ The format is based on [Keep a Changelog][keepachangelog] and this project adher
 
 ### Added
 
-- Class `ReportMakeParams` to build make-report parameters
+- Class `DevPingParams` as parameter to test connection
+- Class `DevTokenParams` as parameter to debug token generation
+- Class `UserReportMakeParams` to build make-report parameters
+- Class `UserParams` as parameter to retrieve information about current user
+- Class `UserBalanceParams` as parameter to retrieve balance information
+- Class `UserReportTypesParams` as parameter to retrieve report types data
+- Class `UserReportsParams` as parameter to get reports list
+- Class `UserReportParams` as parameter to get report by unique report ID
+- Class `UserReportRefreshParams` as parameter to refresh existing report
 - Optional parameter `idempotenceKey` for report-make requests
 
 ### Changed
 
 - Method `ClientInterface::userReportMake` now takes object `ReportMakeParams` as parameter
+- Method `ClientInterface::devPing` now takes optional object `DevPingParams` as parameter
+- Method `ClientInterface::devToken` now takes object `DevTokenParams` as parameter
+- Method `ClientInterface::user` now takes optional object `UserParams` as parameter
+- Method `ClientInterface::userBalance` now takes object `UserBalanceParams` as parameter
+- Method `ClientInterface::userReportTypes` now takes optional object `UserReportTypesParams` as parameter
+- Method `ClientInterface::userReports` now takes optional object `UserReportsParams` as parameter
+- Method `ClientInterface::userReport` now takes object `UserReportParams` as parameter
+- Method `ClientInterface::userReportRefresh` now takes object `UserReportRefreshParams` as parameter
 - Replace `new static` with `new self`
 
 ### Fixed
