@@ -296,9 +296,9 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
         return UserReportResponse::fromHttpResponse(
             $this->doRequest(new Request('get', \sprintf('user/reports/%s', \urlencode($params->getReportUid()))), [
                 'query' => [
-                    '_content'  => $params->isIncludeContent() === false
-                        ? 'false'
-                        : 'true',
+                    '_content'  => $params->isIncludeContent() === true
+                        ? 'true'
+                        : 'false',
                     '_detailed' => $params->isDetailed() === true
                         ? 'true'
                         : 'false',
