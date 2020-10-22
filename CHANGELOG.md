@@ -30,7 +30,7 @@ The format is based on [Keep a Changelog][keepachangelog] and this project adher
 - Method `ClientInterface::userReports` now takes optional object `UserReportsParams` as parameter
 - Method `ClientInterface::userReport` now takes object `UserReportParams` as parameter
 - Method `ClientInterface::userReportRefresh` now takes object `UserReportRefreshParams` as parameter
-- Replace `new static` with `new self`
+- Stricter PHPStan checks (without `ignoreErrors`)
 
 ### Fixed
 
