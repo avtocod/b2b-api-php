@@ -100,7 +100,7 @@ class UserReportsResponse implements ResponseInterface, Countable, IteratorAggre
             return Report::fromArray($report_data);
         }, $as_array['data']);
 
-        return new static(
+        return new self(
             $raw_response,
             $as_array['state'],
             $as_array['size'],

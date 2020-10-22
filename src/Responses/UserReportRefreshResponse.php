@@ -88,7 +88,7 @@ class UserReportRefreshResponse implements ResponseInterface, Countable, Iterato
             return ReportMade::fromArray($data);
         }, $as_array['data']);
 
-        return new static(
+        return new self(
             $raw_response,
             $as_array['state'],
             $as_array['size'],

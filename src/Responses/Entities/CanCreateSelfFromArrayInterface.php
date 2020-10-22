@@ -7,9 +7,9 @@ interface CanCreateSelfFromArrayInterface
     /**
      * Create self using array of data.
      *
-     * @param array<mixed> $data
+     * @param array<string, mixed> $data
      *
-     * @return self|$this
+     * @return self
      */
     public static function fromArray(array $data);
 }
