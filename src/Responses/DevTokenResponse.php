@@ -76,18 +76,18 @@ class DevTokenResponse implements ResponseInterface
     /**
      * Create a new response instance.
      *
-     * @param string   $raw_response
-     * @param string   $user
-     * @param string   $password
-     * @param string   $password_hash
+     * @param string            $raw_response
+     * @param string            $user
+     * @param string            $password
+     * @param string            $password_hash
      * @param DateTimeImmutable $date
-     * @param int      $stamp
-     * @param int      $age
-     * @param string   $salt
-     * @param string   $salted_pass_hash
-     * @param string   $raw_token
-     * @param string   $token
-     * @param string   $header
+     * @param int               $stamp
+     * @param int               $age
+     * @param string            $salt
+     * @param string            $salted_pass_hash
+     * @param string            $raw_token
+     * @param string            $token
+     * @param string            $header
      */
     private function __construct(string $raw_response,
                                  string $user,

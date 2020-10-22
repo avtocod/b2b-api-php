@@ -4,9 +4,9 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Responses;
 
-use DateTimeImmutable;
 use Countable;
 use ArrayIterator;
+use DateTimeImmutable;
 use IteratorAggregate;
 use Tarampampam\Wrappers\Json;
 use Avtocod\B2BApi\DateTimeFactory;
@@ -51,7 +51,7 @@ class UserReportResponse implements ResponseInterface, Countable, IteratorAggreg
      * @param string             $raw_response
      * @param string             $state
      * @param int                $size
-     * @param DateTimeImmutable           $stamp
+     * @param DateTimeImmutable  $stamp
      * @param array<int, Report> $data
      */
     private function __construct(string $raw_response, string $state, int $size, DateTimeImmutable $stamp, array $data)
