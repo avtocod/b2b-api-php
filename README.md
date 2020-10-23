@@ -16,7 +16,7 @@
 Require this package with composer using the following command:
 
 ```shell
-$ composer require avtocod/b2b-api-php "^3.3"
+$ composer require avtocod/b2b-api-php "^4.0"
 ```
 
 > Installed `composer` is required ([how to install composer][getcomposer]).
@@ -87,7 +87,7 @@ For example, if you want to generate report for `A111AA177` (`GRZ` type), you ca
 // Make report (this operation is asynchronous)
 $report_uid = $client
     ->userReportMake(
-        (new \Avtocod\B2BApi\Params\UserReportMakeParams(`some_report_uid`, 'GRZ', 'A111AA177'))
+        (new \Avtocod\B2BApi\Params\UserReportMakeParams('some_report_uid', 'GRZ', 'A111AA177'))
             ->setForce(true)
             ->setOnUpdateUrl('https://example.com/webhook/updated')
             ->setOnCompleteUrl('https://example.com/webhook/completed')
