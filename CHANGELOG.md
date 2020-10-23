@@ -34,6 +34,7 @@ The format is based on [Keep a Changelog][keepachangelog] and this project adher
   - `Avtocod\B2BApi\Exceptions\*`
   - `Avtocod\B2BApi\Responses\Entities\*`
   - `Avtocod\B2BApi\Responses\*Response`
+- Date/time objects in service responses & entities not immutable (`DateTimeImmutable` instead `DateTime`)
 
 ### Fixed
 

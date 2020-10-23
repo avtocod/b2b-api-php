@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Tests\Unit\Responses\Entities;
 
+use DateTimeImmutable;
 use Avtocod\B2BApi\DateTimeFactory;
 use Avtocod\B2BApi\Tests\AbstractTestCase;
 use Avtocod\B2BApi\Responses\Entities\Report;
@@ -36,12 +37,12 @@ class ReportTest extends AbstractTestCase
             $report_type_uid = $attributes['report_type_uid'],
             $domain_uid = $attributes['domain_uid'],
             $tags = \explode(',', $attributes['tags']),
-            $created_at = DateTimeFactory::createFromIso8601Zulu($attributes['created_at']),
+            $created_at = DateTimeImmutable::createFromMutable(DateTimeFactory::createFromIso8601Zulu($attributes['created_at'])),
             $created_by = $attributes['created_by'],
-            $updated_at = DateTimeFactory::createFromIso8601Zulu($attributes['updated_at']),
+            $updated_at = DateTimeImmutable::createFromMutable(DateTimeFactory::createFromIso8601Zulu($attributes['updated_at'])),
             $updated_by = $attributes['updated_by'],
-            $active_from = DateTimeFactory::createFromIso8601Zulu($attributes['active_from']),
-            $active_to = DateTimeFactory::createFromIso8601Zulu($attributes['active_to']),
+            $active_from = DateTimeImmutable::createFromMutable(DateTimeFactory::createFromIso8601Zulu($attributes['active_from'])),
+            $active_to = DateTimeImmutable::createFromMutable(DateTimeFactory::createFromIso8601Zulu($attributes['active_to'])),
             $progress_ok = $attributes['progress_ok'],
             $progress_wait = $attributes['progress_wait'],
             $progress_error = $attributes['progress_error'],
