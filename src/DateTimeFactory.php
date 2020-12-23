@@ -28,7 +28,7 @@ class DateTimeFactory extends DateTime
 
         if (! $result instanceof DateTime) {
             throw new InvalidArgumentException(
-                "Wrong time [$time] passed (" . \implode(',', DateTime::getLastErrors()['errors'] ?? []) . ')'
+                "Wrong time [$time] passed (" . \implode(',', ((array) DateTime::getLastErrors())['errors'] ?? []) . ')'
             );
         }
 

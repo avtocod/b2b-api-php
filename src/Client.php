@@ -415,7 +415,7 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
         $user_agent = 'b2b-api-php/' . $this->getVersion();
 
         if (\function_exists('curl_version') && \extension_loaded('curl')) {
-            $user_agent .= ' curl/' . (\curl_version()['version'] ?? 'UNKNOWN');
+            $user_agent .= ' curl/' . (((array) \curl_version())['version'] ?? 'UNKNOWN');
         }
 
         return $user_agent . ' PHP/' . PHP_VERSION;
