@@ -4,9 +4,7 @@ declare(strict_types = 1);
 
 namespace Avtocod\B2BApi\Responses;
 
-use Tarampampam\Wrappers\Json;
 use Avtocod\B2BApi\Exceptions\BadResponseException;
-use Tarampampam\Wrappers\Exceptions\JsonEncodeDecodeException;
 use Psr\Http\Message\ResponseInterface as HttpResponseInterface;
 
 class DevPingResponse implements ResponseInterface
@@ -69,10 +67,10 @@ class DevPingResponse implements ResponseInterface
      */
     public static function fromHttpResponse(HttpResponseInterface $response): self
     {
-        try {
-            $as_array = (array) Json::decode($raw_response = (string) $response->getBody());
-        } catch (JsonEncodeDecodeException $e) {
-            throw BadResponseException::wrongJson($response, $e->getMessage(), $e);
+        $as_array = (array) \json_decode($raw_response = (string) $response->getBody(), true);
+
+        if (\json_last_error() !== \JSON_ERROR_NONE) {
+            throw BadResponseException::wrongJson($response, \json_last_error_msg());
         }
 
         return new self(

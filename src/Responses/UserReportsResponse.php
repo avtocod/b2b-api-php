@@ -8,11 +8,9 @@ use Countable;
 use ArrayIterator;
 use DateTimeImmutable;
 use IteratorAggregate;
-use Tarampampam\Wrappers\Json;
 use Avtocod\B2BApi\DateTimeFactory;
 use Avtocod\B2BApi\Responses\Entities\Report;
 use Avtocod\B2BApi\Exceptions\BadResponseException;
-use Tarampampam\Wrappers\Exceptions\JsonEncodeDecodeException;
 use Psr\Http\Message\ResponseInterface as HttpResponseInterface;
 
 /**
@@ -90,10 +88,10 @@ class UserReportsResponse implements ResponseInterface, Countable, IteratorAggre
      */
     public static function fromHttpResponse(HttpResponseInterface $response): self
     {
-        try {
-            $as_array = (array) Json::decode($raw_response = (string) $response->getBody());
-        } catch (JsonEncodeDecodeException $e) {
-            throw BadResponseException::wrongJson($response, $e->getMessage(), $e);
+        $as_array = (array) \json_decode($raw_response = (string) $response->getBody(), true);
+
+        if (\json_last_error() !== \JSON_ERROR_NONE) {
+            throw BadResponseException::wrongJson($response, \json_last_error_msg());
         }
 
         $as_array['data'] = \array_map(static function (array $report_data): Report {

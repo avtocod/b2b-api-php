@@ -6,10 +6,8 @@ namespace Avtocod\B2BApi\Exceptions;
 
 use Throwable;
 use RuntimeException;
-use Tarampampam\Wrappers\Json;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Tarampampam\Wrappers\Exceptions\JsonEncodeDecodeException;
 
 class BadRequestException extends RuntimeException implements B2BApiExceptionInterface
 {
@@ -84,9 +82,9 @@ class BadRequestException extends RuntimeException implements B2BApiExceptionInt
      */
     protected function extractErrorMessageFromResponse(ResponseInterface $response): ?string
     {
-        try {
-            $as_array = (array) Json::decode((string) $response->getBody());
+        $as_array = \json_decode((string) $response->getBody(), true);
 
+        if (\json_last_error() === \JSON_ERROR_NONE && \is_array($as_array)) {
             if (isset($as_array['type'], $as_array['name'], $as_array['message'])) {
                 return "{$as_array['type']}: {$as_array['name']} ({$as_array['message']})";
             }
@@ -102,8 +100,6 @@ class BadRequestException extends RuntimeException implements B2BApiExceptionInt
 
                 return "{$type}: {$name} ({$message})";
             }
-        } catch (JsonEncodeDecodeException $e) {
-            //
         }
 
         return null;
