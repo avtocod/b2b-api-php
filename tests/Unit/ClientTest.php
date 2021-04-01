@@ -11,7 +11,6 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use PackageVersions\Versions;
-use Tarampampam\Wrappers\Json;
 use GuzzleHttp\Client as Guzzle;
 use Avtocod\B2BApi\ClientInterface;
 use Avtocod\B2BApi\DateTimeFactory;
@@ -1428,7 +1427,7 @@ class ClientTest extends AbstractTestCase
             DateTimeFactory::createFromIso8601Zulu('2019-07-07T19:23:58.897Z'), $made->getSuggestGet()
         );
 
-        $request_body = Json::decode($this->guzzle_handler->getLastRequest()->getBody()->getContents());
+        $request_body = \json_decode($this->guzzle_handler->getLastRequest()->getBody()->getContents(), true);
 
         $this->assertTrue($request_body['options']['FORCE']);
         $this->assertSame($type, $request_body['queryType']);
@@ -1502,7 +1501,7 @@ class ClientTest extends AbstractTestCase
         $this->assertJsonStringEqualsJsonString($raw, $response->getRawResponseContent());
 
         // Check that we received correct 'idempotenceKey' in request body
-        $request_body = Json::decode($this->guzzle_handler->getLastRequest()->getBody()->getContents());
+        $request_body = \json_decode($this->guzzle_handler->getLastRequest()->getBody()->getContents(), true);
         $this->assertSame($idempotence_key, $request_body['idempotenceKey']);
     }
 
