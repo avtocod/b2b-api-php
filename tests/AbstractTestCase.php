@@ -7,7 +7,7 @@ namespace Avtocod\B2BApi\Tests;
 use Faker\Generator as Faker;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
-use Tarampampam\GuzzleUrlMock\UrlsMockHandler;
+use AvtoDev\GuzzleUrlMock\UrlsMockHandler;
 
 abstract class AbstractTestCase extends TestCase
 {

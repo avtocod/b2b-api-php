@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog][keepachangelog] and this project adheres to [Semantic Versioning][semver].
 
+## Unreleased
+
+### Changed
+
+- Package `tarampampam/guzzle-url-mock` replaced with `avto-dev/guzzle-url-mock` version `^1.5`
+
 ## v4.1.0
 
 ### Removed
