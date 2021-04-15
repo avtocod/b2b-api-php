@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog][keepachangelog] and this project adher
 ### Changed
 
 - Package `fzaninotto/faker` replaced with `fakerphp/faker` version `^1.14` [#28]
+- If the token creation timestamp is not passed, the minute is subtracted from the current time
 
 [#28]:https://github.com/avtocod/b2b-api-php/issues/28
 

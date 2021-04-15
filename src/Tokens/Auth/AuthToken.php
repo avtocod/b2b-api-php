@@ -9,13 +9,18 @@ use Avtocod\B2BApi\Exceptions\TokenParserException;
 final class AuthToken
 {
     /**
+     * Constant for modify current time.
+     */
+    public const MODIFY_PERIOD = 60;
+
+    /**
      * Parse authorization token string.
      *
      * @param string $auth_token
      *
+     * @return TokenInfo
      * @throws TokenParserException
      *
-     * @return TokenInfo
      */
     public static function parse(string $auth_token): TokenInfo
     {
@@ -51,7 +56,10 @@ final class AuthToken
                                     int $age = 172800,
                                     ?int $timestamp = null): string
     {
-        $timestamp = $timestamp ?? \time();
+        if ($timestamp === null) {
+            $timestamp = (new \DateTime)->modify(\sprintf('-%d sec', self::MODIFY_PERIOD))->getTimestamp();
+            $age       += self::MODIFY_PERIOD;
+        }
 
         $username = $domain === null
             ? $username
