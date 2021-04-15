@@ -8,7 +8,9 @@ The format is based on [Keep a Changelog][keepachangelog] and this project adher
 
 ### Changed
 
-- Package `fzaninotto/faker` replaced with `fakerphp/faker` version `^1.14`
+- Package `fzaninotto/faker` replaced with `fakerphp/faker` version `^1.14` [#28]
+
+[#28]:https://github.com/avtocod/b2b-api-php/issues/28
 
 ## v4.2.0
 
