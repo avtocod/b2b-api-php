@@ -23,12 +23,12 @@
         "ocramius/package-versions": "^1.2"
     },
     "require-dev": {
-        "fzaninotto/faker": "^1.9.1",
         "mockery/mockery": "^1.3",
         "phpstan/phpstan": "~0.12",
         "phpunit/phpunit": "^8.5.4",
         "vlucas/phpdotenv": "^3.4 || ^4.0 || ^5.0",
-        "avto-dev/guzzle-url-mock": "^1.5"
+        "avto-dev/guzzle-url-mock": "^1.5",
+        "fakerphp/faker": "^1.14"
     },
     "autoload": {
         "psr-4": {
