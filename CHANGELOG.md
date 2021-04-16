@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog][keepachangelog] and this project adheres to [Semantic Versioning][semver].
 
+## Unreleased
+
+### Changed
+
+- Package `fzaninotto/faker` replaced with `fakerphp/faker` version `^1.14` [#28]
+
+[#28]:https://github.com/avtocod/b2b-api-php/issues/28
+
 ## v4.2.0
 
 ### Changed
