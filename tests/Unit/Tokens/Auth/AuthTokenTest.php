@@ -77,7 +77,7 @@ class AuthTokenTest extends AbstractTestCase
         ));
 
         $this->assertSame($username, $parsed->getUser());
-        $this->assertSame($age, $parsed->getAge());
-        $this->assertEqualsWithDelta(time(), $parsed->getTimestamp(), 1);
+        $this->assertSame($age + AuthToken::MODIFY_PERIOD, $parsed->getAge());
+        $this->assertEqualsWithDelta(\time() - AuthToken::MODIFY_PERIOD, $parsed->getTimestamp(), 0);
     }
 }
