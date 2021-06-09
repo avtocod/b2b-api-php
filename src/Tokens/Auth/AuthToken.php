@@ -18,9 +18,9 @@ final class AuthToken
      *
      * @param string $auth_token
      *
-     * @return TokenInfo
      * @throws TokenParserException
      *
+     * @return TokenInfo
      */
     public static function parse(string $auth_token): TokenInfo
     {
