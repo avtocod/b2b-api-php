@@ -10,8 +10,10 @@ The format is based on [Keep a Changelog][keepachangelog] and this project adher
 
 - Package `fzaninotto/faker` replaced with `fakerphp/faker` version `^1.14` [#28]
 - If the token creation timestamp is not passed, the minute is subtracted from the current time
+- Add support `composer 2` and `php 8.0` [#30]
 
 [#28]:https://github.com/avtocod/b2b-api-php/issues/28
+[#30]:https://github.com/avtocod/b2b-api-php/issues/30
 
 ## v4.2.0
 
