@@ -20,7 +20,7 @@ jobs: # Docs: <https://git.io/JvxXE>
       matrix:
         setup: [basic, lowest]
         coverage: [yes]
-        php: ['7.2', '7.3', '7.4']
+        php: ['7.2', '7.3', '7.4', '8.0']
     steps:
       - name: Check out code
         uses: actions/checkout@v2
@@ -42,9 +42,6 @@ jobs: # Docs: <https://git.io/JvxXE>
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ matrix.setup }}-${{ hashFiles('**/composer.json') }}
           restore-keys: ${{ runner.os }}-composer-
-
-      - name: Install Composer 'hirak/prestissimo' package
-        run: composer global require hirak/prestissimo --update-no-dev --no-progress --ansi
 
       - name: Install lowest Composer dependencies
         if: matrix.setup == 'lowest'
