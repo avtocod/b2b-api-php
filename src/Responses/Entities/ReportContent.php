@@ -34,9 +34,9 @@ class ReportContent
     /**
      * Get content using path in some notation (dot, by default).
      *
-     * @param string     $path
-     * @param mixed|null $default
-     * @param string     $delimiter Dot `.` by default
+     * @param string           $path
+     * @param mixed|null       $default
+     * @param non-empty-string $delimiter Dot `.` by default
      *
      * @return mixed
      */
