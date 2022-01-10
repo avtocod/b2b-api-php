@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog][keepachangelog] and this project adheres to [Semantic Versioning][semver].
 
+## Unreleased
+
+### Added
+
+- Support PHP `8.x` [#30]
+
+### Changed
+
+- Composer `2.x` is supported now [#30]
+
+[#30]:https://github.com/avtocod/b2b-api-php/issues/30
+
 ## v4.3.0
 
 ### Changed

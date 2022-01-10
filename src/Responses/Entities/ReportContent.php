@@ -34,14 +34,16 @@ class ReportContent
     /**
      * Get content using path in some notation (dot, by default).
      *
-     * @param string     $path
-     * @param mixed|null $default
-     * @param string     $delimiter Dot `.` by default
+     * @param string           $path
+     * @param mixed|null       $default
+     * @param non-empty-string $delimiter Dot `.` by default
      *
      * @return mixed
      */
     public function getByPath(string $path, $default = null, string $delimiter = '.')
     {
+        $delimiter = \mb_strlen($delimiter) ? $delimiter : '.';
+
         return \array_reduce((array) \explode($delimiter, $path), static function ($carry, $item) use (&$default) {
             return \is_numeric($item) || \is_array($carry)
                 ? ($carry[$item] ?? $default)
