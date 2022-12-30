@@ -141,7 +141,7 @@ This is open-sourced software licensed under the [MIT License][link_license].
 
 [badge_packagist_version]:https://img.shields.io/packagist/v/avtocod/b2b-api-php.svg?maxAge=180
 [badge_php_version]:https://img.shields.io/packagist/php-v/avtocod/b2b-api-php.svg?longCache=true
-[badge_build_status]:https://img.shields.io/github/workflow/status/avtocod/b2b-api-php/tests/master
+[badge_build_status]:https://img.shields.io/github/actions/workflow/status/avtocod/b2b-api-php/tests.yml
 [badge_coverage]:https://img.shields.io/codecov/c/github/avtocod/b2b-api-php/master.svg?maxAge=60
 [badge_downloads_count]:https://img.shields.io/packagist/dt/avtocod/b2b-api-php.svg?maxAge=180
 [badge_license]:https://img.shields.io/packagist/l/avtocod/b2b-api-php.svg?longCache=true
