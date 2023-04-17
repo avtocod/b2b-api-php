@@ -70,6 +70,13 @@ class UserReportMakeParams
     protected $idempotence_key;
 
     /**
+     * Features - some settings that affect the rules for generating any specific reports.
+     *
+     * @var array<string, mixed>|null
+     */
+    protected $features;
+
+    /**
      * ReportMakeParameter constructor.
      *
      * @param string $report_type_uid Unique report type ID (e.g.: `some_report_uid` or `some_report_uid@domain`)
@@ -255,5 +262,29 @@ class UserReportMakeParams
     public function getIdempotenceKey(): ?string
     {
         return $this->idempotence_key;
+    }
+
+    /**
+     * Set "features" (some settings that affect the rules for generating any specific reports).
+     *
+     * @param array<string, mixed>|null $features
+     *
+     * @return $this
+     */
+    public function setFeatures(?array $features): self
+    {
+        $this->features = $features;
+
+        return $this;
+    }
+
+    /**
+     * Get "features" (some settings that affect the rules for generating any specific reports).
+     *
+     * @return array<string, mixed>|null
+     */
+    public function getFeatures(): ?array
+    {
+        return $this->features;
     }
 }

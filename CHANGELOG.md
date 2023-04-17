@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog][keepachangelog] and this project adheres to [Semantic Versioning][semver].
 
+## Unreleased
+
+### Added
+
+- Property `features` in `UserReportMakeParams` with some settings that affect the rules for generating any specific reports.
+
 ## v4.4.0
 
 ### Added

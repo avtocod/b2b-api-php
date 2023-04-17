@@ -339,6 +339,10 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
             $request_body['data'] = (object) $data;
         }
 
+        if (\is_array($features = $params->getFeatures())) {
+            $request_body['features'] = (object) $features;
+        }
+
         $request_body['options'] = (object) \array_replace($options, $params->getOptions() ?? []);
 
         return UserReportMakeResponse::fromHttpResponse(

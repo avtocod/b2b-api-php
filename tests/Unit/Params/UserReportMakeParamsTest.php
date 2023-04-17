@@ -22,7 +22,6 @@ class UserReportMakeParamsTest extends AbstractTestCase
             $type = $this->faker->word,
             $value = $this->faker->word
         );
-
         $this->assertSame($report_type_uid, $params->getReportTypeUid());
         $this->assertSame($type, $params->getType());
         $this->assertSame($value, $params->getValue());
@@ -39,6 +38,10 @@ class UserReportMakeParamsTest extends AbstractTestCase
                 ($key_one = $this->faker->word) => $this->faker->randomDigitNotNull,
                 ($key_two = $this->faker->word) => $this->faker->word,
             ])
+            ->setFeatures($features =[
+                "code"  => $this->faker->word,
+                "value" => $this->faker->randomDigitNotNull
+            ])
             ->setForce($is_force = $this->faker->boolean)
             ->setOnUpdateUrl($on_update = $this->faker->url)
             ->setOnCompleteUrl($on_complete = $this->faker->url)
@@ -50,6 +53,8 @@ class UserReportMakeParamsTest extends AbstractTestCase
         $this->assertSame($on_update, $params->getOnUpdateUrl());
         $this->assertSame($on_complete, $params->getOnCompleteUrl());
         $this->assertSame($data, (array) $params->getData());
+
+        $this->assertSame($features, $params->getFeatures());
 
         $this->assertArrayHasKey($key_one, $params->getOptions());
         $this->assertArrayHasKey($key_two, $params->getOptions());
@@ -67,5 +72,6 @@ class UserReportMakeParamsTest extends AbstractTestCase
         $this->assertNull($params->getOnUpdateUrl());
         $this->assertNull($params->getOnCompleteUrl());
         $this->assertNull($params->getData());
+        $this->assertNull($params->getFeatures());
     }
 }
