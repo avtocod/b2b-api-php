@@ -22,6 +22,7 @@ class UserReportMakeParamsTest extends AbstractTestCase
             $type = $this->faker->word,
             $value = $this->faker->word
         );
+
         $this->assertSame($report_type_uid, $params->getReportTypeUid());
         $this->assertSame($type, $params->getType());
         $this->assertSame($value, $params->getValue());
