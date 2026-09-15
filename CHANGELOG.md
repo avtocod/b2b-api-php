@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog][keepachangelog] and this project adheres to [Semantic Versioning][semver].
 
+## Unreleased
+
+### Changed
+
+- Package version is resolved via `Composer\InstalledVersions` (`composer-runtime-api ^2.0`)
+- Composer `1.x` is no longer supported
+
+### Removed
+
+- Package `composer/package-versions-deprecated`
+
 ## v4.4.0
 
 ### Added
