@@ -36,7 +36,7 @@ class BadResponseExceptionTest extends AbstractTestCase
     {
         $response = new Response;
 
-        $this->assertRegExp('~Server.*wrong json~i', ($e = BadResponseException::wrongJson($response))->getMessage());
+        $this->assertMatchesRegExp('~Server.*wrong json~i', ($e = BadResponseException::wrongJson($response))->getMessage());
         $this->assertSame($response, $e->getHttpResponse());
     }
 }

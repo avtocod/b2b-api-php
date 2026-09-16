@@ -28,6 +28,6 @@ class TokenParserExceptionTest extends AbstractTestCase
      */
     public function testFabrics(): void
     {
-        $this->assertRegExp('~not.*parse.*token~i', TokenParserException::cannotParseToken()->getMessage());
+        $this->assertMatchesRegExp('~not.*parse.*token~i', TokenParserException::cannotParseToken()->getMessage());
     }
 }

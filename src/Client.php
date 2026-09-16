@@ -7,7 +7,7 @@ namespace Avtocod\B2BApi;
 use Closure;
 use DateTime;
 use GuzzleHttp\Psr7\Request;
-use PackageVersions\Versions;
+use Composer\InstalledVersions;
 use GuzzleHttp\Client as Guzzle;
 use Avtocod\B2BApi\Params\UserParams;
 use Psr\Http\Message\RequestInterface;
@@ -115,13 +115,14 @@ class Client implements ClientInterface, WithSettingsInterface, WithEventsHandle
      */
     public function getVersion(bool $without_hash = true): string
     {
-        $version = Versions::getVersion('avtocod/b2b-api-php');
+        $package = 'avtocod/b2b-api-php';
+        $pretty  = InstalledVersions::getPrettyVersion($package) ?? '';
 
-        if ($without_hash === true && \is_int($delimiter_position = \mb_strpos($version, '@'))) {
-            return \mb_substr($version, 0, (int) $delimiter_position);
+        if ($without_hash === true) {
+            return $pretty;
         }
 
-        return $version;
+        return $pretty . '@' . (string) InstalledVersions::getReference($package);
     }
 
     /**

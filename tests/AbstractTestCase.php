@@ -39,4 +39,22 @@ abstract class AbstractTestCase extends TestCase
             ));
         }
     }
+
+    /**
+     * @param string $pattern
+     * @param string $string
+     * @param string $message
+     *
+     * @return void
+     */
+    protected function assertMatchesRegExp(string $pattern, string $string, string $message = ''): void
+    {
+        if (\method_exists($this, 'assertMatchesRegularExpression')) {
+            $this->assertMatchesRegularExpression($pattern, $string, $message);
+
+            return;
+        }
+
+        $this->assertRegExp($pattern, $string, $message);
+    }
 }

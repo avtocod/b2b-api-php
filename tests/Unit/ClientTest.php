@@ -10,7 +10,7 @@ use Avtocod\B2BApi\Settings;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
-use PackageVersions\Versions;
+use Composer\InstalledVersions;
 use GuzzleHttp\Client as Guzzle;
 use Avtocod\B2BApi\ClientInterface;
 use Avtocod\B2BApi\DateTimeFactory;
@@ -88,9 +88,11 @@ class ClientTest extends AbstractTestCase
      */
     public function testGetVersion(): void
     {
-        $this->assertSame($version = Versions::getVersion('avtocod/b2b-api-php'), $this->client->getVersion(false));
+        $package = 'avtocod/b2b-api-php';
+        $pretty  = InstalledVersions::getPrettyVersion($package);
 
-        $this->assertSame(\mb_substr($version, 0, (int) \mb_strpos($version, '@')), $this->client->getVersion());
+        $this->assertSame($pretty . '@' . InstalledVersions::getReference($package), $this->client->getVersion(false));
+        $this->assertSame($pretty, $this->client->getVersion());
     }
 
     /**
@@ -252,7 +254,7 @@ class ClientTest extends AbstractTestCase
             $this->guzzle_handler->getLastRequest()->getHeaderLine('Authorization')
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegExp(
             '~b2b\-api\-php\/.+curl\/\d.+PHP\/\d.+~',
             $this->guzzle_handler->getLastRequest()->getHeaderLine('User-Agent')
         );

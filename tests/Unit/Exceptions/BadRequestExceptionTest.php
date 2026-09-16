@@ -51,7 +51,7 @@ class BadRequestExceptionTest extends AbstractTestCase
                 new Response(500, [], \file_get_contents(__DIR__ . '/../../stubs/generic_system_error_500.json'))
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegExp(
             '~GenericSystemError\:\s.+ошибка.+DataAccessResourceFailureException~iu',
             $exception->getMessage()
         );
@@ -68,7 +68,7 @@ class BadRequestExceptionTest extends AbstractTestCase
                 new Response(500, [], \file_get_contents(__DIR__ . '/../../stubs/report_type_not_found_500.json'))
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegExp(
             '~DataSeekObjectError\:\s.?Отсутствие.+Report_Type~iu',
             $exception->getMessage()
         );
@@ -84,7 +84,7 @@ class BadRequestExceptionTest extends AbstractTestCase
             $response = new Response(500, [], \file_get_contents(__DIR__ . '/../../stubs/wrong_json_passed_400.json'))
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegExp(
             '~Bad Request\:\s.*HttpMessageNotReadableException.+Bad Request~iu',
             $exception->getMessage()
         );
@@ -100,7 +100,7 @@ class BadRequestExceptionTest extends AbstractTestCase
             $response = new Response(500, [], \file_get_contents(__DIR__ . '/../../stubs/wrong_token_error_400.json'))
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegExp(
             '~SecurityAuthMalformedToken\:\sНеверная структура.+Неверная структура~iu',
             $exception->getMessage()
         );
