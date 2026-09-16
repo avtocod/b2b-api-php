@@ -43,7 +43,7 @@ class AuthTokenTest extends AbstractTestCase
             try {
                 AuthToken::parse($wrong_token);
             } catch (TokenParserException $e) {
-                $this->assertRegExp('~Cannot.*parse~i', $e->getMessage());
+                $this->assertMatchesRegExp('~Cannot.*parse~i', $e->getMessage());
 
                 $throws = true;
             }

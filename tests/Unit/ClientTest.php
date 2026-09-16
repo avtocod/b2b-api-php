@@ -254,7 +254,7 @@ class ClientTest extends AbstractTestCase
             $this->guzzle_handler->getLastRequest()->getHeaderLine('Authorization')
         );
 
-        $this->assertRegExp(
+        $this->assertMatchesRegExp(
             '~b2b\-api\-php\/.+curl\/\d.+PHP\/\d.+~',
             $this->guzzle_handler->getLastRequest()->getHeaderLine('User-Agent')
         );

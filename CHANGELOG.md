@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog][keepachangelog] and this project adher
 
 - Package version is resolved via `Composer\InstalledVersions` (`composer-runtime-api ^2.0`)
 - Composer `1.x` is no longer supported
+- `phpunit/phpunit` now allows `^8.5.4 || ^9.6`
 
 ### Removed
 
